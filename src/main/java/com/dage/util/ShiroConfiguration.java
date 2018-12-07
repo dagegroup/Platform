@@ -31,7 +31,7 @@ public class ShiroConfiguration {
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         Map<String,String> map = new HashMap<String,String>();
-        map.put("/**","authc");
+        map.put("/**","anon");
         map.put("/user/toLogin","anon");
         map.put("/user/login","anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);

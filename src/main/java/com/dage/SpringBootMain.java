@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @creatTime:2018-11-21 09:31
  */
 @SpringBootApplication
-@MapperScan("com.aaa.sboot.dao") //扫描dao层接口
+@MapperScan("com.dage.dao") //扫描dao层接口
 public class SpringBootMain {
     /**
      * 主函数
