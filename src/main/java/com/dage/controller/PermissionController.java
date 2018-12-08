@@ -4,7 +4,10 @@ import com.dage.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Map;
 
 
 /**
@@ -37,5 +40,20 @@ public class PermissionController {
     @RequestMapping("tree")
     public Object getTree(){
        return permissionService.getListByRole();
+    }
+
+    /**
+     * 跳转权限添加界面
+     * @return
+     */
+    @RequestMapping("toadd")
+    public Object toadd(){
+        return "power/add";
+    }
+
+    @RequestMapping("add")
+    @ResponseBody
+    public Object add(@RequestParam Map map){
+        return permissionService.add(map);
     }
 }

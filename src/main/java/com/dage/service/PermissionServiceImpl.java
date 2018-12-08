@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @className:PermissionServiceImpl
@@ -44,6 +45,15 @@ public class PermissionServiceImpl implements PermissionService{
         return list;
     }
 
+    /**
+     * 权限添加
+     * @param map
+     * @return
+     */
+    @Override
+    public int add(Map map) {
+        return permissionDao.add(map);
+    }
 
 
     /**

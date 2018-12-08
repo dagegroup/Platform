@@ -1,10 +1,12 @@
 package com.dage.dao;
 
 import com.dage.entity.Permission;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @className:Permission
@@ -22,4 +24,13 @@ public interface PermissionDao {
     @Select("select permissionid as id,pname as text,purl as url,pid,prefix,token,state,iconcls from tb_permission where " +
             "permissionid in (select permissionid from tb_role_permission where roleid=#{roleid})")
     List<Permission> getListByRole(Integer roleid);
+
+    /**
+     * 添加权限菜单
+     * @param map
+     * @return
+     */
+    @Insert("insert into tb_permission(permissionid,pname,purl,pid,prefix,token,state,iconcls)" +
+            " values(seq_permissionid.nextval,#{text},#{url},#{pid},#{prefix},#{token},#{state},#{iconcls})")
+    int add(Map map);
 }

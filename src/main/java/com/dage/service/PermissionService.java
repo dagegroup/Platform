@@ -3,6 +3,7 @@ package com.dage.service;
 import com.dage.entity.Permission;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @className:PermissionService
@@ -17,4 +18,11 @@ public interface PermissionService {
      * @return
      */
     List<Permission> getListByRole();
+
+    /**
+     * 权限添加
+     * @param map
+     * @return
+     */
+    int add(Map map);
 }
