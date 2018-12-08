@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -30,10 +31,16 @@ public class ShiroConfiguration {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("/**","anon");
+        Map<String,String> map = new LinkedHashMap();
+        map.put("/js/**","anon");
+        map.put("/easyui/**","anon");
+        map.put("/*.html","anon");
         map.put("/user/toLogin","anon");
         map.put("/user/login","anon");
+        map.put("/**","anon");
+        //anon 不拦截
+        //authc 登陆访问
+        //perms[]  权限访问
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         shiroFilterFactoryBean.setLoginUrl("/user/toLogin");
         shiroFilterFactoryBean.setUnauthorizedUrl("/user/noAuth");
