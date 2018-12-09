@@ -23,6 +23,15 @@ public class PermissionController {
     private PermissionService permissionService;
 
     /**
+     * 跳转前台页面
+     * @return
+     */
+    @RequestMapping("index")
+    public Object toIndex(){
+        return "foreground/index";
+    }
+
+    /**
      * 跳转后台页面
      * @return
      */
