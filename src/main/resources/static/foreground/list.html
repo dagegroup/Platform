@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html  >
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>p2p网贷平台</title>
@@ -10,6 +10,60 @@
 <link href="css/detail.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="script/jquery.min.js"></script>
 <script type="text/javascript" src="script/common.js"></script>
+  <script>
+      $(function(){
+          $.ajax({
+              url: "/bid/list",
+              async:false,//同步
+              type:"post",
+              dataType:"json",
+              success: function(data){
+                  ///s=JSON.stringify(data[0]);
+                  //alert(s);
+                  //alert(data[0].ENAME);
+                  var str="";
+                  if(data!=null){
+                      for (var i = 0; i < data.length; i++) {
+                          str+=" <ul >\n" +
+                              "            <li  class='col-330 col-t'>\n" +
+                              "              <a href='infor.html' target='_blank'>\n" +
+                              "              <a  class='f18 c-orange' href='infor.html' target='_blank' >" +data[i].BIDPROJECT +"</a>\n" +
+                              "            </li>\n" +
+                              "            <li   class='col-180'>\n" +
+                              "              <span class='f20 c-333'>" +data[i].BIDAMOUNT +"</span>元\n" +
+                              "            </li>\n" +
+                              "            <li class='col-110 relative'>\n" +
+                              "              <span class='f20 c-orange'>" +data[i].BIDRATE +"%</span>\n" +
+                              "            </li>\n" +
+                              "            <li class='col-150'>\n" +
+                              "              <span class='f20 c-333'>" +data[i].BIDDEADLINE +"</span>个月\n" +
+                              "            </li>\n" +
+                              "            <li class='col-150'>" +data[i].BIDREPAYMENTMETHOD +"</li>\n" +
+                              "            <li class='col-120'>\n" +
+                              "              <div class='circle'>\n" +
+                              "                <div class='left progress-bar'>\n" +
+                              "                  <div class='progress-bgPic progress-bfb10'>\n" +
+                              "                    <div class='show-bar'>50% </div>\n" +
+                              "                  </div>\n" +
+                              "                </div>\n" +
+                              "              </div>\n" +
+                              "            </li>\n" +
+                              "            <li class='col-120-2'>\n" +
+                              "              <a class='ui-btn btn-gray' href='infor.html'>我要投标</a>\n" +
+                              "            </li>\n" +
+                              "          </ul>"
+
+                      }
+                  }
+                  $('#bid').append(str);
+
+              },
+              error : function(data) {
+                  alert(data);
+              }
+          })
+      })
+  </script>
 </head>
 <body>
 <header>
@@ -61,19 +115,7 @@
           <input id="filterMulti" name="multiple_choice" type="checkbox">
           多选</label>
         </div>
-        <div class="bd">
-          <dl>
-            <dt>项目类型</dt>
-            <dd>
-              <ul>
-                <li class="n1"><a href="javascript:url('post_type','');" id="post_type_" class="active">不限</a></li>
-                <li class="n2"><a href="javascript:url('post_type','car');" id="post_type_car">车易贷</a></li>
-                <li class="n3"><a href="javascript:url('post_type','house');" id="post_type_house">房易贷</a></li>
-                <li class="n4"><a href="javascript:url('post_type','bridge');" id="post_type_bridge">赎楼贷</a></li>
-                <li class="n5"><a href="javascript:url('post_type','worth');" id="post_type_worth">债权贷</a> </li>
-              </ul>
-            </dd>
-          </dl>
+        <div class="bid">
           <dl>
             <dt>年利率</dt>
             <dd>
@@ -147,195 +189,9 @@
           </ul>
         </div>
         <!------------投资列表-------------->
-        <div class="item">
-          <ul>
-            <li class="col-330 col-t"><a href="infor.html" target="_blank"><i class="icon icon-che" title="车易贷"></i></a><a class="f18" href="infor.html" title="赵女士长安福特福克斯汽车质押贷款4万元" target="_blank"> 赵女士长安福特福克斯汽车质... </a></li>
-            <li class="col-180"><span class="f20 c-333">40,000.00</span>元</li>
-            <li class="col-110 relative"><span class="f20 c-orange">12.00% </span></li>
-            <li class="col-150"> <span class="f20 c-333">1</span>个月 </li>
-            <li class="col-150">按月付息,到期还本</li>
-            <li class="col-120">
-              <div class="circle">
-                <div class="left progress-bar">
-                  <div class="progress-bgPic progress-bfb10">
-                    <div class="show-bar"> 100% </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-120-2"> <a class="ui-btn btn-gray" href="infor.html">还款中</a> </li>
-          </ul>
-        </div>
-        <div class="item">
-          <ul>
-            <li class="col-330 col-t"><a href="infor.html" target="_blank"><i class="icon icon-che" title="车易贷"></i></a><a class="f18" href="infor.html" title="唐先生宝马318汽车质押贷款5万元" target="_blank"> 唐先生宝马318汽车质押贷... </a></li>
-            <li class="col-180"><span class="f20 c-333">50,000.00</span>元</li>
-            <li class="col-110 relative"><span class="f20 c-orange">12.00% </span></li>
-            <li class="col-150"> <span class="f20 c-333">1</span>个月 </li>
-            <li class="col-150">按月付息,到期还本</li>
-            <li class="col-120">
-              <div class="circle">
-                <div class="left progress-bar">
-                  <div class="progress-bgPic progress-bfb1">
-                    <div class="show-bar"> 10% </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-120-2"> <a class="ui-btn btn-gray" href="infor.html">还款中</a> </li>
-          </ul>
-        </div>
-        <div class="item">
-          <ul>
-            <li class="col-330 col-t"><a href="infor.html" target="_blank"><i class="icon icon-che" title="车易贷"></i></a><a class="f18" href="infor.html" title="秦先生雪佛兰赛欧汽车质押贷款2万元" target="_blank"> 秦先生雪佛兰赛欧汽车质押贷... </a></li>
-            <li class="col-180"><span class="f20 c-333">20,000.00</span>元</li>
-            <li class="col-110 relative"><span class="f20 c-orange">12.00% </span></li>
-            <li class="col-150"> <span class="f20 c-333">1</span>个月 </li>
-            <li class="col-150">按月付息,到期还本</li>
-            <li class="col-120">
-              <div class="circle">
-                <div class="left progress-bar">
-                  <div class="progress-bgPic progress-bfb2">
-                    <div class="show-bar"> 20% </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-120-2"> <a class="ui-btn btn-gray" href="infor.html">还款中</a> </li>
-          </ul>
-        </div>
-        <div class="item">
-          <ul>
-            <li class="col-330 col-t"><a href="infor.html" target="_blank"><i class="icon icon-che" title="车易贷"></i></a><a class="f18" href="infor.html" title="曾先生北京现代悦动汽车质押贷款3万元" target="_blank"> 曾先生北京现代悦动汽车质押... </a></li>
-            <li class="col-180"><span class="f20 c-333">30,000.00</span>元</li>
-            <li class="col-110 relative"><span class="f20 c-orange">12.00% </span></li>
-            <li class="col-150"> <span class="f20 c-333">1</span>个月 </li>
-            <li class="col-150">按月付息,到期还本</li>
-            <li class="col-120">
-              <div class="circle">
-                <div class="left progress-bar">
-                  <div class="progress-bgPic progress-bfb3">
-                    <div class="show-bar"> 30% </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-120-2"> <a class="ui-btn btn-gray" href="infor.html">还款中</a> </li>
-          </ul>
-        </div>
-        <div class="item">
-          <ul>
-            <li class="col-330 col-t"><a href="infor.html" target="_blank"><i class="icon icon-che" title="车易贷"></i></a><a class="f18" href="infor.html" title="李先生海马普力马汽车质押贷款3.5万元" target="_blank"> 李先生海马普力马汽车质押贷... </a></li>
-            <li class="col-180"><span class="f20 c-333">35,000.00</span>元</li>
-            <li class="col-110 relative"><span class="f20 c-orange">12.00% </span></li>
-            <li class="col-150"> <span class="f20 c-333">1</span>个月 </li>
-            <li class="col-150">按月付息,到期还本</li>
-            <li class="col-120">
-              <div class="circle">
-                <div class="left progress-bar">
-                  <div class="progress-bgPic progress-bfb4">
-                    <div class="show-bar"> 40% </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-120-2"> <a class="ui-btn btn-gray" href="infor.html">还款中</a> </li>
-          </ul>
-        </div>
-        <div class="item">
-          <ul>
-            <li class="col-330 col-t"><a href="infor.html" target="_blank"><i class="icon icon-fang" title="房易贷"></i></a><a class="f18" href="infor.html" target="_blank"> 温先生单独所有房产抵押贷款... </a></li>
-            <li class="col-180"><span class="f20 c-333">200,000.00</span>元</li>
-            <li class="col-110 relative"><span class="f20 c-orange">15.60% </span></li>
-            <li class="col-150"> <span class="f20 c-333">36</span>个月 </li>
-            <li class="col-150">等额本息</li>
-            <li class="col-120">
-              <div class="circle">
-                <div class="left progress-bar">
-                  <div class="progress-bgPic progress-bfb5">
-                    <div class="show-bar"> 50% </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-120-2"> <a class="ui-btn btn-gray" href="infor.html">还款中</a> </li>
-          </ul>
-        </div>
-        <div class="item">
-          <ul>
-            <li class="col-330 col-t"><a href="infor.html" target="_blank"><i class="icon icon-fang" title="房易贷"></i></a><a class="f18" href="infor.html" title="孙先生单独所有房产、车位抵押贷款26万元" target="_blank"> 孙先生单独所有房产、车位抵... </a></li>
-            <li class="col-180"><span class="f20 c-333">260,000.00</span>元</li>
-            <li class="col-110 relative"><span class="f20 c-orange">15.60% </span></li>
-            <li class="col-150"> <span class="f20 c-333">36</span>个月 </li>
-            <li class="col-150">等额本息</li>
-            <li class="col-120">
-              <div class="circle">
-                <div class="left progress-bar">
-                  <div class="progress-bgPic progress-bfb7">
-                    <div class="show-bar"> 60% </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-120-2"> <a class="ui-btn btn-gray" href="infor.html">还款中</a> </li>
-          </ul>
-        </div>
-        <div class="item">
-          <ul>
-            <li class="col-330 col-t"><a href="infor.html" target="_blank"><i class="icon icon-che" title="车易贷"></i></a><a class="f18" href="#" title="马先生宝马X3汽车抵押贷款27万元" target="_blank"> 马先生宝马X3汽车抵押贷款... </a></li>
-            <li class="col-180"><span class="f20 c-333">270,000.00</span>元</li>
-            <li class="col-110 relative"><span class="f20 c-orange">13.20% </span></li>
-            <li class="col-150"> <span class="f20 c-333">12</span>个月 </li>
-            <li class="col-150">等额本息</li>
-            <li class="col-120">
-              <div class="circle">
-                <div class="left progress-bar">
-                  <div class="progress-bgPic progress-bfb8">
-                    <div class="show-bar"> 70% </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-120-2"> <a class="ui-btn btn-gray" href="infor.html">还款中</a> </li>
-          </ul>
-        </div>
-        <div class="item">
-          <ul>
-            <li class="col-330 col-t"><a href="infor.html" target="_blank"><i class="icon icon-fang" title="房易贷"></i></a><a class="f18" href="#" title="吴女士单独所有房产抵押贷款13万元" target="_blank"> 吴女士单独所有房产抵押贷款... </a></li>
-            <li class="col-180"><span class="f20 c-333">130,000.00</span>元</li>
-            <li class="col-110 relative"><span class="f20 c-orange">12.10% </span></li>
-            <li class="col-150"> <span class="f20 c-333">2</span>个月 </li>
-            <li class="col-150">按月付息,到期还本</li>
-            <li class="col-120">
-              <div class="circle">
-                <div class="left progress-bar">
-                  <div class="progress-bgPic progress-bfb9">
-                    <div class="show-bar"> 80% </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-120-2"> <a class="ui-btn btn-gray" href="infor.html">还款中</a> </li>
-          </ul>
-        </div>
-        <div class="item">
-          <ul>
-            <li class="col-330 col-t"><a href="#" target="_blank"><i class="icon icon-fang" title="房易贷"></i></a><a class="f18" href="infor.html" title="李先生夫妻共有房产抵押贷款15万元" target="_blank"> 李先生夫妻共有房产抵押贷款... </a></li>
-            <li class="col-180"><span class="f20 c-333">150,000.00</span>元</li>
-            <li class="col-110 relative"><span class="f20 c-orange">18.00% </span></li>
-            <li class="col-150"> <span class="f20 c-333">60</span>个月 </li>
-            <li class="col-150">等额本息</li>
-            <li class="col-120">
-              <div class="circle">
-                <div class="left progress-bar">
-                  <div class="progress-bgPic progress-bfb9">
-                    <div class="show-bar"> 90% </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="col-120-2"> <a class="ui-btn btn-gray" href="infor.html">还款中</a> </li>
-          </ul>
+
+        <div class="item" id="bid">
+
         </div>
         <!------------投资列表-------------->
       </div>
