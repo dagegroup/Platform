@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * className:BidController
  * discription:
@@ -26,7 +28,7 @@ public class BidController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public Object list(){
-        return bidService.getList(null);
+    public Object list(Map map){
+        return bidService.getList(map);
     }
 }
