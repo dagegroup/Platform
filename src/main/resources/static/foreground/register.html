@@ -9,8 +9,62 @@
 <link href="css/register.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="script/jquery.min.js"></script>
 <script type="text/javascript" src="script/common.js"></script>
-<script src="script/login.js" type="text/javascript"></script>
+<!--<script src="script/login.js" type="text/javascript"></script>-->
+  <style type="text/css">
+    #checkNode{
+      background-image: url(../images/yzm4.jpg);/*验证码的背景图 */
+      font-family: Arial;
+      font-style: italic;
+      font-size: 140%;
+      color: black;
+      border: 0;
+      padding:2px 3px;
+      letter-spacing: 3px;
+      width: 70px;
+      height: 40px;
+      font-weight: bolder;
+      text-align: center;
+    }
+
+  </style>
+  <script type="text/javascript">
+      window.onload=function(){
+          createCode();
+      }
+      var code;/!*定义一个验证码的全局变量*!/
+      function createCode(){/!* 生成验证码的函数 *!/
+          code="";
+          var codeLength=4;
+          var checkCode=$("#checkNode");
+          checkCode.value="";
+          var selectChar=new Array(1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+          for(var i=0;i < codeLength;i++){
+              var charIndex=Math.floor(Math.random()*61);
+              code += selectChar[charIndex];
+          }
+          if (code.length != codeLength) {
+              createCode();
+          }
+          $("#checkNode").val(code);
+      }
+      //验证图片验证码
+      var flagJPG=0;
+      $("#jpgVerify").blur(function(){
+          var inputCode =document.getElementById("jpgVerify").value.toUpperCase();
+          var codeToUp=code.toUpperCase();
+          if(inputCode.length <= 0){
+              $("#jpgVerifys").html("验证码不能为空").css("color","red");
+          }else if(inputCode != codeToUp){
+              $("#jpgVerifys").html("验证码输入错误").css("color","red");
+          }else {
+              $("#jpgVerifys").html("验证码输入正确").css("color","green");
+              flagJPG=1;
+          }
+      });
+
+  </script>
 </head>
+
 <body>
 <header>
   <div class="header-top min-width">
@@ -41,7 +95,7 @@
       <ul class="top-nav fn-clear">
         <li class="on"> <a href="index.html">首页</a> </li>
         <li> <a href="list.html" class="">我要投资</a> </li>
-        <li> <a href="#">我要融资</a> </li>
+        <li> <a href="register1.html">我要融资</a> </li>
         <li> <a href="帮助中心.html">安全保障</a> </li>
         <li class="top-nav-safe"> <a href="个人中心首页.html">我的账户</a> </li>
         <li> <a href="公司简介.html">关于我们</a> </li>
@@ -71,7 +125,11 @@
           <span id="repeatPasswordAlt" data-info="请再次输入密码">请再次输入密码</span></li>
         <li> <span class="dis">验证码:</span>
           <input type="text" id="jpgVerify" class="input input1 _yanzhengma" name="yzm" maxlength="4" tabindex="1">
-          <img src="images/code.jpg" alt="验证码" style="cursor:pointer;" id="yzm" class="valign"> <a class="look blue _changeCapcherButton" id="look" href="javascript:void(0);">看不清？换一张</a> <span class="info" id="jpgVerifys" data-info="请输入手机验证码"></span> </li>
+          <input type="text" id="checkNode" disabled="disabled"/>
+          <a class="look blue _changeCapcherButton" id="look" href="javascript:void(0);" onclick="createCode()">看不清？换一张</a>
+          <span class="info" id="jpgVerifys"></span>
+        </li>
+        </li>
         <li class="telNumber"> <span class="dis">手机号码:</span>
           <input type="text" class="input _phoneNum" id="phone" name="phone" tabindex="1" maxlength="11">
           <a href="javascript:void(0);" class="button radius1 _getkey" id="sendPhone">获取验证码</a> <span id="phoneJy" data-info="请输入您的常用电话">请输入您的常用电话</span></li>
