@@ -17,13 +17,13 @@ public class Permission {
     private String token;
     private String state;
     private String iconcls;
-    private String checked;
+    private Boolean checked;
 
-    public String getChecked() {
+    public Boolean getChecked() {
         return checked;
     }
 
-    public void setChecked(String checked) {
+    public void setChecked(Boolean checked) {
         this.checked = checked;
     }
 

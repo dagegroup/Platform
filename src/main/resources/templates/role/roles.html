@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>角色列表</title>
+    <!-- 引入样式 -->
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <script type="text/javascript" src="/js/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
+    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+<div id="tableView">
+    <!--列表顶部工具条-->
+    <el-row>
+        <el-form :inline="true"  class="demo-form-inline">
+        <el-form-item>
+            <el-button type="success" icon="plus" @click="addClick">新增</el-button>
+        </el-form-item>
+        </el-form>
+    </el-row>
+    <!--列表-->
+    <el-row>
+        <el-table
+                :data="tableData"
+                v-loading.body="loading"
+                border
+                style="width: 100%">
+            <el-table-column
+                    prop="roleid"
+                    label="角色ID"
+                    width="50">
+            </el-table-column>
+            <el-table-column
+                    prop="rolename"
+                    label="角色名称"
+                    width="150">
+            </el-table-column>
+            <el-table-column
+                    prop="roledesc"
+                    label="角色描述"
+                    width="450">
+            </el-table-column>
+
+            <el-table-column
+                    prop="rolestate"
+                    label="角色状态"
+                    width="150">
+            </el-table-column>
+            <el-table-column
+                    label="操作">
+                <template scope="scope">
+                    <el-button :plain="true" type="success" size="small" icon="edit" @click="editClick(scope.row)">编辑</el-button>
+                    <el-button :plain="true" v-if="scope.row.rolestate=='正常'" type="primary" size="small" icon="plus" @click="addPower(scope.row)">角色授权</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </el-row>
+
+    <!--编辑界面-->
+    <el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
+        <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+            <el-form-item label="角色名称" prop="rolename">
+                <el-input v-model="editForm.rolename" auto-complete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="角色状态">
+                <el-select v-model="editForm.rolestate" placeholder="请选择">
+                    <el-option label="正常" value="正常"></el-option>
+                    <el-option label="注销" value="注销"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="角色描述">
+                <el-input type="text" v-model="editForm.roledesc"></el-input>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click.native="editFormVisible = false">取消</el-button>
+            <el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
+        </div>
+    </el-dialog>
+    <!-- 授权界面 -->
+    <el-dialog title="授权" :visible.sync="authorization" :close-on-click-modal="false">
+        <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+            <el-form-item label="角色名称" prop="rolename">
+                <el-input v-model="editForm.rolename" auto-complete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="权限选择">
+                <div class="easyui-panel" style="padding:5px">
+                    <ul id="ttree" class="easyui-tree" data-options="method:'get',animate:true,checkbox:true"></ul>
+                </div>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click.native="authorization = false">取消</el-button>
+            <el-button type="primary" @click.native="powerSubmit" :loading="editLoading">保存</el-button>
+        </div>
+    </el-dialog>
+</div>
+
+
+<script type="text/javascript">
+
+    var tableView = new Vue({
+        el: '#tableView',
+        data: {
+            //列表数据
+            tableData: [],
+            //显示加载中样式
+            loading:false,
+            //授权页面是否展示
+            authorization:false,
+            //编辑界面是否显示
+            editFormVisible: false,
+            editLoading: false,
+            goUrl:'',
+            editFormRules: {
+                name: [
+                    { required: true, message: '请输入姓名', trigger: 'blur' }
+                ]
+            },
+            //编辑界面数据
+            editForm: {
+                roleid:0,
+                rolename: '',
+                roledesc:'',
+                rolestate:'',
+                powersid:''
+            },
+        },
+        created:function(){
+            //在 then的内部不能使用Vue的实例化的this, 因为在内部 this 没有被绑定。
+            var self = this;
+            var start =this.currentPage;
+            var end =this.pageSize;
+            axios.post('/role/list').then(function(response){
+                self.tableData = response.data;
+            })
+        },
+        methods:{
+            //表格重新加载数据
+            loadingData:function() {
+                var _self = this;
+                _self.loading = true;
+                axios.post('/role/list').then(function(response){
+                    _self.tableData = response.data;
+                })
+                setTimeout(function(){
+                    console.info("加载数据成功");
+                    _self.loading = false;
+                },300);
+            },
+            addPower:function (row) {
+                //alert(row)
+                this.editForm = Object.assign({}, row);
+                $("#ttree").tree({
+                    url:'/power/checktree?roleid='+row.roleid
+                });
+                this.authorization = true;
+            },
+            powerSubmit:function () {
+                var _self = this;
+                var nodes = $('#ttree').tree('getChecked');
+                var s = '';
+                //循环每一个节点
+                for(var i=0; i<nodes.length; i++){
+                    if (s != '') s += ',';
+                    s += nodes[i].id;
+                }
+                _self.editForm.powersid = s;
+               // alert(_self.editForm.powersid)
+                var formData = _self.editForm;
+                axios.post("/power/saverolepower",formData).then(function(response){
+                    if(response.data>0){
+                        _self.$message({
+                            message:'操作成功',
+                            type: 'success'
+                        });
+                        _self.authorization = false;
+                    }else{
+                        _self.$message({
+                            message:'操作有误',
+                            type: 'error'
+                        });
+                    }
+                    _self.loadingData();//重新加载数据
+                })
+            },
+            //表格编辑事件
+            editClick:function(row) {
+                this.goUrl="/role/update";
+                this.editFormVisible = true;
+                this.editForm = Object.assign({}, row);
+            },
+            //新建事件
+            addClick:function() {
+                //alert(111);
+                this.goUrl="/role/add";
+                var _self = this;
+                this.editForm={
+                    roleid:0,
+                    rolename: '',
+                    roledesc:'',
+                    rolestate:'',
+                    powersid:''
+                }
+                this.editFormVisible = true;
+                _self.loadingData();//重新加载数据
+            },
+            //表格查询事件
+            searchClick:function() {
+                var self = this;
+            },
+            //保存点击事件
+            editSubmit:function(){
+                var _self = this;
+                _self.loading = true;
+                var formData =this.editForm;
+                var goUrl=this.goUrl;
+                axios.post(goUrl,formData).then(function(response){
+                     if(response.data>0){
+                         _self.$message({
+                             message:'操作成功',
+                             type: 'success'
+                         });
+                         _self.editFormVisible = false;
+                     }else if(response.data=-1){
+                        _self.$message({
+                            message:'该角色下有员工，请删除后重试！',
+                            type: 'error'
+                        });
+                    }else{
+                         _self.$message({
+                             message:'操作有误',
+                             type: 'error'
+                         });
+                     }
+                    _self.loadingData();//重新加载数据
+                })
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>

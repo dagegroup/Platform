@@ -2,11 +2,16 @@ package com.dage.service;
 
 import com.dage.dao.PermissionDao;
 import com.dage.entity.Permission;
+import com.dage.entity.Role;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +28,8 @@ public class PermissionServiceImpl implements PermissionService{
     private PermissionDao permissionDao;
     @Autowired
     private HttpSession session;
+    @Autowired
+    private SqlSessionFactory sqlSessionFactory;
 
     /**
      * 根据角色信息获取对应权限
@@ -46,6 +53,35 @@ public class PermissionServiceImpl implements PermissionService{
     }
 
     /**
+     * 获取选中的权限
+     * @param roleid
+     * @return
+     */
+    @Override
+    public List<Permission> getCheckList(Integer roleid) {
+        List<Permission> list = permissionDao.getList();
+        List<Permission> listByRole = permissionDao.getListByRole(roleid);
+        List<Permission> lists = new ArrayList<>();
+        if(list!=null&&list.size()>0){
+            for (Permission permission : list) {
+                if(listByRole!=null&&listByRole.size()>0){
+                    for (Permission roles : listByRole) {
+                        if(roles.getId()==permission.getId()){
+                            permission.setChecked(true);
+                            break;
+                        }
+                    }
+                }
+                if (permission.getPid()==0){
+                    lists.add(permission);
+                    bindChirldren(permission,list);
+                }
+            }
+        }
+        return lists;
+    }
+
+    /**
      * 权限添加
      * @param map
      * @return
@@ -55,6 +91,33 @@ public class PermissionServiceImpl implements PermissionService{
         return permissionDao.add(map);
     }
 
+    @Override
+    public int saveRolePower(Role role) {
+        SqlSession sqlSession = null;
+        Boolean flag = true;
+        try {
+            sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
+            PermissionDao permissionDaos = sqlSession.getMapper(PermissionDao.class);
+            String powersid = role.getPowersid();
+            String[] powerids = powersid.split(",");
+            Integer roleid = role.getRoleid();
+            permissionDao.delRolePower(roleid);
+            for (String powerid : powerids) {
+                int i = permissionDaos.saveRolePower(roleid,Integer.valueOf(powerid));
+                if (i==0) { flag = false;}
+            }
+            System.out.println(flag);
+            if(flag) {
+                sqlSession.commit();
+                return 1;
+            }else{
+                sqlSession.rollback();
+                return 0;
+            }
+        } finally {
+            sqlSession.close();
+        }
+    }
 
     /**
      * 递归绑定所有子节点
