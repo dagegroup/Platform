@@ -24,7 +24,24 @@ public class Bid {
     private Date biddeaddate;/*招标结束时间*/
     private String biddesc;/*借款描述*/
     private String bidtype;/*标的类型*/
-    private String bidState;/*标的状态*/
+    private String bidstate;/*标的状态*/
+    private String bidschedule;/*招标进度*/
+
+    public String getBidstate() {
+        return bidstate;
+    }
+
+    public void setBidstate(String bidstate) {
+        this.bidstate = bidstate;
+    }
+
+    public String getBidschedule() {
+        return bidschedule;
+    }
+
+    public void setBidschedule(String bidschedule) {
+        this.bidschedule = bidschedule;
+    }
 
     public String getBidid() {
         return bidid;
@@ -146,11 +163,5 @@ public class Bid {
         this.bidtype = bidtype;
     }
 
-    public String getBidState() {
-        return bidState;
-    }
 
-    public void setBidState(String bidState) {
-        this.bidState = bidState;
-    }
 }

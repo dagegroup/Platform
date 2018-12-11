@@ -18,16 +18,13 @@
               type:"post",
               dataType:"json",
               success: function(data){
-                  ///s=JSON.stringify(data[0]);
-                  //alert(s);
-                  //alert(data[0].ENAME);
                   var str="";
                   if(data!=null){
                       for (var i = 0; i < data.length; i++) {
                           str+=" <ul >\n" +
                               "            <li  class='col-330 col-t'>\n" +
                               "              <a href='infor.html' target='_blank'>\n" +
-                              "              <a  class='f18 c-orange' href='infor.html' target='_blank' >" +data[i].BIDPROJECT +"</a>\n" +
+                              "              <a  class='f18' href='infor.html' target='_blank'  style='color:#6769FD'>" +data[i].BIDPROJECT +"</a>\n" +
                               "            </li>\n" +
                               "            <li   class='col-180'>\n" +
                               "              <span class='f20 c-333'>" +data[i].BIDAMOUNT +"</span>元\n" +
@@ -35,18 +32,12 @@
                               "            <li class='col-110 relative'>\n" +
                               "              <span class='f20 c-orange'>" +data[i].BIDRATE +"%</span>\n" +
                               "            </li>\n" +
-                              "            <li class='col-150'>\n" +
+                              "            <li class='col-110'>\n" +
                               "              <span class='f20 c-333'>" +data[i].BIDDEADLINE +"</span>个月\n" +
                               "            </li>\n" +
-                              "            <li class='col-150'>" +data[i].BIDREPAYMENTMETHOD +"</li>\n" +
-                              "            <li class='col-120'>\n" +
-                              "              <div class='circle'>\n" +
-                              "                <div class='left progress-bar'>\n" +
-                              "                  <div class='progress-bgPic progress-bfb10'>\n" +
-                              "                    <div class='show-bar'>50% </div>\n" +
-                              "                  </div>\n" +
-                              "                </div>\n" +
-                              "              </div>\n" +
+                              "            <li class='col-180'>" +data[i].BIDREPAYMENTMETHOD +"</li>\n" +
+                              "            <li class='col-110 relative'>\n" +
+                              "              <span class='f20' style='color:#289C30'>" +data[i].BIDSCHEDULE +"</span>\n" +
                               "            </li>\n" +
                               "            <li class='col-120-2'>\n" +
                               "              <a class='ui-btn btn-gray' href='infor.html'>我要投标</a>\n" +
@@ -182,8 +173,8 @@
             <li class="col-330">借款标题</li>
             <li class="col-180"><a href="javascript:url('order','account_up');" class="">借款金额</a> </li>
             <li class="col-110"><a href="javascript:url('order','apr_up');" class="">年利率</a> </li>
-            <li class="col-150"><a href="javascript:url('order','period_up');" class="">借款期限</a> </li>
-            <li class="col-150">还款方式</li>
+            <li class="col-110"><a href="javascript:url('order','period_up');" class="">借款期限</a> </li>
+            <li class="col-180">还款方式</li>
             <li class="col-120"><a href="javascript:url('order','scale_up');" class="">借款进度</a></li>
             <li class="col-120-t">操作</li>
           </ul>
@@ -191,7 +182,6 @@
         <!------------投资列表-------------->
 
         <div class="item" id="bid">
-
         </div>
         <!------------投资列表-------------->
       </div>
