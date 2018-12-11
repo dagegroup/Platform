@@ -18,6 +18,6 @@ public interface BidDao {
      * 获取新闻列表
      * @return
      */
-    @Select(value ="select * from bid_info")
+    @Select(value ="select bidid,userid,auditid,bidproject,bidamount,bidcurrentamount,bidrepaymentmethod,bidrate,100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline,bidissuedate,biddeadday,bidapplydate,biddeaddate,biddesc,bidtype,bidstate from bid_info")
     List<Map> getList(Map map);
 }
