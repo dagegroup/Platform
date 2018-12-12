@@ -1,12 +1,13 @@
 package com.dage.entity;
 
+
 /**
  * @className:Role
  * @discription:
  * @author:ProMonkey-K
  * @creatTime:2018-12-11 14:58
  */
-public class Role {
+public class Role{
     //roleid,rolename,roledesc,rolestate
     private Integer roleid;
     private String rolename;

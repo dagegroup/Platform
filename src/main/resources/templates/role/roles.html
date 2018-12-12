@@ -161,6 +161,10 @@
                 $("#ttree").tree({
                     url:'/power/checktree?roleid='+row.roleid
                 });
+                setTimeout(function(){
+                    console.info("加载数据成功");
+                    _self.loading = false;
+                },300);
                 this.authorization = true;
             },
             powerSubmit:function () {
