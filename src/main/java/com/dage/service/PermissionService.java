@@ -40,4 +40,25 @@ public interface PermissionService {
      * @return
      */
     int saveRolePower(Role role);
+
+    /**
+     * 权限树更新操作 根据id获取权限的 信息
+     * @param id
+     * @return
+     */
+    Permission getPowerById(Integer id);
+
+    /**
+     * 权限树更新操作
+     * @param map
+     * @return
+     */
+    int update(Map map);
+
+    /**
+     * 权限树删除操作
+     * @param id
+     * @return
+     */
+    int del(Integer id);
 }

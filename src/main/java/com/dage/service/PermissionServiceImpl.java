@@ -88,6 +88,9 @@ public class PermissionServiceImpl implements PermissionService{
      */
     @Override
     public int add(Map map) {
+        if (map.get("pid")==null||map.get("pid")=="null"||map.get("pid")==""){
+            map.put("pid","0");
+        }
         return permissionDao.add(map);
     }
 
@@ -117,6 +120,24 @@ public class PermissionServiceImpl implements PermissionService{
         } finally {
             sqlSession.close();
         }
+    }
+
+    @Override
+    public Permission getPowerById(Integer id) {
+        return permissionDao.getPowerById(id);
+    }
+
+    @Override
+    public int update(Map map) {
+        return permissionDao.update(map);
+    }
+
+    @Override
+    public int del(Integer id) {
+        int i = permissionDao.delPowerRole(id);
+        if (i>0)
+            return permissionDao.del(id);
+        return 0;
     }
 
     /**

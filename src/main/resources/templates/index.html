@@ -39,7 +39,16 @@
         .el-container:nth-child(6) .el-aside {
             line-height: 260px;
         }
-
+        .el-tree-node__label{
+            font-size: 21px;
+            line-height: 40px;
+            color:#2d2d2d;
+            margin: 10px 15px 5px 5px;
+            padding:  10px 15px 5px 5px;
+        }
+        .el-tree-node__content{
+            height: 35px;
+        }
         .el-container:nth-child(7) .el-aside {
             line-height: 320px;
         }
@@ -67,7 +76,7 @@
                             :key="item.name"
                             :label="item.title"
                             :name="item.name">
-                        <iframe :src="item.url" frameborder="1" height="450px" id="iframe1" name="iframe1" width="100%" onload="this.height=iframe1.document.body.scrollHeight" ></iframe>
+                        <iframe :src="item.url" frameborder="0" height="450px" id="iframe1" name="iframe1" width="100%" onload="this.height=iframe1.document.body.scrollHeight" ></iframe>
                     </el-tab-pane>
                 </el-tabs>
 
