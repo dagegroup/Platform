@@ -15,4 +15,11 @@ public interface BidService {
      * @return
      */
     List<Map> getList(Map map);
+
+    /**
+     *条件查询标列表
+     * @param map
+     * @return
+     */
+    List<Map> getTerm(Map map);
 }
