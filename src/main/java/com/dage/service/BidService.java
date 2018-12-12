@@ -10,16 +10,29 @@ import java.util.Map;
  * createTime:2018-12-10 17:29
  */
 public interface BidService {
-    /**
+   /**
      * 标列表查询
      * @return
      */
     List<Map> getList(Map map);
-
     /**
      *条件查询标列表
      * @param map
      * @return
      */
     List<Map> getTerm(Map map);
+
+    /**
+     * 雇员分页方法
+     * @param map
+     * @return
+     */
+    List<Map> getPage(Map map);
+
+    /**
+     * 雇员分页总数量
+     * @param map
+     * @return
+     */
+    int getPageCount(Map map);
 }

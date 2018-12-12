@@ -22,8 +22,8 @@
         for (var i = 0; i < li.length; i++){
             li[i].className = '';
         }
-        bidrate=a;
         self.classList.add('active');
+        bidrate=a;
         ax(bidrate,biddeadline,bidrepaymentmethod);
     }
     function biddeadlinea(a,self) {
@@ -47,33 +47,36 @@
 //  封装axaj
     function ax(a,b,c) {
         $.ajax({
-            url: "/bid/term",
+            url: "/bid/page ",
             async:false,//同步
             data:{bidrate:a,biddeadline:b,bidrepaymentmethod:c},
             type:"post",
             dataType:"json",
             success: function(data){
+                var pageString = data.pageString;
+                $("#pa").html(pageString);
+                var bidList=data.bidList;
                 $('#bid').empty();
                 var str="";
                 if(data!=null){
-                    for (var i = 0; i < data.length; i++) {
+                    for (var i = 0; i < bidList.length; i++) {
                         str+=" <ul >\n" +
                             "            <li  class='col-330 col-t'>\n" +
                             "              <a href='infor.html' target='_blank'>\n" +
-                            "              <a  class='f18' href='infor.html' target='_blank'  style='color:#6769FD'>" +data[i].BIDPROJECT +"</a>\n" +
+                            "              <a  class='f18' href='infor.html' target='_blank'  style='color:#6769FD'>" +bidList[i].BIDPROJECT +"</a>\n" +
                             "            </li>\n" +
                             "            <li   class='col-180'>\n" +
-                            "              <span class='f20 c-333'>" +data[i].BIDAMOUNT +"</span>元\n" +
+                            "              <span class='f20 c-333'>" +bidList[i].BIDAMOUNT +"</span>元\n" +
                             "            </li>\n" +
                             "            <li class='col-110 relative'>\n" +
-                            "              <span class='f20 c-orange'>" +data[i].BIDRATE +"%</span>\n" +
+                            "              <span class='f20 c-orange'>" +bidList[i].BIDRATE +"%</span>\n" +
                             "            </li>\n" +
                             "            <li class='col-110'>\n" +
-                            "              <span class='f20 c-333'>" +data[i].BIDDEADLINE +"</span>个月\n" +
+                            "              <span class='f20 c-333'>" +bidList[i].BIDDEADLINE +"</span>个月\n" +
                             "            </li>\n" +
-                            "            <li class='col-180'>" +data[i].BIDREPAYMENTMETHOD +"</li>\n" +
+                            "            <li class='col-180'>" +bidList[i].BIDREPAYMENTMETHOD +"</li>\n" +
                             "            <li class='col-110 relative'>\n" +
-                            "              <span class='f20' style='color:#289C30'>" +data[i].BIDSCHEDULE +"</span>\n" +
+                            "              <span class='f20' style='color:#289C30'>" +bidList[i].BIDSCHEDULE +"</span>\n" +
                             "            </li>\n" +
                             "            <li class='col-120-2'>\n" +
                             "              <a class='ui-btn btn-gray' href='infor.html'>我要投标</a>\n" +
@@ -137,9 +140,8 @@
       <div class="filter-item">
         <div class="hd">
           <h3>筛选投资项目</h3>
-
-
         </div>
+        <!------------筛选条件-------------->
         <div class="bid">
           <dl>
             <dt>年利率</dt>
@@ -196,13 +198,14 @@
       <h3>投资列表</h3>
       <div class="count">
         <ul>
-          <li class="line">散标投资交易金额&nbsp;&nbsp;<span class="f20 bold">73.54亿元</span></li>
-          <li>累计赚取收益&nbsp;&nbsp;<span class="f20 bold">2.52亿元</span></li>
+          <li class="line">散标投资交易金额&nbsp;&nbsp;<span class="f20 bold">88.66亿元</span></li>
+          <li>累计赚取收益&nbsp;&nbsp;<span class="f20 bold">2.22亿元</span></li>
         </ul>
       </div>
     </div>
     <div class="bd">
       <div class="invest-table clearfix">
+        <!------------字段名（未改）-------------->
         <div class="title clearfix">
           <ul>
             <li class="col-330">借款标题</li>
@@ -218,10 +221,23 @@
         <div class="item" id="bid">
           <!--顶部遍历-->
         </div>
-        <!------------投资列表-------------->
+
       </div>
-      <div class="pagination clearfix mrt30"> <span class="page"><a href="javascript:void(0);" onclick="">首页</a><a href="javascript:void(0);" onclick="">上一页</a>&nbsp;<a class="curr" href="javascript:;">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="javascript:void(0);" onclick="#">下一页</a><a href="javascript:void(0);" onclick="#">尾页</a>&nbsp;<em>共2297页&nbsp;</em></span>
-        <dl class="page-select">
+      <div class="pagination clearfix mrt30">
+        <span class="page" id="pa"></span>
+        <!--<span class="page">
+          <a href="javascript:void(0);" onclick="">首页</a>
+          <a href="javascript:void(0);" onclick="">上一页</a>&nbsp;
+          <a class="curr" href="javascript:;">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">5</a>
+          <a href="javascript:void(0);" onclick="#">下一页</a>
+          <a href="javascript:void(0);" onclick="#">尾页</a>&nbsp;
+          <em>共2297页&nbsp;</em>
+        </span>-->
+        <!--<dl class="page-select">
           <dt><span>1</span><i class="icon icon-down"></i></dt>
           <dd style="display: none;">
             <ul name="nump" id="jsnump">
@@ -230,7 +246,7 @@
               <li><a href="##" onclick="page_jump(&quot;this&quot;,3)">3</a></li>
             </ul>
           </dd>
-        </dl>
+        </dl>-->
       </div>
     </div>
   </div>
