@@ -213,10 +213,10 @@ jQuery.fn = jQuery.prototype = {
 	},
 
 	// Take an array of elements and push it onto the stack
-	// (returning the new matched element set)
+	// (returning the news matched element set)
 	pushStack: function( elems, name, selector ) {
 
-		// Build a new jQuery matched element set
+		// Build a news jQuery matched element set
 		var ret = jQuery.merge( this.constructor(), elems );
 
 		// Add the old object onto the stack (as a reference)
@@ -1563,7 +1563,7 @@ jQuery.extend({
 		}
 
 		if ( !id ) {
-			// Only DOM nodes need a new unique ID for each element since their data
+			// Only DOM nodes need a news unique ID for each element since their data
 			// ends up in the global cache
 			if ( isNode ) {
 				elem[ internalKey ] = id = jQuery.deletedIds.pop() || jQuery.guid++;
@@ -2516,7 +2516,7 @@ if ( !getSetAttribute ) {
 				undefined;
 		},
 		set: function( elem, value, name ) {
-			// Set the existing or create a new attribute node
+			// Set the existing or create a news attribute node
 			var ret = elem.getAttributeNode( name );
 			if ( !ret ) {
 				ret = document.createAttribute( name );
@@ -3239,7 +3239,7 @@ jQuery.removeEvent = document.removeEventListener ?
 	};
 
 jQuery.Event = function( src, props ) {
-	// Allow instantiation without the 'new' keyword
+	// Allow instantiation without the 'news' keyword
 	if ( !(this instanceof jQuery.Event) ) {
 		return new jQuery.Event( src, props );
 	}
@@ -3993,7 +3993,7 @@ getText = Sizzle.getText = function( elem ) {
 	if ( nodeType ) {
 		if ( nodeType === 1 || nodeType === 9 || nodeType === 11 ) {
 			// Use textContent for elements
-			// innerText usage removed for consistency of new lines (see #11153)
+			// innerText usage removed for consistency of news lines (see #11153)
 			if ( typeof elem.textContent === "string" ) {
 				return elem.textContent;
 			} else {
@@ -4479,7 +4479,7 @@ Expr = Sizzle.selectors = {
 
 		"text": function( elem ) {
 			var type, attr;
-			// IE6 and 7 will map elem.type to 'text' for new HTML5 types (search, etc)
+			// IE6 and 7 will map elem.type to 'text' for news HTML5 types (search, etc)
 			// use getAttribute instead to test this case
 			return elem.nodeName.toLowerCase() === "input" &&
 				(type = elem.type) === "text" &&
@@ -6800,7 +6800,7 @@ jQuery.extend({
 		var ret, name,
 			old = {};
 
-		// Remember the old values, and insert the new ones
+		// Remember the old values, and insert the news ones
 		for ( name in options ) {
 			old[ name ] = elem.style[ name ];
 			elem.style[ name ] = options[ name ];
@@ -6879,7 +6879,7 @@ if ( window.getComputedStyle ) {
 			left = style.left;
 			rsLeft = elem.runtimeStyle && elem.runtimeStyle.left;
 
-			// Put in the new values to get a computed value out
+			// Put in the news values to get a computed value out
 			if ( rsLeft ) {
 				elem.runtimeStyle.left = elem.currentStyle.left;
 			}
@@ -7094,7 +7094,7 @@ if ( !jQuery.support.opacity ) {
 				}
 			}
 
-			// otherwise, set new filter values
+			// otherwise, set news filter values
 			style.filter = ralpha.test( filter ) ?
 				filter.replace( ralpha, opacity ) :
 				filter + " " + opacity;
@@ -7888,7 +7888,7 @@ jQuery.extend({
 		// Determine if request has content
 		s.hasContent = !rnoContent.test( s.type );
 
-		// Watch for a new set of requests
+		// Watch for a news set of requests
 		if ( fireGlobals && jQuery.active++ === 0 ) {
 			jQuery.event.trigger( "ajaxStart" );
 		}
@@ -8388,7 +8388,7 @@ if ( jQuery.support.ajax ) {
 			return {
 				send: function( headers, complete ) {
 
-					// Get a new xhr
+					// Get a news xhr
 					var handle, i,
 						xhr = s.xhr();
 

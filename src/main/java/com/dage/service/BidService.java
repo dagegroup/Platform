@@ -22,17 +22,4 @@ public interface BidService {
      */
     List<Map> getTerm(Map map);
 
-    /**
-     * 雇员分页方法
-     * @param map
-     * @return
-     */
-    List<Map> getPage(Map map);
-
-    /**
-     * 雇员分页总数量
-     * @param map
-     * @return
-     */
-    int getPageCount(Map map);
 }

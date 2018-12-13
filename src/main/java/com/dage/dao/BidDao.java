@@ -40,7 +40,7 @@ public interface BidDao {
     List<Map> getTerm(Map map);
 
     /**
-     * 雇员分页查询
+     * 雇员分页查询(思想历程，最终失败了)
      * @param map
      * @return
      */
@@ -52,20 +52,12 @@ public interface BidDao {
             "select rownum rn,bidid,userid,auditid,bidproject,bidamount,bidcurrentamount,bidrepaymentmethod,bidrate," +
             "100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline,bidissuedate,biddeadday,bidapplydate," +
             "biddeaddate,biddesc,bidtype,bidstate from bid_info " +
-            "where rownum&lt;#{end} " +
+            "where rownum&lt;${end} " +
             "<if test=\" bidrate!=null and bidrate!=''\"> and ${bidrate}</if>" +
             "<if test=\" biddeadline!=null and biddeadline!=''\"> and ${biddeadline}</if>" +
             "<if test=\" bidrepaymentmethod!=null and bidrepaymentmethod!=''\"> and ${bidrepaymentmethod}</if>" +
             ") a " +
-            " where  a.rn &gt; #{start} </script>")
+            " where  a.rn &gt; ${start} </script>")
     List<Map> getPage(Map map);
 
-    /**
-     * 查询分页总数量
-     * @return
-     */
-    @Select("<script>" +
-            "select count(*) as cnt from bid_info" +
-            "</script>")
-    int getPageCount(Map map);
 }
