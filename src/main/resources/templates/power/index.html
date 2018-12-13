@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入样式 -->
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <script type="text/javascript" src="/js/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <style>
+        .el-header, .el-footer {
+            background-color: #B3C0D1;
+            color: #333;
+            text-align: center;
+            line-height: 60px;
+        }
+
+        .el-aside {
+            background-color: #D3DCE6;
+            color: #333;
+            text-align: center;
+            line-height: 200px;
+        }
+
+        .el-main {
+            background-color: #E9EEF3;
+            color: #333;
+            text-align: center;
+        }
+
+        body > .el-container {
+            margin-bottom: 40px;
+        }
+
+        .el-container:nth-child(5) .el-aside,
+        .el-container:nth-child(6) .el-aside {
+            line-height: 260px;
+        }
+        .el-tree-node__label{
+            font-size: 21px;
+            line-height: 40px;
+            color:#2d2d2d;
+            margin: 10px 15px 5px 5px;
+            padding:  10px 15px 5px 5px;
+        }
+        .el-tree-node__content{
+            height: 35px;
+        }
+        .el-container:nth-child(7) .el-aside {
+            line-height: 320px;
+        }
+    </style>
+</head>
+<body>
+<div id="tree">
+    <el-container>
+        <el-header>Header</el-header>
+        <el-container style="height:550px">
+            <el-aside width="200px">
+                <el-tree style="width: 200px;font-family: Arial; font-size:larger;line-height: 55px"
+                        :data="tree"
+                        :props="defaultProps"
+                        accordion
+                        @node-click="NodeClick"
+                        :icon-class="iconcls"
+                >
+                </el-tree>
+            </el-aside>
+            <el-main>
+                <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
+                    <el-tab-pane
+                            v-for="(item, index) in editableTabs"
+                            :key="item.name"
+                            :label="item.title"
+                            :name="item.name">
+                        <iframe :src="item.url" frameborder="0" height="450px" id="iframe1" name="iframe1" width="100%" onload="this.height=iframe1.document.body.scrollHeight" ></iframe>
+                    </el-tab-pane>
+                </el-tabs>
+
+            </el-main>
+        </el-container>
+        <el-footer>
+            Footer
+        </el-footer>
+    </el-container>
+</div>
+<script>
+    var tree = new Vue({
+        el:'#tree',
+        data:{
+            tree: [],
+            defaultProps: {
+                children: 'children',
+                label:'text'
+            },
+            iconcls:'',
+            editableTabsValue: '',
+            editableTabs: [ {
+                title: '首页',
+                name: '首页',
+                url: 'https://www.baidu.com'
+            }],
+            tabIndex: 0
+        },
+        created:function(){
+            //在 then的内部不能使用Vue的实例化的this, 因为在内部 this 没有被绑定。
+            var self = this;
+            axios.post('/power/tree').then(function(response){
+                self.tree = response.data;
+                self.iconcls = response.data[1].iconcls
+                //alert(JSON.stringify(self.tree))
+                // self.multipleSelection=response.data.data;
+            })
+        },
+        methods:{
+            NodeClick:function(n){
+                //alert(n.url)
+                if (n.url != null && n.url != 'null' && n.url != '')
+                    this.addTab(n.text, n.url);
+            },
+            addTab: function (targetName,url) {
+                var newTabName = targetName;
+                if (JSON.stringify(this.editableTabs).indexOf(newTabName) == -1) {
+                    this.editableTabs.push({
+                        title: newTabName,
+                        name: newTabName,
+                        url: url
+                    });
+                }
+                this.editableTabsValue = newTabName;
+            },
+            removeTab: function (targetName) {
+                let tabs = this.editableTabs;
+                let activeName = this.editableTabsValue;
+                if (activeName === targetName) {
+                    tabs.forEach((tab, index) => {
+                        if (tab.name === targetName) {
+                            let nextTab = tabs[index + 1] || tabs[index - 1];
+                            if (nextTab) {
+                                activeName = nextTab.name;
+                            }
+                        }
+                    });
+                }
+                this.editableTabsValue = activeName;
+                this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+            }
+        }
+    });
+</script>
+</body>
+</html>

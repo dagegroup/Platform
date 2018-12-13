@@ -17,7 +17,7 @@ public class Permission {
     private String prefix;
     private String token;
     private String state;
-    private String iconcls;
+    private String iconCls;
     private Boolean checked;
 
     public Boolean getChecked() {
@@ -94,11 +94,11 @@ public class Permission {
         this.state = state;
     }
 
-    public String getIconcls() {
-        return iconcls;
+    public String getIconCls() {
+        return iconCls;
     }
 
-    public void setIconcls(String iconcls) {
-        this.iconcls = iconcls;
+    public void setIconCls(String iconCls) {
+        this.iconCls = iconCls;
     }
 }

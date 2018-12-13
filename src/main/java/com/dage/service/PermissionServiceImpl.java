@@ -1,17 +1,18 @@
 package com.dage.service;
 
 import com.dage.dao.PermissionDao;
+import com.dage.entity.Emp;
 import com.dage.entity.Permission;
 import com.dage.entity.Role;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,6 @@ public class PermissionServiceImpl implements PermissionService{
     @Autowired
     private PermissionDao permissionDao;
     @Autowired
-    private HttpSession session;
-    @Autowired
     private SqlSessionFactory sqlSessionFactory;
 
     /**
@@ -39,7 +38,9 @@ public class PermissionServiceImpl implements PermissionService{
     @Override
     public List<Permission> getListByRole() {
         //session.getAttribute()
-        List<Permission> permissionList = permissionDao.getListByRole(3);
+        Subject subject = SecurityUtils.getSubject();
+        Emp emp = (Emp)subject.getPrincipal();
+        List<Permission> permissionList = permissionDao.getListByRole(emp.getRoleid());
         List<Permission> list = new ArrayList<>();
         if (permissionList!=null&&permissionList.size()>0){
             for (Permission permission : permissionList) {
@@ -53,6 +54,16 @@ public class PermissionServiceImpl implements PermissionService{
     }
 
     /**
+     * 根据角色信息获取对应权限令牌
+     * @param
+     * @return
+     */
+    public List<Permission> getListByRoleid() {
+        Subject subject = SecurityUtils.getSubject();
+        Emp emp = (Emp)subject.getPrincipal();
+        return permissionDao.getListByRole(emp.getRoleid());
+    }
+    /**
      * 获取选中的权限
      * @param roleid
      * @return
@@ -64,6 +75,7 @@ public class PermissionServiceImpl implements PermissionService{
         List<Permission> lists = new ArrayList<>();
         if(list!=null&&list.size()>0){
             for (Permission permission : list) {
+                permission.setState("open");
                 if(listByRole!=null&&listByRole.size()>0){
                     for (Permission roles : listByRole) {
                         if(roles.getId()==permission.getId()){
@@ -95,6 +107,11 @@ public class PermissionServiceImpl implements PermissionService{
     }
 
     @Override
+    public List<Permission> getList() {
+        return permissionDao.getList();
+    }
+
+    @Override
     public int saveRolePower(Role role) {
         SqlSession sqlSession = null;
         Boolean flag = true;
@@ -102,8 +119,12 @@ public class PermissionServiceImpl implements PermissionService{
             sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
             PermissionDao permissionDaos = sqlSession.getMapper(PermissionDao.class);
             String powersid = role.getPowersid();
-            String[] powerids = powersid.split(",");
             Integer roleid = role.getRoleid();
+            if (powersid==""||powersid==null||powersid=="null"){
+                int del = permissionDao.delRolePower(roleid);
+                return del;
+            }
+            String[] powerids = powersid.split(",");
             permissionDao.delRolePower(roleid);
             for (String powerid : powerids) {
                 int i = permissionDaos.saveRolePower(roleid,Integer.valueOf(powerid));

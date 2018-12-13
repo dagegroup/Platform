@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>权限添加</title>
-    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
     <script type="text/javascript" src="/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
@@ -23,6 +23,17 @@
                 <tr align="center" class="success">
                     <td>父节点</td>
                     <td><input class="easyui-combotree" name="pid"  data-options="url:'/power/tree',method:'get',required:true" style="width:210px"></td>
+                </tr>
+                <tr align="center"  class="active">
+                    <td>图标</td>
+                    <td><input type="text" name="iconcls"></td>
+                </tr>
+                <tr align="center"  class="active">
+                    <td>状态</td>
+                    <td><select name="state">
+                        <option value="open" selected="selected">打开</option>
+                        <option value="closed">关闭</option>
+                    </select></td>
                 </tr>
                 <tr align="center"  class="active">
                     <td>链接</td>
@@ -61,7 +72,6 @@
                             });
                         }
                         setTimeout(function(){ window.location.href=window.location.href;},1000);
-
                     }
                 });
             })
