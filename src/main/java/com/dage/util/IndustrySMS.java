@@ -137,8 +137,8 @@ public class IndustrySMS {
 		return result;
 	}
 
-//	public static void main(String[] args) {
-//		int execute = IndustrySMS.execute("15660003543");
-//		System.out.println(execute);
-//	}
+	/*public static void main(String[] args) {
+		int execute = IndustrySMS.execute("15660003543");
+		System.out.println(execute);
+	}*/
 }
