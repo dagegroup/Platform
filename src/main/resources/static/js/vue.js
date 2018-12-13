@@ -935,7 +935,7 @@ function copyAugment (target, src, keys) {
 
 /**
  * Attempt to create an observer instance for a value,
- * returns the new observer if successfully observed,
+ * returns the news observer if successfully observed,
  * or the existing observer if the value already has one.
  */
 function observe (value, asRootData) {
@@ -1023,7 +1023,7 @@ function defineReactive (
 }
 
 /**
- * Set a property on an object. Adds the new property and
+ * Set a property on an object. Adds the news property and
  * triggers change notification if the property doesn't
  * already exist.
  */
@@ -1121,7 +1121,7 @@ var strats = config.optionMergeStrategies;
     if (!vm) {
       warn(
         "option \"" + key + "\" can only be used during instance " +
-        'creation with the `new` keyword.'
+        'creation with the `news` keyword.'
       );
     }
     return defaultStrat(parent, child)
@@ -1445,7 +1445,7 @@ function assertObjectType (name, value, vm) {
 }
 
 /**
- * Merge two option objects into a new one.
+ * Merge two option objects into a news one.
  * Core utility used in both instantiation and inheritance.
  */
 function mergeOptions (
@@ -2818,9 +2818,9 @@ function updateChildComponent (
   // determine whether component has slot children
   // we need to do this before overwriting $options._renderChildren
   var hasChildren = !!(
-    renderChildren ||               // has new static slots
+    renderChildren ||               // has news static slots
     vm.$options._renderChildren ||  // has old static slots
-    parentVnode.data.scopedSlots || // has new scoped slots
+    parentVnode.data.scopedSlots || // has news scoped slots
     vm.$scopedSlots !== emptyObject // has old scoped slots
   );
 
@@ -3223,7 +3223,7 @@ Watcher.prototype.run = function run () {
       isObject(value) ||
       this.deep
     ) {
-      // set new value
+      // set news value
       var oldValue = this.value;
       this.value = value;
       if (this.user) {
@@ -4139,8 +4139,8 @@ var componentVNodeHooks = {
       child,
       options.propsData, // updated props
       options.listeners, // updated listeners
-      vnode, // new parent vnode
-      options.children // new children
+      vnode, // news parent vnode
+      options.children // news children
     );
   },
 
@@ -4657,7 +4657,7 @@ function resolveConstructorOptions (Ctor) {
     var cachedSuperOptions = Ctor.superOptions;
     if (superOptions !== cachedSuperOptions) {
       // super option changed,
-      // need to resolve new options.
+      // need to resolve news options.
       Ctor.superOptions = superOptions;
       // check if there are any late-modified/attached options (#4976)
       var modifiedOptions = resolveModifiedOptions(Ctor);
@@ -4711,7 +4711,7 @@ function Vue (options) {
   if ("development" !== 'production' &&
     !(this instanceof Vue)
   ) {
-    warn('Vue is a constructor and should be called with the `new` keyword');
+    warn('Vue is a constructor and should be called with the `news` keyword');
   }
   this._init(options);
 }
@@ -5531,7 +5531,7 @@ function createPatchFunction (backend) {
   ) {
     if (isDef(vnode.elm) && isDef(ownerArray)) {
       // This vnode was used in a previous render!
-      // now it's used as a new node, overwriting its elm would cause
+      // now it's used as a news node, overwriting its elm would cause
       // potential patch errors down the road when it's used as an insertion
       // reference node. Instead, we clone the node on-demand before creating
       // associated DOM element for it.
@@ -5837,7 +5837,7 @@ function createPatchFunction (backend) {
             oldCh[idxInOld] = undefined;
             canMove && nodeOps.insertBefore(parentElm, vnodeToMove.elm, oldStartVnode.elm);
           } else {
-            // same key but different element. treat as new element
+            // same key but different element. treat as news element
             createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, false, newCh, newStartIdx);
           }
         }
@@ -5895,7 +5895,7 @@ function createPatchFunction (backend) {
 
     // reuse element for static trees.
     // note we only do this if the vnode is cloned -
-    // if the new node is not cloned it means the render functions have been
+    // if the news node is not cloned it means the render functions have been
     // reset by the hot-reload-api and we need to do a proper re-render.
     if (isTrue(vnode.isStatic) &&
       isTrue(oldVnode.isStatic) &&
@@ -6073,7 +6073,7 @@ function createPatchFunction (backend) {
     var insertedVnodeQueue = [];
 
     if (isUndef(oldVnode)) {
-      // empty mount (likely as component), create new root element
+      // empty mount (likely as component), create news root element
       isInitialPatch = true;
       createElm(vnode, insertedVnodeQueue, parentElm, refElm);
     } else {
@@ -6113,7 +6113,7 @@ function createPatchFunction (backend) {
         var oldElm = oldVnode.elm;
         var parentElm$1 = nodeOps.parentNode(oldElm);
 
-        // create new node
+        // create news node
         createElm(
           vnode,
           insertedVnodeQueue,
@@ -6198,7 +6198,7 @@ function _update (oldVnode, vnode) {
     oldDir = oldDirs[key];
     dir = newDirs[key];
     if (!oldDir) {
-      // new directive, bind
+      // news directive, bind
       callHook$1(dir, 'bind', vnode, oldVnode);
       if (dir.def && dir.def.inserted) {
         dirsWithInsert.push(dir);
@@ -9482,7 +9482,7 @@ function processSlot (el) {
       if ("development" !== 'production' && slotScope) {
         warn$2(
           "the \"scope\" attribute for scoped slots have been deprecated and " +
-          "replaced by \"slot-scope\" since 2.5. The new \"slot-scope\" attribute " +
+          "replaced by \"slot-scope\" since 2.5. The news \"slot-scope\" attribute " +
           "can also be used on plain elements in addition to <template> to " +
           "denote scoped slots.",
           true
@@ -10558,7 +10558,7 @@ function transformSpecialNewlines (text) {
 // these keywords should not appear inside expressions, but operators like
 // typeof, instanceof and in are allowed
 var prohibitedKeywordRE = new RegExp('\\b' + (
-  'do,if,for,let,new,try,var,case,else,with,await,break,catch,class,const,' +
+  'do,if,for,let,news,try,var,case,else,with,await,break,catch,class,const,' +
   'super,throw,while,yield,delete,export,import,return,switch,default,' +
   'extends,finally,continue,debugger,function,arguments'
 ).split(',').join('\\b|\\b') + '\\b');
