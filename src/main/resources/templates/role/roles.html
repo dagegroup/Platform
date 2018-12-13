@@ -63,6 +63,20 @@
         </el-table>
     </el-row>
 
+    <el-row style="margin-top: 20px" type="flex" justify="end">
+        <el-col :span="24" >
+            <el-pagination
+                    style="float: right"
+                    @size-change="pageSizeChange"
+                    @current-change="currentPageChange"
+                    :current-page="currentPage"
+                    :page-sizes="[10, 20, 30, 50]"
+                    :page-size="pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="total">
+            </el-pagination>
+        </el-col>
+    </el-row>
     <!--编辑界面-->
     <el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
         <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
@@ -132,23 +146,33 @@
                 rolestate:'',
                 powersid:''
             },
+            //当前页
+            currentPage:1,
+            //分页大小
+            pageSize:10,
+            //总记录数
+            total:800,
         },
         created:function(){
             //在 then的内部不能使用Vue的实例化的this, 因为在内部 this 没有被绑定。
             var self = this;
             var start =this.currentPage;
             var end =this.pageSize;
-            axios.post('/role/list').then(function(response){
-                self.tableData = response.data;
+            axios.post('/role/list',{'start':start,'end':end}).then(function(response){
+                self.total = response.data.page.total;
+                self.tableData = response.data.page.list;
             })
         },
         methods:{
             //表格重新加载数据
             loadingData:function() {
                 var _self = this;
+                var start =this.currentPage;
+                var end =this.pageSize;
                 _self.loading = true;
-                axios.post('/role/list').then(function(response){
-                    _self.tableData = response.data;
+                axios.post('/role/list',{'start':start,'end':end}).then(function(response){
+                    _self.total = response.data.page.total;
+                    _self.tableData = response.data.page.list;
                 })
                 setTimeout(function(){
                     console.info("加载数据成功");
@@ -157,15 +181,15 @@
             },
             addPower:function (row) {
                 //alert(row)
+                var self = this;
                 this.editForm = Object.assign({}, row);
                 $("#ttree").tree({
                     url:'/power/checktree?roleid='+row.roleid
                 });
                 setTimeout(function(){
-                    console.info("加载数据成功");
-                    _self.loading = false;
-                },300);
-                this.authorization = true;
+                    self.authorization = true;
+                },1000);
+
             },
             powerSubmit:function () {
                 var _self = this;

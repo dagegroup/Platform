@@ -28,6 +28,13 @@ public interface RoleDao {
     List<Role> getRoles();
 
     /**
+     * 获取所有正常使用的角色信息
+     * @return
+     */
+    @Select("select roleid,rolename,roledesc,rolestate from tb_role where rolestate='正常' order by roleid")
+    List<Role> getRolesByState();
+
+    /**
      * 角色添加
      * @param role
      * @return
@@ -48,6 +55,6 @@ public interface RoleDao {
      * @param roleid
      * @return
      */
-    @Select("select count(*) from employee where eroleid=#{roleid}")
+    @Select("select count(*) from tb_emp where roleid=#{roleid}")
     int haveEmp(Integer roleid);
 }

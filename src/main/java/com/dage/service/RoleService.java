@@ -17,6 +17,11 @@ public interface RoleService {
      * @return
      */
     List<Role> getRoles();
+    /**
+     * 获取所有正常使用的角色信息
+     * @return
+     */
+    List<Role> getRolesByState();
 
     /**
      * 角色添加

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>角色列表</title>
+    <!-- 引入样式 -->
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <script type="text/javascript" src="/js/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
+    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+<div id="tableView">
+    <!--列表顶部工具条-->
+    <el-row>
+        <el-form :inline="true"  class="demo-form-inline">
+        <el-form-item>
+            <el-button type="success" icon="plus" @click="addClick">新增</el-button>
+        </el-form-item>
+        </el-form>
+    </el-row>
+    <!--列表-->
+    <el-row>
+        <el-table
+                :data="tableData"
+                v-loading.body="loading"
+                border
+                style="width: 100%">
+            <el-table-column
+                    prop="id"
+                    label="ID"
+                    v-if="false"
+                    align="center"
+                    width="50">
+            </el-table-column>
+            <el-table-column
+                    prop="name"
+                    align="center"
+                    label="姓名"
+                    width="90">
+            </el-table-column>
+            <el-table-column
+                    prop="sex"
+                    align="center"
+                    label="性别"
+                    width="70">
+            </el-table-column>
+
+            <el-table-column
+                    prop="idcard"
+                    align="center"
+                    label="证件号"
+                    width="200">
+            </el-table-column>
+            <el-table-column
+                    prop="phone"
+                    align="center"
+                    label="手机号"
+                    width="200">
+            </el-table-column>
+            <el-table-column
+                    prop="state"
+                    align="center"
+                    label="账户状态"
+                    width="100">
+            </el-table-column>
+            <el-table-column
+                    prop="rolename"
+                    align="center"
+                    label="角色类型"
+                    width="120">
+            </el-table-column>
+            <el-table-column
+                    prop="nearlogintime"
+                    align="center"
+                    label="最近登陆时间"
+                    width="200">
+            </el-table-column>
+            <el-table-column
+                    prop="password"
+                    align="center"
+                    label="账户密码"
+                    width="100"
+            v-if="false">
+            </el-table-column>
+            <el-table-column
+                    align="center"
+                    label="操作">
+                <template scope="scope">
+                    <el-button :plain="true" type="success" size="small" icon="edit" @click="editClick(scope.row)">编辑</el-button>
+                    <el-button :plain="true" v-if="scope.row.roleid!=3&&scope.row.state=='注销'" type="warning" size="small" icon="plus" @click="updatestate(scope.row)">恢复使用</el-button>
+                    <el-button :plain="true" v-if="scope.row.roleid!=3&&scope.row.state=='正常'" type="danger" size="small" icon="plus" @click="updatestate(scope.row)">注销</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </el-row>
+
+    <el-row style="margin-top: 20px" type="flex" justify="end">
+        <el-col :span="24" >
+            <el-pagination
+                    style="float: right"
+                    @size-change="pageSizeChange"
+                    @current-change="currentPageChange"
+                    :current-page="currentPage"
+                    :page-sizes="[10, 20, 30, 50]"
+                    :page-size="pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="total">
+            </el-pagination>
+        </el-col>
+    </el-row>
+    <!--编辑界面-->
+    <el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
+        <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+            <el-form-item label="姓名" >
+                <el-input v-model="editForm.name" auto-complete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="性别">
+                <el-select v-model="editForm.sex" placeholder="请选择">
+                    <el-option label="男" value="男"></el-option>
+                    <el-option label="女" value="女"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="证件号">
+                <el-input type="text" v-model="editForm.idcard"></el-input>
+            </el-form-item>
+            <el-form-item label="手机号">
+                <el-input-number type="text" v-model="editForm.phone"></el-input-number>
+            </el-form-item>
+            <el-form-item label="账户状态">
+                <el-select v-model="editForm.state" placeholder="请选择">
+                    <el-option label="请选择" value=""></el-option>
+                    <el-option label="注销" value="注销"></el-option>
+                    <el-option label="正常" value="正常"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="角色类型">
+                <el-select v-model="editForm.roleid" placeholder="请选择">
+                    <el-option label="请选择" value=""></el-option>
+                    <el-option v-for="item in options"
+                               :key="item.roleid"
+                               :label="item.rolename"
+                               :value="item.roleid">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="密码">
+                <el-input type="text" v-model="editForm.password"></el-input>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click.native="editFormVisible = false">取消</el-button>
+            <el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
+        </div>
+    </el-dialog>
+</div>
+
+
+<script type="text/javascript">
+
+    var tableView = new Vue({
+        el: '#tableView',
+        data: {
+            options:[],
+            //列表数据
+            tableData: [],
+            //显示加载中样式
+            loading:false,
+            //编辑界面是否显示
+            editFormVisible: false,
+            editLoading: false,
+            goUrl:'',
+            editFormRules: {
+                name: [
+                    { required: true, message: '请输入姓名', trigger: 'blur' }
+                ]
+            },
+            //编辑界面数据
+            editForm: {
+                id:0,
+                name:'',
+                sex:'',
+                idcard:'',
+                phone:'',
+                roleid:'',
+                state:'',
+                password:'',
+                rolename:''
+
+            },
+            //当前页
+            currentPage:1,
+            //分页大小
+            pageSize:10,
+            //总记录数
+            total:800,
+        },
+        created:function(){
+            //在 then的内部不能使用Vue的实例化的this, 因为在内部 this 没有被绑定。
+            var self = this;
+            var start =this.currentPage;
+            var end =this.pageSize;
+            axios.post('/emp/list',{'start':start,'end':end}).then(function(response){
+                self.total = response.data.page.total;
+                self.tableData = response.data.page.list;
+            })
+            axios.post('/role/all').then(function(response){
+                // console.log(response.data);
+                //alert(response.data.total);
+                self.options = response.data;
+                // self.multipleSelection=response.data.data;
+            })
+        },
+        methods:{
+            //表格重新加载数据
+            loadingData:function() {
+                var _self = this;
+                var start =this.currentPage;
+                var end =this.pageSize;
+                _self.loading = true;
+                axios.post('/emp/list',{'start':start,'end':end}).then(function(response){
+                    _self.total = response.data.page.total;
+                    _self.tableData = response.data.page.list;
+                })
+                setTimeout(function(){
+                    console.info("加载数据成功");
+                    _self.loading = false;
+                },300);
+            },
+            updatestate:function (row) {
+                var _self=this;
+                this.$confirm('确认更新' + row.name +'的状态吗?', '提示', {
+                    type: 'warning'
+                }).then(function(){
+                    var ds = '';
+                    if(row.state=='正常'){ds='注销'}
+                    else(ds='正常')
+                    axios.post('/emp/updatestate',{'id':row.id,'state':ds}).then(function(response){
+                        if(response.data>0){
+                            _self.$message({
+                                message:'更新状态成功',
+                                type: 'success'
+                            });
+                        }else{
+                            _self.$message({
+                                message:'更新状态失败',
+                                type: 'error'
+                            });
+                        }
+                        _self.loadingData();//重新加载数据
+                    })
+                }).catch(function(e){
+                    if(e != "cancel")
+                        console.log("出现错误：" + e);
+                });
+            },
+            //表格编辑事件
+            editClick:function(row) {
+                this.goUrl="/emp/update";
+                this.editFormVisible = true;
+                this.editForm = Object.assign({}, row);
+            },
+            //新建事件
+            addClick:function() {
+                //alert(111);
+                this.goUrl="/emp/add";
+                var _self = this;
+                this.editForm={
+                    id:0,
+                    name:'',
+                    sex:'',
+                    idcard:'',
+                    phone:'',
+                    roleid:'',
+                    state:'',
+                    password:'',
+                    rolename:''
+                }
+                this.editFormVisible = true;
+                _self.loadingData();//重新加载数据
+            },
+            //保存点击事件
+            editSubmit:function(){
+                var _self = this;
+                _self.loading = true;
+                var formData =this.editForm;
+                var goUrl=this.goUrl;
+                if(formData.rolename=='超级管理员'){
+                    _self.$message({
+                        message:'超级管理员权限不可注销',
+                        type: 'warning'
+                    });
+                    _self.editFormVisible = false;
+                    _self.loadingData();//重新加载数据
+                }else {
+                    axios.post(goUrl,formData).then(function(response){
+                         if(response.data>0){
+                             _self.$message({
+                                 message:'操作成功',
+                                 type: 'success'
+                             });
+                             _self.editFormVisible = false;
+                         }else{
+                             _self.$message({
+                                 message:'操作有误',
+                                 type: 'error'
+                             });
+                         }
+                        _self.loadingData();//重新加载数据
+                    })
+                }
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>

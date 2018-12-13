@@ -29,13 +29,9 @@
                     login.validateInvist();
                     return false;
                 });
-                $getKey.on('click', function(event) {
+               $getKey.on('click', function(event) {
                     event.preventDefault();
-                    if (flag3 != 0) {
-                        $("#phoneJy").text("");
-                        $("#phoneJy").append("<span style=color:#ff7800>请先输入正确的验证码</span>");
-                        return false;
-                    }
+
                     if (flag4 == 1) {
                         flag4 = 0;
                         login._ya($(this));
@@ -74,7 +70,7 @@
                 });
                 $("._ajaxSubmit").on('click', function(event) {
                     event.preventDefault();
-                    login.ajaxSubmit();
+                    login.ajaxSubmit($(this));
                     return false;
                 });
             },
@@ -125,12 +121,10 @@
                 $.ajax({
                     type: "post", //请求方式
                     dataType: "json",
-                    url: path.base + "/user!phoneVerify.action", //发送请求地址
+                    url:"/user/check", //发送请求地址
                     async: false,
                     data: { //发送给数据库的数据
                         phone: $("#phone").val(),
-                        userName: $("#userName").val(),
-                        ud: sendUD
                     },
                     //请求成功后的回调函数有两个参数
                     success: function(data) {
@@ -168,39 +162,34 @@
                     return false;
                 }
             },
-            checkSecurity: function(vr) {
-                var byName = vr.data('_id');
-                var ids = '#' + byName;
-                $.ajax({
+         checkSecurity: function(vr) {
+             var byName = vr.data('_id');
+             var ids = '#' + byName;
+             $.ajax({
                     type: "post", //请求方式
                     dataType: "json",
-                    url: path.base + "/user!verify.action", //发送请求地址
+                    url:"/user/verifyCode", //发送请求地址
                     data: { //发送给数据库的数据
-                        verifyCode: vr.val(),
-                        byName: byName
+                        verifyCode: $("#phonVerify").val(),
                     },
                     //请求成功后的回调函数有两个参数
                     success: function(data) {
-                        $(ids + "s").text("");
-                        if (data.msg == "1") {
-                            $(ids + "s").html("<span style=color:green>验证成功</span>");
+                        $("phonVerifys").text("");
+                        if (data['msg'] == "1") {
+                            $(".infomation").css("color", "green");
+                            $(".infomation").html("验证成功");
                             flag1 = true;
-                            if (byName == "phonVerify") {
-                                verify1 = "1";
-                            } else {
-                                verify2 = "1";
-                            }
+
                         } else {
-                            $(ids + "s").html("<span style=color:#ff7800>验证失败</span>");
+                            $(".infomation").css("color", "yellow");
+                            $(".infomation").html("验证失败");
                             flag1 = false;
-                            if (byName == "phonVerify") {
-                                verify1 = "2";
-                            } else {
-                                verify2 = "2";
-                            }
+
                         }
                     },
-                    error: function(data, textStatus) {}
+                    error: function(data, textStatus) {
+                        alert(1111);
+                    }
                 });
             },
             strVerify: function(event) {
@@ -214,11 +203,11 @@
                         $(ids).append("<span style=color:#ff7800>用户名不能为空</span>");
                         return false;
                     }
-                    if (!/^[a-zA-Z][a-zA-Z0-9_]{6,15}$/.test(strVal)) {
+                    if (!/^[a-zA-Z]([-_a-zA-Z0-9]{5,20})$/.test(strVal)) {
                         $(ids).text("");
-                        $(ids).append("<span style=color:#ff7800>用户名只能为以字母开头,字母、数字下划线组成</span>");
+                        $(ids).append("<span style=color:#ff7800>用户名只能为以字母开头,英文,数字,下划线和减号 6-20位组成</span>");
                         return false;
-                    } else if (strVal.length < 6 || strVal.length > 24) {
+                    } else if (strVal.length < 6 || strVal.length > 20) {
                         $(ids).text("");
                         $(ids).append("<span style=color:#ff7800>用户名小于6位或者大于24位</span>");
                         return false;
@@ -226,20 +215,20 @@
                         $.ajax({
                             type: "post",
                             dataType: "json",
-                            url: path.base + "/user!verify1.action", //发送请求地址
+                            url: "/user/verifyName", //发送请求地址
                             data: {
-                                verifyStr: strName,
-                                verifyVal: strVal
-                            },
+
+                                userName: strVal
+                        },
                             //请求成功后的回调函数有两个参数
                             success: function(data) {
                                 var msg1 = data['msg']
-                                if ("1" == data.retCode) {
+                                if (msg1=='1') {
                                     $(ids).text("");
                                     $(ids).append("<span style=color:green>填入信息可用</span>")
                                 } else {
                                     $(ids).text("");
-                                    $(ids).append("<span style=color:#ff7800>" + msg1 + "</span>")
+                                    $(ids).append("<span style=color:#ff7800>用户名已存在</span>")
                                 }
                             }
                         });
@@ -251,13 +240,13 @@
                         $(ids).text("");
                         $(ids).append("<span style=color:#ff7800>密码不能为空</span>");
                     }
-                    if (strVal.length < 6 || strVal.length > 15) {
+                    if (strVal.length < 6 || strVal.length > 24) {
                         $(ids).text("");
                         $(ids).append("<span style=color:#ff7800>密码小于6位或者大于24位</span>");
                     }
-                    if (!Vtdb.VuserPasswd(strVal)) {
+                    if (!/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/.test(strVal)) {
                         $(ids).text("");
-                        $(ids).append("<span style=color:#ff7800>密码必须是数字和字符组合</span>");
+                        $(ids).append("<span style=color:#ff7800>密码必须是由6-21字母和数字组合</span>");
                     } else {
                         $(ids).text("");
                         $(ids).append("<span style=color:green>填入信息可用</span>");
@@ -275,7 +264,7 @@
                 }
                 //结束
             },
-            verify: function(vr) {
+         /*   verify: function(vr) {
                 var byName = vr.attr("id");
                 var ids = '#' + byName;
                 $.ajax({
@@ -283,10 +272,9 @@
                     dataType: "json",
                     cache: false,
                     async: false,
-                    url: path.base + "/user!verify.action", //发送请求地址
+                    url: "/user/verifyCode", //发送请求地址
                     data: { //发送给数据库的数据
                         verifyCode: $(ids).val(),
-                        byName: byName
                     },
                     //请求成功后的回调函数有两个参数
                     success: function(data) {
@@ -313,30 +301,32 @@
                         alsert(textStatus);
                     }
                 });
-            },
+            },*/
             ajaxSubmit: function() {
                 var selectedItems = new Array();
                 $("input[name='protocol']:checked").each(function() {
                     selectedItems.push($(this).val());
                 });
-                var pattern = /^(?=.*\d.*)(?=.*[a-zA-Z].*).{6,24}$/;
+                var pattern = /^[a-zA-Z]([-_a-zA-Z0-9]{5,20})$/;
+                var pattern2=/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
+
                 if ($('#userName').val() == null || $('#userName').val() == '') {
                     $('#userNameAlt').text("");
                     $('#userNameAlt').append("<span style=color:#ff7800>用户名不能为空</span>");
                     return false;
-                } else if (!Vtdb.VuserName($('#userName').val())) {
+                }else if (!pattern.test($('#userName').val())) {
                     $('#userNameAlt').text("");
-                    $('#userNameAlt').append("<span style=color:#ff7800>用户名只能为数字和字母</span>");
+                    $('#userNameAlt').append("<span style=color:#ff7800>用户名只能为以字母开头,字母、数字下划线组成</span>");
                     return false;
-                } else if ($('#password').val() == null || $('#password').val() == '') {
+                }  else if ($('#password').val() == null || $('#password').val() == '') {
                     $('#passwordAlt').text("");
                     $('#passwordAlt').append("<span style=color:#ff7800>密码不能为空</span>");
                     return false;
-                } else if ($('#password').val().length < 6 || $('#password').val().length > 15) {
+                } else if ($('#password').val().length < 6 || $('#password').val().length > 24) {
                     $('#passwordAlt').text("");
                     $('#passwordAlt').append("<span style=color:#ff7800>密码小于6位或者大于24位</span>");
                     return false;
-                } else if (!Vtdb.VuserPasswd($('#password').val())) {
+                } else if (!pattern2.test($('#password').val())) {
                     $('#passwordAlt').text("");
                     $('#passwordAlt').append("<span style=color:#ff7800>密码必须是数字和字符组合</span>");
                     return false;
@@ -362,28 +352,28 @@
                             dataType: "json",
                             async: false,
                             cache: false,
-                            url: path.base + "/user!register.action", //发送请求地址
+                            url: "/user/verify", //发送请求地址
                             data: {
                                 "userName": $('#userName').val(),
                                 "password": $('#password').val(),
-                                "phone": $("#phone").val(),
-                                "verifyCode":$("#phonVerify").val(),
-                                "invite": $invist.val()
+                                "telephone": $("#phone").val(),
+                                "refereeName": $(".input1_invist").val()
                             },
                             //请求成功后的回调函数有两个参数
-                            success: function(data) {
-                                if (data.msg == '1') {
-                                	if (!asdfasdf){
-                                		 window.location = path.base + "/user!registerFinish.action?userName=" + data['userName'] + "&time=" + new Date();
-                                	} else {
-                                		window.location = nextUrl;
-                                	}
-                                } else if (data.msg == "2") {
-                                    alert("用户名已被注册！");
-                                } else {
-                                    alert(data.msg);
+                            success: function (data) {
+                                if (data['msg']== "1") {
+                                    window.location = "/foreground/register1.html";}
+                                else if (data['msg']=="2"){
+                                    alert("用户名已经被注册");
                                 }
+                                else if (data['msg']=="3"){
+                                    alert("注册失败");
+                                }
+                            },
+                            error:function(){
+                                alert("注册失败");
                             }
+
                         });
                         subFlag = "2";
                     }
@@ -405,14 +395,14 @@
             },
             validateInvist: function() {
                 $.ajax({
-                    url: path.base + '/user!checkInvistUser.action',
-                    type: 'GET',
+                    url: "/user/findref",
+                    type: 'post',
                     dataType: 'json',
                     data: {
                         i_n: $invist.val()
                     },
-                    success:function(result) {
-                        if (result) {
+                    success:function(data) {
+                        if (data['msg'] == "1") {
                             $invist_msg.css("color", "green");
                             $invist_msg.html("推荐人正确");
                             invist_flag = true;

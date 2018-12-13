@@ -30,6 +30,17 @@
                 <td><input type="text" id="purl" th:value="${power.url}" name="url"></td>
             </tr>
             <tr align="center"  class="active">
+                <td>图标</td>
+                <td><input type="text" name="iconcls" th:value="${power.iconCls}"></td>
+            </tr>
+            <tr align="center"  class="active">
+                <td>状态</td>
+                <td><select name="state" >
+                    <option value="open" th:selected="${power.state=='open'}">打开</option>
+                    <option value="closed" th:selected="${power.state=='closed'}">关闭</option>
+                </select></td>
+            </tr>
+            <tr align="center"  class="active">
                 <td>权限路径</td>
                 <td><input type="text" th:value="${power.prefix}" name="prefix"></td>
             </tr>

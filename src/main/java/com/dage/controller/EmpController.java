@@ -1,8 +1,7 @@
 package com.dage.controller;
 
-import com.dage.entity.Role;
-import com.dage.service.RoleService;
-import com.dage.util.FtpUtil;
+import com.dage.entity.Emp;
+import com.dage.service.EmpService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,23 +10,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * @className:RoleController
+ * @className:EmpController
  * @discription:
  * @author:ProMonkey-K
- * @creatTime:2018-12-11 15:05
+ * @creatTime:2018-12-13 15:01
  */
 @Controller
-@RequestMapping("role")
-public class RoleController {
-
+@RequestMapping("emp")
+public class EmpController {
     @Autowired
-    private RoleService roleService;
+    private EmpService empService;
 
     /**
      * 跳转角色页面
@@ -35,7 +32,7 @@ public class RoleController {
      */
     @RequestMapping("tolist")
     public Object toList(){
-        return "role/roles";
+        return "emp/emps";
     }
     /**
      * 展示所有角色信息
@@ -43,47 +40,46 @@ public class RoleController {
      */
     @ResponseBody
     @RequestMapping("list")
-    public Object getRoles(@RequestBody Map map){
+    public Object getEmps(@RequestBody Map map){
         Map mp = new HashMap<>();
         PageHelper.startPage(Integer.valueOf(map.get("start")+""),Integer.valueOf(map.get("end")+""));
-        List<Role> roles = roleService.getRoles();
-        PageInfo<Role> info = new PageInfo<>(roles);
+        List<Emp> list = empService.getList();
+        PageInfo<Emp> info = new PageInfo<>(list);
         mp.put("page",info);
         return mp;
     }
 
     /**
-     * 获取所有正常角色
-     * @param
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("all")
-    public Object getAllRoles(){
-        return roleService.getRolesByState();
-    }
-
-    /**
-     * 角色添加
-     * @param role
+     * 账户添加方法
+     * @param emp
      * @return
      */
     @ResponseBody
     @RequestMapping("add")
-    public Object add(@RequestBody Role role){
-        return roleService.add(role);
+    public Object add(@RequestBody Emp emp){
+        return empService.add(emp);
     }
 
     /**
-     * 角色更新
-     * @param role
+     * 账户更新方法
+     * @param emp
      * @return
      */
     @ResponseBody
     @RequestMapping("update")
-    public Object update(@RequestBody Role role){
-        return roleService.update(role);
+    public Object update(@RequestBody Emp emp){
+        return empService.update(emp);
     }
 
+    /**
+     * 账户状态更改方法
+     * @param map
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("updatestate")
+    public Object updateState(@RequestBody Map map){
+        return empService.updateStateTo(Integer.valueOf(map.get("id")+""),map.get("state")+"");
+    }
 
 }

@@ -19,6 +19,12 @@ public interface PermissionService {
      * @return
      */
     List<Permission> getListByRole();
+    /**
+     * 根据登陆角色信息，查询对应权限令牌
+     * @param
+     * @return
+     */
+    List<Permission> getListByRoleid();
 
     /**
      * 根据登陆角色信息，查询对应权限，出对应的权限树
@@ -26,6 +32,13 @@ public interface PermissionService {
      * @return
      */
     List<Permission> getCheckList(Integer roleid);
+
+    /**
+     * 获取所有权限
+     * @param
+     * @return
+     */
+    List<Permission> getList();
 
     /**
      * 权限添加
