@@ -26,14 +26,7 @@ import java.util.Map;
 public class PermissionController {
     @Autowired
     private PermissionService permissionService;
-    /**
-     * 跳转后台页面(index elementui)
-     * @return
-     */
-    @RequestMapping("index")
-    public Object toIndex(){
-        return "index";
-    }
+
 
     /**
      * 跳转(power elementui+vue)后台页面

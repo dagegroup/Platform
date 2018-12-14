@@ -58,14 +58,15 @@ public class EmpRealm extends AuthorizingRealm {
      * @throws AuthenticationException
      */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException{
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken){
        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //System.out.println(token.getUsername());
         Emp emp = empService.getEmpByPhone(token.getUsername());
-        if (emp!=null){
-            return new SimpleAuthenticationInfo(emp,emp.getPassword(),"");
+        System.out.println(emp==null);
+        if (emp==null){
+            return null;
         }
-        return null;
+        return new SimpleAuthenticationInfo(emp,emp.getPassword(),"");
     }
 
 }

@@ -55,8 +55,8 @@ public class ShiroConfiguration {
         //authc 登陆访问
         //perms[]  权限访问
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
-        shiroFilterFactoryBean.setLoginUrl("/bklogin.html");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/noAuth.html");
+        shiroFilterFactoryBean.setLoginUrl("/bklogin");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/noAuth");
         return shiroFilterFactoryBean;
     }
     /**
