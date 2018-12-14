@@ -11,6 +11,22 @@
 <script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
 <script type="text/javascript" src="../foreground/script/common.js"></script>
 </head>
+
+<script>
+  $(function(){
+      $.ajax({
+          type : "post",
+          url : "/user/getName",
+          dataType : "text",
+          success : function(result) {
+              $("#p").html(result+",恭喜您注册成功！")
+          },
+          error : function() {
+              alert("請求失敗");
+          }
+      });
+  })
+</script>
 <body>
 <header>
   <div class="header-top min-width">
@@ -78,8 +94,8 @@
     </div>
     <div class="registerCont">
       <ul>
-        <li class="scses"> zhuchaoyou， 恭喜您注册成功！<a class="blue" href="#" target="_blank">请立即开通--双乾支付账户,即可投资！</a></li>
-        <li class="rz"><a href="#" class="btn">立即开通</a><a href="#" class="blue">进入我的账户</a></li>
+        <li class="scses"> <span id="p"></span>， <a class="blue" href="#" target="_blank">请立即开通--双乾支付账户,即可投资！</a></li>
+        <li class="rz"><a href="#" class="btn">立即开通</a><a href="/foreground/个人中心首页.html" class="blue">进入我的账户</a></li>
       </ul>
     </div>
   </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>权限添加</title>
-    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
     <script type="text/javascript" src="/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
@@ -11,38 +11,72 @@
 </head>
 <body>
     <div>
-        <form action="/power/add" method="post">
-            <table border="1" width="800px" align="center" style='font-family:楷体;font-size:20px'  class="table table-hover">
+        <form action="/power/add" method="post" id="ff">
+            <table border="0" width="800px" align="center" style='font-family:楷体;font-size:20px'  class="table table-hover">
                 <tr align="center" class="warning">
                     <td >名称</td>
                     <td>
                         <input type="hidden" name="id">
-                        <input type="text" name="name">
+                        <input type="text" name="pname">
                     </td>
                 </tr>
                 <tr align="center" class="success">
                     <td>父节点</td>
                     <td><input class="easyui-combotree" name="pid"  data-options="url:'/power/tree',method:'get',required:true" style="width:210px"></td>
                 </tr>
-                <tr align="center" class="danger">
-                    <td>状态</td>
-                    <td><input type="radio" name="state" value="open" checked="checked">打开
-                        <input type="radio" name="state" value="closed">关闭
-                    </td>
-                </tr>
-                <tr align="center" class="warning">
+                <tr align="center"  class="active">
                     <td>图标</td>
                     <td><input type="text" name="iconcls"></td>
                 </tr>
                 <tr align="center"  class="active">
+                    <td>状态</td>
+                    <td><select name="state">
+                        <option value="open" selected="selected">打开</option>
+                        <option value="closed">关闭</option>
+                    </select></td>
+                </tr>
+                <tr align="center"  class="active">
                     <td>链接</td>
                     <td><input type="text" name="url"></td>
+                </tr>
+                <tr align="center"  class="active">
+                    <td>权限路径</td>
+                    <td><input type="text" name="perfix"></td>
+                </tr>
+                <tr align="center"  class="active">
+                    <td>令牌</td>
+                    <td><input type="text" name="token"></td>
                 </tr>
                 <tr align="center" class="success">
                     <td colspan="2"><input type="submit" class="btn btn-success" value="添加"></td>
                 </tr>
             </table>
         </form>
+        <script>
+            $(function () {
+                $('#ff').form({
+                    onSubmit: function(){//对form表单校验
+                        return $(this).form('validate');
+                    },
+                    success:function(data){
+                        if (data>0) {
+                            $.messager.show({
+                                title: '成功信息',
+                                msg: '添加成功'
+                            });
+                        }
+                        else{
+                            $.messager.show({
+                                title: '错误信息',
+                                msg: '添加失败'
+                            });
+                        }
+                        setTimeout(function(){ window.location.href=window.location.href;},1000);
+                    }
+                });
+            })
+
+        </script>
     </div>
 </body>
 </html>

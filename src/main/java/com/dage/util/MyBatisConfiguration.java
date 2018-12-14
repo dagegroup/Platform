@@ -17,7 +17,7 @@ public class MyBatisConfiguration {
     @Bean
     public PageHelper pageHelper(){
         PageHelper pageHelper = new PageHelper();
-        Properties p = new Properties();
+        Properties p = new Properties(); //map接口的实现类
         p.setProperty("offsetAsPageNum","true");
         p.setProperty("rowBoundsWithCount","true");
         p.setProperty("reasonable","true");

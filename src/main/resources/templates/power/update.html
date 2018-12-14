@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
+    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" href="/easyui/themes/bootstrap.min.css" type="text/css">
+</head>
+<body>
+<div>
+    <form action="/power/update" method="post" id="ff">
+        <table border="0" width="800px" align="center" style='font-family:楷体;font-size:20px'  class="table table-hover">
+            <tr align="center" class="warning">
+                <td >名称</td>
+                <td>
+                    <input type="hidden" id="pid" name="id" th:value="${power.id}">
+                    <input type="text" id="pname" name="pname" th:value="${power.text}" >
+                </td>
+            </tr>
+            <tr align="center" class="success">
+                <td>父节点</td>
+                <td><input class="easyui-combotree" name="pid"  th:value="${power.pid}" data-options="url:'/power/tree',method:'get',required:true" style="width:210px"></td>
+            </tr>
+            <tr align="center"  class="active">
+                <td>链接</td>
+                <td><input type="text" id="purl" th:value="${power.url}" name="url"></td>
+            </tr>
+            <tr align="center"  class="active">
+                <td>图标</td>
+                <td><input type="text" name="iconcls" th:value="${power.iconCls}"></td>
+            </tr>
+            <tr align="center"  class="active">
+                <td>状态</td>
+                <td><select name="state" >
+                    <option value="open" th:selected="${power.state=='open'}">打开</option>
+                    <option value="closed" th:selected="${power.state=='closed'}">关闭</option>
+                </select></td>
+            </tr>
+            <tr align="center"  class="active">
+                <td>权限路径</td>
+                <td><input type="text" th:value="${power.prefix}" name="prefix"></td>
+            </tr>
+            <tr align="center"  class="active">
+                <td>令牌</td>
+                <td><input type="text" th:value="${power.token}" name="token"></td>
+            </tr>
+            <tr align="center">
+                <td colspan="2"><input type="submit" value="修改" class='btn btn-success'>
+                    <input type="button" onclick="del()" value="删除" class="btn btn-danger"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script type="text/javascript">
+        $('#ff').form({
+            onSubmit: function(){//对form表单校验
+                return $(this).form('validate');
+            },
+            success:function(data){
+                if (data>0){
+                   // alert("更新成功")
+                    $.messager.show({
+                        title: '成功信息',
+                        msg: '更新成功'
+                    });
+                }
+                else{
+                    $.messager.show({
+                        title: '错误信息',
+                        msg: '更新失败'
+                    });
+                }
+                setTimeout(function(){ window.location.href=window.location.href;},1000);
+
+            }
+        });
+
+    function del(){
+        var id =$("#pid").val();
+        var url = $("#purl").val();
+        var pname = $("#pname").val();
+        //alert(url);
+        if(url==null||url==''||url=='null'){
+            $.messager.show({
+                title: '错误信息',
+                msg: '当前节点有子节点，请删除子节点后重试！'
+            });
+        }else{
+            $.messager.confirm('Confirm','确认删除'+pname+'吗 ?',function(r){
+                if (r){
+                    $.ajax({
+                        url:"/power/del?id="+id,//请求地址
+                        //data:{},//请求中携带的参数
+                        async:false,//是否是同步请求 ，如果不写，默认为true，默认异步的 ，如果为false，同步
+                        type:"post",//设置请求类型
+                        dataType:"json",//设置返回值的类型
+                        success:function(data){//成功后回调的函数
+                            if (data>0){
+                                $.messager.show({
+                                    title: '成功信息',
+                                    msg: pname+'删除成功'
+                                });
+                            }
+                            else{
+                                $.messager.show({
+                                    title: '错误信息',
+                                    msg: pname+'删除失败'
+                                });
+                            }
+                            setTimeout(function(){ window.parent.location.href=window.parent.location.href;},1000);
+
+                        },
+                    });
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>

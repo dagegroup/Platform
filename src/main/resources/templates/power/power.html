@@ -3,11 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>后台主页面</title>
-    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
     <script type="text/javascript" src="/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
-
+    <script>
+        $(function(){
+            $('#tr').tree({
+                onClick:function(node){
+                    //alert(node.id);
+                    $(this).tree(node.state === 'closed' ? 'expand' : 'collapse', node.target);
+                    node.state = node.state === 'closed' ? 'open' : 'closed';
+                    //if(node.url!=null&&node.url!='null'&&node.url!=''){
+                    //addTab(node.text, node.url);
+                    $("#ifm").attr("src","/power/toUpdate?id="+node.id);
+                    //}
+                }
+            });
+        });
+    </script>
 </head>
 
 <body class="easyui-layout">
