@@ -1,0 +1,5504 @@
+@charset "utf-8";
+/*出借人账户首页*/
+.lenderaccount_box {
+	padding: 10px;
+}
+
+.lenderaccount_box .input_btn {
+	padding: 0px;
+	width: 55px;
+	height: 27px;
+	line-height: 27px;
+	font-size: 14px;
+}
+
+.lenderaccount_box .btn_orange {
+	background-color: #f36245;
+	height: 27px;
+	padding: 0px;
+	border: none;
+	width: 84px;
+	line-height: 27px;
+	color: #fff;
+}
+
+/*出借-账户-理财账户-理财流水*/
+.ydy_detail_container .title_h2 {
+	margin-top: 15px;
+	font-size: 14px;
+	height: 54px;
+	line-height: 54px;
+	border-top: 1px solid #dfdfdf;
+	border-bottom: 1px solid #dfdfdf;
+	background: #f5f7f6;
+	padding-left: 36px;
+}
+
+.ydy_detail_table {
+	width: 93%;
+	margin: 20px auto 10px;
+}
+
+.ydy_detail_table td {
+	height: 28px;
+	line-height: 28px;
+}
+
+.ydy_detail_table .money {
+	color: #c10000;
+	font-weight: bold;
+}
+
+.ydy_detail_container .inner_box {
+	padding: 15px;
+}
+
+.ydy_detail_container .table_gray {
+	margin: 0 0 15px;
+}
+
+.light_tit {
+	color: #8c8c8c;
+}
+
+/*出借-账户-理财账户-我的理财*/
+.account_licai_table th,.account_licai_table td {
+	text-align: left;
+	line-height: 34px;
+}
+
+.account_licai_table th {
+	font-size: 16px;
+	line-height: 40px;
+}
+
+.account_licai_table span,.licai_list li td span {
+	color: #c10000;
+}
+
+.account_licai_table td {
+	border-right: 1px dashed #dfdfdf;
+	width: 30%;
+}
+
+.account_licai_table td.mid {
+	width: 40%;
+}
+
+.account_licai_table td.last {
+	border: none;
+	width: 30%
+}
+
+.account_licai_table div {
+	padding-left: 50px;
+}
+
+.mylicaiservice p {
+	margin-top: 20px;
+	line-height: 28px;
+}
+
+.licai_list {
+	margin: 5px 20px 0;
+}
+
+.licai_list li {
+	padding: 15px 0px;
+	border-bottom: 1px dashed #dfdfdf;
+}
+
+.licai_list li.last {
+	border: none;
+}
+
+.licai_list img {
+	border: 2px solid #e5e6e7;
+}
+
+.licai_list li td {
+	line-height: 18px;
+}
+
+/*出借-账户-理财账户-资金流水.*/
+.funds_particulars_table {
+	margin-bottom: 15px;
+}
+
+.funds_particulars_table span {
+	color: #c10000;
+}
+
+.funds_particulars_table span.money {
+	color: #00d053;
+}
+
+/*出借-账户首页 资产总览*/
+.funds {
+	width: 200px;
+	height: 180px;
+	border: 1px solid #dfdfdf;
+	margin-right: 7px;
+	overflow: hidden;
+	position: relative
+}
+
+.funds_all_list {
+	padding: 10px;
+	line-height: 30px;
+}
+
+.funds_all_list li {
+	float: left;
+	width: 384px;
+	padding: 10px;
+}
+
+.funds_all_list li.underline {
+	float: none;
+	width: auto;
+	border-bottom: 1px solid #dfdfdf;
+	padding: 0 10px 5px
+}
+
+.funds_all_list li.underline span {
+	margin-left: 40px
+}
+
+.funds_all_list h3 {
+	padding-left: 15px;
+	height: 30px;
+	background: transparent url("/yiren/images/account_ico.gif")
+		/*tpa=http://www.yirendai.com/images/account_ico.gif*/   -2px
+		-71px no-repeat;
+	font-size: 14px;
+	font-weight: normal;
+	border-bottom: 1px solid #dfdfdf;
+	margin-bottom: 10px;
+	padding-bottom: 5px;
+}
+
+.funds_all_list p {
+	padding-left: 15px;
+}
+
+.funds_all_list h4 {
+	font-size: 16px;
+	font-family: "microsoft yahei";
+	font-weight: normal;
+	text-align: right
+}
+
+.funds_all_list table th {
+	font-family: "microsoft yahei";
+	font-weight: normal
+}
+
+.funds_all_list table td {
+	text-align: center;
+	padding: 3px 0
+}
+
+.funds_all_list table tr.underline td {
+	border-bottom: 1px solid #dfdfdf;
+}
+
+.height180 {
+	height: 180px
+}
+
+.space_a {
+	display: inline-block;
+	padding: 0 5px;
+	font-size: 18px;
+	font-style: italic;
+	text-decoration: underline
+}
+
+span.circle {
+	background: url("/yiren/images/circle.png")
+		/*tpa=http://www.yirendai.com/images/circle.png*/   no-repeat 0
+		2px;
+	padding-left: 18px;
+	font-weight: bold;
+	_text-indent: 0
+}
+
+.whitebg {
+	background-color: #fff;
+	position: relative;
+	width: 100%;
+	height: 100%
+}
+
+.whitebg h4 {
+	font-size: 14px;
+	padding: 50px 0 20px 25px;
+	font-family: "microsoft yahei"
+}
+
+.whitebg p {
+	font-size: 24px;
+	padding-left: 25px
+}
+
+.bluebg {
+	background-color: #00b4ff;
+	position: relative;
+	height: 100%;
+	color: #fff;
+	padding: 0 10px
+}
+
+.bluebg h4 {
+	padding-top: 15px;
+	font-family: "microsoft yahei";
+	text-indent: 28px
+}
+
+.bluebg p.all {
+	text-indent: 0;
+	text-align: center;
+	font-size: 24px;
+	border-bottom: 1px solid #dfdfdf;
+	padding: 0 0 5px 0
+}
+
+.bluebg p {
+	padding-top: 8px;
+	text-indent: 20px
+}
+
+.slideup,.slidedown {
+	background: url("/yiren/images/arrow_slide.png")
+		/*tpa=http://www.yirendai.com/images/arrow_slide.png*/   right
+		4px no-repeat #00b4ff;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 24px;
+	_width: 200px
+}
+
+.slidedown {
+	background-position: right -17px
+}
+
+.bluebg span.circle {
+	background-position: 0 -15px;
+	_background-position: 0 -12px
+}
+
+.symbol {
+	font-size: 16px;
+	font-style: italic;
+	font-family: "microsoft yahei";
+	margin-right: 5px
+}
+
+.smallnum {
+	font-size: 16px
+}
+/*出借-账户首页 账户信息*/
+.creditor_right_list {
+	width: 680px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.creditor_right_list li {
+	float: left;
+	text-align: center;
+	width: 340px;
+	height: 46px;
+	line-height: 46px;
+	border-bottom: 1px dashed #dfdfdf;
+}
+
+.creditor_right_list li.last {
+	border: none;
+}
+
+.lender_account_profile .pro_left {
+	width: 190px;
+	float: left;
+	padding: 25px 10px 20px 140px;
+	height: 105px;
+	border-right: 1px solid #dfdfdf;
+	position: relative;
+}
+
+.lender_account_profile .pro_right {
+	width: 487px;
+	float: left;
+	padding-top: 40px;
+}
+
+.pro_right h3 {
+	font-size: 14px;
+	line-height: 30px;
+	padding-left: 28px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.pro_right p .money {
+	font-size: 24px;
+	font-weight: normal;
+	line-height: 30px;
+	padding-left: 28px;
+	display: inline-block;
+	padding-right: 10px;
+}
+
+.pro_right p .money.lenderacount_cash {
+	font-size: 20px;
+}
+
+.pro_right p .money i {
+	font-size: 16px;
+	font-style: normal;
+}
+
+.pro_right .r {
+	padding-top: 43px;
+	padding-right: 28px;
+}
+
+.lender_account_profile .pro_left img {
+	position: absolute;
+	left: 25px;
+	top: 25px;
+	border: 3px solid #f1f2f2;
+}
+
+.lender_account_profile .pro_left h3 {
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.lender_account_profile .pro_left p {
+	padding-left: 25px;
+	background: transparent url("/yiren/images/account_ico.gif")
+		/*tpa=http://www.yirendai.com/images/account_ico.gif*/   -2px
+		2px no-repeat;
+	height: 24px;
+	line-height: 24px;
+	width: 160px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.lender_account_profile .pro_left p.tel {
+	background-position: -2px -22px;
+}
+
+.lender_account_profile .pro_left p.id_state {
+	background-position: -2px -150px;
+}
+
+.lender_account_profile .pro_left p.id_state_active {
+	background-position: -2px -45px;
+}
+
+.lender_account_profile .pro_left p.email_active {
+	background-position: -2px -102px;
+}
+
+.lender_account_profile .pro_left p.tel_active {
+	background-position: -2px -127px;
+}
+
+.lender_account_profile a.input_btn {
+	height: 26px;
+	width: 54px;
+	padding: 0;
+	line-height: 26px;
+	margin-left: 25px;
+}
+
+.lender_account_profile a.input_btn.btn_orange {
+	height: 28px;
+	width: 84px;
+	padding: 0;
+	line-height: 28px;
+	border: none;
+	background: #ff6f36;
+	color: #fff;
+	font-size: 14px;
+}
+
+.common_box_icondiv .l {
+	height: 80px;
+	padding-left: 176px;
+	position: relative;
+	width: 294px;
+}
+
+.pro_banner {
+	width: 807px;
+	margin: 0px auto 5px;
+}
+
+.profile_quick_list li {
+	float: left;
+	width: 200px;
+	margin-right: 10px;
+	_margin-right: 7px
+}
+
+.profile_quick_list li.last {
+	margin-right: 0;
+}
+
+.profile_quick_list {
+	margin-bottom: 10px
+}
+
+.profile_quick_list li a,.profile_quick_list li a:hover {
+	background: url("/yiren/images/pro_map.gif-v=1.0.gif")
+		/*tpa=http://www.yirendai.com/images/pro_map.gif?v=1.0*/
+		no-repeat;
+	width: 200px;
+	height: 50px;
+	display: block;
+}
+
+.profile_quick_list a.loanlist:hover {
+	background-position: 0 -50px
+}
+
+.profile_quick_list a.autoloan {
+	background-position: 0 -100px
+}
+
+.profile_quick_list a.autoloan:hover {
+	background-position: 0 -150px
+}
+
+.profile_quick_list a.transfer {
+	background-position: 0 -200px
+}
+
+.profile_quick_list a.transfer:hover {
+	background-position: 0 -250px
+}
+
+.profile_quick_list a.funds {
+	background-position: 0 -300px;
+	border: none;
+}
+
+.profile_quick_list a.funds:hover {
+	background-position: 0 -350px
+}
+/*出借-账户-我的债权-投资明细*/
+.flex_cont_table {
+	border-collapse: collapse;
+	border: none;
+	width: 100%;
+}
+
+.flex_cont_table td {
+	border: none;
+	height: 28px;
+	line-height: 28px;
+	text-align: left;
+}
+
+.detail_tr_div p {
+	margin-top: 10px;
+	text-align: left;
+	padding-left: 20px;
+}
+
+.detail_tr_div  h2 {
+	text-align: left;
+	margin: 20px 0;
+	border-bottom: 0px;
+}
+
+.detail_tr_div li {
+	border-bottom: 1px dashed #dfdfdf;
+	padding-bottom: 10px;
+}
+
+.detail_tr_div li.last {
+	border: none;
+	padding-top: 10px;
+	padding-bottom: 0px;
+}
+
+/*出借-账户-资金流水*/
+.profile_funds .funds_tongji {
+	margin-bottom: 30px;
+}
+
+.profile_funds .notice_box {
+	border-top: 1px dashed #dfdfdf;
+	padding-top: 20px;
+}
+
+.profile_funds .notice_box h3 {
+	font-size: 12px;
+	margin-bottom: 20px;
+}
+
+.profile_funds .notice_box {
+	line-height: 30px;
+}
+
+/*出借-自动投标-历史记录*/
+.autobid_detail_box h3 {
+	border-bottom: 1px dashed #dfdfdf;
+	font-size: 12px;
+	height: 20px;
+	line-height: 20px;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+
+.autobid_detail_box h3 span {
+	font-weight: normal;
+}
+
+.autobid_detail_box h3 span.autobid_modify {
+	float: right;
+	width: 300px;
+}
+
+.autobid_detail_box h3 span.autobid_modify a {
+	display: inline-block;
+	margin-right: 35px;
+	color: #0098e0;
+}
+
+.autobid_notice {
+	line-height: 24px;
+}
+
+.autobid_state span.cash_total {
+	width: 240px;
+	display: inline-block;
+}
+
+.autobid_state span a {
+	display: inline-block;
+	margin-right: 50px;
+}
+
+.autobid_detail_box .empty_cont {
+	background: none;
+	border: none;
+	border-top: 1px solid #dfdfdf;
+	padding-bottom: 20px;
+}
+
+.autobid_modify_table {
+	margin-bottom: 20px;
+}
+
+.autobid_modify_table .abChoose {
+	margin: 10px 0;
+}
+
+.autobid_modify_table .maximumAmount {
+	display: none;
+}
+
+.autobid_modify_table  .amount {
+	background: none repeat scroll 0 0 #F8F8F8;
+	border: 1px solid #CCCCCC;
+	float: left;
+	height: 15px;
+	line-height: 15px;
+	margin: 0 4px;
+	padding: 0;
+	text-align: center;
+	width: 62px;
+	vertical-align: middle;
+}
+
+.autobid_modify_table .minus,.autobid_modify_table .plus {
+	cursor: pointer;
+	float: left;
+	font-size: 0;
+	height: 15px;
+	line-height: 15px;
+	margin-top: 1px;
+	text-align: center;
+	width: 15px;
+}
+
+.autobid_state_unuseful {
+	text-align: center;
+}
+
+.autobidAgreement {
+	padding: 25px;
+}
+
+.autobidAgreement .initMenu li li {
+	height: 250px;
+	overflow-y: auto;
+}
+
+.autobidAgreement .initMenu .abtitle {
+	height: 42px;
+	line-height: 42px;
+	padding-left: 20px;
+	background: transparent url("/yiren/images/automaticBid_abg.gif")
+		/*tpa=http://www.yirendai.com/images/automaticBid_abg.gif*/;
+	display: block;
+	font-size: 14px;
+	font-weight: normal;
+	color: #666;
+}
+
+.autobidAgreement .xy {
+	width: 590px;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+.autobidAgreement .xy td {
+	border: 1px solid #414141;
+	padding: 3px;
+}
+
+.autobidAgreement .initMenu p {
+	line-height: 20px;
+	padding-bottom: 10px;
+}
+
+.autobidAgreement .tc {
+	text-align: center;
+}
+
+.autobidAgreement .f16 {
+	font-size: 16px;
+}
+
+.autobidAgreement .tr {
+	text-align: right;
+}
+
+.autobidAgreement .pb10 {
+	padding-bottom: 10px;
+}
+
+.autobidAgreement .initMenu h3 {
+	font-size: 14px;
+	font-weight: bold;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
+
+.autobid_detail_box .abStart {
+	text-align: center;
+	margin: 30px auto 50px;
+}
+
+.autobid_detail_box p {
+	margin-bottom: 10px;
+}
+
+.autobid_detail_box .input_btn {
+	width: 82px;
+}
+
+/*债权转让*/
+.creditor_agreement_table {
+	margin: 20px 20px 100px;
+}
+
+.creditor_agreement_table p {
+	margin: 30px 0 20px;
+}
+
+.creditor_agreement_table td {
+	padding: 5px 0;
+}
+
+.creditor_agreement_table td.last {
+	text-align: center;
+}
+
+.creditor_agreement_table .input_btn {
+	margin-right: 15px;
+}
+
+.credit_transfer_success {
+	padding: 90px 0 300px 200px;
+}
+
+.credit_transfer_success h3 {
+	font-size: 24px;
+	font-family: "microsoft yahei";
+	line-height: 80px;
+	margin-left: 20px;
+	font-weight: normal;
+}
+
+.credit_transfer_success p {
+	margin: 50px 0 0 150px;
+}
+
+/*我的借款 借款信息*/
+.loan_info_box {
+	padding: 20px;
+}
+
+.loan_info_box h3.title_h3 {
+	height: 42px;
+	line-height: 42px;
+	border-bottom: 1px solid #dfdfdf;
+}
+
+.loan_info_box h3 .icontit {
+	float: left;
+	margin-top: 13px;
+}
+
+.loan_info_box table {
+	width: 870px;
+	margin: 20px auto;
+	border-collapse: collapse;
+}
+
+.loan_info_box td {
+	border: 1px solid #dfdfdf;
+	padding: 8px;
+	text-align: center;
+}
+
+.loan_info_box td.gray_td {
+	background: #f6f6f6;
+	width: 100px;
+}
+
+.loan_info_box td.address {
+	height: 52px;
+	line-height: 52px;
+}
+
+.loan_info_box td p.cont {
+	text-align: left;
+	padding: 10px;
+	text-indent: 2em;
+	line-height: 20px;
+}
+
+.loan_info_box .uploadFileBox table {
+	width: 750px;
+}
+
+.loan_info_box .uploadFileBox table td.uploadFileNoteTd {
+	padding: 0 0 0 8px;
+}
+
+/*出借-支付-支付成功*/
+.pay_success_box {
+	padding: 70px 240px;
+}
+
+.pay_success_box .images {
+	float: left;
+	width: 120px;
+	padding-top: 7px;
+}
+
+.pay_success_box .cont {
+	float: left;
+	width: 310px;
+}
+
+.pay_success_box .cont h4 {
+	font-size: 24px;
+	font-family: "microsoft yahei";
+	font-weight: normal;
+	margin-bottom: 10px;
+}
+
+.pay_success_box .cont p a {
+	margin-left: 15px;
+}
+
+.hot_credit_box {
+	border: 1px solid #dfdfdf;
+	border-top: none;
+	height: 170px;
+	margin-bottom: 20px;
+}
+
+.hot_credit_box h4 {
+	background: #0199e2;
+	color: #fff;
+	padding-left: 20px;
+	font-size: 14px;
+	font-weight: bold;
+	height: 40px;
+	line-height: 40px;
+}
+
+.hot_credit_list {
+	margin-left: 30px;
+	padding-top: 20px;
+}
+
+.hot_credit_list li {
+	float: left;
+	width: 275px;
+	margin-right: 10px;
+}
+
+.hot_credit_list li .images {
+	float: left;
+	width: 75px;
+}
+
+.hot_credit_list li .cont {
+	float: left;
+	width: 200px;
+}
+
+.hot_credit_list li .cont h5 {
+	font-size: 12px;
+	color: #0088cc;
+}
+
+/*以下思思*/
+.payment_center .common_box {
+	min-height: 400px;
+	_height: 400px;
+	border: 1px solid #DFDFDF;
+	margin-bottom: 20px;
+}
+
+.payment_center .common_box h2 {
+	height: 60px;
+	line-height: 60px;
+	font-size: 16px;
+}
+
+.payment_center .common_box h2 .icontit {
+	margin-top: 22px;
+}
+
+.event_details {
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.view_details {
+	text-decoration: underline;
+}
+
+.font_typeface {
+	font-size: 14px;
+}
+
+.under_margins,.conditions_apply p,.conditions_apply {
+	margin-bottom: 15px;
+}
+
+.up_down_margins {
+	margin: 20px 0;
+}
+
+.distance_value a,.distance_value span {
+	padding-left: 15px;
+}
+
+.line_bottom {
+	height: 1px;
+	line-height: 1px;
+	border-bottom: 1px solid #CDCDCD;
+	font-size: 0;
+	width: 940px;
+	margin: 0 auto 20px;
+}
+
+.distance_value .no_bid {
+	display: block;
+	color: #0088cc;
+	padding: 15px 0 0 0;
+}
+
+.typeface_grayed {
+	color: #cdcdcd;
+}
+
+.mobile_services_border,.return_list_tit,.r_list_con {
+	border-bottom: 1px solid #e9e9e9;
+}
+
+.up_photos {
+	overflow: hidden;
+	width: 451px;
+	margin: 50px auto 0
+}
+
+.avatar {
+	padding: 20px 33px 17px 20px;
+	width: 100px;
+	overflow: hidden;
+}
+
+.avatar img {
+	width: 92px;
+	height: 92px;
+	border: 4px solid #e2e2e2;
+}
+
+.avatar p {
+	text-align: center;
+}
+
+.av_information {
+	padding-top: 18px;
+	width: 298px;
+	overflow: hidden;
+}
+
+.av_information p,.has_passed p,.elite_tit p strong,.elite_left h3,.elite_right p,.basic_information h3,.audit_edition p,.required_informa strong,.calculators_result table th
+	{
+	color: #414141;
+}
+
+.av_information p,.avatar p,.has_passed p {
+	padding-bottom: 13px;
+}
+
+.av_information p a {
+	padding-right: 70px;
+}
+
+.has_passed {
+	padding: 48px 0 0 90px;
+	margin: 0 auto;
+	width: 450px
+}
+
+.has_passed_bg,.mobile_services,.mobile_countdown .mobile_countdown_tips em,.mobile_tips p em,.congratula_img,.find_Pass,.guarantee_img,.change_pass_img,.left_arrow,.right_arrow,.left_arrow_triangle
+	{
+	background: url("/yiren/images/lending-icon.png") no-repeat 0 0;
+	width: 21px;
+	height: 14px;
+	display: block;
+	margin: 3px 0 0 16px;
+}
+
+.optional_information .m-holderBox span {
+	display: block;
+	padding-top: 4px;
+}
+
+.dividing_line {
+	padding: 0 10px;
+}
+
+.grayline {
+	width: 700px;
+	margin: 20px auto;
+	height: 1px;
+	background-color: #dfdfdf;
+	_overflow: hidden
+}
+
+.id_verification {
+	width: 370px;
+	min-height: 220px;
+	_height: 220px;
+	margin: 0 auto 50px
+}
+
+* html .id_verification {
+	width: 357px;
+}
+
+.optional_information .m-row {
+	margin-top: 20px;
+}
+
+.optional_information {
+	width: 340px;
+	padding: 0 0 50px 70px;
+}
+
+.optional_informationB {
+	padding: 0 0 0 20px;
+}
+
+.optional_information_save {
+	text-align: center;
+	padding-bottom: 60px;
+}
+
+.optional_information_save .btn_blue {
+	padding: 0 44px;
+}
+
+.authentication_forum {
+	
+}
+
+.authentication_forum .tips {
+	line-height: 18px;
+	margin: 10px 0 20px 0;
+}
+
+.authentication_forum .m-row {
+	padding: 0 0 18px 20px;
+}
+
+.authentication_verify_now {
+	padding-left: 100px;
+}
+
+.pleasant_currency {
+	width: 740px;
+	margin: 0 auto;
+	padding-bottom: 35px
+}
+
+.pleasant_currency p img {
+	width: 740px;
+	margin-top: 20px;
+}
+
+.public_icon_a {
+	background: url("/yiren/images/a_ico.gif")
+		/*tpa=http://www.yirendai.com/images/icon/a_ico.gif*/
+		no-repeat right 5px;
+	padding-right: 15px;
+}
+
+.pleasant_currency p span {
+	padding-left: 40px;
+}
+
+.pleasant_currency p strong {
+	color: #0098E0;
+	padding: 0 10px;
+}
+
+.recommended_add {
+	border: 1px solid #e1e1e1;
+	background: #f5f7f6;
+	padding: 8px 35px;
+	margin: 55px 0 60px 0;
+}
+
+.pleasant_currency ul {
+	padding: 20px 0 0;
+}
+
+.pleasant_currency ul li {
+	padding-bottom: 10px;
+	list-style: none;
+}
+
+.pleasant_currency ul li a {
+	font-weight: bold;
+	padding-left: 20px;
+}
+
+.mobile_box {
+	margin: 40px auto;
+	width: 684px;
+}
+
+.mobile_change_h4 {
+	line-height: 30px;
+	padding-left: 15px;
+	font-size: 12px;
+}
+
+.mobile_change_step {
+	background: transparent url("/yiren/images/mobile_change_step.gif")
+		/*tpa=http://www.yirendai.com/images/mobile_change_step.gif*/
+		no-repeat;
+	width: 684px;
+	height: 109px;
+	margin: 0 auto 50px;
+}
+
+.mobile_change_step.step_2 {
+	background-position: 0 -109px;
+}
+
+.mobile_services {
+	background-position: 0 -160px;
+	width: 700px;
+	height: 52px;
+	padding-left: 40px;
+	font-size: 14px;
+	margin: 0 0 25px 0;
+}
+
+.mobile_services p {
+	padding-bottom: 8px;
+}
+
+.mobile_services p a {
+	padding-left: 30px;
+}
+
+.free_service {
+	padding: 0 0 15px 0;
+}
+
+.mobile_box .m-tab-w .m-tabT a.m-tabTA,.mobile_box .m-tab-w .m-tabT a.m-tabTA:visited
+	{
+	width: 50%;
+}
+
+.mobile_box .m-tab-w .m-tabT a.m-tabTA span {
+	font-size: 12px;
+	padding-left: 30px;
+	font-weight: normal;
+	color: #aaa;
+}
+
+.no_cost p,.mobile_countdown p,.clolrGray {
+	color: #aaa;
+}
+
+.mobile_box .m-tabT a.m-tabTA span.has_been,.mobile_tips p,.find_Pass_guarantee p a,.return_list p a,.elite_left table span
+	{
+	color: #666;
+}
+
+.mobile_services_con {
+	width: 650px;
+	margin: 57px auto 50px;
+}
+
+.mobile_services_con p {
+	margin-bottom: 8px;
+}
+
+.mobile_services_con .sms {
+	width: 320px;
+	margin: 25px 0 55px 0;
+}
+
+.mobile_services_con .l p strong {
+	padding-left: 25px;
+}
+
+.mobile_services_con .l p {
+	clear: both;
+	overflow: hidden;
+}
+
+.mobile_services_con .l p em {
+	width: 16px;
+	height: 16px;
+}
+
+.mobile_services_con .l p span {
+	padding: 0 10px;
+}
+
+.mobile_services_con .l p .m-checkbox {
+	position: relative;
+	top: 2px;
+	left: 0;
+}
+
+.mobile_services_con .l p .dib {
+	padding: 0;
+}
+
+.pt_get .dib a {
+	display: block;
+	border: 1px solid #e3e3e3;
+	background: #f7f7f7;
+	padding: 8px 10px;
+}
+
+.pt_get .time_yzm {
+	background: #d7d7d7;
+	padding: 0 10px;
+	display: block;
+	color: #fff;
+	height: 35px;
+	line-height: 35px;
+}
+
+.mobile_services_con .pt_get {
+	margin-bottom: 0;
+}
+
+.mobile_captcha {
+	padding-left: 90px;
+}
+
+.mobile_moreServices .mobile_captcha {
+	padding-left: 130px;
+	margin-top: 30px;
+}
+
+.mobile_countdown {
+	padding: 0 0 0 120px;
+}
+
+.no_cost {
+	height: 30px;
+	line-height: 30px;
+	padding: 0 0 0 120px;
+}
+
+.mobile_countdown .mobile_countdown_tips {
+	margin: 5px 0
+}
+
+.mobile_countdown .mobile_countdown_tips em {
+	background-position: 0 -119px;
+	height: 16px;
+	width: 16px;
+	margin-left: 0;
+	margin-right: 5px;
+}
+
+.mobile_tips {
+	background: #ededed;
+	width: 340px;
+	padding: 10px 20px;
+	margin-bottom: 10px;
+}
+
+.mobile_tips p {
+	margin-bottom: 0;
+}
+
+.mobile_tips p em {
+	background-position: 0 -147px;
+	padding-left: 5px;
+	margin-bottom: 0;
+	width: 2px;
+	height: 2px;
+	margin: 8px 0 0 0;
+	overflow: hidden;
+}
+
+.mobile_open {
+	margin: 20px 0 0 116px;
+}
+
+.mobile_services_border {
+	padding: 0 50px 10px;
+	margin-bottom: 40px;
+}
+
+.messagelist_box {
+	margin: 40px 50px;
+}
+
+.congratula_img {
+	background-position: 0 -222px;
+	width: 83px;
+	height: 71px;
+}
+
+.find_Pass {
+	background-position: 0 -379px;
+	width: 32px;
+	height: 41px;
+	padding-right: 20px;
+}
+
+.guarantee_img {
+	background-position: 0 -439px;
+	width: 33px;
+	height: 41px;
+	padding-right: 20px;
+}
+
+.change_pass_img {
+	background-position: 0 -300px;
+	width: 63px;
+	height: 70px;
+	padding-right: 50px;
+}
+
+.iphone_binding {
+	font-size: 18px;
+	color: #505051;
+	font-family: \5FAE\8F6F\96C5\9ED1, 'Microsoft YaHei', SimHei, SimSun;
+	padding-top: 20px;
+}
+
+.find_Pass_guarantee {
+	border-top: 1px solid #e9e9e9;
+	padding: 65px 0 0 30px;
+	margin-top: 30px;
+}
+
+.find_Pass_guarantee p {
+	font-size: 14px;
+	color: #666;
+	padding: 0 0 5px 0;
+}
+
+.success_modified {
+	width: 360px;
+	margin: 0 auto;
+}
+
+.find_Pass_con {
+	padding: 0 80px;
+}
+
+.congratula_img {
+	margin: 0 30px 0 0;
+}
+
+.congratula_tit p {
+	padding-bottom: 30px;
+}
+
+.congratula_tit p span {
+	color: #909090;
+}
+
+.congratula_tit p strong {
+	font-size: 16px;
+}
+
+.change_pass_div {
+	width: 490px;
+	margin: 0 auto;
+	padding: 30px 0;
+}
+
+.unread_mess_tit {
+	background: url("/yiren/images/dotline-1.gif")
+		/*tpa=http://www.yirendai.com/images/icon/dotline.gif*/
+		repeat-x 0 bottom;
+	height: 35px;
+	line-height: 35px;
+}
+
+.unread_mess_tit em {
+	margin: 12px 5px 0 0;
+}
+
+.unread_mess_tit strong span,.red_ty,.interest_rate_div p strong {
+	color: #c10000;
+}
+
+.red_ty {
+	font-weight: bold;
+}
+
+.unread_tit strong,.unread_p span {
+	display: block;
+	float: left;
+	padding: 12px 10px;
+}
+
+.unread_sender {
+	width: 150px;
+}
+
+.unread_bt {
+	width: 300px;
+}
+
+.unread_tit {
+	font-size: 12px;
+}
+
+.unread_delivery_time {
+	width: 200px;
+}
+
+a.unread_p {
+	border: 1px solid #e3e3e3;
+	background: #f7f7f7;
+	margin-bottom: 8px;
+	display: block;
+	color: #666666;
+}
+
+a:hover.unread_p {
+	background-color: #f1f9ff;
+}
+
+.unread_messages a.unread_pYellow,.unread_messages a:visited.unread_pYellow
+	{
+	background-color: #fefee9;
+}
+
+.left_arrow,.right_arrow {
+	background-position: 0 -52px;
+	width: 16px;
+	height: 16px;
+	padding: 0 8px 0 0;
+}
+
+.right_arrow {
+	background-position: 0 -84px;
+	margin: 3px 0 0 8px;
+}
+
+.left_arrow_triangle {
+	background-position: 0 -25px;
+	margin: 3px 0 0 0;
+}
+
+.seal_list {
+	width: 210px;
+}
+
+.seal_list span {
+	padding: 0 15px 0;
+	display: block;
+}
+
+.seal_list span a {
+	color: #333;
+}
+
+.return_list_tit {
+	padding-bottom: 22px;
+}
+
+.r_list_tit a {
+	color: #454545;
+}
+
+.r_list_tit {
+	padding: 15px 20px;
+}
+
+.r_list_con {
+	padding: 0 20px 10px;
+	position: relative;
+}
+
+.r_list_con p {
+	line-height: 24px;
+}
+
+.r_list_con p.l {
+	width: 580px;
+}
+
+.r_list_con p.r {
+	position: absolute;
+	right: 20px;
+	bottom: 10px;
+}
+
+.transceivers_people {
+	margin: 25px 20px 0 0;
+}
+
+.transceivers_people strong {
+	font-weight: normal;
+}
+
+.transceivers_people em {
+	margin: 4px 0 0 0;
+}
+
+.transceivers_people .r em {
+	margin-right: 7px;
+}
+/*2014.4.28*/
+.container_other {
+	background: none;
+}
+
+.elite_box {
+	background: #fff;
+}
+
+.elite_box .table_gray {
+	width: 700px;
+	margin: 0 auto;
+}
+
+.elite_tit {
+	border-bottom: 1px solid #cdcdcd;
+	background: #0099df;
+	padding: 5px 20px;
+	height: 48px;
+}
+
+.elite_tit p strong {
+	padding: 10px 0 0 0;
+	display: block;
+	font-size: 14px;
+	color: #fff;
+}
+
+.elite_tit p span {
+	padding: 5px 0 0 0;
+	display: inline-block;
+	width: 200px;
+	margin-left: 5px
+}
+
+.elite_tit p span a {
+	display: block;
+	text-align: right;
+	color: #fff;
+}
+
+.elite_tit p img {
+	position: relative;
+	top: 9px;
+	left: 9px;
+}
+
+.elite_bg,.elite_bg_transfer {
+	background: url("/yiren/images/jyz_bg.png")
+		/*tpa=http://www.yirendai.com/images/jyz_bg.png*/   no-repeat 0
+		1px;
+	width: 44px;
+	height: 46px;
+	margin-right: 15px;
+}
+
+.elite_bg_transfer {
+	background-position: 0 -55px;
+}
+
+.elite_bg_finance {
+	background: url("/yiren/images/elite_bg_finance.png")
+		/*tpa=http://www.yirendai.com/images/elite_bg_finance.png*/
+		no-repeat 3px 3px;
+	width: 44px;
+	height: 46px;
+	margin-right: 15px;
+}
+
+.elite_bg_new {
+	background: url("/yiren/images/elite_bg_new.png")
+		/*tpa=http://www.yirendai.com/images/elite_bg_new.png*/
+		no-repeat;
+	width: 74px;
+	height: 50px;
+	margin: 3px 15px 0 -20px;
+}
+
+.new_vip_bg_finance {
+	background: url("/yiren/images/new_vip.png")
+		/*tpa=http://www.yirendai.com/images/new_vip.png*/   no-repeat
+		0px -1px;
+	width: 85px;
+	height: 66px;
+	position: absolute;
+	top: -5px;
+	left: 0px;
+}
+
+.elite_tit p strong.pt18 {
+	padding-top: 18px;
+}
+
+.mr8 {
+	margin-right: 8px;
+}
+
+.bd_gray {
+	border: 1px solid #dcdcdc;
+	border-top: none
+}
+
+.elite_left {
+	width: 615px;
+	padding: 30px 25px 20px 35px;
+	display: inline;
+}
+
+.loadingNum2 {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #DCDCDC;
+	height: 16px;
+	width: 178px;
+	margin-right: 5px;
+}
+
+.loadingNum_bar2 {
+	background: url("/yiren/images/loadingBg_x.gif")
+		/*tpa=http://www.yirendai.com/images/loadingBg_x.gif*/
+		repeat-x 0 0;
+	height: 16px;
+}
+
+.elite_table td {
+	padding: 7px 0;
+	color: #414141;
+}
+
+.elite_table strong,.elite_table strong span,.surplus_money strong {
+	color: #c10000;
+	font-size: 30px;
+	font-family: Arial;
+	font-weight: normal;
+}
+
+.elite_table .tender_completed {
+	color: #0099df;
+	font-size: 12px;
+}
+
+.elite_table strong span,.surplus_money strong span {
+	font-size: 18px;
+}
+
+.elite_left h3,.basic_information h3 {
+	font-size: 12px;
+	padding: 12px 0;
+}
+
+.elite_left p {
+	line-height: 22px;
+}
+
+.elite_right {
+	width: 302px;
+	background: #f8f8f8;
+	padding: 31px 0 20px 20px;
+	border-left: 1px solid #cdcdcd;
+	height: 245px;
+}
+
+.finance-detail-elitebox {
+	background: transparent url("/yiren/images/finance_detail_bg.gif-v=1.gif")
+		/*tpa=http://www.yirendai.com/images/finance_detail_bg.gif?v=1*/
+		  0 -409px no-repeat;
+}
+
+.jjg-detail-elitebox {
+	background: transparent url("/yiren/images/jjg_detail.jpg")
+		/*tpa=http://www.yirendai.com/images/jjg_detail.jpg*/   0
+		-409px no-repeat;
+}
+
+.finance-detail-time {
+	margin-top: 10px;
+}
+
+.finance-detail-time li {
+	background: transparent url("/yiren/images/finance_detail_bg.gif-v=1.gif")
+		/*tpa=http://www.yirendai.com/images/finance_detail_bg.gif?v=1*/
+		   -17px -15px no-repeat;
+	padding-left: 20px;
+	margin-bottom: 10px;
+}
+
+.finance-detail-time li.time {
+	background-position: -17px -48px;
+}
+
+.finance-detail-time li.first {
+	background: url("/yiren/images/jjg_detail.jpg")
+		/*tpa=http://www.yirendai.com/images/jjg_detail.jpg*/    -17px
+		-76px no-repeat
+}
+
+.finance_intro_image {
+	background: transparent url("/yiren/images/finance_detail_bg.gif-v=1.gif")
+		/*tpa=http://www.yirendai.com/images/finance_detail_bg.gif?v=1*/
+		   0px -110px no-repeat;
+	height: 99px;
+	border-top: 1px solid #DFDFDF;
+	clear: both;
+}
+
+.jjg_intro_image {
+	background: transparent url("/yiren/images/jjg_detail.jpg")
+		/*tpa=http://www.yirendai.com/images/jjg_detail.jpg*/    0px
+		-110px no-repeat;
+	height: 200px;
+	border-top: 1px solid #DFDFDF;
+	clear: both;
+}
+
+.finance_newBid_image {
+	background: url("/yiren/images/finance_newbid_image.jpg")
+		/*tpa=http://www.yirendai.com/images/finance_newbid_image.jpg*/
+		   -1px -1px no-repeat;
+	height: 99px;
+	clear: both;
+}
+
+.finance_wdzj518_image {
+	background: url("/yiren/images/finance_wdzj518_image.jpg")
+		/*tpa=http://www.yirendai.com/images/finance_wdzj518_image.jpg*/
+		   -1px -1px no-repeat;
+	height: 99px;
+	clear: both;
+}
+
+.transfer_bd_gray .elite_right {
+	height: 170px
+}
+
+.finance_detail_box .elite_right {
+	height: 224px;
+}
+
+.elite_right p {
+	padding: 5px 0 12px 0;
+}
+
+.elite_box2 .common_box,.elite_box .common_box {
+	width: 998px;
+	margin: 15px auto 0;
+	border-bottom: 1px solid #DFDFDF;
+	position: relative;
+	min-height: 260px;
+	_height: 260px;
+	height: auto !important;
+}
+
+.basic_information {
+	width: 400px;
+	padding: 20px 0 20px 16px;
+}
+
+.basic_information ul li {
+	float: left;
+	width: 170px;
+	padding-bottom: 10px;
+}
+
+.audit_edition {
+	background: url("/yiren/images/audit_edition.jpg") no-repeat 0 0;
+	width: 337px;
+	height: 190px;
+	padding: 87px 0 0 144px;
+}
+
+.audit_edition p {
+	line-height: 24px;
+	padding-bottom: 8px;
+}
+
+.by {
+	position: absolute;
+	top: 110px;
+	left: 353px;
+}
+
+.elite_box .table_gray strong,.service_introduction p strong,.service_advantage p strong,.calculators_result table td strong
+	{
+	color: #c10000;
+}
+
+.q_mark img {
+	position: relative;
+	top: 3px;
+	left: 5px;
+}
+
+.elite_right .buy_but {
+	margin-top: 30px;
+	padding-bottom: 0;
+	height: 30px;
+}
+
+.elite_right .buy_but_top {
+	margin-top: 10px;
+}
+
+.elite_right .buy_but .m-input-normal {
+	height: 29px;
+	line-height: 29px;
+}
+/*精英 转让 新增样式*/
+.elite_height {
+	height: 285px;
+	overflow: hidden;
+}
+
+.elite_height_rig {
+	height: 285px;
+}
+
+.lending_login {
+	padding: 0 0 0 30px;
+}
+
+.service_introduction h3,.service_advantage h3,.questions_f h3 {
+	font-size: 12px;
+	padding: 10px 0 12px 0;
+}
+
+.service_introduction p,.service_advantage p {
+	line-height: 26px;
+}
+
+.service_advantage p {
+	background: url("/yiren/images/jjg_detail.jpg")
+		/*tpa=http://www.yirendai.com/images/jjg_detail.jpg*/   -915px
+		-486px no-repeat;
+	padding-left: 25px
+}
+
+.service_advantage p.second {
+	background-position: -915px -525px
+}
+
+.service_advantage p.third {
+	background-position: -915px -565px
+}
+
+.service_advantage p.fourth {
+	background-position: -915px -605px
+}
+
+.service_introduction {
+	width: 615px;
+	padding: 22px 38px 22px 0;
+}
+
+.service_advantage {
+	width: 280px;
+	padding: 22px 0 22px 20px;
+	background: transparent
+		url("/yiren/images/finance_detail_bg.gif-v=1.gif")
+		/*tpa=http://www.yirendai.com/images/finance_detail_bg.gif?v=1*/
+		  -781px -490px no-repeat;
+}
+
+.questions_f p {
+	text-indent: 2em;
+	line-height: 20px;
+	padding-bottom: 10px;
+	padding-right: 50px;
+}
+
+.question_f_bg,.questions_f .question_f_bg {
+	width: 163px;
+	height: 92px;
+	float: right;
+	background: transparent
+		url("/yiren/images/finance_detail_bg.gif-v=1.gif")
+		/*tpa=http://www.yirendai.com/images/finance_detail_bg.gif?v=1*/
+		  -792px -347px no-repeat;
+}
+
+.content_layout {
+	width: 500px;
+	margin: 0 auto;
+	padding: 95px 0;
+	overflow: hidden;
+}
+
+.content_layout .iconpic {
+	margin-top: 8px;
+}
+
+.content_query {
+	padding: 0 0 0 15px;
+	width: 370px;
+}
+
+.content_query p {
+	padding-bottom: 8px;
+}
+
+.content_query p a {
+	margin-right: 20px;
+}
+
+.content_query strong,.elite_description_tit h3,.borrowing_calculator h3,.rapid_applica_tit
+	{
+	font-size: 24px;
+	font-family: \5FAE\8F6F\96C5\9ED1, 'Microsoft YaHei', SimHei, SimSun;
+	font-weight: normal;
+}
+
+.content_query span {
+	font-weight: bold;
+}
+
+.content_query .padd_bottom {
+	padding-top: 10px;
+}
+
+.reason_tit {
+	padding-top: 20px;
+}
+
+.payment_failure .content_layout {
+	width: 750px;
+}
+
+.failure_reason {
+	padding: 0 0 25px 20px;
+}
+
+/*债权转让列表*/
+.dropList_box {
+	margin: 20px auto;
+	padding-bottom: 20px;
+	background: #fff;
+	border: 1px solid #E9E9E9;
+	border-top: none;
+}
+
+.dropList_box .m-tab-w .m-tabT a {
+	font-size: 18px;
+	font-family: "microsoft yahei";
+}
+
+.dropList_box .m-tabT a.m-tabTActive,.m-tabT a:visited.m-tabTActive {
+	font-weight: normal;
+}
+
+.dropList_box .m-tabC .intro {
+	margin-bottom: 20px;
+}
+
+.dropList_box .m-tabC .intro p {
+	width: 630px;
+	padding: 10px 20px;
+	line-height: 24px;
+	text-indent: 2em;
+	color: #000;
+	margin-top: 20px;
+	float: left;
+}
+
+.dropList_box .m-tabC .intro ul {
+	float: left;
+	width: 274px;
+	padding-left: 53px;
+	margin-top: 15px;
+	border-left: 1px dashed #e7e7e7;
+}
+
+.dropList_box .m-tabC .intro ul li {
+	background: url("/yiren/images/dot_blue.png") no-repeat 0 10px;
+	padding: 3px 0 3px 15px;
+}
+
+.dropList_box .m-tabC .intro .loanlist_quick_box {
+	background: #eeeff1;
+	width: 310px; /*height:50px; padding:28px 0;*/
+	float: left;
+	margin-top: 20px;
+}
+
+.dropList_box .m-tabC .intro a.loanlist_autobid {
+	display: block;
+	width: 140px;
+	height: 50px;
+	background: transparent url("/yiren/images/loanlist_autobid.gif") no-repeat;
+	float: left;
+	margin: 0 10px;
+}
+
+.dropList_box .m-tabC .intro a.loanlist_guide {
+	display: block;
+	width: 310px;
+	height: 106px;
+	background: transparent url("/yiren/images/loanlist_guide_new.jpg")
+		no-repeat;
+	float: left;
+}
+
+.dropList_box .m-tabC .soldout {
+	height: 4px;
+	background-color: #f8f8f8;
+	position: relative;
+	margin-bottom: 25px;
+	width: 960px;
+	margin: 0 auto 25px;
+}
+
+.dropList_box .m-tabC .soldout h3 {
+	position: absolute;
+	background-color: #fff;
+	left: 50%;
+	top: -8px;
+	color: #747474;
+	margin-left: -60px;
+	padding: 0 15px;
+}
+
+.dropList_box table.m-financeList th {
+	background: #f8f8f8;
+	text-align: center;
+	padding: 15px 0;
+	border-top: 1px solid #e4e3e8;
+	border-bottom: 1px solid #e4e3e8;
+	font-weight: normal;
+}
+
+.dropList_box table.m-financeList span.title {
+	margin-left: 20px;
+}
+
+.dropList_box table.m-financeList p.number {
+	font-family: "microsoft yahei";
+	font-size: 14px;
+	color: #666;
+	background: transparent url("/yiren/images/line_s.gif") no-repeat
+		right center;
+}
+
+.dropList_box table.m-financeList p.number.last {
+	background: none;
+}
+
+.dropList_box table.m-financeList p.number span {
+	color: #666;
+	font-size: 20px;
+	font-weight: normal;
+	font-family: arial;
+}
+
+.dropList_box .m-page {
+	position: relative;
+	left: 50%;
+	float: left;
+}
+
+.dropList_box .m-page a,.dropList_box .m-page input {
+	position: relative;
+	right: 50%;
+	z-index: 2;
+	float: left
+}
+
+.dropList_box .m-tabC .m-chooseBoxBg {
+	margin: 20px 20px 0;
+	padding: 10px 20px;
+}
+
+.dropList_box .m-tabC .m-chooseBoxBg .m-rowLabel {
+	height: 30px;
+	line-height: 30px;
+}
+
+.dropList_box .m-tab {
+	border: none;
+}
+
+.ydy_banner {
+	background: url("/yiren/images/ydy_countdownbg.gif") no-repeat;
+	width: 962px;
+	height: 161px;
+	margin: 0 0 25px 20px;
+	position: relative
+}
+
+.ydy_banner em {
+	font-style: normal;
+}
+
+.ydy_logo {
+	margin: 32px 0px 0 30px;
+	width: 280px;
+	_display: inline;
+}
+
+.ydy_logo h3 {
+	font-size: 32px;
+	color: #fbb450;
+	font-family: "microsoft yahei";
+}
+
+.jjg_logo h3 {
+	color: #0079d2
+}
+
+.ydy_logo h3 a {
+	color: #FBB450;
+}
+
+.jjg_logo h3 a {
+	color: #0079d2
+}
+
+.ydy_logo h3 a:hover {
+	text-decoration: none;
+}
+
+.ydy_logo h3 span {
+	font-size: 18px;
+}
+
+.ydy_logo p {
+	font-size: 14px;
+	color: #666;
+	font-weight: bold;
+	margin-top: 5px;
+	margin-bottom: 10px
+}
+
+.ydy_banner .numbers {
+	width: 330px;
+	margin: 15px 49px 0 0;
+	font-size: 14px;
+	font-family: "microsoft yahei"
+}
+
+.ydy_banner .numbers span.percent {
+	margin-right: 30px;
+	display: inline-block;
+	width: 90px;
+	text-align: center;
+}
+
+.ydy_banner .numbers span.months {
+	width: 90px;
+	text-align: center;
+	display: inline-block;
+}
+
+.ydy_banner .numbers span em {
+	font-size: 24px;
+	color: #414141;
+	line-height: 90px;
+}
+
+.ydy_banner .numbers span.percent em,.ydy_banner  .red {
+	color: #c10000;
+}
+
+.ydy_banner .grayRound {
+	background: #eee;
+	border-radius: 10px;
+	font-size: 12px;
+	padding: 3px;
+}
+
+.ydy_banner .numbers span.moneys {
+	margin-right: 30px;
+	width: 75px;
+	display: inline-block;
+	text-align: center;
+}
+
+.ydy_banner .countdown {
+	margin-top: 45px;
+}
+
+.ydy_banner .countdown .clock {
+	height: 45px;
+}
+
+.ydy_banner .countdown span {
+	font-size: 30px;
+	font-weight: bold;
+	color: #000;
+	letter-spacing: 10px
+}
+
+.ydy_banner .countdown span.day,.ydy_banner .countdown span.hour {
+	margin-right: 28px;
+	_margin-right: 33px
+}
+
+.ydy_banner .countdown .selltime {
+	margin-top: 15px;
+	font-size: 14px;
+	color: #666;
+	font-weight: bold
+}
+
+.ydy_banner .countdown .selltime em {
+	color: #9e9e9e;
+}
+
+.bidList li .loan_type {
+	width: 80px;
+	height: 80px;
+	float: left;
+	background: transparent url("/yiren/images/icon_loanlist.gif")
+		no-repeat;
+}
+
+.bidList li .loan_type32,.bidList li .loan_type33 {
+	background-position: 0 0;
+}
+
+.bidList li.gray_li .loan_type32,.bidList li.gray_li .loan_type33 {
+	background-position: 0 -116px;
+}
+
+.bidList li .loan_type27,.bidList li .loan_type28 {
+	background-position: 0 -239px;
+}
+
+.bidList li.gray_li .loan_type27,.bidList li.gray_li .loan_type28 {
+	background-position: 0 -369px;
+}
+
+.bidList li .loan_type36 {
+	background-position: 0 -514px;
+}
+
+.bidList li.gray_li .loan_type36 {
+	background-position: 0 -656px;
+}
+
+.bidList li .loan_type30 {
+	background-position: 0 -814px;
+}
+
+.bidList li.gray_li .loan_type30 {
+	background-position: 0 -971px;
+}
+
+.bidList li .loan_type20,.bidList li .loan_type21,.bidList li .loan_type22,.bidList li .loan_type23,.bidList li .loan_type24,.bidList li .loan_type25,.bidList li .loan_type26,.bidList li .loan_type37,.bidList li .loan_type38,.bidList li .loan_type39
+	{
+	background-position: 0 -1126px;
+}
+
+.bidList li.gray_li .loan_type20,.bidList li.gray_li .loan_type21,.bidList li.gray_li .loan_type22,.bidList li.gray_li .loan_type23,.bidList li.gray_li .loan_type24,.bidList li.gray_li .loan_type25,.bidList li.gray_li .loan_type26,.bidList li.gray_li .loan_type37,.bidList li.gray_li .loan_type38,.bidList li.gray_li .loan_type39
+	{
+	background-position: 0 -1271px;
+}
+
+.bidList li .loan_type35 {
+	background-position: 0 -1430px;
+}
+
+.bidList li.gray_li .loan_type35 {
+	background-position: 0 -1516px;
+}
+
+.bidList li .loan_type29 {
+	background-position: 0 -1605px;
+}
+
+.bidList li.gray_li .loan_type29 {
+	background-position: 0 -1691px;
+}
+
+.bidList li .loan_type34 {
+	background-position: 0 -1782px;
+}
+
+.bidList li.gray_li .loan_type34 {
+	background-position: 0 -1868px;
+}
+
+.bidList li .loan_type40 {
+	background-position: 0 -2307px;
+}
+
+.bidList li.gray_li .loan_type40 {
+	background-position: 0 -2220px;
+}
+
+.bidList li .loan_type31 {
+	background-position: 0 -1957px;
+}
+
+.bidList li.gray_li .loan_type31 {
+	background-position: 0 -2043px;
+}
+
+.bidList {
+	padding: 0 20px;
+}
+
+.bidList li {
+	border-bottom: 1px solid #edeef2;
+	padding: 14px 0 14px 0px;
+	height: 80px;
+}
+
+.bidList li.gray_li {
+	background: #fafafa;
+}
+
+.bidList li .loan_detail {
+	float: left;
+	padding-left: 12px;
+	width: 860px;
+}
+
+.bidList h3 {
+	color: #08c;
+	height: 22px;
+	font-size: 14px;
+}
+
+.bidList li .loan_detail .leftpart {
+	width: 550px;
+	float: left;
+}
+
+.bidList li .loan_detail .rightpart {
+	width: 310px;
+	float: left;
+	overflow: hidden;
+}
+
+.bidList h4 {
+	line-height: 24px;
+	margin-top: 10px;
+}
+
+.bidList h4 span {
+	font-size: 24px;
+	font-weight: normal;
+}
+
+.bidList p.cont {
+	color: #999999;
+	position: relative;
+}
+
+.bidList p.cont .rate {
+	padding-right: 5px;
+}
+
+.bidProgressbar {
+	width: 144px;
+	height: 10px;
+	border: 1px solid #cbced5;
+	text-align: center;
+	position: relative;
+}
+
+.bidDetail {
+	width: 190px;
+	line-height: 24px;
+	margin-top: 25px;
+}
+
+.bid_total {
+	width: 150px;
+	text-align: center;
+	background: transparent url("/yiren/images/line_s.gif") no-repeat
+		right bottom;
+}
+
+.bid_rate {
+	width: 100px;
+	text-align: center;
+	background: transparent url("/yiren/images/line_s.gif") no-repeat
+		right bottom;
+	_position: relative;
+	_z-index: 1
+}
+
+.bidInfor {
+	width: 109px;
+	text-align: center;
+	background: transparent url("/yiren/images/line_s.gif") repeat-y right
+		bottom;
+}
+
+.bidList .bidForm {
+	padding: 25px 0 0 60px;
+	*padding-left: 55px;
+}
+
+.bidList .bidForm.bidForm_full {
+	padding-top: 15px;
+}
+
+.bidList .bidForm .m-row-bid {
+	margin-left: 15px;
+}
+
+.bidList .bidForm .input_btn {
+	height: 35px;
+	line-height: 35px;
+	margin-right: 5px;
+}
+
+.bidList .bidForm .input_btn.btn_normal {
+	height: 28px;
+	line-height: 28px;
+}
+
+.transferList .bidDetail {
+	margin-top: 5px;
+}
+/*.transferList li{border-bottom:1px solid #e3e4e8;padding:15px 0;}*/
+.transferList li .loan_type {
+	width: 80px;
+	height: 80px;
+	float: left;
+	background: transparent url("/yiren/images/refresh_ico.gif")
+		/*tpa=http://www.yirendai.com/images/refresh_ico.gif*/
+		no-repeat;
+}
+
+.transferList li.gray_li .loan_type {
+	background-position: 0 -110px;
+}
+
+.transferList.bidList .bidForm {
+	padding-top: 8px;
+}
+
+.transferList.bidList .bidForm p {
+	line-height: 20px;
+}
+/*.transferList .bidInfor{background:none;}*/
+/*.transferProgressbar{width:125px;text-align:center;padding:5px 0;}
+.transferDetail{width:400px;line-height:30px;}
+.transferDetail h3{color:#08c;}
+.transferInfor{width:245px;line-height:30px;}
+.transferInfor em{font-style:normal;font-weight:bold;}*/
+.dropList_box .m-tabC .transferchoose {
+	margin: 20px 20px 0
+}
+
+/* .bidForm  */
+.toshoppingcart_a {
+	display: inline-block;
+	width: 16px;
+	height: 13px;
+	background: transparent url("/yiren/images/ico_cart.gif")
+		/*tpa=http://www.yirendai.com/images/ico_cart.gif*/   no-repeat;
+}
+
+.bidForm .bid_empty_errortip {
+	color: #FF0000;
+	line-height: 18px;
+}
+
+.bidfull_box {
+	width: 182px;
+	position: absolute;
+	right: 65px;
+	_right: 30px;
+	top: -30px;
+	height: 85px;
+}
+
+.bidForm p {
+	line-height: 26px
+}
+
+.bidForm p.notice {
+	margin: 10px 35px 0 0;
+	text-align: center;
+	font-size: 14px;
+}
+
+.bidForm p.full {
+	margin-left: 30px;
+	background: transparent url("/yiren/images/ico_right.gif")
+		/*tpa=http://www.yirendai.com/images/ico_right.gif*/
+		no-repeat left 8px;
+	padding-left: 15px;
+}
+
+.bidForm .disable_box {
+	margin-right: 35px;
+	text-align: center;
+}
+
+.bidForm .disable_box .input_btn {
+	width: 180px;
+	padding: 0px;
+}
+
+.progressbar_bg {
+	background: #0099df;
+	height: 12px;
+	overflow: hidden;
+	position: absolute;
+	left: 0px;
+	top: -1px;
+}
+
+.progress_ico {
+	width: 25px;
+	height: 26px;
+	display: block;
+	background: transparent url("/yiren/images/progressbar_ico1.gif")
+		/*tpa=http://www.yirendai.com/images/progressbar_ico1.gif*/
+		no-repeat;
+}
+
+/*出借充值提现*/
+.recharge_box {
+	background: url("/yiren/images/dotline-1.gif")
+		/*tpa=http://www.yirendai.com/images/icon/dotline.gif*/
+		repeat-x 0 bottom;
+	overflow: visible;
+	padding-bottom: 25px;
+	margin-bottom: 30px;
+}
+
+.recharge_gray,.withdrawal_con3 p {
+	color: #aaa;
+}
+
+.recharge_red {
+	color: #b81f04;
+}
+
+.recharge_bg {
+	background: url("/yiren/images/tit_icon.gif")
+		/*tpa=http://www.yirendai.com/images/icon/tit_icon.gif*/
+		no-repeat 0 5px;
+	padding: 0 0 15px 10px;
+	font-size: 12px;
+	font-weight: normal;
+	border-bottom: 1px solid #dfdfdf;
+	margin-bottom: 30px;
+}
+
+.recharge_bg_none {
+	background: none;
+}
+
+.recharge_box .m-row .m-rowLabel {
+	color: #666;
+}
+
+.recharge_box p {
+	padding: 10px 0 10px 76px;
+}
+
+.recharge_box p.pt_get {
+	margin-left: 17px;
+	padding-left: 0px;
+}
+
+.recharge_box p img {
+	display: block;
+	margin-top: 10px;
+}
+
+.recharge_box p i {
+	font-style: normal;
+	width: 100px;
+	text-align: right;
+	display: block;
+	float: left;
+}
+
+.recharge_box .recharge_yzm span {
+	padding: 0 15px;
+}
+
+.recharge_box strong {
+	color: #aaa;
+	padding-left: 20px;
+	font-weight: normal;
+}
+
+.recharge_tips {
+	padding: 0 0 0 10px;
+}
+
+.recharge_tips li {
+	padding-bottom: 3px;
+}
+
+.recharge_box p.recharge_yzm_but {
+	text-align: center;
+	margin: 50px 0;
+	padding: 0;
+	float: none
+}
+
+.recharge_box .recharge_yzm .yzm_tips {
+	padding-right: 100px;
+}
+
+.rech_magtop {
+	margin-top: 7px;
+}
+
+.recharge_box .table_blue p {
+	padding: 5px 0 0 56px;
+	margin-top: 0;
+	line-height: 24px;
+}
+
+.recharge_paging {
+	margin: 20px 0 0 0;
+}
+
+.withdrawal_box p {
+	padding: 8px 0 8px 10px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.withdrawal_con1 {
+	width: 120px;
+	text-align: right;
+}
+
+.withdrawal_con1 p {
+	text-align: right;
+}
+
+.withdrawal_con2 {
+	width: 150px;
+}
+
+.withdrawal_con3 {
+	width: 400px;
+}
+
+.bank_select .withdrawal_con1 p {
+	padding: 0 0 10px 71px;
+}
+
+.bank_select a.m-radio {
+	color: #666;
+	text-decoration: none;
+}
+
+.recharge_box .bank_select .m-row .m-rowLabel {
+	
+}
+
+.select_fill .m-row span {
+	padding: 0 10px;
+}
+
+.select_fill .m-row span.verifica_bg {
+	background: url("/yiren/images/verifica_bg.gif")
+		/*tpa=http://www.yirendai.com/images/verifica_bg.gif*/
+		no-repeat 0 2px;
+	padding: 0 0 0 22px;
+	margin-left: 10px;
+	height: 24px;
+	display: block;
+	float: left;
+}
+
+.margin_right {
+	margin-right: 10px;
+}
+
+.select_fill table {
+	margin-top: 15px;
+}
+
+.select_fill td {
+	padding: 10px 0 0 0;
+}
+
+.upgrade_tips {
+	padding: 18px 0 0 133px;
+}
+
+.recharge_box .bank_select .m-row .rowLabel_tips {
+	width: 218px;
+}
+
+.recharge_box3 .recharge_box {
+	background: none;
+}
+
+.forms_authen {
+	width: 300px;
+	margin: 55px auto 0;
+}
+
+.recharge_box .forms_authen .m-row .m-rowLabel {
+	width: 84px;
+}
+
+.creditor_last {
+	width: 250px;
+	margin: 0 auto 20px;
+}
+
+.recharge_table_bg {
+	background: url("/yiren/images/dotline-1.gif")
+		/*tpa=http://www.yirendai.com/images/icon/dotline.gif*/
+		repeat-x 0 bottom;
+	padding-bottom: 10px;
+	margin-bottom: 40px;
+}
+
+.recharge_table_bg table {
+	margin-bottom: 50px;
+}
+
+.creditor_last a {
+	margin-right: 20px;
+}
+
+.right-container-topPic .iconpic07,.right-container-topPic .iconpic08,.right-container-topPic .iconpic28
+	{
+	margin-left: 200px;
+	display: inline;
+}
+
+.creditor_last_a a {
+	width: 105px;
+}
+
+.bank_select .m-row-error {
+	text-indent: 235px
+}
+
+.bank_select .m-row-error span {
+	margin-right: 45px
+}
+
+.dialog_common p {
+	text-align: center;
+	font-size: 14px;
+	font-family: "microsoft yahei"
+}
+
+.dialog_common .btn_blue {
+	margin-right: 10px
+}
+
+.select_fill .m-rowLabel {
+	margin-right: 30px
+}
+
+.bank_select {
+	padding-left: 40px
+}
+
+.recharge_yzm_but {
+	text-align: center;
+	margin: 50px 0
+}
+
+.select_fill .m-rowLabel {
+	margin-right: 30px
+}
+
+.recharge_box_new p {
+	float: left;
+}
+/*出借身申诉份*/
+.upload_ex_con span {
+	display: block;
+	width: 110px;
+	text-align: right;
+}
+
+.upload_ex_con {
+	margin-bottom: 15px;
+}
+
+.upload_ex_con textarea {
+	width: 398px;
+	height: 88px;
+	border: 1px solid #ccc;
+	padding: 5px;
+}
+
+.upload_ex_con p {
+	padding-bottom: 5px;
+}
+
+.upload_explana h3 {
+	color: #414141;
+	padding: 0 0 20px 30px;
+}
+
+.upload_div p {
+	border: 1px solid #e4e9ee;
+	background: #eaf5ff;
+	padding: 10px;
+	height: 20px;
+	line-height: 20px;
+	width: 245px;
+	margin-right: 20px;
+	margin-bottom: 10px
+}
+
+.upload_div p strong {
+	font-weight: normal;
+	color: #0088cc;
+	padding-left: 20px;
+}
+
+.upload_div p i {
+	color: #454545;
+	font-style: normal;
+}
+
+.upload_but {
+	height: 42px;
+	line-height: 42px;
+}
+
+.upload_div a {
+	display: block;
+	background: url("/yiren/images/close_bg.png")
+		/*tpa=http://www.yirendai.com/images/close_bg.png*/   no-repeat
+		-1px -3px;
+	width: 15px;
+	height: 15px;
+	text-indent: -99999px;
+	margin-top: 3px;
+}
+
+.upload_div a:hover {
+	display: block;
+	background: url("/yiren/images/close_bg.png")
+		/*tpa=http://www.yirendai.com/images/close_bg.png*/   no-repeat
+		-1px -33px;
+}
+
+.upload_con_txt {
+	margin-top: 15px;
+	overflow: hidden;
+}
+
+.upload_div .upload_gray i,.upload_div .upload_gray strong {
+	color: #acacac;
+}
+
+.verifica_upload {
+	padding: 45px 0 0 0;
+	width: 640px;
+	margin: 0 auto;
+}
+
+.verifica_btn {
+	margin-top: 25px;
+}
+
+.verifica_btn input {
+	margin-right: 20px;
+}
+/*账户首页 被申诉页面*/
+.account_profile .pro_left_to {
+	padding-left: 0px;
+	border-right: 0;
+	width: 110px;
+}
+
+.account_profile .pro_left_to img {
+	left: 0;
+}
+
+.account_profile .pro_right_to {
+	width: 605px;
+	background: url("/yiren/images/dotline-1.gif") repeat-x 0 bottom;
+	height: 104px;
+}
+
+.account_profile .pro_right_to p {
+	padding-left: 25px;
+	background: transparent url("/yiren/imagesaccount_ico.gif") -2px 2px
+		no-repeat;
+	height: 24px;
+	line-height: 24px;
+	width: 160px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.account_profile .pro_right_to p.tel {
+	background-position: -2px -22px;
+	margin: 7px 0 3px 0;
+	height: 24px;
+}
+
+.account_profile .pro_right_to p.id_state {
+	background-position: -2px -45px;
+	height: 24px;
+}
+
+.account_profile .pro_right_to {
+	padding-top: 18px;
+}
+
+.pro_right_to h3 {
+	padding-left: 0;
+}
+
+.pro_right_to .verifica .id_state {
+	float: left;
+	margin-left: 30px;
+}
+
+.account_profile .pro_right_to .price {
+	background: none;
+	float: right;
+	width: 290px;
+	height: 30px;
+	line-height: 30px;
+	position: relative;
+	top: -34px;
+}
+
+.account_profile .pro_right_to .price strong {
+	font-size: 14px;
+}
+
+.home_authentication_left {
+	padding: 0 50px 0 90px;
+}
+
+.home_authentication_left,.home_authentication_right {
+	float: left;
+}
+
+.home_authentica {
+	margin: 0 38px;
+}
+
+.home_authentication_right .home_authentica_tips {
+	font-size: 14px;
+	color: #f38602;
+	pdding-bottom: 20px;
+	line-height: 24px;
+	padding-bottom: 15px;
+}
+
+.margin-bots {
+	margin-bottom: 35px;
+}
+
+.btn_recharge {
+	text-align: center;
+	border-bottom: 1px dashed #e9e9e9;
+	margin-bottom: 20px;
+}
+
+.btn_recharge .btn_orange {
+	font-size: 16px;
+	margin: 20px 0;
+}
+
+.select_fill td.active {
+	background: #f4f4f4
+}
+/*身份申诉 确认申诉的弹出框内容*/
+.verify_box {
+	border-bottom: 1px dotted #c5c6c7;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+
+.verify_appeal {
+	padding: 20px 50px;
+}
+
+.ver_left {
+	padding-right: 20px;
+}
+
+.ver_left,.ver_right {
+	float: left;
+}
+
+.verify_box,.verify_tips {
+	text-align: left;
+}
+
+.verify_appeal p {
+	padding-bottom: 6px;
+	color: #454545;
+}
+
+.ver_right span {
+	padding-right: 20px;
+}
+
+.ver_right strong {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.ver_right strong,.ver_right em {
+	color: #f38602;
+}
+/*理财 借款 登录注册*/
+.logon_regist {
+	border: 1px solid #e0e1e3;
+	width: 998px;
+	height: 442px;
+	margin: 10px auto;
+}
+
+.loan-box,.lending-box,.loan-box-hover,.lending-box-hover {
+	position: relative;
+	float: left;
+}
+
+.loan-box a,.lending-box a,.loan-box .cr,.lending-box .cr,.loan-box-hover a,.lending-box-hover a
+	{
+	display: block;
+	width: 230px;
+	height: 50px;
+	background: url("/yiren/images/loan_btm.gif")
+		/*tpa=http://www.yirendai.com/images/loan_btm.gif*/   no-repeat
+		0 0;
+	position: absolute;
+	bottom: 30px;
+	left: 130px;
+	text-indent: -999999px;
+}
+
+.lending-box a {
+	background-position: 0 -63px;
+}
+
+.loan-box-hover a {
+	background-position: 0 -63px;
+}
+
+.lending-box a,.lending-box-hover a {
+	background: url("/yiren/images/lending_btm.gif")
+		/*tpa=http://www.yirendai.com/images/lending_btm.gif*/
+		no-repeat 0 0;
+}
+
+.lending-box-hover a {
+	background-position: 0 -63px;
+}
+
+.loan-box,.lending-box,.loan-box-hover,.lending-box-hover {
+	background: url("/yiren/images/borrower_bg.gif")
+		/*tpa=http://www.yirendai.com/images/borrower_bg.gif*/
+		no-repeat 0 0;
+	width: 499px;
+	height: 440px;
+}
+
+.lending-box {
+	background: url("/yiren/images/lender_bg.gif")
+		/*tpa=http://www.yirendai.com/images/lender_bg.gif*/
+		no-repeat 0 0;
+}
+
+.loan-box-hover {
+	background: url("/yiren/images/borrower_bg.gif")
+		/*tpa=http://www.yirendai.com/images/borrower_bg.gif*/
+		no-repeat 0 -440px;
+}
+
+.lending-box-hover {
+	background: url("/yiren/images/lender_bg.gif")
+		/*tpa=http://www.yirendai.com/images/lender_bg.gif*/
+		no-repeat 0 -440px;
+}
+/*充值页面新增样式*/
+.recharge_box_new p {
+	float: left;
+	padding: 10px 0 10px 30px;
+}
+
+.recharge_box_new p.withdrawal_tit {
+	padding-top: 19px;
+}
+
+#oldWdApplyForm {
+	padding-left: 40px
+}
+
+.chooseWay label {
+	height: 34px;
+	line-height: 34px
+}
+
+.recharge_box_new .m-row-error {
+	text-indent: 180px
+}
+
+.bank_select .m-row-error {
+	text-indent: 140px
+}
+
+.bank_select .m-row-error span {
+	margin-right: 50px
+}
+
+.common_box_pay {
+	width: 1000px;
+	margin: 20px auto;
+}
+
+.common_box_pay .inner_box {
+	padding-left: 36px;
+	padding-right: 36px;
+}
+
+.dotlineBtm {
+	margin-bottom: 10px;
+	background: url("/yiren/images/dotline-1.gif") repeat-x bottom;
+	padding-bottom: 18px;
+	padding-top: 18px;
+}
+
+.dotlineBtm .m-checkbox {
+	margin-bottom: -4px;
+	margin-right: 8px;
+}
+
+.common_box_pay h3 {
+	font-size: 16px;
+	color: #414141;
+	margin-top: 30px;
+}
+
+.boxRight {
+	text-align: right;
+	padding-top: 14px;
+	padding-bottom: 14px;
+}
+
+.boxRight .money {
+	font-size: 24px;
+}
+
+.common_box_pay .common_box h2 {
+	font-size: 14px;
+	color: #666;
+}
+
+.common_box_pay .common_box h2 small {
+	font-size: 12px;
+	color: #aaa;
+	margin-left: 5px;
+}
+
+.banksList {
+	width: 740px;
+	margin: 0 auto
+}
+
+/*精英标列表*/
+.l-list {
+	padding: 0 40px 0 60px;
+}
+
+.fineIcon,.turnIcon {
+	background-image: url("/yiren/images/jz_ico-1.png")
+		/*tpa=http://www.yirendai.com/images/jz_ico.png*/;
+	background-repeat: no-repeat;
+}
+
+.fineIcon {
+	background-position: 0 3px;
+}
+
+.turnIcon {
+	background-position: 0 -120px;
+}
+
+.xuanxian .fineIcon {
+	background-position: 0 -59px;
+	padding: 0 0 0 60px
+}
+
+.xuanxian .turnIcon {
+	background-position: 0 -180px;
+	padding: 0 0 0 60px
+}
+
+.information_tit {
+	padding-bottom: 10px;
+}
+
+.information_tit strong {
+	font-size: 14px;
+	color: #0088cc;
+}
+
+.information_txt strong,.m-financeList strong {
+	font-size: 14px;
+	color: #c10000;
+}
+
+.information_txt span {
+	padding-right: 50px;
+}
+
+.m-list li,.m-list li.xuanxian {
+	height: 62px;
+	padding: 18px 10px 10px 18px;
+	background: url("/yiren/images/dashed.gif")
+		/*tpa=http://www.yirendai.com/images/dashed.gif*/   repeat-x 0
+		0;
+	overflow: hidden;
+}
+
+.m-list li.xuanxian {
+	background: #f8f8f8 url("/yiren/images/dashed.gif")
+		/*tpa=http://www.yirendai.com/images/dashed.gif*/   repeat-x 0
+		0;
+}
+
+.me-ico {
+	background: url("/yiren/images/me_ico.gif")
+		/*tpa=http://www.yirendai.com/images/me_ico.gif*/   no-repeat 0
+		0;
+	width: 58px;
+	height: 25px;
+	font-style: normal;
+	display: block;
+}
+
+.m-financeList {
+	width: 960px;
+	margin: 0 auto;
+}
+
+.m-financeList table {
+	border-top: 1px solid #e3e4e8;
+}
+
+.m-financeList td {
+	padding: 20px 0;
+	border-bottom: 1px solid #e3e4e8;
+}
+
+.m-financeList span {
+	color: #0088cc;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.m-list .r {
+	margin-top: 10px;
+}
+
+/* 投标弹窗  */
+.bidsubmit_box {
+	padding: 20px;
+}
+
+.bidsubmit_box .bid_detail {
+	background: #f7f9fa;
+	border: 1px solid #e7e8e8;
+	padding: 18px 25px 17px;
+	height: 45px;
+	margin-bottom: 20px;
+}
+
+.bidsubmit_box .bid_detail .images {
+	float: left;
+	width: 55px;
+}
+
+.bidsubmit_box .bid_detail .cont {
+	float: left;
+	width: 370px;
+}
+
+.bidsubmit_box .bid_detail .cont h3 {
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+
+.bidsubmit_box .agreement {
+	font-size: 12px;
+	font-weight: normal;
+	margin: 20px 0 20px 150px;
+}
+
+.bidsubmit_box .tc {
+	text-align: center;
+	margin: 20px 0
+}
+
+.bidsubmit_box h2 {
+	font-size: 14px;
+	font-family: "microsoft yahei";
+	text-align: center;
+}
+
+.bidsubmit_box .input_btn {
+	margin-right: 10px;
+}
+
+.bidsubmit_box .bid_detail .space {
+	padding: 0 5px;
+}
+/*出借-精英贷-理财服务-债权转让列表切换*/
+.ydy_banner_two {
+	background: url("/yiren/images/ydy_countdownbg2.gif")
+		/*tpa=http://www.yirendai.com/images/ydy_countdownbg2.gif*/
+		no-repeat 0 0;
+}
+
+.ydy_banner_new {
+	background: url("/yiren/images/ydy_countdownbgs3.gif")
+		/*tpa=http://www.yirendai.com/images/ydy_countdownbgs3.gif*/
+		no-repeat 0 0;
+}
+
+.amount_countdown {
+	margin: 23px 0 0 17px;
+}
+
+.amount_countdown strong {
+	font-size: 14px;
+}
+
+/*出借 购物车*/
+.common_box_shopping {
+	width: 1000px;
+	margin: 20px auto;
+}
+
+.common_box_shopping .table_blue thead th {
+	text-align: left;
+	padding-left: 20px;
+}
+
+.common_box_shopping .table_blue thead td .m-checkbox {
+	margin-bottom: -4px;
+}
+
+.common_box_shopping .table_blue thead td {
+	background-color: #ececec;
+	color: #666;
+	font-weight: bold;
+}
+
+.common_box_shopping .table_blue thead td.checkAll {
+	text-align: left;
+	padding-left: 17px;
+}
+
+.common_box_shopping .table_blue thead td .m-checkbox {
+	margin-right: 8px;
+}
+
+.common_box_shopping .table_blue tbody td {
+	line-height: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.common_box_shopping .table_blue tbody td .m-checkbox {
+	
+}
+
+.common_box_shopping .table_blue table {
+	margin: 0 auto;
+	width: 920px;
+	margin-bottom: -11px;
+}
+
+.common_box_shopping .table_blue table,.common_box_shopping .table_blue table tr,.common_box_shopping .table_blue table td
+	{
+	border: 0;
+	border-collapse: collapse;
+}
+
+.common_box_shopping .table_blue table td {
+	border-bottom: 1px solid #e3e4e8;
+}
+
+.common_box_shopping .cartempty_box {
+	background: transparent url("/yiren/images/cartempty.gif")
+		/*tpa=http://www.yirendai.com/images/cartempty.gif*/
+		no-repeat;
+	padding-left: 150px;
+	padding-top: 35px;
+	height: 200px;
+	margin-left: 250px;
+	margin-top: 80px;
+	width: 280px;
+	overflow: hidden;
+	*float: left;
+	*margin-left: 250px;
+	_margin-left: 125px;
+}
+
+.common_box_shopping .cartempty_box h3 {
+	font-size: 24px;
+	font-family: "microsoft yahei";
+	margin-bottom: 10px;
+	font-weight: normal;
+}
+
+.common_box_shopping .cartempty_box .btn_orange {
+	width: 200px;
+	padding: 0px;
+}
+
+.table_blue_tit {
+	text-align: left;
+	padding-left: 14px;
+}
+
+.m-holderBox-shopping {
+	margin: 0 auto;
+}
+
+.shoppingBtn {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.shoppingBtn .money {
+	font-size: 24px;
+	font-weight: normal;
+}
+
+.shoppingAgree {
+	text-align: right;
+}
+
+.shoppingAgree .m-checkbox {
+	margin-bottom: -4px;
+	margin-right: 8px;
+}
+
+.shoppingBtnR {
+	margin-top: 15px;
+	margin-bottom: 30px;
+}
+
+.tableblueNote {
+	border: 1px solid #fcaf41;
+	background-color: #fff7db;
+	color: #ff5a00;
+	padding: 18px 20px;
+	text-align: left;
+}
+
+#confirm_bid_pay {
+	
+}
+
+#confirm_bid_pay.btn_orange {
+	font-size: 16px;
+	border: 1px solid #F36245;
+}
+
+/* mylist */
+.mylist .table_gray th {
+	border: 0;
+}
+
+.mylist .table_gray td {
+	height: 31px;
+	line-height: 31px;
+	border: 1px solid #ddd;
+}
+
+a.moneyFlow,a:visited.moneyFlow {
+	line-height: 34px;
+	height: 34px;
+}
+
+.paybillno_notice {
+	border-top: 1px dashed #E9E9E9;
+	padding: 20px 0 0 10px;
+	line-height: 24px;
+	margin-top: 20px;
+}
+
+.lender_finace_form .m-row .m-rowLabel {
+	width: 250px;
+}
+
+.lender_finace_form .m-holderBox {
+	height: 34px;
+	line-height: 34px;
+}
+
+.dialog_lenderfinance_notice .notice_cont {
+	margin: 10px 0 0 80px;
+}
+
+.dialog_lenderfinance_notice .icons {
+	float: left;
+	width: 80px;
+	background: transparent url("/yiren/images/success-1.png")
+		/*tpa=http://www.yirendai.com/js/dialog/skins/icons/success.png*/
+		  no-repeat;
+	height: 80px;
+}
+
+.dialog_lenderfinance_notice .icons.fail {
+	background: transparent url("/yiren/images/fail-2.png")
+		/*tpa=http://www.yirendai.com/js/dialog/skins/icons/fail.png*/
+		  no-repeat;
+}
+
+.dialog_lenderfinance_notice .icons.warning {
+	background: transparent url("/yiren/images/warning.png")
+		/*tpa=http://www.yirendai.com/js/dialog/skins/icons/warning.png*/
+		  no-repeat;
+}
+
+.daiPay {
+	color: #c10000;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.new_bd .fullPayment {
+	font-size: 14px;
+	color: #c10000;
+	font-weight: bold;
+}
+
+.new_bd .newExper {
+	color: #f75048;
+}
+
+.new_bd .boldRed {
+	color: #c10000;
+}
+
+.new_bd .newBiller {
+	padding-bottom: 0px;
+	background: none;
+	margin-bottom: 0px;
+}
+
+/*content部分样式*/
+.new_bd .container {
+	background: #F3F1F0;
+}
+
+.new_bd .s_panel .title {
+	height: 50px;
+	line-height: 56px;
+	color: #fff;
+	font-size: 14px;
+	padding-left: 74px;
+	background: url("/yiren/images/elite_bg_new.png")
+		/*tpa=http://www.yirendai.com/images/elite_bg_new.png*/   top
+		left no-repeat #0099df;
+	text-indent: 16px;
+	font-weight: bold;
+}
+
+.new_bd .s_panel .right_tips {
+	text-align: right;
+	line-height: 56px;
+	font-size: 12px;
+	font-weight: normal;
+	margin-right: 12px;
+}
+
+.new_bd .content {
+	height: 304px;
+	width: 1000px;
+	background: #fff;
+}
+
+.new_bd .left_ct {
+	width: 662px;
+	border-left: 1px solid #CDCDCC;
+	border-bottom: 1px solid #CDCDCC;
+	border-right: 1px solid #cdcdcc;
+	height: 253px;
+}
+
+.new_bd .rigth_form {
+	width: 275px;
+	border-right: 1px solid #CDCDCC;
+	border-bottom: 1px solid #CDCDCC;
+	height: 303px;
+	position: relative;
+	margin-top: -6px;
+}
+
+.new_bd .rigth_form .start_money {
+	position: absolute;
+	left: 32px;
+	top: 60px;
+	color: #414141;
+}
+
+.new_bd .rigth_form .input_txt {
+	position: absolute;
+	left: 32px;
+	top: 90px;
+	border: 1px solid #d7d8d8;
+	height: 34px;
+	width: 226px;
+	background-color: #ffffff;
+	text-indent: 12px;
+	height: 14px\9;
+	padding: 10px 0\9;
+}
+
+.new_bd .red {
+	color: #B51D23;
+	font-weight: bold;
+}
+
+.new_bd .rigth_form .incomes {
+	position: absolute;
+	left: 36px;
+	top: 131px;
+}
+
+.new_bd .rigth_form .input_btn {
+	position: absolute;
+	left: 32px;
+	top: 176px;
+	background: #0079d2;
+	height: 34px;
+	width: 190px;
+	text-align: center;
+	line-height: 34px;
+	color: #fff;
+	text-decoration: none;
+	font-size: 14px;
+	font-family: "Microsoft YaHei";
+}
+
+.new_bd .rigth_form .tipes {
+	position: absolute;
+	left: 87px;
+	top: 220px;
+}
+
+.new_bd .boldRed {
+	color: #c10000;
+	font-weight: bold;
+	font-family: "Microsoft YaHei";
+}
+
+.new_bd .tou_tips {
+	height: 190px;
+	border: 1px solid #CDCDCC;
+	color: #656565;
+	font-size: 14px;
+	background: #ffffff;
+}
+
+.new_bd .tou_tips ul {
+	height: 150px;
+	background: url("/yiren/images/left_logo.jpg")
+		/*tpa=http://www.yirendai.com/images/left_logo.jpg*/   left top
+		no-repeat;
+	margin-left: 38px;
+	margin-top: 20px;
+	padding-left: 33px;
+}
+
+.new_bd .tou_tips ul li {
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+}
+
+.new_bd .container .questions {
+	height: 500px;
+	border: 1px solid #CDCDCC;
+	background: #ffffff;
+}
+
+.new_bd .questions .title {
+	color: #656565;
+	font-size: 14px;
+	margin-left: 40px;
+	margin-top: 29px;
+	margin-bottom: 8px;
+	font-weight: bold;
+}
+
+.new_bd .q_content {
+	color: #656565;
+	font-size: 14px;
+	line-height: 30px;
+	width: 885px;
+	margin-left: 40px;
+}
+
+.new_bd .elite_left {
+	display: inline;
+	padding: 30px 25px 20px 35px;
+}
+
+.new_bd .loadingNum2 {
+	background: none repeat scroll 0 0 #ffffff;
+	border: 1px solid #dcdcdc;
+	height: 16px;
+	margin-right: 5px;
+	width: 178px;
+}
+
+.new_bd .loadingNum_bar2 {
+	background: url("/yiren/images/loadingBg_x.gif")
+		/*tpa=http://www.yirendai.com/images/loadingBg_x.gif*/
+		repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+	height: 16px;
+}
+
+.new_bd .elite_table td {
+	color: #414141;
+	padding: 7px 0;
+}
+
+.new_bd .elite_table strong,.elite_table strong span,.surplus_money strong
+	{
+	color: #c10000;
+	font-family: Arial;
+	font-size: 30px;
+	font-weight: normal;
+}
+
+.new_bd .elite_table .tender_completed {
+	color: #0099df;
+	font-size: 12px;
+}
+
+.new_bd .elite_table strong span,.surplus_money strong span {
+	font-size: 18px;
+}
+
+.new_bd .elite_left h3,.basic_information h3 {
+	font-size: 12px;
+	padding: 12px 0;
+}
+
+.new_bd .elite_left p {
+	line-height: 22px;
+}
+
+.new_bd .av_information p,.has_passed p,.elite_left h3,.elite_right p,.basic_information h3,.audit_edition p,.required_informa strong,.calculators_result table th
+	{
+	color: #414141;
+}
+
+.clear {
+	clear: both;
+}
+
+.hr_20 {
+	height: 20px;
+	background: #f4f4f4;
+}
+
+.hr_16 {
+	height: 16px;
+	background: #f4f4f4;
+}
+
+.hr_30 {
+	height: 30px;
+	background: #f4f4f4;
+}
+
+.hr_300 {
+	height: 300px;
+	background: #f4f4f4;
+}
+
+.comWidth {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.l,.fl {
+	float: left;
+}
+
+.f,.fr {
+	float: right;
+}
+
+.l,.f,.fl,.fr {
+	display: inline;
+}
+/*新手标- 弹框css*/
+.new_bd_basic {
+	height: 80px;
+	width: 502px;
+	border: 1px solid #E7E8E8;
+	margin-left: 20px;
+	margin-top: 20px;
+	position: relative;
+}
+
+.new_bd_basic .new_bd_logo {
+	position: absolute;
+	left: 25px;
+	top: 18px;
+}
+
+.new_bd_basic .title {
+	position: absolute;
+	left: 98px;
+	top: 18px;
+	font-size: 14px;
+	color: #666666;
+	font-family: "microsoft yahei";
+	font-weight: bold;
+}
+
+.new_bd_basic .basic_info {
+	position: absolute;
+	left: 96px;
+	top: 48px;
+	font-size: 14px;
+	color: #666666;
+	font-family: "microsoft yahei";
+}
+
+.new_content {
+	margin-top: 8px;
+	text-align: center;
+	font-size: 16px;
+	color: #f38602;
+	font-family: "microsoft yahei";
+	font-weight: bold;
+}
+
+.fontSize23 {
+	font-size: 23px;
+}
+
+.mgauto {
+	margin: 0 auto;
+	margin-top: 10px;
+	line-height: 22px;
+}
+
+.mtf2 {
+	margin-top: -2px;
+}
+
+.width338 {
+	width: 338px;
+}
+
+.width423 {
+	width: 423px;
+}
+
+.new_bd .mew_bd_cts {
+	font-size: 14px;
+	font-family: "microsoft yahei";
+	width: 490px;
+	line-height: 22px;
+	margin: 32px auto 0;
+	color: #666666;
+}
+
+.new_bd .basic_logos {
+	width: 502px;
+	height: 80px;
+	border: 1px solid #E7E8E8;
+	margin: 36px auto 0;
+	position: relative;
+}
+
+.new_bd .basic_logos span {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+	font-weight: bold;
+	color: #0079d2;
+	font-family: "microsoft yahei";
+	background: url("/yiren/images/basic_logos.png")
+		/*tpa=http://www.yirendai.com/images/basic_logos.png*/
+		no-repeat;
+	display: block;
+	padding-left: 60px;
+	height: 48px;
+	line-height: 48px;
+	cursor: pointer;
+}
+
+.new_bd .basic_logos .span1 {
+	left: 27px;
+	top: 16px;
+	background-position: 5px 2px;
+}
+
+.new_bd .basic_logos .span2 {
+	left: 193px;
+	top: 16px;
+	background-position: -164px 2px;
+}
+
+.new_bd .basic_logos .span3 {
+	left: 358px;
+	top: 16px;
+	background-position: -330px 2px;
+}
+
+.new_bd .basic_logos .span1.active {
+	background-position: 5px -48px;
+}
+
+.new_bd .basic_logos .span2.active {
+	background-position: -164px -48px;
+}
+
+.new_bd .basic_logos .span3.active {
+	background-position: -330px -48px;
+}
+
+.profit_tip {
+	text-align: left;
+}
+
+.mr20 {
+	margin-right: 20px;
+}
+
+.mt25 {
+	margin-top: 25px;
+}
+
+.right_tips a {
+	color: #fff;
+}
+
+.tc {
+	text-align: center;
+}
+
+.width425 {
+	width: 425px;
+}
+
+.new_bd_title {
+	margin-left: 90px;
+}
+
+.moni_ydy {
+	color: #9E9E9E;
+}
+
+.ydy_logo h3.moni_ydy_title_color a {
+	color: #FB7850;
+}
+
+/*invite*/
+.invite {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.invite .m-tabC {
+	padding-top: 20px;
+}
+
+.invite .m-tab2 .m-tabT {
+	border-bottom: 2px solid #13a0e3;
+}
+
+.inviteBox {
+	border: 1px solid #cfcfcf;
+	margin: 0 auto;
+	width: 740px;
+	height: 238px;
+	border-radius: 10px;
+	background-color: #fff;
+	padding: 5px;
+}
+
+.inviteBoxInner {
+	background-color: #f5f5f5;
+	border-radius: 10px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+
+.inviteBoxShadow {
+	background: url("/yiren/images/inviteShadow.png")
+		/*tpa=http://www.yirendai.com/images/invite/inviteShadow.png*/
+		  no-repeat top center;
+	width: 758px;
+	height: 18px;
+	margin: 0 auto;
+}
+
+.inviteCopyLink h3,.inviteCode h3 {
+	font-size: 14px;
+	color: #696969;
+	font-family: \5FAE\8F6F\96C5\9ED1, 'Microsoft YaHei', STHeiti,
+		sans-serif;
+	font-weight: normal;
+}
+
+.inviteCopyLink h3 {
+	margin-left: 16px;
+	margin-bottom: 50px;
+}
+
+.inviteCode h3 {
+	margin-left: 36px;
+	margin-bottom: 16px;
+}
+
+.inviteCopyLink input {
+	border: 1px solid #ccc;
+	background-color: #fff;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	height: 60px;
+	width: 280px;
+	margin-bottom: 30px;
+	margin-left: 36px;
+	line-height: 26px;
+	padding-left: 5px;
+	color: #696969;
+}
+
+.inviteCopyLink a.btn_blue,.inviteCopyLink a:visited.btn_blue {
+	width: 200px;
+	font-size: 14px;
+	margin: 0 auto;
+	display: block;
+}
+
+.inviteCopyLink {
+	width: 360px;
+	border-right: 1px solid #d2d2d2;
+	height: 214px;
+}
+
+.inviteCode {
+	height: 214px;
+	width: 370px;
+	border-left: 1px solid #fff;
+}
+
+.inviteImgBox {
+	background: url("/yiren/images/inviteCodeBox.png")
+		/*tpa=http://www.yirendai.com/images/invite/inviteCodeBox.png*/
+		  no-repeat;
+	width: 158px;
+	height: 150px;
+	text-align: center;
+	line-height: 150px;
+	margin: 0 auto;
+}
+
+.recommend {
+	padding: 0 38px;
+	margin-bottom: 20px;
+}
+
+.recommend h3 {
+	font-size: 14px;
+	color: #696969;
+	padding-bottom: 9px;
+	font-family: \5FAE\8F6F\96C5\9ED1, 'Microsoft YaHei', STHeiti,
+		sans-serif;
+	border-bottom: 2px solid #d2d2d2;
+}
+
+.recommendBox {
+	height: 60px;
+	padding-left: 20px;
+	padding-top: 14px;
+}
+
+.recommendBox .bdsharebuttonbox a,.recommendBox .bdsharebuttonbox a:visited
+	{
+	width: 140px;
+	text-indent: 40px;
+	color: #696969;
+}
+
+.inviteImg a,.inviteImg a:visited {
+	background-image: url("/yiren/images/inviteImg.png")
+		/*tpa=http://www.yirendai.com/images/invite/inviteImg.png*/;
+	background-repeat: no-repeat;
+	display: block;
+	float: left;
+	margin-right: 4px;
+	margin-top: 4px;
+	width: 140px;
+	text-indent: 40px;
+	color: #696969;
+	line-height: 30px;
+}
+
+.inviteImg a.inviteImgQQ,.inviteImg a:visited.inviteImgQQ {
+	background-position: 0 0;
+	width: 140px;
+	height: 30px;
+}
+
+.inviteImg a.inviteImgWeixin,.inviteImg a:visited.inviteImgWeixin {
+	background-position: 0 -100px;
+	width: 140px;
+	height: 29px;
+}
+
+.inviteImg a.inviteImgEmail,.inviteImg a:visited.inviteImgEmail {
+	background-position: 0 -200px;
+	width: 140px;
+	height: 30px;
+}
+
+.inviteTopA {
+	text-align: right;
+	width: 770px;
+	margin-left: 40px;
+	margin-top: 28px;
+	margin-bottom: 20px;
+}
+
+.invitePStrong {
+	font-weight: bold;
+	color: #666;
+	margin-left: 40px;
+}
+
+.inviteTop {
+	margin-bottom: 30px;
+}
+
+.inviteBtm {
+	margin-bottom: 28px;
+	text-indent: 14px;
+}
+
+.invite .table_blue {
+	/* margin-left: 40px;width:750px;margin-right: 40px; */
+	margin-bottom: 48px;
+}
+
+.invite .inner_box h4 {
+	margin-bottom: 20px;
+}
+
+.inviteInfo {
+	margin-left: 40px;
+	font-weight: bold;
+	color: #666;
+	border: 1px solid #ddd;
+	background-color: #fafcfb;
+	padding-left: 14px;
+	height: 32px;
+	line-height: 32px;
+	margin-right: 40px;
+	margin-bottom: 18px;
+}
+
+.iconAsk {
+	margin-left: 50px;
+}
+
+.iconAsk li {
+	background: url("/yiren/images/iconAsk.png")
+		/*tpa=http://www.yirendai.com/images/invite/iconAsk.png*/
+		no-repeat left 50%;
+	padding-left: 18px;
+	margin-bottom: 20px;
+}
+
+.iconAsk li a,.iconAsk li a:visited {
+	text-decoration: underline;
+}
+
+.inviteResult {
+	color: #666;
+	margin-left: 40px;
+	margin-bottom: 26px;
+}
+
+.inviteResult strong {
+	color: #0079d2;
+	font-size: 22px;
+	font-style: italic;
+	font-weight: normal;
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+.inviteForm {
+	margin-bottom: 24px;
+	padding-top: 36px;
+}
+
+.shareDialogBox {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.shareDialog {
+	color: #696969;
+	font-size: 12px;
+	font-family: \5B8B\4F53, SimSun, NSimSun, STSong, sans-serif;
+	height: 160px;
+	padding: 16px;
+	border: 1px solid #c8c9ca;
+	margin: 0 auto 20px;
+	width: 400px;
+	line-height: 22px;
+}
+
+.shareDialogBtn {
+	text-align: center;
+}
+
+.emailDialog {
+	margin: 30px;
+}
+
+.emailDialog .dialogRow {
+	margin-bottom: 12px;
+}
+
+.emailDialog .dialogRow label {
+	width: 40px;
+	float: left;
+	margin-right: 10px;
+	height: 30px;
+	line-height: 30px;
+	text-align: right;
+	color: #696969;
+	font-weight: bold;
+}
+
+.emailDialog .dialogRow input {
+	width: 350px;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 10px;
+	color: #696969;
+	float: left;
+	border: 1px solid #c8c9ca;
+}
+
+.emailDialog .dialogRow .shareDialog {
+	margin: 0;
+	float: left;
+}
+
+.emailDialog a.btn_blue,.emailDialog a:visited.btn_blue {
+	width: 176px;
+}
+
+.inviteForm .Wdate {
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	height: 24px;
+	background: url("/yiren/images/wdateIcon.png")
+		/*tpa=http://www.yirendai.com/images/invite/wdateIcon.png*/
+		no-repeat right 50% #fff;
+	width: 104px;
+	margin-right: 16px;
+	margin-top: 4px;
+}
+
+.wdateSpanInvite {
+	height: 24px;
+	line-height: 24px;
+	margin-right: 12px;
+}
+
+.inviteForm .m-rowLabel {
+	margin-right: 8px;
+}
+
+.inviteForm .mDropInvite {
+	height: 26px;
+	width: 180px;
+	margin-top: 4px;
+}
+
+.inviteSuc {
+	width: 386px;
+	margin: 0 auto 30px;
+	padding-top: 40px;
+}
+
+.inviteSucText h3 {
+	font-size: 24px;
+	color: #666;
+	font-family: \5FAE\8F6F\96C5\9ED1, 'Microsoft YaHei', STHeiti,
+		sans-serif;
+	font-weight: normal;
+	margin-bottom: 10px;
+}
+
+.inviteSucText p {
+	margin-bottom: 10px;
+	color: #666;
+}
+
+.inviteSucText p a,.inviteSucText p a:visited {
+	margin-right: 14px;
+	text-decoration: underline;
+}
+
+.inviteSBox {
+	width: 386px;
+	margin: 0 auto 20px;
+}
+
+.inviteSBox h3 {
+	font-size: 14px;
+	font-family: \5FAE\8F6F\96C5\9ED1, 'Microsoft YaHei', STHeiti,
+		sans-serif;
+	margin-bottom: 10px;
+	font-weight: normal;
+}
+
+.inviteSBox .bdsharebuttonbox a,.inviteSBox .bdsharebuttonbox a:visited
+	{
+	margin-right: 30px;
+}
+
+a.inviteSBoxMore,a:visited.inviteSBoxMore {
+	margin-top: 10px;
+}
+/**/
+.m-userChange {
+	margin-top: 40px;
+	color: #666;
+}
+
+.m-userChange a,.m-userChange a:visited {
+	font-weight: bold;
+}
+
+.userChangeBox {
+	padding: 30px 36px;
+	height: 600px;
+}
+
+.userChangeBox .inner_box {
+	padding-left: 66px;
+	color: #666;
+	padding-bottom: 30px;
+}
+
+.userChangeBox .inner_box h3 {
+	margin-bottom: 12px;
+}
+
+.userChangeBox .inner_box ul {
+	font-size: 14px;
+}
+
+.userChangeBox .inner_box ul li {
+	margin-bottom: 8px;
+}
+
+.userChangeBox .inner_box p.innerBoxP {
+	margin-left: 14px;
+	line-height: 20px;
+}
+
+.userChangeBox .inner_box p.innerBoxP strong {
+	color: #ff6f36;
+	font-weight: normal;
+}
+
+.userChangeBox .iconInnerBox {
+	color: #0079d2;
+	font-style: normal;
+	font-size: 14px;
+	margin-right: 5px;
+}
+
+.userChangeBox .icontitOrange {
+	color: #ff6f36;
+}
+
+.userChangeBoxBtm {
+	text-align: center;
+	margin-top: 56px;
+}
+
+.userChangeBoxMsg {
+	color: #666;
+	margin-top: 40px;
+	font-size: 14px;
+}
+
+.userChangeBoxMsg strong {
+	color: #0079d2;
+}
+
+.userChangeBoxMsgSuc {
+	color: #ff6f36;
+	text-align: center;
+	margin-top: 50px;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.userChangeBoxMsgLose {
+	margin-top: 40px;
+}
+
+.userChangeBoxMsgLose h3 {
+	color: #ff6f36;
+	margin-bottom: 16px;
+}
+
+.userChangeBoxMsgLose ul {
+	color: #666;
+}
+
+.userChangeBoxMsgLose ul li {
+	line-height: 22px;
+}
+
+.leadBoxMain {
+	width: 1020px;
+	height: 550px;
+	margin: 232px auto 0;
+	background: url("/yiren/images/leadImg.png")
+		/*tpa=http://www.yirendai.com/images/invite/leadImg.png*/
+		no-repeat left 100px;
+}
+
+.inviteShareBox {
+	position: relative;
+}
+
+.inviteShareA {
+	position: absolute;
+	right: 12px;
+	top: 10px;
+}
+
+a.inviteShareA,a:visited.inviteShareA {
+	background: url("/yiren/images/iconShare.png")
+		/*tpa=http://www.yirendai.com/images/invite/iconShare.png*/
+		no-repeat left 50%;
+	padding-left: 20px;
+	color: #0093d9;
+}
+
+#inviteShareABox {
+	position: absolute;
+	right: 4px;
+	top: 30px;
+	display: none;
+}
+
+#inviteShareABox.inviteShareABoxShow {
+	display: block;
+}
+
+#inviteShareABox a,#inviteShareABox a:visited {
+	display: block;
+	clear: both;
+	text-indent: 5px;
+	margin-bottom: 2px;
+}
+
+.dialogRow {
+	position: relative;
+}
+
+.dialogRow .on_changes {
+	position: absolute;
+	list-style: none;
+	display: none;
+	background-color: #fff;
+	z-index: 10;
+	left: 50px;
+	top: 31px;
+	border: 1px solid #ccc;
+	padding: 5px 10px;
+}
+
+.dialogRow .on_changes li.active {
+	background: #CEE7FF;
+}
+
+/* 百度 宜定赢 */
+.common_box_red .elite_tit {
+	background-color: #f12323;
+}
+
+.common_box_red .elite_bg_finance {
+	background-image: url("/yiren/images/elite_bg_financeRed.png")
+		/*tpa=http://www.yirendai.com/images/elite_bg_financeRed.png*/;
+}
+
+.elite_bg_jjg {
+	background-image: url("/yiren/images/elite_bg_jjg.png")
+		/*tpa=http://www.yirendai.com/images/elite_bg_jjg.png*/;
+}
+
+.elite_tit p strong.elite_bg_financeStrong {
+	font: bold 18px \5FAE\8F6F\96C5\9ED1, 'Microsoft YaHei', STHeiti,
+		sans-serif;
+	text-align: center;
+}
+
+.common_box_red .elite_table strong,.common_box_red  .elite_table strong span,.common_box_red .surplus_money strong
+	{
+	color: #e81d00
+}
+
+.common_box_red .finance-detail-time li {
+	padding-left: 34px;
+}
+
+.finance-detail-time li.add {
+	background: url("/yiren/images/iconCommonBoxRed.png")
+		/*tpa=http://www.yirendai.com/images/iconCommonBoxRed.png*/
+		no-repeat left 50%;
+}
+
+.common_box_red .finance-detail-time,.common_box_red .elite_left table span
+	{
+	color: #e81d00;
+}
+
+.common_box_red .elite_table td.percent span {
+	color: #e81d00;
+	font-size: 24px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.common_box_red .elite_table strong {
+	font-size: 36px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.common_box_red .q_mark img {
+	top: 0;
+}
+
+.common_box_ol ol {
+	width: 700px;
+}
+
+.common_box_ol ol li {
+	clear: both;
+	line-height: 36px;
+}
+
+.common_box_ol ol li i {
+	display: block;
+	width: 14px;
+	height: 14px;
+	background-color: #ff3e3d;
+	color: #fff;
+	font-size: 12px;
+	text-align: center;
+	line-height: 14px;
+	border-radius: 6px;
+	float: left;
+	font-style: normal;
+	margin-right: 10px;
+	margin-top: 12px;
+}
+
+.common_box_ol ol li span {
+	display: block;
+	float: left;
+	width: 670px;
+}
+
+.common_box_ol .inner_box {
+	background: url("/yiren/images/baiduYrdLogo.png")
+		/*tpa=http://www.yirendai.com/images/baiduYrdLogo.png*/
+		no-repeat 98% 92%;
+}
+
+.dialogUnLogin {
+	width: 466px;
+	margin: 30px auto;
+}
+
+.dialogUnLogin div p {
+	text-align: center;
+	font-size: 18px;
+	color: #696969;
+	margin-bottom: 16px;
+}
+
+.dialogUnLogin .l a,.dialogUnLogin .l a:visited {
+	display: block;
+	width: 214px;
+	height: 116px;
+	background: url("/yiren/images/dialogReg.png")
+		/*tpa=http://www.yirendai.com/images/dialogReg.png*/
+		no-repeat center 50% #f88b19;
+}
+
+.dialogUnLogin .l a:hover {
+	background-color: #faa521;
+}
+
+.dialogUnLogin .r a,.dialogUnLogin .r a:visited {
+	display: block;
+	width: 214px;
+	height: 116px;
+	background: url("/yiren/images/dialogLogin.png")
+		/*tpa=http://www.yirendai.com/images/dialogLogin.png*/
+		no-repeat center 50% #0099df;
+}
+
+.dialogUnLogin .r a:hover {
+	background-color: #00b2e8;
+}
+
+.codeBaiduCF {
+	background: url("/yiren/images/codeBaiDuCF2.png")
+		/*tpa=http://www.yirendai.com/images/codeBaiDuCF2.png*/
+		no-repeat 760px 70px;
+}
+
+.codeBaiduCF p {
+	margin-bottom: 5px;
+}
+
+.inner_box_baiduCF .inviteSuc .l {
+	margin-top: 10px;
+}
+
+.inner_box_baiduCF .inviteSuc {
+	margin-bottom: 100px;
+	width: 410px;
+}
+
+.inner_box_baiduCF .inviteSuc p {
+	margin-bottom: 14px;
+}
+
+.inner_box_baiduCF .inviteSuc p a,.inner_box_baiduCF .inviteSuc p a:visited
+	{
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.inner_box_baiduCF .inviteSBox {
+	width: 340px;
+	margin-bottom: 40px;
+}
+
+.bannerBaiDuCF {
+	width: 100%;
+}
+
+.inner_box_baiduCF .bannerBaiDuCF {
+	margin-bottom: -2px;
+}
+
+.common_box_ol .bannerBaiDuCF {
+	margin-bottom: 10px;
+}
+
+.finance_detail_box .common_box_red .elite_right {
+	height: 245px;
+}
+
+/* 2015-3-10 快捷支付添加 */
+.mm-tabT li {
+	float: left;
+	font-size: 14px;
+}
+
+.bankCardMAll {
+	*margin-bottom: 20px;
+}
+
+.bankCardMAll li {
+	float: left;
+	width: 30%;
+	padding-left: 2.4%;
+	margin-bottom: 20px;
+}
+
+.bankCardM>.l {
+	margin-top: 60px;
+}
+
+.bankCard {
+	width: 90%;
+	border: 1px solid #ddd;
+	font-size: 14px;
+}
+
+.bankCard strong {
+	margin-left: 10px;
+	display: block;
+	font-weight: normal;
+	margin-bottom: 6px;
+}
+
+.bankCard p {
+	background-color: #fdfdfd;
+	border-top: 1px solid #f5f5f5;
+	color: #c2c2c2;
+	height: 24px;
+	line-height: 24px;
+	text-indent: 1em;
+	font-size: 12px;
+}
+
+.bankCardMAll .bankCard h3 {
+	margin-top: 0;
+	height: 42px;
+	border-bottom: 1px dotted #cdcdcd;
+	margin-bottom: 10px;
+}
+
+.bankCardMAll .bankCard h3 .bank-icon {
+	width: 127px;
+	height: 40px;
+	color: #696969;
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-icbc {
+	background-position: -1px -1px;
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-abc {
+	background-position: -1px -133px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-ccb {
+	background-position: -1px -45px;
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-boc {
+	background-position: -1px -309px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-cmb {
+	background-position: -1px -89px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-cmbc {
+	background-position: -1px -485px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-spdb {
+	background-position: -1px -177px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-post {
+	background-position: -1px -353px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-comm {
+	background-position: -1px -397px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-gdb {
+	background-position: -1px -529px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-ceb {
+	background-position: -1px -265px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-sdb {
+	background-position: -1px -573px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-cib {
+	background-position: -1px -617px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-citic {
+	background-position: -1px -661px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-hxb {
+	background-position: -1px -221px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-pab {
+	background-position: -1px -705px
+}
+
+.bankCardMAll .bankCard h3 .bank-icon-other {
+	background-position: -1px -441px
+}
+
+.bankCardTit {
+	background: url("/yiren/images/bankCardTit.png")
+		/*tpa=http://www.yirendai.com/images/bankCardTit.png*/
+		repeat-x left -5px;
+	color: #696969;
+	font-size: 12px;
+	font-weight: normal;
+	width: 45px;
+	height: 30px;
+	line-height: 24px;
+	text-align: center;
+}
+
+.bankCardMore {
+	margin-left: 26px;
+	display: none;
+}
+
+a.bankCardAdd,a:visited.bankCardAdd {
+	width: 90%;
+	border: 1px solid #ddd;
+	font-size: 14px;
+	background-color: #fafafa;
+	display: block;
+	color: #2175d1;
+	height: 84px;
+	text-align: center;
+	padding-top: 50px;
+	position: relative;
+	text-decoration: none;
+	*background: url("/yiren/images/bankCardIcon.png")
+		/*tpa=http://www.yirendai.com/images/bankCardIcon.png*/
+		no-repeat 50px 45px;
+}
+
+a:hover.bankCardAdd {
+	background-color: #eee;
+}
+
+a.bankCardAdd:before {
+	content: '';
+	background: url("/yiren/images/bankCardIcon.png")
+		/*tpa=http://www.yirendai.com/images/bankCardIcon.png*/
+		no-repeat;
+	display: block;
+	width: 32px;
+	height: 32px;
+	position: absolute;
+	left: 50px;
+	top: 45px;
+}
+
+.shoppingBtnC {
+	margin: 15px auto 30px;
+	width: 96%;
+	text-align: center;
+	background: url("/yiren/images/dotline-1.gif")
+		/*tpa=http://www.yirendai.com/images/icon/dotline.gif*/
+		repeat-x top left;
+	padding-top: 35px;
+}
+
+.bankCardMobile {
+	border: 1px solid #ddd;
+	padding-top: 15px;
+	margin-bottom: 30px;
+	margin-left: 30px;
+	margin-right: 30px;
+	display: none;
+}
+
+.bankCardMobile .m-rowLabel {
+	width: 80px
+}
+
+.bankCardMobile .m-row-error {
+	text-indent: 170px;
+}
+
+.m-inputText {
+	width: 270px;
+	border: 1px solid #d7d8d8;
+	height: 34px;
+	line-height: 34px;
+	text-indent: 12px;
+}
+
+.m-row .m-inputTextCode {
+	width: 100px;
+	margin-right: 15px;
+	float: left;
+}
+
+.m-rowPhone {
+	float: left;
+	margin-top: 8px;
+}
+
+.mm-row-info {
+	width: 280px;
+	padding-left: 14px;
+}
+
+.pb5 {
+	float: left;
+	margin-top: 9px;
+}
+
+a.bankCardCode,a:visited.bankCardCode {
+	background-color: #f7f7f7;
+	border: 1px solid #e3e3e3;
+	color: #2175d1;
+	padding: 10px;
+}
+
+a:hover.bankCardCode {
+	text-decoration: none;
+}
+
+span.time_yzm {
+	background-color: #f7f7f7;
+	border: 1px solid #e3e3e3;
+	color: #999;
+	padding: 8px;
+	margin-top: -15px;
+}
+/* dialog */
+.dialogBankUnValForm {
+	height: 340px;
+}
+
+.aui_content .dialogBankUnValForm h3 {
+	color: #454545;
+	text-align: center;
+	margin-bottom: 15px;
+	font-size: 14px;
+	padding-top: 4px;
+}
+
+.aui_content p.dialogBankUnValFormInfo {
+	color: #696969;
+	font-size: 14px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.aui_content .m-row {
+	font-size: 12px;
+}
+
+.aui_content .m-row label.rowLabel {
+	display: block;
+	width: 210px;
+	text-align: right;
+	margin-right: 10px;
+}
+
+.aui_content .m-row-error {
+	height: 30px;
+	line-height: 30px;
+	color: #f00;
+}
+
+.aui_content .rowBtn {
+	text-align: center;
+}
+
+.dialogBankUnValForm .m-row-error {
+	margin-bottom: 0;
+	height: 28px;
+	line-height: 28px;
+}
+
+.aui_content .dialogBankUnPay h3 {
+	text-align: center;
+	font-size: 14px;
+	color: #454545;
+	margin-bottom: 10px;
+}
+
+.aui_content .dialogBankUnPay p {
+	font-size: 14px;
+	color: #666;
+	line-height: 24px;
+	margin: 0 auto 40px;
+	width: 86%;
+}
+
+.aui_content .dialogBankUnPay .btnArea {
+	width: 360px;
+	margin: 0 auto 20px;
+}
+
+.aui_content .dialogBankUnPay .btnArea .input_btn {
+	font-size: 14px;
+}
+
+.aui_content .dialogBankUnPay .btnArea .btn_blue {
+	margin-right: 50px;
+}
+
+.aui_content .dialogBankVerifyFail {
+	width: 300px;
+	margin: 0 auto;
+}
+
+.aui_content .dialogBankVerifyFail h3,.aui_content .dialogBankVerifyPass h3,.aui_content .dialogBankRecharge h3
+	{
+	color: #454545;
+	margin-bottom: 30px;
+	font-size: 14px;
+}
+
+.aui_content .dialogBankVerifyFail strong {
+	color: #666;
+	display: block;
+	font-size: 14px;
+}
+
+.aui_content .dialogBankVerifyFail ol {
+	margin-bottom: 30px;
+}
+
+.aui_content .dialogBankVerifyFail ol li {
+	font-size: 14px;
+}
+
+.aui_content .dialogBankVerifyFail p {
+	font-size: 12px;
+	margin-bottom: 2px;
+}
+
+.aui_content .dialogBankVerifyFail p.pBtm {
+	margin-bottom: 10px;
+}
+
+.aui_content .dialogBankVerifyFail p a,.aui_content .dialogBankVerifyFail p a:visited
+	{
+	margin-right: 15px;
+}
+
+.aui_content .dialogBankVerifyPass h3,.aui_content .dialogBankRecharge h3
+	{
+	text-align: center;
+}
+
+.aui_content .dialogBankVerifyPass p {
+	width: 304px;
+	margin: 0 auto 40px;
+	font-size: 14px;
+	text-align: center;
+}
+
+.aui_content .dialogBankRecharge h3 {
+	margin-bottom: 20px;
+}
+
+.aui_content .dialogBankRecharge .btnArea {
+	width: 286px;
+	margin: 0 auto 30px;
+}
+
+.aui_content .dialogBankRecharge .input_btn {
+	font-size: 14px;
+}
+
+.aui_content .dialogBankRecharge .btnArea .btn_orange {
+	margin-right: 30px;
+}
+
+.aui_content .dialogBankRecharge .btnArea2 {
+	background: url("/yiren/images/dotline-1.gif")
+		/*tpa=http://www.yirendai.com/images/icon/dotline.gif*/
+		repeat-x top left;
+	padding-top: 30px;
+	width: 90%;
+	margin: 0 auto;
+	font-size: 14px;
+}
+
+.aui_content .dialogBankRecharge .btnArea2 span {
+	margin-left: 70px;
+	margin-right: 10px;
+}
+/*新手专享图标*/
+.exclusive {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url("/yiren/images/icon_exclusive.png")
+		/*tpa=http://www.yirendai.com/images/icon_exclusive.png*/
+		no-repeat;
+	width: 86px;
+	height: 30px;
+}
+
+/* 宜人币相关 */
+.yrbTitle {
+	background: url("/yiren/images/yrb.jpg")
+		/*tpa=http://www.yirendai.com/images/yrb/yrb.jpg*/   no-repeat
+		#fff;
+	padding-left: 150px;
+	height: 55px;
+	border-right: 1px solid #ddd
+}
+
+.yrbTitle ul {
+	padding: 5px 0;
+}
+
+.yrbTitle ul li {
+	float: left;
+	padding: 0 20px;
+	line-height: 45px;
+	height: 45px;
+}
+
+.yrbTitle ul li.second {
+	border-left: 1px solid #ddd;
+	margin-left: 20px;
+	_display: inline;
+}
+
+.yrbTitle ul li.second span {
+	color: #b1b1b1;
+	margin-left: 10px;
+}
+
+.yrbTitle ul li h3 {
+	background: url("/yiren/images/yrb_ulbg.jpg")
+		/*tpa=http://www.yirendai.com/images/yrb/yrb_ulbg.jpg*/
+		no-repeat 15px 18px;
+	padding-left: 30px;
+	font-family: "microsoft yahei";
+	float: left;
+}
+
+.yrbTitle ul li p {
+	font-size: 26px;
+	color: #ff7640;
+	text-indent: .5em;
+	float: left;
+}
+
+.btn_orange {
+	cursor: pointer;
+	padding: 0 21px;
+	height: 30px;
+	line-height: 30px
+}
+
+.btn_bolderOrange {
+	cursor: pointer;
+	border: 1px solid #f36245;
+	color: #f36245;
+	font-size: 14px;
+	margin: 0 auto;
+	outline: 0;
+	background-color: #fff;
+	padding: 0 21px;
+	margin-left: 10px;
+	height: 30px;
+	line-height: 30px
+}
+
+.btn_bolderOrange:hover,.btn_bolderOrange:active {
+	background-color: #f36245;
+	color: #fff;
+}
+
+.m-tab2 .m-tabT {
+	padding-top: 10px;
+}
+
+.none {
+	display: none;
+}
+
+.m-chooseBox .m-labelClick a.m-radio2 {
+	margin-top: 0;
+}
+
+.blue {
+	color: #0098e0;
+}
+
+.earn {
+	min-height: 400px;
+	text-align: center
+}
+
+.earn img {
+	margin-top: 15px;
+}
+
+.plwOut {
+	padding: 12px 0 10px 13px;
+	min-height: 400px;
+}
+
+.plw {
+	height: 100px;
+	width: 800px;
+	background: url("/yiren/images/plw.png")
+		/*tpa=http://www.yirendai.com/images/yrb/plw.png*/   240px 41px
+		no-repeat #fff;
+	margin-right: 12px;
+	margin-bottom: 15px;
+}
+
+.yrb-rules {
+	padding: 10px 20px;
+}
+
+.yrb-rules h4 {
+	margin: 50px 0 30px;
+}
+
+.yrb-rules .table_blue {
+	
+}
+
+.yrb-rules h4.ask {
+	background: url("/yiren/images/ask-1.png")
+		/*tpa=http://www.yirendai.com/images/yrb/ask.png*/   no-repeat
+		0 3px;
+	padding-left: 20px;
+	margin-top: 0;
+}
+
+.yrb-rules h4.ask a {
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+.coin_bg {
+	background: url("/yiren/images/coin.png")
+		/*tpa=http://www.yirendai.com/images/yrb/coin.png*/   no-repeat;
+	display: inline-block;
+	padding-left: 25px;
+}
+
+.ddmoney {
+	color: #c10000
+}
+
+.yrb-inp {
+	width: 80px
+}
+
+.pro_togetherGan {
+	font-family: 'Microsoft YaHei';
+}
+
+.pro_togetherGan .left,.pro_togetherGan .right {
+	float: left;
+}
+
+.pro_togetherGan .yqz_con0 {
+	border: 1px solid #dfdfdf;
+	background: #fff;
+	padding: 13px 15px;
+	margin-bottom: 12px;
+}
+
+.pro_togetherGan .yqz_con0 .right {
+	padding-left: 35px;
+}
+
+.pro_togetherGan .yqz_con0 img {
+	display: block
+}
+
+.pro_togetherGan .yqz_con1 {
+	border: 1px solid #dfdfdf;
+	margin-bottom: 12px;
+}
+
+.pro_togetherGan .yqz_con1 .yqz_tt {
+	background: #fff4e3;
+	border-bottom: 1px solid #dfdfdf;
+}
+
+.pro_togetherGan .yqz_con1 img {
+	display: block;
+}
+
+.pro_togetherGan .yqz_scorll {
+	background: #fff;
+	padding-top: 27px;
+}
+
+.pro_togetherGan .tab_btn_a {
+	width: 363px;
+	height: 58px;
+	background: url("/yiren/images/ico-1.png")
+		/*tpa=http://www.yirendai.com/images/yqz/ico.png*/   0 0
+		no-repeat;
+	float: left;
+	margin-left: 235px;
+	display: inline;
+	font-size: 0;
+}
+
+.pro_togetherGan .yqz_con1 .yqz_scorll img {
+	display: inline-block;
+}
+
+.pro_togetherGan .tab_btn_a span {
+	display: inline-block;
+	height: 58px;
+	width: 58px;
+	cursor: pointer;
+}
+
+.pro_togetherGan .tab_btn_a .btn_list0 {
+	background: url("/yiren/images/ico-1.png")
+		/*tpa=http://www.yirendai.com/images/yqz/ico.png*/   0 0
+		no-repeat;
+}
+
+.pro_togetherGan .tab_btn_a .btn_list1 {
+	background: url("/yiren/images/ico-1.png")
+		/*tpa=http://www.yirendai.com/images/yqz/ico.png*/   -102px 0
+		no-repeat;
+	margin-left: 44px;
+}
+
+.pro_togetherGan .tab_btn_a .btn_list2 {
+	background: url("/yiren/images/ico-1.png")
+		/*tpa=http://www.yirendai.com/images/yqz/ico.png*/   -204px 0
+		no-repeat;
+	margin-left: 44px;
+}
+
+.pro_togetherGan .tab_btn_a .btn_list3 {
+	background: url("/yiren/images/ico-1.png")
+		/*tpa=http://www.yirendai.com/images/yqz/ico.png*/   -303px 0
+		no-repeat;
+	margin-left: 41px;
+}
+
+.pro_togetherGan .tab_btn_a .btn_list0.active {
+	background-position: 0 -79px
+}
+
+.pro_togetherGan .tab_btn_a .btn_list1.active {
+	background-position: -102px -79px
+}
+
+.pro_togetherGan .tab_btn_a .btn_list2.active {
+	background-position: -204px -79px
+}
+
+.pro_togetherGan .tab_btn_a .btn_list3.active {
+	background-position: -303px -79px
+}
+
+.pro_togetherGan .t_showBox {
+	padding-top: 18px;
+	position: relative;
+}
+
+.pro_togetherGan .t_showBox .btn_left {
+	display: inline-block;
+	width: 27px;
+	height: 65px;
+	background: url("/yiren/images/btn-1.png")
+		/*tpa=http://www.yirendai.com/images/yqz/btn.png*/   0 0
+		no-repeat;
+	position: absolute;
+	left: 100px;
+	top: 50%;
+	margin-top: -60px;
+	z-index: 100;
+	cursor: pointer;
+	display: none;
+}
+
+.pro_togetherGan .t_showBox .btn_left:hover {
+	background-position: 0 -72px;
+}
+
+.pro_togetherGan .t_showBox .btn_right {
+	display: inline-block;
+	width: 27px;
+	height: 65px;
+	background: url("/yiren/images/btn-1.png")
+		/*tpa=http://www.yirendai.com/images/yqz/btn.png*/   -53px 0
+		no-repeat;
+	position: absolute;
+	right: 100px;
+	top: 50%;
+	margin-top: -60px;
+	z-index: 100;
+	cursor: pointer;
+}
+
+.pro_togetherGan .t_showBox .btn_right:hover {
+	background-position: -53px -72px;
+}
+
+.pro_togetherGan .scrollBox {
+	width: 550px;
+	height: 350px;
+	overflow: hidden;
+	position: relative;
+	margin: 0 auto;
+}
+
+.pro_togetherGan .scrollBox .imgList {
+	width: 2200px;
+	position: absolute;
+	left: 0;
+}
+
+.pro_togetherGan .scrollBox .imgList li {
+	width: 550px;
+	float: left;
+}
+
+.pro_togetherGan .t_list {
+	position: relative;
+	font-size: 24px;
+	line-height: 30px;
+}
+
+.pro_togetherGan .t_list .msg {
+	position: absolute;
+	left: 0px;
+	top: 110px;
+	width: 180px;
+	font-size: 14px;
+	text-align: center;
+	line-height: 160%;
+}
+
+.pro_togetherGan .t_list .img {
+	text-align: center;
+	padding-top: 20px;
+}
+
+.pro_togetherGan .t_list .tt {
+	font-size: 12px;
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.zhezhao_for_togetherGain {
+	position: absolute;
+	width: 100%;
+	height: 1000px;
+	left: 0px;
+	top: 0px;
+	background: #000;
+	opacity: 0.6;
+	filter: alpha(opacity = 60);
+	z-index: 1000;
+	display: none;
+}
+
+.guide_for_togetherGain {
+	width: 1000px;
+	position: absolute;
+	left: 50%;
+	margin-left: -525px;
+	top: 310px;
+	z-index: 1001;
+	display: none;
+}
+
+.sure_for_togetherGain {
+	display: inline-block;
+	width: 195px;
+	height: 60px;
+	cursor: pointer;
+	position: absolute;
+	top: 320px;
+	left: 490px;
+	background: #000;
+	opacity: 0;
+	filter: alpha(opacity = 0);
+}

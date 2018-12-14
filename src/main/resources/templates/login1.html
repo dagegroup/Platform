@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>宜人贷-会员登录</title>
+    <link href="../css/index/base.css" rel="stylesheet">
+    <link href="../css/login/unlogin.css" rel="stylesheet">
+    <script src="../js/index/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <!--<meta http-equiv="Cache-Control" content="no-transform" />-->
+</head>
+<body class="bg">
+login
+    <script type="text/javascript">
+        base_url = '';
+    </script>
+    <div class="header">
+        <div class="header_top">
+            <div class="innerbox">
+                <ul class="header_contact">
+                    <li class="header_ico_yixin"><a href="register.jsp"
+                                                    rel="nofollow" target="_blank" title="宜信官网">宜信官网</a></li>
+                    <li class="header_ico_app"><a target="_blank" href="javascript:;">手机宜人贷</a>
+                    </li>
+                    <li class="header_ico_tel">&nbsp;</li>
+                </ul>
+                <ul class="header_login">
+                    <s:if test="#session.user.usePhone!=null&&#session.user.useState==1">
+
+                        <li><span>欢迎您，</span> <span title="" id="userCnname">
+                                <a class="orange" target="_blank"
+                                   href="${pageContext.request.contextPath}/manager-findByInfo">
+                                <s:property value="#session.user.useName"/></a> </span>&nbsp;&nbsp;<a
+                                rel="nofollow" href="${pageContext.request.contextPath}/user-exitUser">退出</a>
+                        </li>
+
+                        <li class="gray">|</li>
+                        <li><a href="#"
+                               id="unreadNoticeA" class="unread">消息<span
+                                id="unreadNoticeHead">（<span class="orange">0</span>）</span>
+                        </a>
+                        </li>
+                    </s:if>
+                    <s:elseif test="#session.user.usePhone!=null&&#session.user.useState==0">
+                        <li><span>欢迎您，</span> <span title="" id="userCnname">
+                                <a class="orange" target="_blank"
+                                   href="${pageContext.request.contextPath}/account/baccount.jsp">
+                                <s:property value="#session.user.useName"/></a> </span>&nbsp;&nbsp;<a
+                                rel="nofollow" href="${pageContext.request.contextPath}/user-exitUser">退出</a>
+                        </li>
+
+                        <li class="gray">|</li>
+                        <li><a href="#"
+                               id="unreadNoticeA" class="unread">消息<span
+                                id="unreadNoticeHead">（<span class="orange">0</span>）</span>
+                        </a>
+                        </li>
+                    </s:elseif>
+                    <s:else>
+                        <li><span> 您好！欢迎来到宜人贷！</span><a href="${pageContext.request.contextPath}/login.jsp" rel="nofollow">登录</a></li>
+                        <li class="gray">|</li>
+                        <li><a href="${pageContext.request.contextPath}/register.jsp" class="orange"  rel="nofollow" rel="nofollow">快速注册</a>
+                        </li>
+                    </s:else>
+                    <li class="gray">|</li>
+                    <li class="guide"><span class="guideIcon"></span> <span
+                            class="guideLink">新手引导</span>
+                        <ul class="guideMenu">
+                        </ul></li>
+                    <li class="gray">|</li>
+                    <li><a href="javascript:;">帮助中心</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="header_main">
+            <a class="logo" href="/"></a>
+            <ul class="header_nav">
+                <li><a class="live" href="/goto/index">首页</a>
+                </li>
+                <li><a href=${pageContext.request.contextPath}/bid-findShowList?page=1>我要理财</a>
+                </li>
+
+                <li><a href="usertest1">我要借款</a>
+                </li>
+
+                <li><a href="javascript:;">安全保障</a>
+                </li>
+                <li>
+                    <div class="navMobile">
+                        <a class="navMobileLi" href="javascript:;">手机客户端</a>
+                    </div></li>
+                <li><a title="" target="_blank" href="javascript:;">宜人问答</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="full_container reglog">
+        <h1 style="margin-bottom:30px">登录宜信通行证</h1>
+        <div class="clearfix ">
+            <div class="l reglogForm">
+                <form class="login_from" action="user-login" method="post"
+                      id="theform">
+                    <input type="hidden" name="fromSite" id="fromSite" value="YRD" />
+                    <div class="m-row">
+                        <label class="l m-rowLabel" for="username">账户：</label>
+                        <div class="l m-holderBox">
+                            <label class="m-holderTxt">请输入邮箱/手机号</label> <input
+                                class="m-holderInput m-textFocus png" id="username"
+                                name="username" value='<s:property value="#request.username"/>' type="text">
+                        </div>
+                    </div>
+                    <div class="m-row-error s_nick_user" id="s_nick_user">
+                        <s:actionmessage />
+                        <s:fielderror fieldName="username"/>
+                    </div>
+                    <div class="m-row">
+                        <label class="l m-rowLabel" for="password">密码：</label>
+                        <div class="l m-holderBox">
+                            <label class="m-holderTxt" for="password">请输入密码</label> <input
+                                class="m-holderInput m-textFocus png" name="password"
+                                id="password" type="password" autoComplete='off'>
+                        </div>
+                    </div>
+                    <div class="m-row-error s_user_pwd1">
+                        <s:fielderror fieldName="password"/>
+                    </div>
+                    <div class="m-row">
+                        <label class="l m-rowLabel" for="srand">验证码：</label>
+                        <div class="l m-holderBox" style="width:115px;">
+                            <label class="m-holderTxt" for="srand">请输入验证码</label> <input
+                                class="m-holderInput m-textFocus png" name="s_rand" type="text"
+                                id="s_rand" style="width:100px;" maxlength="4">
+                        </div>
+                        <img class="validate" name="srand" src="yzm.jsp" title="点击图片刷新验证码"
+                             onclick="loadimage()" id="srand"> <input type="hidden"
+                                                                      id="passport_url" value=""> <a class="space_mr"
+                                                                                                     href="javascript:loadimage();">看不清？换图片</a>
+                    </div>
+                    <div class="m-row-error s_srand">
+                        <s:fielderror fieldName="srand"/></div>
+                    <div class="m-row">
+                        <label class="l m-rowLabel"></label>
+                        <div class="l m-holderBox clearfix" style="padding-top:8px">
+                            <a href="javascript:void(0);" class="m-checkbox l m-checkboxChecked"
+                               style="margin-right: 10px;margin-top:2px">
+                                <input
+                                        type="hidden" id="rememberMe" name="rememberMe"
+                                        class="m-checkbox l m-checkboxChecked" value="0" data="0" /> </a> <label
+                                class="l rowLabel">记住用户名</label> <a
+                                href="${pageContext.request.contextPath}/userInfo/pwd1.jsp" class="r">忘记密码</a>
+                        </div>
+                    </div>
+                    <div class="m-row">
+                        <input type="submit" class="input_btn btn_blue" value="立即登录"
+                               style="width:280px;margin-left:120px">
+                    </div>
+                </form>
+            </div>
+            <div class="l reglogAside">
+
+
+
+                <h3>还没有宜信通行证？</h3>
+                <a class="input_btn btn_blue" style="width:135px" rel="nofollow"
+                   href="register.jsp">立即注册</a> <a target="_blank" href="javascript:;"
+                                                   style="background:url('/yiren/images/toMPic04.png') no-repeat center top;width:198px;height:206px;display:block;margin-top:20px;margin-left:27px;"></a>
+                <div class="invite_box">
+
+                    <p id="#invite_p">
+                        邀请码：<span id="invite_code">YRDFMAB2N</span>
+                    </p>
+
+                    <p>手机注册可得更多奖励！</p>
+                    <p>
+                        <a href="javascript:;"
+                           target="_blank">邀请码使用规则〉</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

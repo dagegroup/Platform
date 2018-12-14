@@ -482,7 +482,7 @@ ED.changeServerApr = function(changelv, change_id, account) {
 		async: false,
 		success: function(msg) {
 			if (msg == 0) {
-				$("#show_apr_td").html("债权已还完！<br>请 <a href='/transfer/index.html' class='c-blue'>刷新</a>  页面")
+				$("#show_apr_td").html("债权已还完！<br>请 <a href='/transfer//goto/index' class='c-blue'>刷新</a>  页面")
 			} else {
 				$("#show_apr_td").html(msg + '%')
 			}
