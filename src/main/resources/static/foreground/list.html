@@ -10,55 +10,17 @@
 <link href="css/detail.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="script/jquery.min.js"></script>
 <script type="text/javascript" src="script/common.js"></script>
-  <script>
-      $(function(){
-          $.ajax({
-              url: "/bid/list",
-              async:false,//同步
-              type:"post",
-              dataType:"json",
-              success: function(data){
-                  var str="";
-                  if(data!=null){
-                      for (var i = 0; i < data.length; i++) {
-                          str+=" <ul >\n" +
-                              "            <li  class='col-330 col-t'>\n" +
-                              "              <a href='infor.html' target='_blank'>\n" +
-                              "              <a  class='f18' href='infor.html' target='_blank'  style='color:#6769FD'>" +data[i].BIDPROJECT +"</a>\n" +
-                              "            </li>\n" +
-                              "            <li   class='col-180'>\n" +
-                              "              <span class='f20 c-333'>" +data[i].BIDAMOUNT +"</span>元\n" +
-                              "            </li>\n" +
-                              "            <li class='col-110 relative'>\n" +
-                              "              <span class='f20 c-orange'>" +data[i].BIDRATE +"%</span>\n" +
-                              "            </li>\n" +
-                              "            <li class='col-110'>\n" +
-                              "              <span class='f20 c-333'>" +data[i].BIDDEADLINE +"</span>个月\n" +
-                              "            </li>\n" +
-                              "            <li class='col-180'>" +data[i].BIDREPAYMENTMETHOD +"</li>\n" +
-                              "            <li class='col-110 relative'>\n" +
-                              "              <span class='f20' style='color:#289C30'>" +data[i].BIDSCHEDULE +"</span>\n" +
-                              "            </li>\n" +
-                              "            <li class='col-120-2'>\n" +
-                              "              <a class='ui-btn btn-gray' href='infor.html'>我要投标</a>\n" +
-                              "            </li>\n" +
-                              "          </ul>"
-
-                      }
-                  }
-                  $('#bid').append(str);
-
-              },
-              error : function(data) {
-                  alert(data);
-              }
-          })
-      })
-  </script>
+    <!-- 引入样式 -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
 <header>
-  <div class="header-top min-width">
+  <div class="header-top min-width" >
     <div class="container fn-clear"> <strong class="fn-left">咨询热线：400-668-6698<span class="s-time">服务时间：9:00 - 18:00</span></strong>
       <ul class="header_contact">
         <li class="c_1"> <a class="ico_head_weixin" id="wx"></a>
@@ -95,51 +57,50 @@
   </div>
 </header>
 <!--列表-->
-<div class="page-filter wrap">
+<div  class="page-filter wrap" id="bidbody">
   <div class="breadcrumbs"><a href="index.html">首页</a>&gt;<span class="cur">散标投资列表</span></div>
   <div class="invest-filter" data-target="sideMenu">
     <div class="filter-inner clearfix">
       <div class="filter-item">
         <div class="hd">
           <h3>筛选投资项目</h3>
-          <label>
-          <input id="filterMulti" name="multiple_choice" type="checkbox">
-          多选</label>
         </div>
+        <!------------筛选条件-------------->
         <div class="bid">
           <dl>
             <dt>年利率</dt>
             <dd>
-              <ul>
-                <li class="n1"><a href="javascript:url('borrow_interestrate','');" id="borrow_interestrate_" class="active">不限</a></li>
-                <li class="n2"><a id="borrow_interestrate_1" href="javascript:url('borrow_interestrate','1');">12%以下</a> </li>
-                <li class="n3"><a id="borrow_interestrate_2" href="javascript:url('borrow_interestrate','2');">12%-14%</a> </li>
-                <li class="n4"><a id="borrow_interestrate_3" href="javascript:url('borrow_interestrate','3');">14%-16%</a> </li>
-                <li class="n5"><a id="borrow_interestrate_4" href="javascript:url('borrow_interestrate','4');">16%及以上</a> </li>
+              <ul id="bidra">
+                <li class="n1"><a  @click="bidratea('',$event)" class="active">不限</a></li>
+                <li class="n2"><a  @click="bidratea('bidrate &gt;= 0 and bidrate &lt;= 6',$event)">6%及以下</a> </li>
+                <li class="n3"><a href="javascript:void(0);" @click="bidratea('bidrate &gt;= 6 and bidrate &lt;= 9',$event)">6%-9%</a> </li>
+                <li class="n4"><a href="javascript:void(0);" @click="bidratea('bidrate &gt;= 9 and bidrate &lt;= 12',$event)">9%-12%</a> </li>
+                <li class="n5"><a href="javascript:void(0);" @click="bidratea('bidrate &gt;= 12 and bidrate &lt;= 15',$event)">12%-15%</a> </li>
+                <li class="n6"><a href="javascript:void(0);" @click="bidratea('bidrate &gt;= 15',$event)">15%及以上</a> </li>
               </ul>
             </dd>
           </dl>
           <dl>
             <dt>期限</dt>
             <dd>
-              <ul>
-                <li class="n1"><a href="javascript:url('spread_month','');" id="spread_month_" class="active">不限</a> </li>
-                <li class="n2"><a id="spread_month_1" href="javascript:url('spread_month','1');">1月以下</a> </li>
-                <li class="n3"><a id="spread_month_2" href="javascript:url('spread_month','2');">1-3月</a> </li>
-                <li class="n4"><a id="spread_month_3" href="javascript:url('spread_month','3');">3-6月</a> </li>
-                <li class="n5"><a id="spread_month_4" href="javascript:url('spread_month','4');">6-12月</a> </li>
-                <li class="n6"><a id="spread_month_5" href="javascript:url('spread_month','5');">12月及以上</a> </li>
+              <ul id="bidde">
+                <li class="n1"><a href="javascript:void(0);" @click="biddeadlinea('',$event)" class="active">不限</a> </li>
+                <li class="n2"><a href="javascript:void(0);" @click="biddeadlinea('biddeadline &lt;= 1',$event)">1月及以下</a> </li>
+                <li class="n3"><a href="javascript:void(0);" @click="biddeadlinea('biddeadline &gt;= 1 and biddeadline &lt;= 3',$event)">1-3月</a> </li>
+                <li class="n4"><a href="javascript:void(0);" @click="biddeadlinea('biddeadline &gt;= 3 and biddeadline &lt;= 6',$event)">3-6月</a> </li>
+                <li class="n5"><a href="javascript:void(0);" @click="biddeadlinea('biddeadline &gt;= 6 and biddeadline &lt;= 12',$event)">6-12月</a> </li>
+                <li class="n6"><a href="javascript:void(0);" @click="biddeadlinea('biddeadline &gt;= 12',$event)">12月及以上</a> </li>
               </ul>
             </dd>
           </dl>
           <dl class="repayment">
             <dt>还款方式</dt>
             <dd>
-              <ul>
-                <li class="n1"><a href="javascript:url('repay_style','');" id="repay_style_" class="active">不限</a></li>
-                <li class="n2"><a id="repay_style_end" href="javascript:url('repay_style','end');">到期还本付息</a> </li>
-                <li class="n2"><a id="repay_style_endmonth" href="javascript:url('repay_style','endmonth');">按月付息,到期还本</a> </li>
-                <li class="n2"><a id="repay_style_month" href="javascript:url('repay_style','month');">等额本息</a> </li>
+              <ul id="bidre">
+                <li class="n1"><a href="javascript:void(0);" @click="bidrepaymentmethoda('',$event)" class="active">不限</a></li>
+                <li class="n2"><a href="javascript:void(0);" @click="bidrepaymentmethoda(' bidrepaymentmethod like \'到期还本付息\' ',$event)">到期还本付息</a> </li>
+                <li class="n2"><a href="javascript:void(0);" @click="bidrepaymentmethoda(' bidrepaymentmethod like \'按月付息，到期还本\' ',$event)">按月付息，到期还本</a> </li>
+                <li class="n2"><a href="javascript:void(0);" @click="bidrepaymentmethoda(' bidrepaymentmethod like \'等额本息\' ',$event)">等额本息</a> </li>
               </ul>
             </dd>
           </dl>
@@ -161,42 +122,49 @@
       <h3>投资列表</h3>
       <div class="count">
         <ul>
-          <li class="line">散标投资交易金额&nbsp;&nbsp;<span class="f20 bold">73.54亿元</span></li>
-          <li>累计赚取收益&nbsp;&nbsp;<span class="f20 bold">2.52亿元</span></li>
+          <li class="line">散标投资交易金额&nbsp;&nbsp;<span class="f20 bold">88.66亿元</span></li>
+          <li>累计赚取收益&nbsp;&nbsp;<span class="f20 bold">2.22亿元</span></li>
         </ul>
       </div>
     </div>
     <div class="bd">
       <div class="invest-table clearfix">
+        <!------------字段名（未改）-------------->
         <div class="title clearfix">
           <ul>
             <li class="col-330">借款标题</li>
-            <li class="col-180"><a href="javascript:url('order','account_up');" class="">借款金额</a> </li>
-            <li class="col-110"><a href="javascript:url('order','apr_up');" class="">年利率</a> </li>
-            <li class="col-110"><a href="javascript:url('order','period_up');" class="">借款期限</a> </li>
+            <li class="col-180"><!--<a href="javascript:url('order','account_up');" class=""-->>借款金额</a> </li>
+            <li class="col-110"><!--<a href="javascript:url('order','apr_up');" class="">-->年利率</a> </li>
+            <li class="col-110"><!--<a href="javascript:url('order','period_up');" class="">-->借款期限</a> </li>
             <li class="col-180">还款方式</li>
-            <li class="col-120"><a href="javascript:url('order','scale_up');" class="">借款进度</a></li>
+            <li class="col-120"><!--<a href="javascript:url('order','scale_up');" class="">-->借款进度</a></li>
             <li class="col-120-t">操作</li>
           </ul>
         </div>
         <!------------投资列表-------------->
-
         <div class="item" id="bid">
+          <!--顶部遍历-->
         </div>
-        <!------------投资列表-------------->
+
       </div>
-      <div class="pagination clearfix mrt30"> <span class="page"><a href="javascript:void(0);" onclick="">首页</a><a href="javascript:void(0);" onclick="">上一页</a>&nbsp;<a class="curr" href="javascript:;">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="javascript:void(0);" onclick="#">下一页</a><a href="javascript:void(0);" onclick="#">尾页</a>&nbsp;<em>共2297页&nbsp;</em></span>
-        <dl class="page-select">
-          <dt><span>1</span><i class="icon icon-down"></i></dt>
-          <dd style="display: none;">
-            <ul name="nump" id="jsnump">
-              <li><a href="##" onclick="page_jump(&quot;this&quot;,1)">1</a></li>
-              <li><a href="##" onclick="page_jump(&quot;this&quot;,2)">2</a></li>
-              <li><a href="##" onclick="page_jump(&quot;this&quot;,3)">3</a></li>
-            </ul>
-          </dd>
-        </dl>
-      </div>
+        <!--分页-->
+        <div id="tableView">
+            <!--列表底部工具条和分页符-->
+            <el-row style="margin-top: 20px" type="flex" justify="end">
+                <el-col :span="18" >
+                    <el-pagination
+                            style="float: right"
+                            @size-change="pageSizeChange"
+                            @current-change="currentPageChange"
+                            :current-page="currentPage"
+                            :page-sizes="[10, 20, 30, 50]"
+                            :page-size="pageSize"
+                            layout="total, sizes, prev, pager, next, jumper"
+                            :total="total">
+                    </el-pagination>
+                </el-col>
+            </el-row>
+        </div>
     </div>
   </div>
 </div>
@@ -214,7 +182,7 @@
       </dl>
       <dl>
         <dt>帮助中心</dt>
-        <dd><a href="帮助中心.html">新手入门</a><a href="个人中心首页.html">我的账户</a><a href="list.html">债权转让</a></dd>
+        <dd><a href="帮助中心.html">新手入门</a><a href="个人中心首页.html">我的账户</a></dd>
       </dl>
       <dl>
         <dt>联系我们</dt>
@@ -245,5 +213,182 @@
     <div class="ft-identity">©2015 亿人宝 All rights reserved&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;安徽省亿人宝投资管理有限公司&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.miitbeian.gov.cn/">皖ICP备12345678号-1</a></div>
   </div>
 </div>
+<script type="text/javascript">
+
+    var tableView = new Vue({
+        el: '#bidbody',
+        data: {
+            bidrate:'',//还款利率
+            biddeadline:'',//还款期限
+            bidrepaymentmethod:'',//还款方式·
+            //列表数据
+            tableData: [],
+            //显示加载中样式
+            loading:false,
+            //当前页
+            currentPage:1,
+            //分页大小
+            pageSize:10,
+            //总记录数
+            total:800,
+
+        },
+
+
+
+        created:function(){
+            //在 then的内部不能使用Vue的实例化的this, 因为在内部 this 没有被绑定。
+            var self = this;
+            $.ajax({
+                url: "/bid/term ",
+                async:false,//同步
+                data:{bidrate:self.bidrate,biddeadline:self.biddeadline,bidrepaymentmethod:self.bidrepaymentmethod,start:this.currentPage,end:this.pageSize},
+                type:"post",
+                dataType:"json",
+                success: function(data){
+                    $('#bid').empty();
+                    var str="";
+                    if(data!=null){
+                        for (var i = 0; i < data.page.list.length; i++) {
+                            /*var s=pageSize*(pageNo-1)+i;*/
+                            str+=" <ul >\n" +
+                                "            <li  class='col-330 col-t'>\n" +
+                                "              <a href='infor.html' target='_blank'>\n" +
+                                "              <a  class='f18' href='infor.html' target='_blank'  style='color:#6769FD'>" +data.page.list[i].BIDPROJECT +"</a>\n" +
+                                "            </li>\n" +
+                                "            <li   class='col-180'>\n" +
+                                "              <span class='f20 c-333'>" +data.page.list[i].BIDAMOUNT +"</span>元\n" +
+                                "            </li>\n" +
+                                "            <li class='col-110 relative'>\n" +
+                                "              <span class='f20 c-orange'>" +data.page.list[i].BIDRATE +"%</span>\n" +
+                                "            </li>\n" +
+                                "            <li class='col-110'>\n" +
+                                "              <span class='f20 c-333'>" +data.page.list[i].BIDDEADLINE +"</span>个月\n" +
+                                "            </li>\n" +
+                                "            <li class='col-180'>" +data.page.list[i].BIDREPAYMENTMETHOD +"</li>\n" +
+                                "            <li class='col-110 relative'>\n" +
+                                "              <span class='f20' style='color:#289C30'>" +data.page.list[i].BIDSCHEDULE +"</span>\n" +
+                                "            </li>\n" +
+                                "            <li class='col-120-2'>\n" +
+                                "              <a class='ui-btn btn-gray' href='infor.html'>我要投标</a>\n" +
+                                "            </li>\n" +
+                                "          </ul>"
+
+                        }
+                        self.total=data.page.total;
+                    }
+                    $('#bid').append(str);
+
+                },
+                error : function(data) {
+                    alert(data);
+                }
+            })
+        },
+        methods:{
+            /*条件：借款利率*/
+            bidratea: function (a,self) {
+                //alert(JSON.stringify(self.currentTarget.classList))
+                //alert(a)
+                var li = document.querySelectorAll('#bidra a');
+                for (var i = 0; i < li.length; i++){
+                    li[i].className = '';
+                }
+                self.currentTarget.classList.add("active");
+                this.bidrate=a;
+                this.loadingData();
+                /*ax(bidrate,biddeadline,bidrepaymentmethod);*/
+            },
+            /*条件：还款期限*/
+            biddeadlinea:function (a,self) {
+                var li = document.querySelectorAll('#bidde a');
+                for (var i = 0; i < li.length; i++){
+                    li[i].className = '';
+                }
+                self.currentTarget.classList.add("active");
+                this.biddeadline=a;
+                this.loadingData();
+            },
+            /*条件：还款方式*/
+            bidrepaymentmethoda:function (a,self) {
+                var li = document.querySelectorAll('#bidre a');
+                for (var i = 0; i < li.length; i++){
+                    li[i].className = '';
+                }
+                self.currentTarget.classList.add("active");
+                this.bidrepaymentmethod=a;
+                this.loadingData();
+            },
+
+
+
+            //表格重新加载数据
+            loadingData:function() {
+                var _self = this;
+                _self.loading = true;
+                var self = this;
+                $.ajax({
+                    url: "/bid/term ",
+                    async:false,//同步
+                    data:{bidrate:self.bidrate,biddeadline:self.biddeadline,bidrepaymentmethod:self.bidrepaymentmethod,start:this.currentPage,end:this.pageSize},
+                    type:"post",
+                    dataType:"json",
+                    success: function(data){
+                        $('#bid').empty();
+                        var str="";
+                        if(data!=null){
+                            for (var i = 0; i < data.page.list.length; i++) {
+                                str+=" <ul >\n" +
+                                    "            <li  class='col-330 col-t'>\n" +
+                                    "              <a href='infor.html' target='_blank'>\n" +
+                                    "              <a  class='f18' href='infor.html' target='_blank'  style='color:#6769FD'>" +data.page.list[i].BIDPROJECT +"</a>\n" +
+                                    "            </li>\n" +
+                                    "            <li   class='col-180'>\n" +
+                                    "              <span class='f20 c-333'>" +data.page.list[i].BIDAMOUNT +"</span>元\n" +
+                                    "            </li>\n" +
+                                    "            <li class='col-110 relative'>\n" +
+                                    "              <span class='f20 c-orange'>" +data.page.list[i].BIDRATE +"%</span>\n" +
+                                    "            </li>\n" +
+                                    "            <li class='col-110'>\n" +
+                                    "              <span class='f20 c-333'>" +data.page.list[i].BIDDEADLINE +"</span>个月\n" +
+                                    "            </li>\n" +
+                                    "            <li class='col-180'>" +data.page.list[i].BIDREPAYMENTMETHOD +"</li>\n" +
+                                    "            <li class='col-110 relative'>\n" +
+                                    "              <span class='f20' style='color:#289C30'>" +data.page.list[i].BIDSCHEDULE +"</span>\n" +
+                                    "            </li>\n" +
+                                    "            <li class='col-120-2'>\n" +
+                                    "              <a class='ui-btn btn-gray' href='infor.html'>我要投标</a>\n" +
+                                    "            </li>\n" +
+                                    "          </ul>"
+
+                            }
+                            self.total=data.page.total;
+                        }
+                        $('#bid').append(str);
+
+                    },
+                    error : function(data) {
+                       // alert(data);
+                    }
+                })
+            },
+            //分页大小修改事件
+            pageSizeChange:function(val) {
+                console.log('每页 ' + val +' 条');
+                this.pageSize = val;
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            },
+            //当前页修改事件
+            currentPageChange:function(val) {
+                this.currentPage = val;
+                console.log('当前页: ' + val);
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            },
+        }
+
+    })
+</script>
 </body>
 </html>

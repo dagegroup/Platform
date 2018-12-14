@@ -27,6 +27,7 @@ public class Bid {
     private String bidstate;/*标的状态*/
     private String bidschedule;/*招标进度*/
 
+
     public String getBidstate() {
         return bidstate;
     }

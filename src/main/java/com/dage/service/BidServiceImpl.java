@@ -20,7 +20,7 @@ public class BidServiceImpl implements BidService{
     @Autowired
     private BidDao bidDao;
 
-    /**
+   /**
      * 查询
      * @return
      */
@@ -28,4 +28,15 @@ public class BidServiceImpl implements BidService{
     public List<Map> getList(Map map) {
         return bidDao.getList(null);
     }
+
+    /**
+     * 条件查询
+     * @param map
+     * @return
+     */
+    @Override
+    public List<Map> getTerm(Map map) {
+        return bidDao.getTerm(map);
+    }
+
 }
