@@ -1,19 +1,25 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html  >
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>p2p网贷平台</title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<link href="../foreground/css/common.css" rel="stylesheet" />
-<link href="../foreground/css/index.css" rel="stylesheet" type="text/css">
-<link href="../foreground/css/detail.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
-<script type="text/javascript" src="../foreground/script/common.js"></script>
-<script src="../foreground/script/ablumn.js"></script>
-<script src="../foreground/script/plugins.js"></script>
-<script src="../foreground/script/detail.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>p2p网贷平台</title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <link href="../foreground/css/common.css" rel="stylesheet" />
+  <link href="../foreground/css/index.css" rel="stylesheet" type="text/css">
+  <link href="../foreground/css/detail.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
+  <script type="text/javascript" src="../foreground/script/common.js"></script>
+<script src="script/ablumn.js"></script>
+<script src="script/plugins.js"></script>
+<script src="script/detail.js"></script>
+  <!-- 引入样式 -->
+  <script type="text/javascript" src="/js/vue.js"></script>
+  <script type="text/javascript" src="/js/axios.min.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
 <header>
@@ -29,51 +35,33 @@
         <li class="c_4"><a href="#" target="_blank" title="新浪微博" alt="新浪微博"><b class="ico_head_sina"></b></a></li>
       </ul>
       <ul class="fn-right header-top-ul">
-        <li> <a href="/goto/index" class="app">返回首页</a> </li>
-        <!--用户名为空-->
-        <li th:if="${session.userName} eq null">
-          <div class="" >
-            <a href="register.html" class="" title="免费注册" >免费注册</a>
-          </div>
+        <li> <a href="index.html" class="app">返回首页</a> </li>
+        <li>
+          <div class=""><a href="register.html" class="c-orange" title="免费注册">免费注册</a></div>
         </li>
-        <li th:if="${session.userName} eq null">
-          <div class="" >
-            <a href="/user/toLogin" class="js-login" title="登录" >登录</a>
-          </div>
+        <li>
+          <div class=""><a href="login.html" class="js-login" title="登录">登录</a></div>
         </li>
-        <!--用户名不为空-->
-        <li th:if="${session.userName} ne null">
-          <div class="">
-            <span th:text="欢迎您 "></span>
-            <span th:text="${session.userName}"></span>
-          </div>
-        </li>
-        <li th:if="${session.userName} ne null">
-          <div class="" >
-            <a href="/user/toLogin" class="js-login" title="退出">退出</a>
-          </div>
-        </li>
-
       </ul>
     </div>
   </div>
   <div class="header min-width">
     <div class="container">
-      <div class="fn-left logo"> <a class="" href="/goto/index"> <img src="../foreground/images/logo.png" title=""> </a> </div>
+      <div class="fn-left logo"> <a class="" href="index.html"> <img src="../foreground/images/logo.png"  title=""> </a> </div>
       <ul class="top-nav fn-clear">
-        <li class="on"> <a href="/goto/index">首页</a> </li>
-        <li> <a href="/goto/list" class="">我要投资</a> </li>
-        <li> <a href="/goto/rent">我要融资</a> </li>
-        <li> <a href="/goto/helpInfo">安全保障</a> </li>
-        <li class="top-nav-safe"> <a href="/user/toOwn">我的账户</a> </li>
-        <li> <a href="/goto/comInfo">关于我们</a> </li>
+        <li class="on"> <a href="index.html">首页</a> </li>
+        <li> <a href="list.html" class="">我要投资</a> </li>
+        <li> <a href="register1.html">我要融资</a> </li>
+        <li> <a href="帮助中心.html">安全保障</a> </li>
+        <li class="top-nav-safe"> <a href="个人中心首页.html">我的账户</a> </li>
+        <li> <a href="公司简介.html">关于我们</a> </li>
       </ul>
     </div>
   </div>
 </header>
 <!--信息详细-->
 <div class="item-detail wrap">
-  <div class="breadcrumbs"> <a href="/goto/index">首页</a>&gt; <a href="#">散标投资列表</a>&gt; <span class="cur">项目详情</span> </div>
+  <div class="breadcrumbs"> <a href="index.html">首页</a>&gt; <a href="#">散标投资列表</a>&gt; <span class="cur">项目详情</span> </div>
   <div class="item-detail-head clearfix" data-target="sideMenu">
     <div class="hd"> <i class="icon icon-che" title="车易贷"></i>
       <h2>赵女士长安福特福克斯汽车质押贷款4万元</h2>
@@ -213,15 +201,15 @@
                   <div class="album-thumb"> <a href="javascript:;" class="btn btn-prev"></a> <a href="javascript:;" class="btn btn-next"></a>
                     <div style="visibility: visible; overflow: hidden; position: relative; z-index: 2; left: 0px; width: 1070px;" class="container" id="albumThumb">
                       <ul style="margin: 0px; padding: 0px; position: relative; list-style-type: none; z-index: 1; width: 1926px; left: 0px;">
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
+                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
+                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
+                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
+                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
+                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
+                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
+                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
+                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
+                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
                       </ul>
                     </div>
                   </div>
@@ -412,19 +400,19 @@
     <div class="ft-helper clearfix">
       <dl>
         <dt>关于我们</dt>
-        <dd><a href="/goto/comInfo">公司简介</a><a href="/goto/ipmt">管理团队</a><a href="/goto/netNotice">网站公告</a></dd>
+        <dd><a href="公司简介.html">公司简介</a><a href="管理团队.html">管理团队</a><a href="网站公告.html">网站公告</a></dd>
       </dl>
       <dl>
         <dt>相关业务</dt>
-        <dd><a href="/goto/list">我要投资</a><a href="/goto/rent">我要借款</a></dd>
+        <dd><a href="list.html">我要投资</a><a href="我要借款.html">我要借款</a></dd>
       </dl>
       <dl>
         <dt>帮助中心</dt>
-        <dd><a href="/goto/helpInfo">新手入门</a><a href="/user/toOwn">我的账户</a><a href="/goto/list">债权转让</a></dd>
+        <dd><a href="帮助中心.html">新手入门</a><a href="个人中心首页.html">我的账户</a><a href="list.html">债权转让</a></dd>
       </dl>
       <dl>
         <dt>联系我们</dt>
-        <dd><a href="/goto/contactUs">联系我们</a></dd>
+        <dd><a href="联系我们.html">联系我们</a></dd>
       </dl>
     </div>
     <div class="ft-service">

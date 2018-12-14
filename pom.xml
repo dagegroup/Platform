@@ -112,13 +112,11 @@
       <artifactId>thymeleaf-extras-shiro</artifactId>
       <version>2.0.0</version>
     </dependency>
-<<<<<<< HEAD
     <!--模板thymeleaf包-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
-=======
     <!--DigestUtils-->
     <dependency>
       <groupId>commons-codec</groupId>
@@ -131,8 +129,6 @@
       <artifactId>commons-net</artifactId>
       <version>3.3</version>
     </dependency>
-
->>>>>>> origin/master
 
   </dependencies>
 
