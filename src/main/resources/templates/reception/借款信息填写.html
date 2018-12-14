@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="../foreground/css/borrower.css" rel="stylesheet">
+		<link href="../foreground/css/base.css" rel="stylesheet">
+		<link href="../foreground/css/lender.css" rel="stylesheet">
+		<style type="text/css">
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 12px;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+        <div class="loadApplicationCon">
+            <form id="borrowInfoForm" name="borrowInfoForm" action="borrowerAction_info?type=1" method="POST">
+                <div class="common_box">
+                 <input type="hidden" name="yrd_token" value="KK37ZUJZY3B62WTI3BTIGE7XZEXCY6XG">
+                  
+                    <h2><span class="icontit icontit12 png"></span>借款信息</h2>
+                    <div class="innerbox">
+                        <div class="m-row m-row-mini">
+                            <label class="l m-rowLabel" for="">借款用途：</label>
+                            <div class="l m-drop clearfix" style="z-index: auto;"><div class="m-dropInput" style="width: 142.2px; height: 22.4px; line-height: 22.4px; color: rgb(170, 170, 170);">买房</div><a class="m-dropIcon" href="javascript:void(0);" style="height: 24.4px; width: 23.4px;"></a>
+                              
+                            
+                           <input id="borrowPurpose" name="borUse" data="买房" class="m-dropHid" type="hidden"> 
+                             
+                              
+                             <!-- <input id="borrowPurpose" name="borUse" data="请选择" class="m-dropHid" type="text" > -->
+                                <ul class="m-dropList" style="width: 180.4px; top: -156px; height: 156px; display: none;">
+                                
+                                    <li data="买房">买房</li>
+                                
+                                    <li data="买车">买车</li>
+                                
+                                    <li data="结婚">结婚</li>
+                                
+                                    <li data="兼职创业">兼职创业</li>
+                                
+                                    <li data="教育培训">教育培训</li>
+                                
+                                    <li data="家居">家居</li>
+                                
+                                    <li data="装修">装修</li>
+                                
+                                    <li data="旅游">旅游</li>
+                                
+                                    <li data="医疗">医疗</li>
+                                
+                                    <li data="日常消费">日常消费</li>
+                                
+                                    <li data="偿还债务">偿还债务</li>
+                                
+                                    <li data="投资">投资</li>
+                                
+                                    <li data="其他">其他</li>
+                                
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="m-row-error"></div>
+                        <div class="m-row m-row-mini" style="position:relative;">
+                            <label class="l m-rowLabel" for="">申请金额：</label>
+                            <input id="jine" name="borMoney" placeholder="借款额度为10000-500000" maxlength="6" type="text" class="m-input-normal m-textFocus l counterNote-principal" value="13223" onblur="showv()">
+                            <!-- counterNote -->
+                            
+                            <div id="counterNote" class="counterNote counterNote-top" style="width:228px;">
+                            	 <p>根据您填写的申请金额和借款期限计算得出</p>
+                            	 <p>借款成本：<strong id="totalFee"></strong> 元</p>
+                            	 <p> 还款总额：<strong id="payallMoney">14677.53</strong> 元
+                            	 </p><p>月还款额：<strong id="monthlyRePayAmt">1223.13</strong> 元</p>
+                            	 <p class="calculators_box_pInfo"> <a class="r" id="fysm_dialog_btn">查看费用说明</a>
+                            </p></div>
+                        </div>
+                        <div class="m-row-error"></div>
+                        <div class="m-row m-row-mini" id="content">
+<!--                            <label class="l m-rowLabel" for="">借款期限：</label>
+ -->                            
+                             <label class="l m-rowLabel" for="">借款期限：</label>
+                           <select id="one_context" onchange="show2()" name="borLine" class="l m-drop clearfix counterNote-period"><div class="m-dropInput" style="width: 140.4px; height: 20.4px; line-height: 20.4px;">undefined</div><a class="m-dropIcon" href="javascript:void(0);" style="height: 22.4px; width: 21.4px;"></a>
+                           <option value="请选择">请选择</option>
+                           <option value="12">12个月</option>
+                           <option value="24">24个月</option>
+                           <option value="36">36个月</option>
+                           <option value="48">48个月</option>
+                           </select>
+                           
+                        </div>
+                        <div class="m-row-error"></div>
+                        <div class="m-row m-row-mini" style="margin-top:24px;">
+                            <label class="l m-rowLabel" for="">借款描述：</label>
+                            
+                            
+                             
+                            
+                           <textarea id="borrowDesc" name="borDesc" maxlength="1000" onkeyup="this.value = this.value.substring(0,1000)" class="l m-rowTextarea m-textFocus" cols="30" rows="10" placeholder="1231"></textarea>
+<!--                             <textarea id="borrowDesc" name="borDesc" maxlength="1000" onkeyup="this.value = this.value.substring(0,1000)" class="l m-rowTextarea m-textFocus" id="" cols="30" rows="10" placeholder="可以输入20-1000个文字，您可以描述一下您的借款原因等等" ></textarea>
+ -->                        </div>
+                        <div class="m-row-error"></div>
+                        <div class="m-row m-row-mini">
+                            <label class="l m-rowLabel" for="">可接受月最高还款额：</label>
+                            <input id="borrowMax" name="borMonth" maxlength="6" type="text" class="m-input-mini m-textFocus" value="1111">
+                        </div>
+                      
+                        <div class="m-row-error"></div>
+
+                        <div class="myCode">
+                            <div class="myCodeCon">
+                                <p>优惠码由特殊渠道或活动发放，如无可不填！</p>
+                                <div class="m-row m-row-mini">
+                                    <label class="l m-rowLabel" for="">优惠码(选填)：</label>
+                                    <input id="discountCode" name="discountCode" type="text" class="m-input-mini m-textFocus l" value="" maxlength="12">
+                                    <input id="detect" type="button" class="input_btn btn_blue" value="检测">
+                                </div>
+                                <div class="m-row-error"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="loanApplicationNote"><span>宜人贷平台会严格保障您的隐私安全，请放心填写</span></p>
+                <div class="loanApplicationBtn">
+                    <input id="btnNext" type="submit" class="input_btn btn_blue mr" value="下一步，填写详细信息">
+                   <!--  <a id="btnSave" class="input_btn btn_normal" onclick="" >保存</a> -->
+                   <!-- <input id="btnSave" type="button" class="input_btn btn_normal" onclick="save()" value="保存" />  -->
+                </div>
+                <input type="hidden" name="maxLoanAmt" id="maxLoanAmt" value="500000">
+                <input type="hidden" name="minLoanAmt" id="minLoanAmt" value="10000">
+            </form>
+     </div>
+    <script type="text/javascript">
+    function save(){
+    window.location="borrowerAction.action";
+    }
+    </script>
+<!-- 借款人 左侧小菜单  -->
+<div class="lend-left-menu">
+    <a href="/yiren/account/Borrower_info.jsp" class="selected">
+    <span class="lend-menuIcon menuIcon-lendInfo png"></span>借款信息
+   	 
+   	
+   	<span class="completed png"></span>
+   	
+   	
+</a>
+    <a href="/yiren/account/Borrower_detailinfo.jsp">
+    <span class="lend-menuIcon menuIcon-detialInfo png"></span>详细信息
+   		
+   				
+   		
+   				
+   		
+    </a>
+    <a href="/yiren/account/Borrower_card.jsp">
+    <span class="lend-menuIcon menuIcon-uploadInfo png"></span>上传资料
+   		
+   				
+   		
+   				
+   		
+    </a>
+    <div class="loanApplicationMenuTxt">
+     <div class="company_qq">
+            <a href="javascript:;" id="onlineService"><img src="123.png" width="164"></a>
+        </div>
+        为了尽快成功借款，请确保信息的真实性，我们将会对您填写的信息进行核实，一旦发现虚假信息将取消您的借款资格。
+    </div>
+</div>
+<script type="text/javascript">
+    var Util ={};
+    Util.loadJS = function(url, callback, ecall) {
+        var head = document.head || document.getElementsByTagName("head")[0] || document.documentElement,
+                script,
+                options,
+                o,
+                scriptsArray = [];
+        if (typeof url === "object") {
+            options = url;
+            url = undefined
+        };
+        o = options || {};
+        url = url || o.url;
+        var path = url.split(",");
+        callback = callback || o.success;
+        for (var i = 0; i < path.length; i++) {
+            str = path[i].slice(path[i].lastIndexOf('/') + 1);
+            name = str.substring(0, str.indexOf("."));
+            script = document.createElement("script");
+            script.async = o.async || false;
+            script.type = "text/javascript";
+            if (o.charset) script.charset = o.charset;
+            if (o.cache === false) {
+                path[i] = path[i] + (/\?/.test(path[i]) ? "&": "?") + "time=" + (new Date()).getTime()
+            };
+            script.src = (path[i].indexOf("/") == '-1' ? true: false) === true ? Util.config.JSfile + path[i] : path[i];
+            head.appendChild(script)
+        };
+        if ('function' == typeof callback) {
+            document.addEventListener ? script.addEventListener("load",
+                    function() {
+                        callback();
+                        script.onload = null;
+                        script.parentNode.removeChild(script)
+                    },
+                    false) : script.onreadystatechange = function() {
+                if (/loaded|complete/.test(script.readyState)) {
+                    callback();
+                    script.onreadystatechange = null
+                }
+            }
+        };
+        if (ecall) {
+            script.onerror = function() {
+                script = null;
+                if ('function' == typeof ecall) ecall()
+            }
+        }
+    };
+</script>
+<script type="text/javascript">
+    $(function(){
+        var protocol = document.location.protocol.toLowerCase();
+        var onlineService = $("#onlineService");
+        if(protocol == "https:"){
+            onlineService.attr("href","http://wpa.b.qq.com/cgi/wpa.php?ln=1&key=XzkzODAyNjk2MV8xOTU2MjhfNDAwNjA5OTQwMF8yXw");
+            onlineService.attr("target","_blank");
+        }else{
+            onlineService.attr("href","javascript:void(0)");
+            Util.loadJS("http://wpa.b.qq.com/cgi/wpa.php", function(){
+                BizQQWPA.addCustom({
+                    aty: '1', //指定工号类型,0-自动分流，1-指定工号，2-指定分组
+                    a: '1002', //指定的工号
+                    nameAccount: '4006099400', //营销 QQ 号码
+                    selector: 'onlineService' //WPA 被放置的元素
+                });
+            });
+        }
+    });
+</script>
+
+    
+	</body>
+</html>

@@ -6,109 +6,69 @@
 <title>p2p网贷平台</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
+<<<<<<< HEAD:src/main/resources/templates/reception/register.html
 <link href="../foreground/css/common.css" rel="stylesheet" />
 <link href="../foreground/css/register.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
 <script type="text/javascript" src="../foreground/script/common.js"></script>
 <!--<script src="script/login.js" type="text/javascript"></script>-->
+=======
+<link href="css/common.css" rel="stylesheet" />
+<link href="css/register.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="script/jquery.min.js"></script>
+<script type="text/javascript" src="script/common.js"></script>
+<script src="script/login.js" type="text/javascript"></script>
+>>>>>>> origin/master:src/main/resources/static/foreground/register.html
+  <style type="text/css">
+    #checkNode{
+      background-image: url(../images/yzm4.jpg);/*验证码的背景图 */
+      font-family: Arial;
+      font-style: italic;
+      font-size: 140%;
+      color: black;
+      border: 0;
+      padding:2px 3px;
+      letter-spacing: 3px;
+      width: 70px;
+      height: 40px;
+      font-weight: bolder;
+      text-align: center;
+    }
 
-    <script type="text/javascript">
-        window.onload=function(){
-           // window.location.href = "/foreground//goto/index";
-            createCode();
-        }
-        var code;/!*定义一个验证码的全局变量*!/
-        function createCode(){/!* 生成验证码的函数 *!/
-            code="";
-            var codeLength=4;
-            var checkCode=$("#checkNode");
-            checkCode.value="";
-            var selectChar=new Array(1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-            for(var i=0;i<codeLength;i++){
-                var charIndex=Math.floor(Math.random()*61);
-                code += selectChar[charIndex];
-            }
-            if (code.length != codeLength) {
-                createCode();
-            }
-            $("#checkNode").val(code);
-        }
-        //验证图片验证码
+  </style>
+  <script type="text/javascript">
 
-        function checkCode(){
-            var flagJPG=0;
-            var inputCode =document.getElementById("jpgVerify").value.toUpperCase();
-            var codeToUp=code.toUpperCase();
-            if(inputCode.length==0){
-                $("#jpgVerifys").html("验证码不能为空").css("color","red");
-                return false;
-            }else if(inputCode != codeToUp){
-                $("#jpgVerifys").html("验证码输入错误").css("color","red");
-                return false;
-            }else {
-                $("#jpgVerifys").html("验证码输入正确").css("color","green");
-                flagJPG=1;
-                return true;
-            }
-        };
-        //验证用户名
-        function checkuser(){
-            var user=document.getElementById("telephone");
-            if(user.value.length>0){
-                $("#tele").html("");
-                return true;
-            }
-            //alert("用户名不能为空");
-            $("#tele").html("用户名不能为空").css("color","red");
-            user.focus();
-            return false;
-        }
-        //验证密码
-        function checkpass(){
-            var pass=document.getElementById("password");
-            if(pass.value.length>0){
-                $("#passw").html("").empty();
-                return true;
-            }
-            //alert("密码不能为空");
-            $("#passw").html("密码不能为空").css("color","red");
-            pass.focus();
+         window.onload = function () {
+             createCode();
+         }
+         var code;
+         /!*定义一个验证码的全局变量*!/
 
-            return false;
-        }
-        //登陆提交
-        function checkAll(){
-            if(checkuser()&&checkpass()&&checkCode()){
-                var form = document.getElementById("LonginForm");
-                form.submit();
-            }
-        }
-        function  userNameJy() {
-        }
+         function createCode() {
+             /!* 生成验证码的函数 *!/
+             code = "";
+             var codeLength = 4;
+             var checkCode = $("#checkNode");
+             checkCode.value = "";
+             var selectChar = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+             for (var i = 0; i < codeLength; i++) {
+                 var charIndex = Math.floor(Math.random() * 61);
+                 code += selectChar[charIndex];
+             }
+             if (code.length != codeLength) {
+                 createCode();
+             }
+             $("#checkNode").val(code);
+         }
 
-    </script>
-    <style type="text/css">
-        #checkNode{
-            background-image: url(../images/yzm4.jpg);/*验证码的背景图 */
-            font-family: Arial;
-            font-style: italic;
-            font-size: 140%;
-            color: black;
-            border: 0;
-            padding:2px 3px;
-            letter-spacing: 3px;
-            width: 70px;
-            height: 40px;
-            font-weight: bolder;
-            text-align: center;
-        }
-    </style>
+
+
+
+  </script>
 </head>
-
 
 <body>
 <header>
-
   <div class="header-top min-width">
     <div class="container fn-clear"> <strong class="fn-left">咨询热线：400-668-6698<span class="s-time">服务时间：9:00 - 18:00</span></strong>
       <ul class="header_contact">
@@ -121,16 +81,17 @@
         <li class="c_4"><a href="#" target="_blank" title="新浪微博" alt="新浪微博"><b class="ico_head_sina"></b></a></li>
       </ul>
       <ul class="fn-right header-top-ul">
+        <li> <a href="/goto/index" class="app">返回首页</a> </li>
         <!--用户名为空-->
         <li th:if="${session.userName} eq null">
           <div class="" >
-            <a href="/goto/register" class="" title="免费注册" >免费注册</a>
+            <a href="register.html" class="" title="免费注册" >免费注册</a>
           </div>
         </li>
         <li th:if="${session.userName} eq null">
           <div class="" >
             <a href="/user/toLogin" class="js-login" title="登录" >登录</a>
-        </div>
+          </div>
         </li>
         <!--用户名不为空-->
         <li th:if="${session.userName} ne null">
@@ -154,7 +115,7 @@
       <ul class="top-nav fn-clear">
         <li class="on"> <a href="/goto/index">首页</a> </li>
         <li> <a href="/goto/list" class="">我要投资</a> </li>
-          <li> <a href="/goto/rent">我要融资</a> </li>
+        <li> <a href="/goto/rent">我要融资</a> </li>
         <li> <a href="/goto/helpInfo">安全保障</a> </li>
         <li class="top-nav-safe"> <a href="/user/toOwn">我的账户</a> </li>
         <li> <a href="/goto/comInfo">关于我们</a> </li>
@@ -164,38 +125,47 @@
 </header>
 <!--注册-->
 <div class="wrap">
- <form id="LonginForm" name="LonginForm"   action="/user/login" method="post">
-	<div class="tdbModule loginPage">
-		<div class="registerTitle">用户登录</div>
-		<div class="registerCont">
-			<ul>
-				<li class="error"  th:if="${msg} ne null">
-				    <span id="prrintInfo" data-info="" ><span th:text="${msg}"></span></span>
-			    </li>
-				<li>
-					<span class="dis">用户名：</span><input class="input" type="text" onblur="userNameJy()" name="telephone" id="telephone" maxlength="24" tabindex="1" autocomplete="off">
-				    <!--<a id="sssdfasdfas" href="#" class="blue">注册用户</a>-->
-                  <span id="tele"></span>
-				</li>
-	                
-				<li>
-				   <span class="dis">密码：</span><input class="input" type="password" name="password" id="password" maxlength="24" tabindex="1" autocomplete="off">
-                  <span id="passw"></span>
-				   <!--<a href="#" id="pawHide" class="blue" >忘记密码</a>-->
-				</li>
-                <li> <span class="dis">验证码:</span>
-                    <input type="text" id="jpgVerify" onblur="checkCode()" class="input input1 _yanzhengma" name="yzm" maxlength="4" tabindex="1">
-                    <input type="text" id="checkNode" disabled="disabled"/>
-                    <a class="look blue _changeCapcherButton" id="look" href="javascript:void(0);" onclick="createCode()">看不清？换一张</a>
-                    <span class="info" id="jpgVerifys"></span>
-                </li>
-				<li class="btn"> 
-					<input type="button"  value="立即登录"  onclick="checkAll()"  >
-				</li>
-			</ul>
-		</div>
-	</div>
- </form>
+  <div class="tdbModule register">
+    <div class="registerTitle">注册账户</div>
+    <div class="registerLc1">
+      <p class="p1">填写账户信息</p>
+      <p class="p2">验证手机信息</p>
+      <p class="p3">注册成功</p>
+    </div>
+    <div class="registerCont">
+      <ul>
+        <li><span class="dis">用户名:</span>
+          <input type="text" name="userName" id="userName" class="input _userName" maxlength="24" tabindex="1">
+          <span id="userNameAlt" data-info="6-24个字符，字母开头，字母、数字下划线组成">6-20个字符，字母开头，字母、数字下划线组成</span></li>
+        <li><span class="dis">密码:</span>
+          <input type="password" name="user.password" id="password" class="input _password" maxlength="24" tabindex="1">
+          <span id="passwordAlt" data-info="6-24个字符，英文、数字组成，区分大小写">6-24个字符，英文、数字组成，区分大小写</span></li>
+        <li><span class="dis">确认密码:</span>
+          <input type="password" name="repeatPassword" id="repeatPassword" class="input _repeatPassword" maxlength="24" tabindex="1">
+          <span id="repeatPasswordAlt" data-info="请再次输入密码">请再次输入密码</span></li>
+        <li> <span class="dis">验证码:</span>
+          <input type="text" id="jpgVerify"  class="input input1 _yanzhengma" name="yzm" maxlength="4" tabindex="1">
+          <input type="text" id="checkNode" disabled="disabled"/>
+          <a class="look blue _changeCapcherButton" id="look" href="javascript:void(0);" onclick="createCode()">看不清？换一张</a>
+          <span class="info" id="jpgVerifys"></span>
+        </li>
+        </li>
+        <li class="telNumber"> <span class="dis">手机号码:</span>
+          <input type="text" class="input _phoneNum" id="phone" name="phone" tabindex="1" maxlength="11">
+          <a href="javascript:void(0);" class="button radius1 _getkey" id="sendPhone">获取验证码</a> <span id="phoneJy" data-info="请输入您的常用电话">请输入您的常用电话</span></li>
+        <li class="telNumber"><span class="dis">短信验证码:</span>
+          <input id="phonVerify" name="phonVerify" type="text" class="input input1  _phonVerify" data-_id="phonVerify" tabindex="1" >
+          <span class="infomation" id="phonVerifys" data-info="请输入手机验证码">请输入手机验证码</span></li>
+        <li> <span class="dis">推 荐 人:</span>
+          <input type="text" class="input input1 _invist" name="refereenName" >
+          <span class="_invist_msg">请填写推荐人账户名，如无推荐人请留空</span> </li>
+        <li class="agree">
+          <input name="protocol" id="protocol" type="checkbox" value="" >
+          我同意《<a href="#" target="_black">亿人宝注册协议</a>》 <span id="protocolAlt" data-info="请查看协议">请查看协议</span></li>
+        <li class="btn"><a href="javascript:void(0);" id="zhuce" class="radius1 _ajaxSubmit">注册</a></li>
+      </ul>
+    </div>
+  </div>
 </div>
 <!--网站底部-->
 <div id="footer" class="ft">
@@ -243,4 +213,5 @@
   </div>
 </div>
 </body>
+
 </html>

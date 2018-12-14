@@ -7,108 +7,13 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="../foreground/css/common.css" rel="stylesheet" />
-<link href="../foreground/css/register.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../foreground/css/user.css" />
 <script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
 <script type="text/javascript" src="../foreground/script/common.js"></script>
-<!--<script src="script/login.js" type="text/javascript"></script>-->
-
-    <script type="text/javascript">
-        window.onload=function(){
-           // window.location.href = "/foreground//goto/index";
-            createCode();
-        }
-        var code;/!*定义一个验证码的全局变量*!/
-        function createCode(){/!* 生成验证码的函数 *!/
-            code="";
-            var codeLength=4;
-            var checkCode=$("#checkNode");
-            checkCode.value="";
-            var selectChar=new Array(1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-            for(var i=0;i<codeLength;i++){
-                var charIndex=Math.floor(Math.random()*61);
-                code += selectChar[charIndex];
-            }
-            if (code.length != codeLength) {
-                createCode();
-            }
-            $("#checkNode").val(code);
-        }
-        //验证图片验证码
-
-        function checkCode(){
-            var flagJPG=0;
-            var inputCode =document.getElementById("jpgVerify").value.toUpperCase();
-            var codeToUp=code.toUpperCase();
-            if(inputCode.length==0){
-                $("#jpgVerifys").html("验证码不能为空").css("color","red");
-                return false;
-            }else if(inputCode != codeToUp){
-                $("#jpgVerifys").html("验证码输入错误").css("color","red");
-                return false;
-            }else {
-                $("#jpgVerifys").html("验证码输入正确").css("color","green");
-                flagJPG=1;
-                return true;
-            }
-        };
-        //验证用户名
-        function checkuser(){
-            var user=document.getElementById("telephone");
-            if(user.value.length>0){
-                $("#tele").html("");
-                return true;
-            }
-            //alert("用户名不能为空");
-            $("#tele").html("用户名不能为空").css("color","red");
-            user.focus();
-            return false;
-        }
-        //验证密码
-        function checkpass(){
-            var pass=document.getElementById("password");
-            if(pass.value.length>0){
-                $("#passw").html("").empty();
-                return true;
-            }
-            //alert("密码不能为空");
-            $("#passw").html("密码不能为空").css("color","red");
-            pass.focus();
-
-            return false;
-        }
-        //登陆提交
-        function checkAll(){
-            if(checkuser()&&checkpass()&&checkCode()){
-                var form = document.getElementById("LonginForm");
-                form.submit();
-            }
-        }
-        function  userNameJy() {
-        }
-
-    </script>
-    <style type="text/css">
-        #checkNode{
-            background-image: url(../images/yzm4.jpg);/*验证码的背景图 */
-            font-family: Arial;
-            font-style: italic;
-            font-size: 140%;
-            color: black;
-            border: 0;
-            padding:2px 3px;
-            letter-spacing: 3px;
-            width: 70px;
-            height: 40px;
-            font-weight: bolder;
-            text-align: center;
-        }
-    </style>
+<script src="../foreground/script/user.js" type="text/javascript"></script>
 </head>
-
-
 <body>
 <header>
-
   <div class="header-top min-width">
     <div class="container fn-clear"> <strong class="fn-left">咨询热线：400-668-6698<span class="s-time">服务时间：9:00 - 18:00</span></strong>
       <ul class="header_contact">
@@ -121,6 +26,7 @@
         <li class="c_4"><a href="#" target="_blank" title="新浪微博" alt="新浪微博"><b class="ico_head_sina"></b></a></li>
       </ul>
       <ul class="fn-right header-top-ul">
+        <li> <a href="/goto/index" class="app">返回首页</a> </li>
         <!--用户名为空-->
         <li th:if="${session.userName} eq null">
           <div class="" >
@@ -130,7 +36,7 @@
         <li th:if="${session.userName} eq null">
           <div class="" >
             <a href="/user/toLogin" class="js-login" title="登录" >登录</a>
-        </div>
+          </div>
         </li>
         <!--用户名不为空-->
         <li th:if="${session.userName} ne null">
@@ -154,7 +60,7 @@
       <ul class="top-nav fn-clear">
         <li class="on"> <a href="/goto/index">首页</a> </li>
         <li> <a href="/goto/list" class="">我要投资</a> </li>
-          <li> <a href="/goto/rent">我要融资</a> </li>
+        <li> <a href="#">我要融资</a> </li>
         <li> <a href="/goto/helpInfo">安全保障</a> </li>
         <li class="top-nav-safe"> <a href="/user/toOwn">我的账户</a> </li>
         <li> <a href="/goto/comInfo">关于我们</a> </li>
@@ -162,40 +68,64 @@
     </div>
   </div>
 </header>
-<!--注册-->
-<div class="wrap">
- <form id="LonginForm" name="LonginForm"   action="/user/login" method="post">
-	<div class="tdbModule loginPage">
-		<div class="registerTitle">用户登录</div>
-		<div class="registerCont">
-			<ul>
-				<li class="error"  th:if="${msg} ne null">
-				    <span id="prrintInfo" data-info="" ><span th:text="${msg}"></span></span>
-			    </li>
-				<li>
-					<span class="dis">用户名：</span><input class="input" type="text" onblur="userNameJy()" name="telephone" id="telephone" maxlength="24" tabindex="1" autocomplete="off">
-				    <!--<a id="sssdfasdfas" href="#" class="blue">注册用户</a>-->
-                  <span id="tele"></span>
-				</li>
-	                
-				<li>
-				   <span class="dis">密码：</span><input class="input" type="password" name="password" id="password" maxlength="24" tabindex="1" autocomplete="off">
-                  <span id="passw"></span>
-				   <!--<a href="#" id="pawHide" class="blue" >忘记密码</a>-->
-				</li>
-                <li> <span class="dis">验证码:</span>
-                    <input type="text" id="jpgVerify" onblur="checkCode()" class="input input1 _yanzhengma" name="yzm" maxlength="4" tabindex="1">
-                    <input type="text" id="checkNode" disabled="disabled"/>
-                    <a class="look blue _changeCapcherButton" id="look" href="javascript:void(0);" onclick="createCode()">看不清？换一张</a>
-                    <span class="info" id="jpgVerifys"></span>
-                </li>
-				<li class="btn"> 
-					<input type="button"  value="立即登录"  onclick="checkAll()"  >
-				</li>
-			</ul>
-		</div>
-	</div>
- </form>
+<!--个人中心-->
+<div class="wrapper wbgcolor">
+  <div class="w1200 personal">
+    <div class="credit-ad"><img src="../foreground/images/clist1.jpg" width="1200" height="96"></div>
+    <div id="personal-left" class="personal-left">
+      <ul>
+        <li class="pleft-cur"><span><a href="/user/toOwn"><i class="dot dot1"></i>账户总览</a></span></li>
+        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="/user/toOwn1">资金记录</a></span></li>
+        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="/user/toOwn2">投资记录</a></span></li>
+        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="/user/toOwn3">回款计划</a></span></li>
+        <li class=""><span><a href="/user/toOwn4"><i class="dot dot02"></i>开通第三方</a> </span> </li>
+        <li><span><a href="/user/toOwn5"><i class="dot dot03"></i>充值</a></span></li>
+        <li class=""><span><a href="/user/toOwn6"><i class="dot dot04"></i>提现</a></span></li>
+        <li style="position:relative;" class=""> <span> <a href="/user/toOwn7"> <i class="dot dot06"></i> 我的红包 </a> </span> </li>
+        <li class=""><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="/user/toOwn8">兑换历史</a></span></li>
+        <li style="position:relative;"> <span> <a href="/user/toOwn9"><i class="dot dot08"></i>系统信息 </a> </span> </li>
+        <li><span><a href="/user/toOwn10"><i class="dot dot09"></i>账户设置</a></span></li>
+      </ul>
+    </div>
+    <style type="text/css">
+		.invest-tab .on  a{color:#fff;}
+	</style>
+    <div class="personal-main">
+      <div class="personal-investnote">
+        <h3><i>投资记录</i></h3>
+        <div class="investnote-money"> <span><b class="fb">累计投资</b><br>
+          <i>0.00</i> 元 </span> <span><b class="fb">累计收益</b><br>
+          <i class="c-pink">0.00</i> 元 </span> <span><b class="fb">待收本金</b><br>
+          <i>0.00</i> 元 </span> <span class="none"><b class="fb">待收收益</b><br>
+          <i>0.00</i> 元 </span> </div>
+        <form id="form" name="form" method="post" action="">
+          <script type="text/javascript">clearPage = function() {PrimeFaces.ab({source:'form:j_idt82',formId:'form',process:'form:j_idt82',params:arguments[0]});}</script>
+          <span id="form:dataTable">
+          <div class="invest-tab">
+            <ul>
+              <li class="on"><span><a href="#" title="投标中">投标中 </a> </span> </li>
+              <li><a href="#" title="回款中">回款中 </a> </li>
+              <li><a href="#" title="已结束">已结束 </a> </li>
+            </ul>
+          </div>
+          <div class="investnote-list">
+            <div class="investnote-contitle"> <span class="investnote-w1 fb">交易时间</span> <span class="investnote-w2 fb">项目</span> <span class="investnote-w3 fb">状态</span> <span class="investnote-hbw4 fb">我的投资</span> <span class="investnote-hbw5 fb">我的收益</span> <span class="investnote-hbw6 fb">操作</span> </div>
+            <ul>
+              <li><span class="investnote-w1">2015-10-1</span><span class="investnote-w2">债权转让</span><span class="investnote-w3">已还款</span><span class="investnote-hbw4">12000.00</span> <span class="investnote-hbw5">12000.00</span> <span class="investnote-hbw6"><a href="#">删除</a></span></li>
+              <li><span class="investnote-w1">2015-10-1</span><span class="investnote-w2">债权转让</span><span class="investnote-w3">已还款</span><span class="investnote-hbw4">12000.00</span> <span class="investnote-hbw5">12000.00</span> <span class="investnote-hbw6"><a href="#">删除</a></span></li>
+              <li><span class="investnote-w1">2015-10-1</span><span class="investnote-w2">债权转让</span><span class="investnote-w3">已还款</span><span class="investnote-hbw4">12000.00</span> <span class="investnote-hbw5">12000.00</span> <span class="investnote-hbw6"><a href="#">删除</a></span></li>
+              <li><span class="investnote-w1">2015-10-1</span><span class="investnote-w2">债权转让</span><span class="investnote-w3">已还款</span><span class="investnote-hbw4">12000.00</span> <span class="investnote-hbw5">12000.00</span> <span class="investnote-hbw6"><a href="#">删除</a></span></li>
+              <!--<div style=" width:760px;height:200px;padding-top:100px; text-align:center;color:#d4d4d4; font-size:16px;">
+								 <img src="images/nondata.png" width="60" height="60"><br><br>
+								   暂无投资记录</div>-->
+            </ul>
+          </div>
+          </span>
+        </form>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
 </div>
 <!--网站底部-->
 <div id="footer" class="ft">
@@ -211,7 +141,7 @@
       </dl>
       <dl>
         <dt>帮助中心</dt>
-        <dd><a href="/goto/helpInfo">新手入门</a><a href="/user/toOwn">我的账户</a><a href="/goto/list">债权转让</a></dd>
+        <dd><a href="/goto/helpInfo">新手入门</a><a href="个人中心首页.html">我的账户</a><a href="/goto/list">债权转让</a></dd>
       </dl>
       <dl>
         <dt>联系我们</dt>
