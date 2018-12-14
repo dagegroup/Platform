@@ -39,11 +39,11 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         Map<String,String> map = new LinkedHashMap();
         List<Permission> list = permissionService.getList();
-        for (Permission permission : list) {
-            if (permission.getPrefix()!=null&&permission.getPrefix()!=""&&permission.getPrefix()!="null"){
-                map.put(permission.getPrefix(),"perms["+permission.getToken()+"]");
-            }
-        }
+//        for (Permission permission : list) {
+//            if (permission.getPrefix()!=null&&permission.getPrefix()!=""&&permission.getPrefix()!="null"){
+//                map.put(permission.getPrefix(),"perms["+permission.getToken()+"]");
+//            }
+//        }
         map.put("/js/**","anon");
         map.put("/easyui/**","anon");
         map.put("/foreground/**","anon");
