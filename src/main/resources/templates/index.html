@@ -29,17 +29,18 @@
 </div>
 </body>
 <script type="text/javascript">
-    //给ID为tt的数绑定onClick事件
-    $("#tree").tree({
-        onClick: function(node){
-            if (node.url!="null"&&node.url!=''&&node.url!=null) {
-                //alert(node.text+",url地址:"+node.url);  // 当点击时，弹出节点名称
-                //addTab(node.text, node.url);
-                $("#ifr").attr("src",node.url);
+    $(function () {
+        $("#tree").tree({
+            onClick: function(node){
+                if (node.url!="null"&&node.url!=''&&node.url!=null) {
+                    //alert(node.text+",url地址:"+node.url);  // 当点击时，弹出节点名称
+                    //addTab(node.text, node.url);
+                    $("#ifr").attr("src",node.url);
+                }
             }
-
-        }
-    });
+        });
+    })
+    //给ID为tt的数绑定onClick事件
     /* 	//动态添加页签
         function addTab(title, url){ //tit le页签的标题   url请求地址
             if ($('#ta').tabs('exists', title)){//判断该名称的页签是否存在   如果true
