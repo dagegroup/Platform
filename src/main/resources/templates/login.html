@@ -1,185 +1,277 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>宜人贷-会员登录</title>
-    <link href="../css/index/base.css" rel="stylesheet">
-    <link href="../css/login/unlogin.css" rel="stylesheet">
-    <script src="../js/index/jquery-1.8.2.min.js" type="text/javascript"></script>
-    <!--<meta http-equiv="Cache-Control" content="no-transform" />-->
-</head>
-<body class="bg">
-login
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>p2p网贷平台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="../foreground/css/common.css" rel="stylesheet" />
+<link href="../foreground/css/register.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
+<script type="text/javascript" src="../foreground/script/common.js"></script>
+<!--<script src="script/login.js" type="text/javascript"></script>-->
+
     <script type="text/javascript">
-        base_url = '';
+        window.onload=function(){
+           // window.location.href = "/foreground//goto/index";
+            createCode();
+        }
+        var code;/!*定义一个验证码的全局变量*!/
+        function createCode(){/!* 生成验证码的函数 *!/
+            code="";
+            var codeLength=4;
+            var checkCode=$("#checkNode");
+            checkCode.value="";
+            var selectChar=new Array(1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+            for(var i=0;i<codeLength;i++){
+                var charIndex=Math.floor(Math.random()*61);
+                code += selectChar[charIndex];
+            }
+            if (code.length != codeLength) {
+                createCode();
+            }
+            $("#checkNode").val(code);
+        }
+        //验证图片验证码
+
+        function checkCode(){
+            var flagJPG=0;
+            var inputCode =document.getElementById("jpgVerify").value.toUpperCase();
+            var codeToUp=code.toUpperCase();
+            if(inputCode.length==0){
+                $("#jpgVerifys").html("验证码不能为空").css("color","red");
+                return false;
+            }else if(inputCode != codeToUp){
+                $("#jpgVerifys").html("验证码输入错误").css("color","red");
+                return false;
+            }else {
+                $("#jpgVerifys").html("验证码输入正确").css("color","green");
+                flagJPG=1;
+                return true;
+            }
+        };
+        //验证用户名
+        function checkuser(){
+            var user=document.getElementById("telephone");
+            if(user.value.length>0){
+                $("#tele").html("");
+                return true;
+            }
+            //alert("用户名不能为空");
+            $("#tele").html("用户名不能为空").css("color","red");
+            user.focus();
+            return false;
+        }
+        //验证密码
+        function checkpass(){
+            var pass=document.getElementById("password");
+            if(pass.value.length>0){
+                $("#passw").html("").empty();
+                return true;
+            }
+            //alert("密码不能为空");
+            $("#passw").html("密码不能为空").css("color","red");
+            pass.focus();
+
+            return false;
+        }
+        //登陆提交
+        function checkAll(){
+            if(checkuser()&&checkpass()&&checkCode()){
+                var form = document.getElementById("LonginForm");
+                form.submit();
+            }
+        }
+
+
+        function  userNameJy() {
+        }
+        /*function submitBtn() {
+            //window.location.href = "/foreground//goto/index";
+        var password= $("#password").val();
+            $.ajax({
+                url: "/user/login ",
+                type: "post",
+                data: {telephone: $("#telephone").val(), password: $("#password").val()},
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    var psw=data.PASSWORD
+                    if (data != null) {
+                        if(psw!=password){
+                            $("#prrintInfo").html("密码错误");
+                        }else{
+                            window.location.href = "/foreground//goto/index";
+                        }
+
+                    }
+                },
+                error: function (data) {
+                    $("#prrintInfo").html("用户名不存在")
+                    //window.location.href="login1.html"
+                }
+
+
+            })
+        }*/
+
+
     </script>
-    <div class="header">
-        <div class="header_top">
-            <div class="innerbox">
-                <ul class="header_contact">
-                    <li class="header_ico_yixin"><a href="register.jsp"
-                                                    rel="nofollow" target="_blank" title="宜信官网">宜信官网</a></li>
-                    <li class="header_ico_app"><a target="_blank" href="javascript:;">手机宜人贷</a>
-                    </li>
-                    <li class="header_ico_tel">&nbsp;</li>
-                </ul>
-                <ul class="header_login">
-                    <s:if test="#session.user.usePhone!=null&&#session.user.useState==1">
+    <style type="text/css">
+        #checkNode{
+            background-image: url(../images/yzm4.jpg);/*验证码的背景图 */
+            font-family: Arial;
+            font-style: italic;
+            font-size: 140%;
+            color: black;
+            border: 0;
+            padding:2px 3px;
+            letter-spacing: 3px;
+            width: 70px;
+            height: 40px;
+            font-weight: bolder;
+            text-align: center;
+        }
+    </style>
+</head>
 
-                        <li><span>欢迎您，</span> <span title="" id="userCnname">
-                                <a class="orange" target="_blank"
-                                   href="${pageContext.request.contextPath}/manager-findByInfo">
-                                <s:property value="#session.user.useName"/></a> </span>&nbsp;&nbsp;<a
-                                rel="nofollow" href="${pageContext.request.contextPath}/user-exitUser">退出</a>
-                        </li>
 
-                        <li class="gray">|</li>
-                        <li><a href="#"
-                               id="unreadNoticeA" class="unread">消息<span
-                                id="unreadNoticeHead">（<span class="orange">0</span>）</span>
-                        </a>
-                        </li>
-                    </s:if>
-                    <s:elseif test="#session.user.usePhone!=null&&#session.user.useState==0">
-                        <li><span>欢迎您，</span> <span title="" id="userCnname">
-                                <a class="orange" target="_blank"
-                                   href="${pageContext.request.contextPath}/account/baccount.jsp">
-                                <s:property value="#session.user.useName"/></a> </span>&nbsp;&nbsp;<a
-                                rel="nofollow" href="${pageContext.request.contextPath}/user-exitUser">退出</a>
-                        </li>
+<body>
+<header>
 
-                        <li class="gray">|</li>
-                        <li><a href="#"
-                               id="unreadNoticeA" class="unread">消息<span
-                                id="unreadNoticeHead">（<span class="orange">0</span>）</span>
-                        </a>
-                        </li>
-                    </s:elseif>
-                    <s:else>
-                        <li><span> 您好！欢迎来到宜人贷！</span><a href="${pageContext.request.contextPath}/login.jsp" rel="nofollow">登录</a></li>
-                        <li class="gray">|</li>
-                        <li><a href="${pageContext.request.contextPath}/register.jsp" class="orange"  rel="nofollow" rel="nofollow">快速注册</a>
-                        </li>
-                    </s:else>
-                    <li class="gray">|</li>
-                    <li class="guide"><span class="guideIcon"></span> <span
-                            class="guideLink">新手引导</span>
-                        <ul class="guideMenu">
-                        </ul></li>
-                    <li class="gray">|</li>
-                    <li><a href="javascript:;">帮助中心</a>
-                    </li>
-
-                </ul>
-            </div>
+  <div class="header-top min-width">
+    <div class="container fn-clear"> <strong class="fn-left">咨询热线：400-668-6698<span class="s-time">服务时间：9:00 - 18:00</span></strong>
+      <ul class="header_contact">
+        <li class="c_1"> <a class="ico_head_weixin" id="wx"></a>
+          <div class="ceng" id="weixin_xlgz" style="display: none;">
+            <div class="cnr"> <img src="../foreground/images/code.png"> </div>
+            <b class="ar_up ar_top"></b> <b class="ar_up_in ar_top_in"></b> </div>
+        </li>
+        <li class="c_2"><a href="#" target="_blank" title="官方QQ" alt="官方QQ"><b class="ico_head_QQ"></b></a></li>
+        <li class="c_4"><a href="#" target="_blank" title="新浪微博" alt="新浪微博"><b class="ico_head_sina"></b></a></li>
+      </ul>
+      <ul class="fn-right header-top-ul">
+        <!--用户名为空-->
+        <li th:if="${session.userName} eq null">
+          <div class="" >
+            <a href="/goto/register" class="" title="免费注册" >免费注册</a>
+          </div>
+        </li>
+        <li th:if="${session.userName} eq null">
+          <div class="" >
+            <a href="/user/toLogin" class="js-login" title="登录" >登录</a>
         </div>
-        <div class="header_main">
-            <a class="logo" href="/"></a>
-            <ul class="header_nav">
-                <li><a class="live" href="index.html">首页</a>
-                </li>
-                <li><a href=${pageContext.request.contextPath}/bid-findShowList?page=1>我要理财</a>
-                </li>
+        </li>
+        <!--用户名不为空-->
+        <li th:if="${session.userName} ne null">
+          <div class="">
+            <span th:text="欢迎您 "></span>
+            <span th:text="${session.userName}"></span>
+          </div>
+        </li>
+        <li th:if="${session.userName} ne null">
+          <div class="" >
+            <a href="/user/toLogin" class="js-login" title="退出">退出</a>
+          </div>
+        </li>
 
-                <li><a href="usertest1">我要借款</a>
-                </li>
-
-                <li><a href="javascript:;">安全保障</a>
-                </li>
-                <li>
-                    <div class="navMobile">
-                        <a class="navMobileLi" href="javascript:;">手机客户端</a>
-                    </div></li>
-                <li><a title="" target="_blank" href="javascript:;">宜人问答</a>
-                </li>
-            </ul>
-        </div>
+      </ul>
     </div>
-
-    <div class="full_container reglog">
-        <h1 style="margin-bottom:30px">登录宜信通行证</h1>
-        <div class="clearfix ">
-            <div class="l reglogForm">
-                <form class="login_from" action="user-login" method="post"
-                      id="theform">
-                    <input type="hidden" name="fromSite" id="fromSite" value="YRD" />
-                    <div class="m-row">
-                        <label class="l m-rowLabel" for="username">账户：</label>
-                        <div class="l m-holderBox">
-                            <label class="m-holderTxt">请输入邮箱/手机号</label> <input
-                                class="m-holderInput m-textFocus png" id="username"
-                                name="username" value='<s:property value="#request.username"/>' type="text">
-                        </div>
-                    </div>
-                    <div class="m-row-error s_nick_user" id="s_nick_user">
-                        <s:actionmessage />
-                        <s:fielderror fieldName="username"/>
-                    </div>
-                    <div class="m-row">
-                        <label class="l m-rowLabel" for="password">密码：</label>
-                        <div class="l m-holderBox">
-                            <label class="m-holderTxt" for="password">请输入密码</label> <input
-                                class="m-holderInput m-textFocus png" name="password"
-                                id="password" type="password" autoComplete='off'>
-                        </div>
-                    </div>
-                    <div class="m-row-error s_user_pwd1">
-                        <s:fielderror fieldName="password"/>
-                    </div>
-                    <div class="m-row">
-                        <label class="l m-rowLabel" for="srand">验证码：</label>
-                        <div class="l m-holderBox" style="width:115px;">
-                            <label class="m-holderTxt" for="srand">请输入验证码</label> <input
-                                class="m-holderInput m-textFocus png" name="s_rand" type="text"
-                                id="s_rand" style="width:100px;" maxlength="4">
-                        </div>
-                        <img class="validate" name="srand" src="yzm.jsp" title="点击图片刷新验证码"
-                             onclick="loadimage()" id="srand"> <input type="hidden"
-                                                                      id="passport_url" value=""> <a class="space_mr"
-                                                                                                     href="javascript:loadimage();">看不清？换图片</a>
-                    </div>
-                    <div class="m-row-error s_srand">
-                        <s:fielderror fieldName="srand"/></div>
-                    <div class="m-row">
-                        <label class="l m-rowLabel"></label>
-                        <div class="l m-holderBox clearfix" style="padding-top:8px">
-                            <a href="javascript:void(0);" class="m-checkbox l m-checkboxChecked"
-                               style="margin-right: 10px;margin-top:2px">
-                                <input
-                                        type="hidden" id="rememberMe" name="rememberMe"
-                                        class="m-checkbox l m-checkboxChecked" value="0" data="0" /> </a> <label
-                                class="l rowLabel">记住用户名</label> <a
-                                href="${pageContext.request.contextPath}/userInfo/pwd1.jsp" class="r">忘记密码</a>
-                        </div>
-                    </div>
-                    <div class="m-row">
-                        <input type="submit" class="input_btn btn_blue" value="立即登录"
-                               style="width:280px;margin-left:120px">
-                    </div>
-                </form>
-            </div>
-            <div class="l reglogAside">
-
-
-
-                <h3>还没有宜信通行证？</h3>
-                <a class="input_btn btn_blue" style="width:135px" rel="nofollow"
-                   href="register.jsp">立即注册</a> <a target="_blank" href="javascript:;"
-                                                   style="background:url('/yiren/images/toMPic04.png') no-repeat center top;width:198px;height:206px;display:block;margin-top:20px;margin-left:27px;"></a>
-                <div class="invite_box">
-
-                    <p id="#invite_p">
-                        邀请码：<span id="invite_code">YRDFMAB2N</span>
-                    </p>
-
-                    <p>手机注册可得更多奖励！</p>
-                    <p>
-                        <a href="javascript:;"
-                           target="_blank">邀请码使用规则〉</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+  </div>
+  <div class="header min-width">
+    <div class="container">
+      <div class="fn-left logo"> <a class="" href="/goto/index"> <img src="../foreground/images/logo.png" title=""> </a> </div>
+      <ul class="top-nav fn-clear">
+        <li class="on"> <a href="/goto/index">首页</a> </li>
+        <li> <a href="/goto/list" class="">我要投资</a> </li>
+          <li> <a href="/goto/rent">我要融资</a> </li>
+        <li> <a href="/goto/helpInfo">安全保障</a> </li>
+        <li class="top-nav-safe"> <a href="/user/toOwn">我的账户</a> </li>
+        <li> <a href="/goto/comInfo">关于我们</a> </li>
+      </ul>
     </div>
+  </div>
+</header>
+<!--注册-->
+<div class="wrap">
+ <form id="LonginForm" name="LonginForm"   action="/user/login" method="post">
+	<div class="tdbModule loginPage">
+		<div class="registerTitle">用户登录</div>
+		<div class="registerCont">
+			<ul>
+				<li class="error"  th:if="${msg} ne null">
+				    <span id="prrintInfo" data-info="" ><span th:text="${msg}"></span></span>
+			    </li>
+				<li>
+					<span class="dis">用户名：</span><input class="input" type="text" onblur="userNameJy()" name="telephone" id="telephone" maxlength="24" tabindex="1" autocomplete="off">
+				    <!--<a id="sssdfasdfas" href="#" class="blue">注册用户</a>-->
+                  <span id="tele"></span>
+				</li>
+	                
+				<li>
+				   <span class="dis">密码：</span><input class="input" type="password" name="password" id="password" maxlength="24" tabindex="1" autocomplete="off">
+                  <span id="passw"></span>
+				   <!--<a href="#" id="pawHide" class="blue" >忘记密码</a>-->
+				</li>
+                <li> <span class="dis">验证码:</span>
+                    <input type="text" id="jpgVerify" onblur="checkCode()" class="input input1 _yanzhengma" name="yzm" maxlength="4" tabindex="1">
+                    <input type="text" id="checkNode" disabled="disabled"/>
+                    <a class="look blue _changeCapcherButton" id="look" href="javascript:void(0);" onclick="createCode()">看不清？换一张</a>
+                    <span class="info" id="jpgVerifys"></span>
+                </li>
+				<li class="btn"> 
+					<input type="button"  value="立即登录"  onclick="checkAll()"  >
+				</li>
+			</ul>
+		</div>
+	</div>
+ </form>
+</div>
+<!--网站底部-->
+<div id="footer" class="ft">
+  <div class="ft-inner clearfix">
+    <div class="ft-helper clearfix">
+      <dl>
+        <dt>关于我们</dt>
+        <dd><a href="/goto/comInfo">公司简介</a><a href="/goto/ipmt">管理团队</a><a href="/goto/netNotice">网站公告</a></dd>
+      </dl>
+      <dl>
+        <dt>相关业务</dt>
+        <dd><a href="/goto/list">我要投资</a><a href="/goto/rent">我要借款</a></dd>
+      </dl>
+      <dl>
+        <dt>帮助中心</dt>
+        <dd><a href="/goto/helpInfo">新手入门</a><a href="/user/toOwn">我的账户</a><a href="/goto/list">债权转让</a></dd>
+      </dl>
+      <dl>
+        <dt>联系我们</dt>
+        <dd><a href="/goto/contactUs">联系我们</a></dd>
+      </dl>
+    </div>
+    <div class="ft-service">
+      <dl>
+        <dd>
+          <p><strong>400-660-1268</strong><br>
+            工作日 9:00-22:00<br>
+            官方交流群:<em>12345678</em><br>
+            工作日 9:00-22:00 / 周六 9:00-18:00<br>
+          </p>
+          <div class="ft-serv-handle clearfix"><a class="icon-hdSprite icon-ft-sina a-move a-moveHover" title="亿人宝新浪微博" target="_blank" href="#"></a><a class="icon-hdSprite icon-ft-qqweibo a-move a-moveHover" title="亿人宝腾讯微博" target="_blank" href="#"></a><a class="icon-ft-qun a-move a-moveHover" title="亿人宝QQ群" target="_blank" href="#"></a><a class="icon-hdSprite icon-ft-email a-move a-moveHover mrn" title="阳光易贷email" target="_blank" href="mailto:xz@yirenbao.com"></a></div>
+        </dd>
+      </dl>
+    </div>
+    <div class="ft-wap clearfix">
+      <dl>
+        <dt>官方二维码</dt>
+        <dd><span class="icon-ft-erweima"><img src="../foreground/images/code.png" style="display: inline;"></span></dd>
+      </dl>
+    </div>
+  </div>
+  <div class="ft-record">
+    <div class="ft-approve clearfix"><a class="icon-approve approve-0 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-1 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-2 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-3 fadeIn-2s" target="_blank" href="#"></a></div>
+    <div class="ft-identity">©2015 亿人宝 All rights reserved&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;安徽省亿人宝投资管理有限公司&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.miitbeian.gov.cn/">皖ICP备12345678号-1</a></div>
+  </div>
+</div>
 </body>
 </html>
