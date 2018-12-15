@@ -60,10 +60,11 @@
   </div>
 </header>
 <!--信息详细-->
-<div class="item-detail wrap">
+<div class="item-detail wrap" id="personaldetails">
   <div class="breadcrumbs"> <a href="index.html">首页</a>&gt; <a href="#">散标投资列表</a>&gt; <span class="cur">项目详情</span> </div>
-  <div class="item-detail-head clearfix" data-target="sideMenu">
-    <div class="hd"> <i class="icon icon-che" title="车易贷"></i>
+  <div class="item-detail-head clearfix" data-target="sideMenu" id="detail">
+    <!--标详细信息-->
+    <!--<div class="hd"> <i class="icon icon-che" title="车易贷"></i>
       <h2>赵女士长安福特福克斯汽车质押贷款4万元</h2>
     </div>
     <div class="bd clearfix">
@@ -95,7 +96,7 @@
             下期还款日： <span class="f20 c-333">2015-10-13</span> </div>
           <i class="icon icon-status icon-status1"></i> </div>
       </div>
-    </div>
+    </div>-->
   </div>
   <div class="item-detail-body clearfix mrt30 ui-tab">
     <div class="ui-tab-nav hd"> <i class="icon-cur" style="left: 39px;"></i>
@@ -439,5 +440,296 @@
     <div class="ft-identity">©2015 亿人宝 All rights reserved&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;安徽省亿人宝投资管理有限公司&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.miitbeian.gov.cn/">皖ICP备12345678号-1</a></div>
   </div>
 </div>
+
+<!--vue-->
+<script type="text/javascript">
+
+    var personaldetails = new Vue({
+        el: '#personaldetails',
+        data: {
+            //列表数据
+            tableData: [],
+            //显示加载中样式
+            loading:false,
+            //搜索表单(模糊查询)
+            searchForm: {
+                bidid: '',//标的编号
+                userid: '',//用户信息表id
+                auditid:'',//标审核表id
+                bidproject:'',//招标项目
+                bidamount:'',//招标金额
+                bidcurrentamount:'',//已投标金额
+                bidschedule:'',//招标进度
+                bidrepaymentmethod:'',//还款方式
+                bidrate:'',//还款利率
+                biddeadline:'',//还款期限
+                bidissuedate:'',//开始招标时间
+                biddeadday:'',//招标天数
+                biddeaddate:'',//招标结束时间
+                biddesc:''//借款描述
+            },
+            //当前页
+            currentPage:1,
+            //分页大小
+            pageSize:10,
+            //总记录数
+            total:800,
+
+        },
+
+        created:function(){
+            /* 用途: 接收地址栏参数 取id=1 根据ID的值 */
+            var urlinfo=window.location.href; //获取当前页面的url
+            var len=urlinfo.length;//获取url的长度
+            var offset=urlinfo.indexOf("?");//设置参数字符串开始的位置
+            var newsidinfo=urlinfo.substr(offset,len);//取出参数字符串 这里会获得类似“id=1”这样的字符串
+            var newsids=newsidinfo.split("=");//对获得的参数字符串按照“=”进行分割
+            var newsid=newsids[1];//得到参数值
+            /*var newsname=newsids[0];//得到参数名字*/
+            /*alert("URL:"+urlinfo+"长度："+len+"--开始位置："+offset+"--字符串："+newsidinfo+
+                           "--分割："+newsids+"--参数："+newsid+"--名字："+newsname);*/
+
+            //在 then的内部不能使用Vue的实例化的this, 因为在内部 this 没有被绑定。
+            $.ajax({
+                url: "/infor/list",
+                async:false,//同步
+                data:{bidid:newsid},
+                type:"post",
+                dataType:"json",
+                success: function(data){
+                    $('#detail').empty();
+                    var str="";
+                    if(data!=null){
+                          str="<div class='hd'><h2>"+data[0].BIDPROJECT+"</h2></div>\n" +
+                          "<div class='bd clearfix'><div class='data'>" +
+                          "<ul>" +
+                          "   <li><span class='f16'>借款金额</span><br>" +
+                          "       <span class='f30 c-333' id='account'>"+data[0].BIDAMOUNT+"</span>元 </li>" +
+                          "   <li class='relative'><span class='f16'>年利率</span><br>\n" +
+                          "       <span class='f30 c-orange'>"+data[0].BIDRATE+" </span>% </li>\n" +
+                          "   <li><span class='f16'>借款期限</span><br>\n" +
+                          "       <span class='f30 c-333'>"+data[0].BIDDEADLINE+"</span>个月</li>\n" +
+                          "   <li><span class='c-888'>借款编号：</span>"+data[0].BIDID+"</li>\n" +
+                          "   <li><span class='c-888'>发标日期： </span>"+data[0].BIDISSUEDATE+"</li>\n" +
+                          "   <li><span class='c-888'>保障方式：</span>100%本息垫付</li>\n" +
+                          "   <li><span class='c-888'>还款方式：</span>"+data[0].BIDREPAYMENTMETHOD+"</li>\n" +
+                          "   <li><span class='c-888'>需还本息：</span>"+data[0].BIDMONEY+" </li>\n" +
+                          "   <li><span class='c-888'>借款用途：</span>"+data[0].BIDDESC+"</li>" +
+                          "   <li class='colspan'> <span class='c-888 fl'>投标进度:</span>\n" +
+                          " <div class='progress-bar fl'> <span style='width:"+data[0].BIDSCHEDULE+"  '></span> </div>\n" +
+                          "       <span class='c-green'>"+data[0].BIDSCHEDULE+"</span> </li>\n" +
+                          "   <li> <span class='c-888'>投资范围：</span> <span id='account_range'> 50元~不限 </span> </li>" +
+                          "</ul></div>" +
+                          "<div class='mod-right mod-status'>\n" +
+                          "   <div class='inner'>\n" +
+                          "   <div class='text'> " +
+                          "         截止日期：<span class='f24 c-333'>"+data[0].BIDDEADDATE+"</span><br>" +
+                          "         剩余期限：<span class='f24 c-333'>"+data[0].BIDENDDAY+"</span>天<br>\n" +
+                          "         可投金额：<span class='f24 c-333'>"+data[0].BIDENDMONEY+"</span>元<br>\n" +
+                          "         <ul><li class='col-120-2'>\n" +
+                          "             <a class='ui-btn btn-gray' href='/goto/infor'>我要投标</a>" +
+                          "         </li></ul>\n" +
+                          "   </div>" +
+                          "</div></div>"
+                    }
+                    $('#detail').append(str);
+
+                },
+                error : function(data) {
+                    alert(data);
+                }
+            })
+        },
+       /* methods:{
+            //表格重新加载数据
+            loadingData:function() {
+                var _self = this;
+                _self.loading = true;
+                var self = this;
+                var start =(this.currentPage-1)*this.pageSize;
+                var end =this.currentPage*this.pageSize+1;
+                var searchForm={'start':start,'end':end,'empNo':this.searchForm.id,'ename':this.searchForm.name,'job':this.searchForm.job,'deptNo':this.searchForm.deptNo};
+                //   alert(JSON.stringify(searchForm));
+                axios.post('/user/page',searchForm).then(function(response){
+                    // console.log(response.data);
+                    // alert(222);
+                    _self.total=response.data.total;
+                    _self.tableData = response.data.pageData;
+                    //_self.multipleSelection=response.data.data;
+                })
+                console.log(_self.currentPage);
+                setTimeout(function(){
+                    console.info("加载数据成功");
+                    _self.loading = false;
+                },300);
+            },
+            //表格编辑事件
+            editClick:function(row) {
+                this.goUrl="/user/update";
+                var _self = this;
+                this.editFormVisible = true;
+                this.editForm = Object.assign({}, row);
+            },
+            //表格删除事件
+            deleteClick:function(row) {
+                var _self = this;
+                this.$confirm('确认删除' + row.EMPNO +'吗?', '提示', {
+                    type: 'warning'
+                }).then(function(){
+                    /!*var  url="/user/delete/"+row.EMPNO;
+                    axios.get(url).then(function (response) {*!/
+                    axios.post('/user/delete',{empNo:row.EMPNO}).then(function (response) {
+                        //alert(response.data);
+                        if(response.data>0){
+                            _self.$message({
+                                message: row.EMPNO + '删除成功',
+                                type: 'success'
+                            });
+                        }else {
+                            _self.$message({
+                                message: row.EMPNO +  '删除失败',
+                                type: 'error'
+                            });
+                        }
+                        _self.loadingData();//重新加载数据
+                    });
+                }).catch(function(e){
+                    if(e != "cancel")
+                        console.log("出现错误：" + e);
+                });
+            },
+            //新建事件
+            addClick:function() {0
+                //alert(111);
+                this.goUrl="/user/add";
+                var _self = this;
+                //表单数据初始化
+                this. editForm={
+                    EMPNO: 0,
+                    ENAME: '',
+                    JOB: '',
+                    SAL: 0,
+                    HIREDATE: '',
+                    DEPTNO:0,
+                    COMM:0
+                }
+                //显示隐藏的from表单
+                this.editFormVisible = true;
+                _self.loadingData();//重新加载数据
+            },
+            //表格查询事件
+            searchClick:function() {
+                var self = this;
+                /!* var start =(this.currentPage-1)*this.pageSize;
+                 var end =this.currentPage*this.pageSize+1;
+                 //var searchForm =this.searchForm;
+
+                 var searchForm={'start':start,'end':end,'id':this.id,'name':this.name,'deptNo':this.deptNo};
+                 alert(searchForm);
+                 //formData.push({'start':start}).push({'end':end})
+                 axios.post('/emp/list',searchForm).then(function(response){
+                     // console.log(response.data);
+                     //alert(response.data.total);
+                     self.total=response.data.total;
+                     self.tableData = response.data.data;
+                     // self.multipleSelection=response.data.data;
+                 })*!/
+                self.loadingData();//重新加载数据
+            },
+            //表格勾选事件
+            selectionChange:function(val) {
+                /!*打印选中行
+                for(var i=0;i<val.length;i++) {
+                    var row = val[i];
+                    alert(JSON.stringify(row));
+                }*!/
+                this.multipleSelection = val;
+                //alert(JSON.stringify(val));
+                console.info(val);
+            },
+            //删除所选，批量删除
+            removeSelection:function() {
+                var _self = this;
+                var multipleSelection = this.multipleSelection;
+                if(multipleSelection.length < 1) {
+                    _self.$message({
+                        message: '请至少选中一条记录',
+                        type: 'error'
+                    });
+                    return;
+                }
+                var ids = "";
+                for(var i=0;i<multipleSelection.length;i++) {
+                    var row = multipleSelection[i];
+                    ids += row.EMPNO + ","
+                }
+                this.$confirm('确认删除' + ids +'吗?', '提示', {
+                    type: 'warning'
+                }).then(function(){
+                    var  url="/user/batchDelThree/"+ids;
+                    axios.get(url).then(function (response) {
+                        // axios.post('/user/batchDel',{empNos:ids}).then(function (response) {
+                        //alert(response.data);
+                        var temp="";
+                        if(response.data>0){
+                            temp="删除成功";
+                        }else {
+                            temp="删除失败";
+                        }
+                        _self.$message({
+                            message: ids + temp,
+                            type: 'success'
+                        });
+                        _self.loadingData();//重新加载数据
+                    });
+
+                }).catch(function(e){
+                    if(e != "cancel")
+                        console.log("出现错误：" + e);
+                });
+            },
+            //分页大小修改事件
+            pageSizeChange:function(val) {
+                console.log('每页 ' + val +' 条');
+                this.pageSize = val;
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            },
+            //当前页修改事件
+            currentPageChange:function(val) {
+                this.currentPage = val;
+                console.log('当前页: ' + val);
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            },
+            //保存点击事件
+            editSubmit:function(){
+                var _self = this;
+                _self.loading = true;
+                var formData =this.editForm;
+                //alert(formData);
+                var goUrl=this.goUrl;
+                //alert(goUrl);
+                //alert(JSON.stringify(formData));
+                axios.post(goUrl,formData).then(function(response){
+                    // console.log(response.data);
+                    // alert(222);
+                    // self.total=response.data.total;
+                    if(response.data>0){
+                        _self.editFormVisible = false;
+                    }else {
+                        _self.$message({
+                            message:  '保存失败',
+                            type: 'error'
+                        });
+                    }
+                    _self.loadingData();//重新加载数据
+                })
+                console.info(this.editForm);
+            }
+        }*/
+
+    })
+</script>
 </body>
 </html>
