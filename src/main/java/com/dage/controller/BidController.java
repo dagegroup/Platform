@@ -43,6 +43,7 @@ public class BidController {
     @RequestMapping("/term")
     @ResponseBody
     public Object term(@RequestParam Map map){
+       /* return bidService.getTerm(map);*/
         Map mp = new HashMap();
         PageHelper.startPage(Integer.valueOf(map.get("start")+""),Integer.valueOf(map.get("end")+""));
         List<Map> term = bidService.getTerm(map);
