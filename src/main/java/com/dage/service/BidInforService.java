@@ -19,4 +19,25 @@ public interface BidInforService {
      */
     List<Map> getList(Map map);
 
+    /**
+     * 项目详情页：借款人信息
+     * @param map
+     * @return
+     */
+    List<Map> getUserList(Map map);
+
+    /**
+     * 项目详情页：投资记录
+     * @param map
+     * @return
+     */
+    List<Map> getUserInvest(Map map);
+
+    /**
+     * 项目详情页：还款记录
+     * @param map
+     * @return
+     */
+    List<Map> getRefundRecord(Map map);
+
 }

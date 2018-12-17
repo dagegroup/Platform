@@ -123,6 +123,7 @@
           </dl>
         </div>
       </div>
+      <!--右侧常见问题栏-->
       <div class="common-problem">
         <h3>常见问题</h3>
         <ul>
@@ -150,7 +151,7 @@
         <div class="title clearfix">
           <ul>
             <li class="col-330">借款标题</li>
-            <li class="col-180"><!--<a href="javascript:url('order','account_up');" class=""-->借款金额</a> </li>
+            <li class="col-180"><a href="javascript:void(0);" @click="order('order by ',$event)">借款金额</a> </li>
             <li class="col-110"><!--<a href="javascript:url('order','apr_up');" class="">-->年利率</a> </li>
             <li class="col-110"><!--<a href="javascript:url('order','period_up');" class="">-->借款期限</a> </li>
             <li class="col-180">还款方式</li>
@@ -258,7 +259,7 @@
             //在 then的内部不能使用Vue的实例化的this, 因为在内部 this 没有被绑定。
             var self = this;
             $.ajax({
-                url: "/bid/term ",
+                url: "/bid/term",
                 async:false,//同步
                 data:{bidrate:self.bidrate,biddeadline:self.biddeadline,bidrepaymentmethod:self.bidrepaymentmethod,start:this.currentPage,end:this.pageSize},
                 type:"post",
@@ -345,7 +346,7 @@
                 _self.loading = true;
                 var self = this;
                 $.ajax({
-                    url: "/bid/term ",
+                    url: "/bid/term",
                     async:false,//同步
                     data:{bidrate:self.bidrate,biddeadline:self.biddeadline,bidrepaymentmethod:self.bidrepaymentmethod,start:this.currentPage,end:this.pageSize},
                     type:"post",

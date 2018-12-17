@@ -32,7 +32,7 @@ public interface BidDao {
             "select bidid,userid,auditid,bidproject,bidamount,bidcurrentamount,bidrepaymentmethod,bidrate," +
             "100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline,bidissuedate,biddeadday,bidapplydate," +
             "biddeaddate,biddesc,bidtype,bidstate from bid_info " +
-            "where bidstate=1 " +
+            "where bidstate='待投标' " +
             "<if test=\" bidrate!=null and bidrate!=''\"> and ${bidrate}</if>" +
             "<if test=\" biddeadline!=null and biddeadline!=''\"> and ${biddeadline}</if>" +
             "<if test=\" bidrepaymentmethod!=null and bidrepaymentmethod!=''\"> and ${bidrepaymentmethod}</if>" +
