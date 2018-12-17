@@ -48,14 +48,15 @@ public class PermissionController {
 
 
     /**
-     * 根据登陆角色不同，获取不同的权限
+     * 获取所有得权限列表
      * @return
      */
     @ResponseBody //返回json格式数据
     @RequestMapping("tree")
     public Object getTree(){
-       return permissionService.getListByRole();
+       return permissionService.getList();
     }
+
 
     /**
      * 根据登陆角色不同，获取不同的权限

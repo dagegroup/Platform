@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>借款审核</title>
+    <!-- 引入样式 -->
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <script type="text/javascript" src="/js/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+<div id="tableView">
+    <!--列表顶部搜索和工具条-->
+
+    <el-row>
+        <el-form :inline="true" :model="searchForm" class="demo-form-inline" style="float:right">
+            <el-form-item label="账户Id">
+                <el-input v-model="searchForm.USERID" placeholder="账户Id"></el-input>
+            </el-form-item>
+            <el-form-item label="借款人">
+                <el-input v-model="searchForm.REALNAME" placeholder="借款人"></el-input>
+            </el-form-item>
+            <el-form-item label="借款标号">
+                <el-input v-model="searchForm.BIDID" placeholder="借款标号"></el-input>
+            </el-form-item>
+           <el-form-item>
+                <el-button type="primary" icon="search" @click="searchClick">查询</el-button>
+           </el-form-item>
+        </el-form>
+    </el-row>
+    <!--列表-->
+    <el-row>
+        <!--bidid,b.userid,b.bidamount,b.bidrepaymentmethod,b.bidrate,b.biddeadline,b.bidproject,r.realname,r.auditresult -->
+
+        <el-table
+                :data="tableData"
+                v-loading.body="loading"
+                border
+                style="width: 100%">
+            <el-table-column
+                    prop="USERID"
+                    label="账户Id"
+                    align="center"
+                    width="120">
+            </el-table-column>
+            <el-table-column
+                    prop="REALNAME"
+                    label="借款人"
+                    align="center"
+                    width="70">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDID"
+                    label="借款标号"
+                    align="center"
+                    v-if="false"
+                    width="130">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDAMOUNT"
+                    label="借款金额(元)"
+                    align="center"
+                    width="110">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDDEADLINE"
+                    align="center"
+                    label="借款期限(月)"
+                    width="110">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDRATE"
+                    label="年利率"
+                    align="center"
+                    width="70">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDREPAYMENTMETHOD"
+                    label="还款方式"
+                    align="center"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDPROJECT"
+                    label="借款描述"
+                    align="center"
+                    width="270">
+            </el-table-column>
+            <el-table-column
+                    prop="AUDITRESULT"
+                    align="center"
+                    label="认证情况"
+                    width="80">
+            </el-table-column>
+            <el-table-column
+                    label="操作"
+                    align="center">
+                <template scope="scope">
+                    <el-button :plain="true" type="success" size="small" icon="edit" @click="editClick(scope.row)">借款详情</el-button>
+                    <el-button :plain="true" type="danger" size="small" icon="delete" @click="deleteClick(scope.row)">认证信息详情</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </el-row>
+
+    <!--列表底部工具条和分页符-->
+    <el-row style="margin-top: 20px" type="flex" justify="end">
+        <el-col :span="24" >
+            <el-pagination
+                    style="float: right"
+                    @size-change="pageSizeChange"
+                    @current-change="currentPageChange"
+                    :current-page="currentPage"
+                    :page-sizes="[10, 20, 30, 50]"
+                    :page-size="pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="total">
+            </el-pagination>
+        </el-col>
+    </el-row>
+
+    <!--借款详情界面-->
+    <el-dialog title="借款详情" :visible.sync="editFormVisible" :close-on-click-modal="false">
+        <el-form :model="bidForm" label-width="120px" :rules="editFormRules" ref="bidForm">
+            <!--BIDID: '',-->
+            <!--USERID: '',-->
+            <!--BIDAMOUNT: '',-->
+            <!--BIDREPAYMENTMETHOD: '',-->
+            <!--BIDRATE:'',-->
+            <!--BIDDEADLINE: '',-->
+            <!--BIDPROJECT:'',-->
+            <!--BIDDEADDAY:'',-->
+            <!--BIDAPPLYDATE:'',-->
+            <!--TELEPHONE:'',-->
+            <!--REALNAME:''-->
+            <el-form-item label="借款标号" prop="BIDID">
+                <el-input v-model="bidForm.BIDID" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="账户ID" prop="USERID">
+                <el-input v-model="bidForm.USERID" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="借款人" prop="REALNAME">
+                <el-input v-model="bidForm.REALNAME" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="借款人手机号" prop="TELEPHONE">
+                <el-input v-model="bidForm.TELEPHONE" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="借款金额(元)" prop="BIDAMOUNT">
+                <el-input v-model="bidForm.BIDAMOUNT" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="还款方式" prop="BIDREPAYMENTMETHOD">
+                <el-input v-model="bidForm.BIDREPAYMENTMETHOD" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="年利率(%)" prop="BIDRATE">
+                <el-input v-model="bidForm.BIDRATE" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="借款期限(月)" prop="BIDDEADLINE">
+                <el-input v-model="bidForm.BIDDEADLINE" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="借款描述" prop="BIDPROJECT">
+                <el-input v-model="bidForm.BIDPROJECT" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="招标天数" prop="BIDDEADDAY">
+                <el-input v-model="bidForm.BIDDEADDAY" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="申请时间" prop="BIDAPPLYDATE">
+                <el-date-picker type="datetime" placeholder="选择日期" v-model="bidForm.BIDAPPLYDATE" value-format="yyyy-MM-dd HH:mm:ss" :readonly="true"></el-date-picker>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click.native="editFormVisible = false">取消</el-button>
+            <el-button type="primary" v-if="bidForm.AUDITRESULT=='审核通过'" @click.native="editSubmit('待投标')" :loading="editLoading">审核通过</el-button>
+            <el-button type="warning" @click.native="editSubmit('初审驳回')" :loading="editLoading">审核驳回</el-button>
+        </div>
+    </el-dialog>
+
+
+
+    <!--认证信息界面-->
+    <el-dialog title="认证信息" :visible.sync="auditVisible" :close-on-click-modal="false">
+        <el-form :model="auditForm" label-width="90px" :rules="editFormRules" ref="bidForm">
+            <!--REALNAMEID:'',USERID:'',-->
+            <!--REALNAME:'',SEX:'',-->
+            <!--ADDRESS:'',EMAIL:'',-->
+            <!--IDNUMBER:'',ACADEMIC:'',-->
+            <!--HOUSED:'',MARRIAGE:'',-->
+            <!--INCOME:'',IDIMAGEFOUNTVAR:'',-->
+            <!--IDIMAGEBACKVAR:'',APPLYTIME:'',-->
+            <!--AUDITORID:'',AUDITTIME:'',-->
+            <!--AUDITRESULT:'',AUDITREMARKS:'',-->
+            <!--LINKMAN1NAME:'',LINKMAN1RELA:'',-->
+            <!--LINKMAN1SEX:'',LINKMAN1PHONE:'',-->
+            <!--LINKMAN1ADDRESS:'',LINKMAN2NAME:'',-->
+            <!--LINKMAN2RELA:'',LINKMAN2SEX:'',-->
+            <!--LINKMAN2PHONE:'',LINKMAN2ADDRESS:'',-->
+            <!--LINKMAN3NAME:'',LINKMAN3RELA:'',-->
+            <!--LINKMAN3SEX:'',LINKMAN3PHONE:'',-->
+            <!--LINKMAN3ADDRESS:'',CREDITIMG:'',-->
+            <!--VALUEIMG:'',-->
+            <el-form-item label="认证ID" prop="REALNAMEID">
+                <el-input v-model="auditForm.REALNAMEID" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="账户ID" prop="USERID">
+                <el-input v-model="auditForm.USERID" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="真实姓名" prop="REALNAME">
+                <el-input v-model="auditForm.REALNAME" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="性别" prop="SEX">
+                <el-input v-model="auditForm.SEX" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="证件号码" prop="IDNUMBER">
+                <el-input v-model="auditForm.IDNUMBER" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="详细住址" prop="ADDRESS">
+                <el-input v-model="auditForm.ADDRESS" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="邮箱" prop="EMAIL">
+                <el-input v-model="auditForm.EMAIL" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="最高学历" prop="ACADEMIC">
+                <el-input v-model="auditForm.ACADEMIC" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="房产" prop="HOUSED">
+                <el-input v-model="auditForm.HOUSED" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="婚姻情况" prop="MARRIAGE">
+                <el-input v-model="auditForm.MARRIAGE" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="联系人信息" >
+            <table border="0" width="100%" style="font-size:12px">
+                <tr><td>姓名</td><td>关系</td><td>性别</td><td>联系方式</td><td>联系住址</td></tr>
+                <tr><td>{{auditForm.LINKMAN1NAME}}</td><td>{{auditForm.LINKMAN1RELA}}</td><td>{{auditForm.LINKMAN1SEX}}</td><td>{{auditForm.LINKMAN1PHONE}}</td><td>{{auditForm.LINKMAN1ADDRESS}}</td></tr>
+                <tr><td>{{auditForm.LINKMAN2NAME}}</td><td>{{auditForm.LINKMAN2RELA}}</td><td>{{auditForm.LINKMAN2SEX}}</td><td>{{auditForm.LINKMAN2PHONE}}</td><td>{{auditForm.LINKMAN2ADDRESS}}</td></tr>
+                <tr><td>{{auditForm.LINKMAN3NAME}}</td><td>{{auditForm.LINKMAN3RELA}}</td><td>{{auditForm.LINKMAN3SEX}}</td><td>{{auditForm.LINKMAN3PHONE}}</td><td>{{auditForm.LINKMAN3ADDRESS}}</td></tr>
+            </table></el-form-item>
+            <el-form-item label="身份证信息">
+                <table width="100%">
+                    <tr><td>身份证正面:</td><td>身份证反面:</td></tr>
+                    <tr><td><img :src="'/audit/show?fileName='+auditForm.IDIMAGEFOUNTVAR" width="100%"></td><td><img :src="'/audit/show?fileName='+auditForm.IDIMAGEBACKVAR" width="100%"></td></tr>
+                </table>
+            </el-form-item>
+            <el-form-item label="其它信息">
+                <table width="100%">
+                    <tr><td>近三个月工资流水:</td><td>个人信用报告:</td></tr>
+                    <tr><td><img :src="'/audit/show?fileName='+auditForm.VALUEIMG" width="100%"></td><td><img :src="'/audit/show?fileName='+auditForm.CREDITIMG" width="100%"></td></tr>
+                </table>
+            </el-form-item>
+            <el-form-item label="申请时间" prop="APPLYTIME">
+                <el-input  v-model="auditForm.APPLYTIME" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="审核人姓名" prop="AUDITORNAME" v-if="auditForm.AUDITRESULT=='审核通过'||auditForm.AUDITRESULT=='审核驳回'">
+                <el-input v-model="auditForm.AUDITORNAME" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="审核时间" prop="AUDITTIME" v-if="auditForm.AUDITRESULT=='审核通过'||auditForm.AUDITRESULT=='审核驳回'">
+                <el-date-picker type="datetime" placeholder="选择日期" v-model="auditForm.AUDITTIME" value-format="yyyy-MM-dd HH:mm:ss" :readonly="true"></el-date-picker>
+            </el-form-item>
+            <el-form-item label="审核结果" prop="AUDITRESULT" >
+                <el-input v-model="auditForm.AUDITRESULT" auto-complete="off" :readonly="true"></el-input>
+            </el-form-item>
+            <el-form-item label="审核备注" prop="AUDITREMARKS" v-if="auditForm.AUDITRESULT=='未审核'">
+                <el-input v-model="auditForm.AUDITREMARKS" auto-complete="off"  placeholder="审核时需要填写" ></el-input>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click.native="auditVisible = false">取消</el-button>
+            <el-button type="primary" v-if="auditForm.AUDITRESULT=='未审核'" @click.native="auditSubmit('审核通过')" :loading="editLoading">审核通过</el-button>
+            <el-button type="warning" v-if="auditForm.AUDITRESULT=='未审核'" @click.native="auditSubmit('审核驳回')" :loading="editLoading">审核驳回</el-button>
+        </div>
+    </el-dialog>
+
+</div>
+
+
+<script type="text/javascript">
+    var tableView = new Vue({
+        el: '#tableView',
+        data: {
+            //列表数据
+            options:[],
+            tableData: [],
+            //显示加载中样式
+            loading:false,
+            //搜索表单
+            searchForm: {
+                USERID: '',
+                BIDID: '',
+                REALNAME: ''
+            },
+            //多选值
+            multipleSelection: [],
+            //当前页
+            currentPage:1,
+            //分页大小
+            pageSize:10,
+            //总记录数
+            total:800,
+            //删除的弹出框
+            auditVisible:false,
+            //编辑界面是否显示
+            editFormVisible: false,
+            editLoading: false,
+            goUrl:'',
+            editFormRules: {
+                name: [
+                    { required: true, message: '请输入姓名', trigger: 'blur' }
+                ]
+            },
+            //借款详情界面数据 b.bidid,b.userid,b.bidamount,b.bidrepaymentmethod,b.bidrate||'%' as bidrate,b.biddeadline,b.bidproject,b.biddeadday,b.bidapplydate,u.telephone
+            bidForm: {
+                BIDID: '',
+                USERID: '',
+                BIDAMOUNT: '',
+                BIDREPAYMENTMETHOD: '',
+                BIDRATE:'',
+                BIDDEADLINE: '',
+                BIDPROJECT:'',
+                BIDDEADDAY:'',
+                BIDAPPLYDATE:'',
+                TELEPHONE:'',
+                REALNAME:'',
+                AUDITRESULT:'',
+                BIDSTATE:''
+            },
+            auditForm:{
+                REALNAMEID:'',
+                USERID:'',
+                REALNAME:'',
+                SEX:'',
+                ADDRESS:'',
+                EMAIL:'',
+                IDNUMBER:'',
+                ACADEMIC:'',
+                HOUSED:'',
+                MARRIAGE:'',
+                INCOME:'',
+                IDIMAGEFOUNTVAR:'',
+                IDIMAGEBACKVAR:'',
+                APPLYTIME:'',
+                AUDITORID:'',
+                AUDITTIME:'',
+                AUDITRESULT:'',
+                AUDITREMARKS:'',
+                LINKMAN1NAME:'',
+                LINKMAN1RELA:'',
+                LINKMAN1SEX:'',
+                LINKMAN1PHONE:'',
+                LINKMAN1ADDRESS:'',
+                LINKMAN2NAME:'',
+                LINKMAN2RELA:'',
+                LINKMAN2SEX:'',
+                LINKMAN2PHONE:'',
+                LINKMAN2ADDRESS:'',
+                LINKMAN3NAME:'',
+                LINKMAN3RELA:'',
+                LINKMAN3SEX:'',
+                LINKMAN3PHONE:'',
+                LINKMAN3ADDRESS:'',
+                CREDITIMG:'',
+                VALUEIMG:'',
+                AUDITORNAME:''
+            }
+        },
+        created:function(){
+            //在 then的内部不能使用Vue的实例化的this, 因为在内部 this 没有被绑定。
+            var self = this;
+            var start =this.currentPage;
+            var end =this.pageSize;
+            axios.post('/audit/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
+                // console.log(response.data);
+                //alert(response.data.total);
+                self.total=response.data.page.total;
+                self.tableData = response.data.page.list;
+                // self.multipleSelection=response.data.data;
+            })
+        },
+        methods:{
+            //表格重新加载数据
+            loadingData:function() {
+                var _self = this;
+                _self.loading = true;
+                var start =this.currentPage;
+                var end =this.pageSize;
+                axios.post('/audit/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
+                    // console.log(response.data);
+                    //alert(response.data.total);
+                    self.total=response.data.page.total;
+                    self.tableData = response.data.page.list;
+                    // self.multipleSelection=response.data.data;
+                })
+                console.log(_self.currentPage);
+                setTimeout(function(){
+                    console.info("加载数据成功");
+                    _self.loading = false;
+                },300);
+            },
+            //表格编辑事件
+            editClick:function(row) {
+                var _self = this;
+                //_self.loading = true;
+                axios.post('/audit/one?bidid='+row.BIDID).then(function(response){
+                    _self.bidForm = response.data;
+                    _self.bidForm.REALNAME = row.REALNAME;
+                    _self.bidForm.AUDITRESULT = row.AUDITRESULT;
+                })
+                _self.editFormVisible=true;
+            },
+            //表格删除事件
+            deleteClick:function(row) {
+                var _self = this;
+                axios.post('/audit/real?id='+row.USERID).then(function(response){
+                    _self.auditForm = response.data;
+                })
+                _self.auditVisible=true;
+            },
+
+            //表格查询事件
+            searchClick:function() {
+                var self = this;
+                self.loadingData();//重新加载数据
+            },
+            //分页大小修改事件
+            pageSizeChange:function(val) {
+                console.log('每页 ' + val +' 条');
+                this.pageSize = val;
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            },
+            //当前页修改事件
+            currentPageChange:function(val) {
+                this.currentPage = val;
+                console.log('当前页: ' + val);
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            },
+            //保存点击事件
+            editSubmit:function(msg){
+                var _self = this;
+                _self.loading = true;
+                _self.bidForm.BIDSTATE=msg;
+                var formData =this.bidForm;
+                axios.post("/audit/updbidstate",formData).then(function(response){
+                    // console.log(response.data);
+                    // alert(222);
+                    // self.total=response.data.total;
+                    if(response.data>0){
+                        _self.editFormVisible = false;
+                    }else{
+                        _self.$message({
+                            message:'操作有误',
+                            type: 'error'
+                        });
+                    }
+                    _self.loadingData();//重新加载数据
+                })
+                console.info(this.editForm);
+            },
+            auditSubmit:function(msg){
+                var _self = this;
+                _self.loading = true;
+                _self.auditForm.AUDITRESULT=msg;
+                var formData =this.auditForm;
+                axios.post("/audit/updrealstate",formData).then(function(response){
+                    // console.log(response.data);
+                    // alert(222);
+                    // self.total=response.data.total;
+                    if(response.data>0){
+                        _self.auditVisible = false;
+                    }else{
+                        _self.$message({
+                            message:'操作有误',
+                            type: 'error'
+                        });
+                    }
+                    _self.loadingData();//重新加载数据
+                })
+                console.info(this.auditVisible);
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>
