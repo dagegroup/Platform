@@ -74,8 +74,9 @@ public class AuditController {
      */
     @ResponseBody
     @RequestMapping("updbidstate")
-    public Object updState(@RequestBody Map map){
-        return auditService.updateBidState(map);
+    public Object updState(@RequestBody Map map,HttpServletRequest request){
+        HttpSession session = request.getSession();
+        return auditService.updateBidState(map,session);
     }
 
     /**

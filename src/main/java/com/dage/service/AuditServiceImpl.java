@@ -38,7 +38,9 @@ public class AuditServiceImpl implements AuditService {
     }
 
     @Override
-    public int updateBidState(Map map) {
+    public int updateBidState(Map map, HttpSession session) {
+        Emp admin = (Emp)session.getAttribute("admin");
+        map.put("EMPID",admin.getId());
         return auditDao.updateBidState(map);
     }
 

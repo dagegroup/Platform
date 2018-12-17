@@ -30,7 +30,7 @@ public interface AuditService {
      * @param map
      * @return
      */
-    int updateBidState(Map map);
+    int updateBidState(Map map, HttpSession session);
     /**
      * 更改认证信息的状态
      * @param map

@@ -1,5 +1,6 @@
 package com.dage.dao;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
@@ -42,9 +43,17 @@ public interface AuditDao {
      * @param map
      * @return
      */
-    @Update("update bid_info set bidstate=#{BIDSTATE} where bidid=#{BIDID} ")
+    @Update("update bid_info set bidstate=#{BIDSTATE},infos=#{INFOS} where bidid=#{BIDID} ")
     int updateBidState(Map map);
 
+    /**
+     * 往标审核表添加信息
+     * @param map
+     * @return
+     */
+    @Insert("insert into bid_audit (auditid,userid,bidid,empid,audittime,auditstate,auditremarks,applytime) values(seq_auditid.nextval,#{USERID},#{BIDID},#{EMPID},sysdate," +
+            "#{BIDSTATE},#{INFOS},#{BIDAPPLYDATE}); ")
+    int AddAudit(Map map);
     /**
      * 更改认证信息的状态  auditorid,audittime,auditorname,auditresult,auditremarks,
      * @param map
