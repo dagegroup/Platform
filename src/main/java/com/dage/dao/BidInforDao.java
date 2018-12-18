@@ -1,5 +1,7 @@
 package com.dage.dao;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -20,11 +22,11 @@ public interface BidInforDao {
      *
      * @return
      */
-    @Select(value = "select bidid,userid,auditid,bidproject,to_char(bidamount, '9999999990.00') as bidamount,to_char(bidcurrentamount, '9999999990.00') as bidcurrentamount," +
+    @Select(value = "select bidid,userid,auditid,bidproject,to_char(bidamount, '9999990.00') as bidamount,to_char(bidcurrentamount, '9999990.00') as bidcurrentamount," +
             "bidrepaymentmethod,bidrate,100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline," +
             "to_char(bidissuedate,'yyyy-MM-dd') as bidissuedate,biddeadday,to_char(bidapplydate,'yyyy-MM-dd') as bidapplydate," +
             "to_char(biddeaddate,'yyyy-MM-dd') as biddeaddate,biddesc,bidtype,bidstate,bidmoney," +
-            "round(to_number(biddeaddate - sysdate)) as bidendday,to_char((bidamount - bidcurrentamount), '9999999990.00') as bidendmoney" +
+            "round(to_number(biddeaddate - sysdate)) as bidendday,to_char((bidamount - bidcurrentamount), '9999990.00') as bidendmoney" +
             " from bid_info where bidid=#{bidid}")
     List<Map> getList(Map map);
 
@@ -62,8 +64,32 @@ public interface BidInforDao {
             "select u.userid,to_char(r.biderpaydeaddate,'yyyy-mm-dd hh24:mi:ss') as bidrepaydeaddate," +
             "to_char(r.biderpaydate,'yyyy-mm-dd hh24:mi:ss') as bidrepaydate," +
             "r.bidrepaytotpmts,r.bidrepaynumber,r.bidrepayamount,r.bidrepaystate from  tb_user_info u " +
-            "left join bid_repay_info r on u.userid=r.userid where bidid=#{bidid} " +
+            "left join bid_repay_info r on u.userid=r.userid where u.bidid=#{bidid} " +
             "order by bidrepaydeaddate desc" +
             "</script>")
     List<Map> getRefundRecord(Map map);
+
+    /**
+     * 我要投标
+     * @param map
+     * @return
+     */
+    @Select("<script>" +
+            "select bidid,bidproject,bidrate,to_char(bidissuedate+5,'yyyy-MM-dd') as biddeaddate," +
+            "to_char((bidamount - bidcurrentamount), '9999990.00') as bidendmoney " +
+            "from bid_info where bidid= #{bidid} and bidstate='待投标'" +
+            "</script>")
+    Map tender(Map map);
+
+    /**
+     * 根据session里的username得到realname
+     * @param username
+     * @return
+     */
+    @Select("<script>" +
+            "select r.realname from tb_user_info u left join " +
+            "tb_realname_certification r on u.userid=r.userid " +
+            "where username=#{username}' " +
+            "</script>")
+    Map getUser(@Param("username") String username);
 }

@@ -1,16 +1,21 @@
 package com.dage.controller;
 
 import com.dage.service.BidInforService;
+import com.dage.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import javafx.scene.control.Alert;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import javax.xml.transform.Source;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +33,8 @@ public class BidInforController {
 
     @Autowired
     private BidInforService bidInforService;
+    @Autowired
+    private UserService userService;
 
     /**
      * 项目详情页：标信息模块
@@ -70,6 +77,11 @@ public class BidInforController {
         /*return bidInforService.getUserInvest(map);*/
     }
 
+    /**
+     * 项目详情页：还款记录
+     * @param map
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/refundRecord")
     public Object refundRecord(@RequestParam Map map){
@@ -80,6 +92,40 @@ public class BidInforController {
         mp.put("page",info);
         mp.put("total",info.getTotal());
         return mp;
+    }
+
+    /**
+     * 投标时判断是否登录账号
+     * @param session
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/bidIntercept")
+    public Object bidIntercept(HttpSession session){
+        Object biduser = session.getAttribute("username");
+        if (biduser!=null&&biduser!=""){
+            return "forward:/reception/infor/list";
+        }else {
+            return "redirect:/user/toLogin";
+        }
+    }
+
+    /**
+     * 我要投标
+     * @param map
+     * @return
+     * RequestBody 该方法接收的数据为json对象
+     * ResponseBody 该方法的返回值为json对象
+     */
+    @ResponseBody
+    @RequestMapping("/tender")
+    public Object tender(@RequestBody Map map,HttpSession session){
+        Object username = session.getAttribute("userName");
+        if (username!=null&&username!=""){
+            return bidInforService.tender(map);
+        }else{
+            return -1;
+        }
     }
 
 }

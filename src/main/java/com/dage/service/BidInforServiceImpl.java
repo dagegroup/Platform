@@ -57,4 +57,23 @@ public class BidInforServiceImpl implements BidInforService {
     public List<Map> getRefundRecord(Map map) {
         return bidInforDao.getRefundRecord(map);
     }
+
+    /**
+     * 我要投标
+     * @param map
+     * @return
+     */
+    public Map tender(Map map){
+
+        return bidInforDao.tender(map);
+    }
+
+    /**
+     * 根据session里的username得到realname
+     * @param username
+     * @return
+     */
+    public Map getUser(String username){
+        return bidInforDao.getUser(username);
+    }
 }
