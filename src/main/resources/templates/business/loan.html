@@ -124,8 +124,8 @@
     </el-row>
 
     <!--借款详情界面-->
-    <el-dialog title="借款详情" :visible.sync="editFormVisible" :close-on-click-modal="false">
-        <el-form-item label="借款标号" prop="BIDID">
+    <el-dialog title="投标详情" :visible.sync="editFormVisible" :close-on-click-modal="false">
+        <el-form-item label="借款标号" prop="BIDID" v-if="false">
             <el-input v-model="BIDID" auto-complete="off" :readonly="true"></el-input>
         </el-form-item>
         <el-table
@@ -167,7 +167,7 @@
 
         <div slot="footer" class="dialog-footer">
             <el-button @click.native="editFormVisible = false">取消</el-button>
-            <el-button type="primary" @click.native="auditSubmit('待放款')" :loading="editLoading">审核通过</el-button>
+            <el-button type="primary" @click.native="auditSubmit" :loading="editLoading">放款通过</el-button>
         </div>
     </el-dialog>
 
@@ -220,7 +220,7 @@
             var self = this;
             var start =this.currentPage;
             var end =this.pageSize;
-            axios.post('/floodmark/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
+            axios.post('/loan/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
                 // console.log(response.data);
                 //alert(response.data.total);
                 self.total=response.data.page.total;
@@ -235,7 +235,7 @@
                 _self.loading = true;
                 var start =this.currentPage;
                 var end =this.pageSize;
-                axios.post('/floodmark/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
+                axios.post('/loan/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
                     // console.log(response.data);
                     //alert(response.data.total);
                     _self.total=response.data.page.total;
@@ -259,17 +259,14 @@
                 })
                 _self.editFormVisible=true;
             },
-            auditSubmit:function(msg){
+            auditSubmit:function(){
                 var _self = this;
                 _self.loading = true;
-                axios.post("/floodmark/check",{BIDID:_self.BIDID,BIDSTATE:msg}).then(function(response){
-                    // console.log(response.data);
-                    // alert(222);
-                    // self.total=response.data.total;
+                axios.post("/loan/check",{BIDID:_self.BIDID}).then(function(response){
                     if(response.data>0){
                         _self.editFormVisible = false;
                         _self.$message({
-                            message:'操作成功',
+                            message:'放款成功，请通知个人查看账户以及还款账单',
                             type: 'success'
                         });
                     }else{

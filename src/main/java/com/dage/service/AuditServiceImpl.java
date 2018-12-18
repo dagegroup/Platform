@@ -1,6 +1,7 @@
 package com.dage.service;
 
 import com.dage.dao.AuditDao;
+import com.dage.dao.RepayDao;
 import com.dage.entity.Emp;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -41,6 +42,8 @@ public class AuditServiceImpl implements AuditService {
     public int updateBidState(Map map, HttpSession session) {
         Emp admin = (Emp)session.getAttribute("admin");
         map.put("EMPID",admin.getId());
+        auditDao.AddAudit(map);
+        auditDao.updateUserState(map.get("USERID")+"");
         return auditDao.updateBidState(map);
     }
 

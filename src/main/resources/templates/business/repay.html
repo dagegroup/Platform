@@ -102,6 +102,7 @@
                     align="center">
                 <template scope="scope">
                     <el-button :plain="true" type="success" size="small" icon="edit" @click="editClick(scope.row)">投标详情</el-button>
+                    <el-button :plain="true" type="primary"  size="small" icon="edit"  @click.native="auditSubmit(scope.row)" :loading="editLoading">还款详情</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -124,10 +125,7 @@
     </el-row>
 
     <!--借款详情界面-->
-    <el-dialog title="借款详情" :visible.sync="editFormVisible" :close-on-click-modal="false">
-        <el-form-item label="借款标号" prop="BIDID">
-            <el-input v-model="BIDID" auto-complete="off" :readonly="true"></el-input>
-        </el-form-item>
+    <el-dialog title="投标详情" :visible.sync="editFormVisible" :close-on-click-modal="false">
         <el-table
                 :data="submitData"
                 v-loading.body="loading"
@@ -167,11 +165,78 @@
 
         <div slot="footer" class="dialog-footer">
             <el-button @click.native="editFormVisible = false">取消</el-button>
-            <el-button type="primary" @click.native="auditSubmit('待放款')" :loading="editLoading">审核通过</el-button>
         </div>
     </el-dialog>
 
+    <!--还款详情界面-->
+    <el-dialog title="还款详情" :visible.sync="repayVisible" :close-on-click-modal="false" width="78%">
+        <el-table
+                :data="repayData"
+                v-loading.body="loading"
+                border
+                style="width: 100%">
+            <!--repayid,bidid,userid,bidrepayamount,biderpaydate,biderpaydeaddate,bidrepaystate,bidrepaynumber,bidrepaytotpmts-->
 
+            <el-table-column
+                    prop="BIDID"
+                    label="标Id"
+                    align="center"
+                    width="130">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDREPAYNUMBER"
+                    label="期数"
+                    align="center"
+                    width="70">
+            </el-table-column>
+            <el-table-column
+                    prop="REALNAME"
+                    label="还款人"
+                    align="center"
+                    width="70">
+            </el-table-column>
+            <el-table-column
+                    prop="TELEPHONE"
+                    label="联系方式"
+                    align="center"
+                    width="130">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDREPAYAMOUNT"
+                    label="还款金额(元)"
+                    align="center"
+                    width="110">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDERPAYDATE"
+                    align="center"
+                    label="还款截至日期"
+                    width="130">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDERPAYDEADDATE"
+                    align="center"
+                    label="结束日期"
+                    width="120">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDREPAYTOTPMTS"
+                    label="总期数"
+                    align="center"
+                    width="70">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDREPAYSTATE"
+                    align="center"
+                    label="还款状态"
+                    width="120">
+            </el-table-column>
+        </el-table>
+
+        <div slot="footer" class="dialog-footer">
+            <el-button @click.native="repayVisible = false">取消</el-button>
+        </div>
+    </el-dialog>
 
 
 
@@ -204,6 +269,7 @@
             BIDID:'',
             //编辑界面是否显示
             editFormVisible: false,
+            repayVisible:false,
             editLoading: false,
             goUrl:'',
             editFormRules: {
@@ -213,14 +279,14 @@
             },
             //借款详情界面数据 b.bidid,b.userid,b.bidamount,b.bidrepaymentmethod,b.bidrate||'%' as bidrate,b.biddeadline,b.bidproject,b.biddeadday,b.bidapplydate,u.telephone
             submitData:[],
-
+            repayDate:[]
         },
         created:function(){
             //在 then的内部不能使用Vue的实例化的this, 因为在内部 this 没有被绑定。
             var self = this;
             var start =this.currentPage;
             var end =this.pageSize;
-            axios.post('/floodmark/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
+            axios.post('/repay/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
                 // console.log(response.data);
                 //alert(response.data.total);
                 self.total=response.data.page.total;
@@ -235,7 +301,7 @@
                 _self.loading = true;
                 var start =this.currentPage;
                 var end =this.pageSize;
-                axios.post('/floodmark/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
+                axios.post('/repay/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
                     // console.log(response.data);
                     //alert(response.data.total);
                     _self.total=response.data.page.total;
@@ -252,34 +318,23 @@
             editClick:function(row) {
                 var _self = this;
                 //_self.loading = true;
-                this.BIDID=row.BIDID;
                 axios.post('/submit/one?bidid='+row.BIDID).then(function(response){
                    // alert(JSON.stringify(response.data.data))
                     _self.submitData = response.data.data;
                 })
                 _self.editFormVisible=true;
             },
-            auditSubmit:function(msg){
+            auditSubmit:function(row){
                 var _self = this;
-                _self.loading = true;
-                axios.post("/floodmark/check",{BIDID:_self.BIDID,BIDSTATE:msg}).then(function(response){
-                    // console.log(response.data);
-                    // alert(222);
-                    // self.total=response.data.total;
-                    if(response.data>0){
-                        _self.editFormVisible = false;
-                        _self.$message({
-                            message:'操作成功',
-                            type: 'success'
-                        });
-                    }else{
-                        _self.$message({
-                            message:'操作有误',
-                            type: 'error'
-                        });
-                    }
-                    _self.loadingData();//重新加载数据
+                //_self.loading = true;
+                axios.post('/repay/one?bidid='+row.BIDID).then(function(response){
+                    _self.repayData = response.data.data;
                 })
+                setTimeout(function(){
+                    console.info("加载数据成功");
+                   // _self.loading = false;
+                    _self.repayVisible=true;
+                },300);
             },
             //表格查询事件
             searchClick:function() {

@@ -1,5 +1,6 @@
 package com.dage.service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,4 +33,18 @@ public interface SubmitService {
      */
     Map getListBidByFull(Map map);
 
+    /**
+     * 更改标的状态
+     * @param map
+     * @return
+     */
+    int updateBidState(Map map);
+
+
+    /**
+     * 获取待放款的投标信息
+     * @param map
+     * @return
+     */
+    Map getListBidByLoan(Map map);
 }
