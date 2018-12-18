@@ -61,6 +61,7 @@ public class RepayServiceImpl implements RepayService {
                     mp.put("BIDREPAYAMOUNT",z);
                 }
                 int i = repayDaos.addRepayPlan(mp);
+                repayDaos.updateUserState(userid);
                 if (i==0){
                     flag=false;
                 }

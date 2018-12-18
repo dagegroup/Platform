@@ -74,4 +74,11 @@ public interface AuditDao {
             "  linkman1phone,linkman1address,linkman2name,linkman2rela,linkman2sex,linkman2phone,\n" +
             "  linkman2address,linkman3name,linkman3rela,linkman3sex,linkman3phone,linkman3address,creditimg,valueimg  from tb_realname_certification where userid = #{id} ")
     Map getRealByUserId(String id);
+
+    /**
+     * 根据用户id更改用户状态信息
+     * @return
+     */
+    @Update("update tb_user_info set state='借款中' where userid =#{userid}")
+    int updateUserState(String userid);
 }

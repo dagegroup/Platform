@@ -2,6 +2,7 @@ package com.dage.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -54,6 +55,14 @@ public interface RepayDao {
      *
      */
     @Select("select a.*,b.telephone from (select r.bidid,r.userid,r.bidrepayamount,to_char(r.biderpaydate,'yyyy-mm-dd') as biderpaydate,to_char(r.biderpaydeaddate,'yyyy-mm-dd') as biderpaydeaddate," +
-            "r.bidrepaynumber,r.bidrepaystate,t.realname from bid_repay_info r left join tb_realname_certification t on r.userid=t.userid where bidid = #{bidid}) a left join tb_user_info b on a.userid=b.userid order by a.bidrepaynumber")
+            "r.bidrepaynumber,r.bidrepaytotpmts,r.bidrepaystate,t.realname from bid_repay_info r left join tb_realname_certification t on r.userid=t.userid where bidid = #{bidid}) a left join tb_user_info b on a.userid=b.userid order by a.bidrepaynumber")
     List<Map> getListByBid(String bidid);
+
+
+    /**
+     * 根据用户id更改用户状态信息
+     * @return
+     */
+    @Update("update tb_user_info set state='待还款' where userid =#{userid}")
+    int updateUserState(String userid);
 }
