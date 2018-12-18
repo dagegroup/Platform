@@ -16,16 +16,54 @@ import java.util.Map;
 public interface BidInforDao {
 
     /**
-     * 获取标列表
+     * 项目详情页：获取标信息
      *
      * @return
      */
-    @Select(value = "select bidid,userid,auditid,bidproject,to_char(bidamount, '9999999999.00') as bidamount,to_char(bidcurrentamount, '9999999999.00') as bidcurrentamount," +
+    @Select(value = "select bidid,userid,auditid,bidproject,to_char(bidamount, '9999999990.00') as bidamount,to_char(bidcurrentamount, '9999999990.00') as bidcurrentamount," +
             "bidrepaymentmethod,bidrate,100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline," +
             "to_char(bidissuedate,'yyyy-MM-dd') as bidissuedate,biddeadday,to_char(bidapplydate,'yyyy-MM-dd') as bidapplydate," +
             "to_char(biddeaddate,'yyyy-MM-dd') as biddeaddate,biddesc,bidtype,bidstate,bidmoney," +
-            "round(to_number(biddeaddate - sysdate)) as bidendday,to_char((bidamount - bidcurrentamount), '9999999999.00') as bidendmoney" +
+            "round(to_number(biddeaddate - sysdate)) as bidendday,to_char((bidamount - bidcurrentamount), '9999999990.00') as bidendmoney" +
             " from bid_info where bidid=#{bidid}")
     List<Map> getList(Map map);
 
+    /**
+     * 项目详情页：借款人信息
+     * @param map
+     * @return
+     */
+    @Select("<script> " +
+            "select r.realname,r.academic,r.marriage,r.address,r.income " +
+            "from tb_user_info u  " +
+            "left join tb_realname_certification r on u.realnameid=r.realnameid  " +
+            "where u.bidid=#{bidid} " +
+            "</script>")
+    List<Map> getUserList(Map map);
+
+    /**
+     * 项目详情页：投资记录
+     * @param map
+     * @return
+     */
+    @Select("<script> " +
+            "select s.userid,s.bidid,s.bidamount,to_char(s.biddate,'yyyy-mm-dd hh24:mi:ss') as biddate," +
+            "r.realname from bid_submit s left join tb_realname_certification r on s.userid=r.userid " +
+            "where s.bidid=#{bidid} order by biddate desc" +
+            "</script>")
+    List<Map> getUserInvest(Map map);
+
+    /**
+     * 项目详情页：还款记录
+     * @param map
+     * @return
+     */
+    @Select("<script> " +
+            "select u.userid,to_char(r.biderpaydeaddate,'yyyy-mm-dd hh24:mi:ss') as bidrepaydeaddate," +
+            "to_char(r.biderpaydate,'yyyy-mm-dd hh24:mi:ss') as bidrepaydate," +
+            "r.bidrepaytotpmts,r.bidrepaynumber,r.bidrepayamount,r.bidrepaystate from  tb_user_info u " +
+            "left join bid_repay_info r on u.userid=r.userid where bidid=#{bidid} " +
+            "order by bidrepaydeaddate desc" +
+            "</script>")
+    List<Map> getRefundRecord(Map map);
 }
