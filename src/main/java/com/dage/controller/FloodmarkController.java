@@ -40,4 +40,15 @@ public class FloodmarkController {
     public Object submitList(@RequestBody Map map){
         return submitService.getListBidByFull(map);
     }
+
+    /**
+     * 满标审核
+     * @param map
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("check")
+    public Object submitCheck(@RequestBody Map map){
+        return submitService.updateBidState(map);
+    }
 }

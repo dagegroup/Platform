@@ -41,6 +41,7 @@ public class AuditServiceImpl implements AuditService {
     public int updateBidState(Map map, HttpSession session) {
         Emp admin = (Emp)session.getAttribute("admin");
         map.put("EMPID",admin.getId());
+        auditDao.AddAudit(map);
         return auditDao.updateBidState(map);
     }
 

@@ -48,4 +48,19 @@ public class SubmitServiceImpl implements SubmitService {
         mp.put("page",info);
         return mp;
     }
+
+    @Override
+    public int updateBidState(Map map) {
+        return submitDao.updateBidState(map);
+    }
+
+    @Override
+    public Map getListBidByLoan(Map map) {
+        Map mp = new HashMap();
+        PageHelper.startPage(Integer.valueOf(map.get("start")+""),Integer.valueOf(map.get("end")+""));
+        List<Map> listBid = submitDao.getListBidByLoan(map);
+        PageInfo<Map> info = new PageInfo<>(listBid);
+        mp.put("page",info);
+        return mp;
+    }
 }
