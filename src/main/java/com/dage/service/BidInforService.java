@@ -39,5 +39,17 @@ public interface BidInforService {
      * @return
      */
     List<Map> getRefundRecord(Map map);
+    /**
+     * 我要投标
+     * @param map
+     * @return
+     */
+    Map tender(Map map);
 
+    /**
+     * 根据session里的username得到realname
+     * @param username
+     * @return
+     */
+    Map getUser(String username);
 }

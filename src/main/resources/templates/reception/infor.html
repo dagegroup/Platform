@@ -14,8 +14,8 @@
 <script src="script/plugins.js"></script>
 <script src="script/detail.js"></script>
   <!-- 引入样式 -->
-  <script type="text/javascript" src="/js/vue.js"></script>
-  <script type="text/javascript" src="/js/axios.min.js"></script>
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript" src="../js/axios.min.js"></script>
   <!-- 引入样式 -->
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   <!-- 引入组件库 -->
@@ -156,7 +156,7 @@
                               @size-change="pageSizeChangeA"
                               @current-change="currentPageChangeA"
                               :current-page="currentPageA"
-                              :page-sizes="[3,10, 20, 30, 50]"
+                              :page-sizes="[10, 20, 30, 50]"
                               :page-size="pageSizeA"
                               layout="total, sizes, prev, pager, next, jumper"
                               :total="totalA">
@@ -196,8 +196,8 @@
                       @size-change="pageSizeChangeB"
                       @current-change="currentPageChangeB"
                       :current-page="currentPageB"
-                      :page-sizes="[3,10, 20, 30, 50]"
-                      :page-size="pageSize"
+                      :page-sizes="[10, 20, 30, 50]"
+                      :page-size="pageSizeB"
                       layout="total, sizes, prev, pager, next, jumper"
                       :total="totalB">
               </el-pagination>
@@ -207,7 +207,38 @@
       </div>
     </div>
   </div>
+
+
+  <!--我要投标界面-->
+  <div>
+    <el-dialog title="我要投标" :visible.sync="editFormVisible" :close-on-click-modal="false">
+
+      <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+        <el-form-item label="项目名" prop="BIDPROJECT">
+          <el-input v-model="editForm.BIDPROJECT" auto-complete="off" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="截止日期" prop="BIDDEADDATE">
+          <el-date-picker type="date" placeholder="选择日期" :disabled="true" v-model="editForm.BIDDEADDATE" value-format="yyyy-MM-dd"></el-date-picker>
+        </el-form-item>
+        <el-form-item label="回款期数" prop="BIDRATE">
+          <el-input v-model="editForm.BIDRATE" auto-complete="off" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="可投金额" prop="BIDENDMONEY">
+          <el-input v-model="editForm.BIDENDMONEY" auto-complete="off" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="我要投" prop="BIDAMOUNT">
+          <el-input v-model="editForm.BIDAMOUNT" auto-complete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click.native="editFormVisible = false">取消</el-button>
+        <el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
+      </div>
+    </el-dialog>
+  </div>
 </div>
+
+
 <!--网站底部-->
 <div id="footer" class="ft">
   <div class="ft-inner clearfix">
@@ -260,6 +291,7 @@
     var personaldetails = new Vue({
         el: '#personaldetails',
         data: {
+            bidid:'',
             //列表数据
             tableData: [],
             //显示加载中样式
@@ -290,6 +322,22 @@
             //总记录数
             totalA:0,
             totalB:0,
+
+            //编辑界面是否显示
+            editFormVisible: false,
+            editLoading: false,
+            goUrl:'',
+            editFormRules: {
+                BIDAMOUNT: [{ required: true, message: '请输入要投金额', trigger: 'blur' }]
+            },
+            //编辑界面数据
+            editForm:{
+                BIDPROJECT: '',
+                BIDRATE:'',
+                BIDDEADDATE: '',
+                BIDENDMONEY: '',
+                BIDAMOUNT:''
+            },
         },
 
         created:function(){
@@ -302,6 +350,7 @@
             var bididinfo=urlinfo.substr(offset,len);//取出参数字符串 这里会获得类似“id=1”这样的字符串
             var bidids=bididinfo.split("=");//对获得的参数字符串按照“=”进行分割
             var bidid=bidids[1];//得到参数值
+            this.bidid=bidid;
             /*alert("URL:"+urlinfo+"长度："+len+"--开始位置："+offset+"--字符串："+newsidinfo+
                            "--分割："+newsids+"--参数："+newsid+"--名字："+newsname);*/
 
@@ -317,6 +366,7 @@
                     $('#detail').empty();
                     var str="";
                     if(data!=null){
+
                           str="<div class='hd'><h2>"+data[0].BIDPROJECT+"</h2></div>\n" +
                           "<div class='bd clearfix'><div class='data'>" +
                           "<ul>" +
@@ -344,7 +394,7 @@
                           "         剩余期限：<span class='f24 c-333'>"+data[0].BIDENDDAY+"</span>天<br>\n" +
                           "         可投金额：<span class='f24 c-333'>"+data[0].BIDENDMONEY+"</span>元<br>\n" +
                           "         <ul><li class='col-120-2'>\n" +
-                          "             <a class='ui-btn btn-gray' href='/goto/infor'>我要投标</a>" +
+                          "             <a class='ui-btn btn-gray'  href='javascript:void(0);' @click='editClick()'>我要投标</a>" +
                           "         </li></ul>\n" +
                           "   </div>" +
                           "</div></div>"
@@ -540,6 +590,28 @@
         },
 
         methods:{
+            //表格编辑事件
+            editClick:function() {
+                var bidid = this.bidid;
+                var _self = this;
+                _self.editFormVisible = true;
+                axios.post("/infor/tender",{bidid:bidid}).then(function(response) {
+                     //alert(JSON.stringify(response.data));
+                     if(response.data!=null&&response.data!=''){
+                             if(response.data==-1){
+                                 _self.$message({
+                                     message:'请在登录后进行投标操作',
+                                     type: 'error'
+                                 });
+                                 _self.editFormVisible = false;
+                             }
+                         _self.editForm = response.data;
+                     }
+                })
+
+            },
+
+
             //投资人列表重新加载数据
             loadingDataA:function() {
                 var _self = this;
@@ -556,7 +628,6 @@
                         var str="";
                         if(data!=null){
                             for (var i = 0; i < data.page.list.length; i++) {
-                                alert(data.page.list[i].BIDAMOUNT);
                                 str+=
                                     /*<!--导航：投资记录-->*/
                                     "           <tr>" +
@@ -565,13 +636,13 @@
                                     "             <td>"+data.page.list[i].BIDDATE+"</td>" +
                                     "           </tr>"
                             }
-                            self.total=data.page.total;
+                            self.totalA=data.page.total;
                         }
                         $('.investor').append(str);
 
                     },
                     error : function(data) {
-                        alert("错误：8888");
+                        alert("投资列表错误");
                     }
                 })
             },
@@ -628,7 +699,6 @@
                 var _self = this;
                 _self.loadingDataA();//重新加载数据
             },
-
             //还款分页大小修改事件
             pageSizeChangeB:function(val) {
                 console.log('每页 ' + val +' 条');
