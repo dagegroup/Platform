@@ -269,7 +269,6 @@
                     var str="";
                     if(data!=null){
                         for (var i = 0; i < data.page.list.length; i++) {
-                            /*var s=pageSize*(pageNo-1)+i;*/
                             str+=" <ul >\n" +
                                 "            <li  class='col-330 col-t'>\n" +
                                 "              <a  class='f18' href='/goto/infor?bidid="+data.page.list[i].BIDID+"' target='_blank'  style='color:#6769FD'>" +data.page.list[i].BIDPROJECT +"</a>\n" +
@@ -291,7 +290,6 @@
                                 "              <a class='ui-btn btn-gray' href='/goto/infor?bidid="+data.page.list[i].BIDID+"'>我要投标</a>\n" +
                                 "            </li>\n" +
                                 "          </ul>"
-
                         }
                         self.total=data.page.total;
                     }
@@ -315,7 +313,6 @@
                 self.currentTarget.classList.add("active");
                 this.bidrate=a;
                 this.loadingData();
-                /*ax(bidrate,biddeadline,bidrepaymentmethod);*/
             },
             /*条件：还款期限*/
             biddeadlinea:function (a,self) {
@@ -337,8 +334,6 @@
                 this.bidrepaymentmethod=a;
                 this.loadingData();
             },
-
-
 
             //表格重新加载数据
             loadingData:function() {
@@ -378,12 +373,10 @@
                                     "              <a class='ui-btn btn-gray' href='/goto/infor?bidid="+data.page.list[i].BIDID+"'>我要投标</a>\n" +
                                     "            </li>\n" +
                                     "          </ul>"
-
                             }
                             self.total=data.page.total;
                         }
                         $('#bid').append(str);
-
                     },
                     error : function(data) {
                        // alert(data);

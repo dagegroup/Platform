@@ -220,19 +220,24 @@
         <el-form-item label="截止日期" prop="BIDDEADDATE">
           <el-date-picker type="date" placeholder="选择日期" :disabled="true" v-model="editForm.BIDDEADDATE" value-format="yyyy-MM-dd"></el-date-picker>
         </el-form-item>
-        <el-form-item label="回款期数" prop="BIDRATE">
-          <el-input v-model="editForm.BIDRATE" auto-complete="off" :disabled="true"></el-input>
+        <el-form-item label="回款期数" prop="BIDDEADLINE">
+          <el-input v-model="editForm.BIDDEADLINE" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="可投金额" prop="BIDENDMONEY">
           <el-input v-model="editForm.BIDENDMONEY" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
-        <el-form-item label="我要投" prop="BIDAMOUNT">
-          <el-input v-model="editForm.BIDAMOUNT" auto-complete="off"></el-input>
+        <el-form-item label="还款利率" prop="BIDRATE">
+          <el-input v-model="editForm.BIDRATE" auto-complete="off" :disabled="true"></el-input>
         </el-form-item>
+        <el-form-item label="我要投" prop="BIDAMOUNT">
+          <el-input v-model="editForm.BIDAMOUNT" auto-complete="off" @blur="canMoney" ></el-input>
+        </el-form-item>
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click.native="editFormVisible = false">取消</el-button>
-        <el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
+        <el-button type="primary" v-if="isDisabled" disabled @click.native="editSubmit" :loading="editLoading">提交</el-button>
+        <el-button type="primary" v-else="!isDisabled" @click.native="editSubmit" :loading="editLoading">提交</el-button>
       </div>
     </el-dialog>
   </div>
@@ -291,6 +296,7 @@
     var personaldetails = new Vue({
         el: '#personaldetails',
         data: {
+            isDisabled:false,
             bidid:'',
             //列表数据
             tableData: [],
@@ -336,7 +342,8 @@
                 BIDRATE:'',
                 BIDDEADDATE: '',
                 BIDENDMONEY: '',
-                BIDAMOUNT:''
+                BIDAMOUNT:'',
+                BIDDEADLINE:''
             },
         },
 
@@ -587,6 +594,7 @@
                 }
             })
 
+
         },
 
         methods:{
@@ -610,7 +618,49 @@
                 })
 
             },
-
+            //保存点击事件
+            editSubmit:function(){
+                var _self = this;
+                _self.loading = true;
+                var formData =this.editForm;
+                //alert(formData);
+                //alert(JSON.stringify(formData));
+                axios.post("/infor/bidSubmit",formData).then(function(response){
+                    // console.log(response.data);
+                    // alert(222);
+                    // self.total=response.data.total;
+                    if(response.data>0){
+                        _self.editFormVisible = false;
+                    }else {
+                        _self.$message({
+                            message:  '保存失败',
+                            type: 'error'
+                        });
+                    }
+                    _self.loadingData();//重新加载数据
+                })
+                console.info(this.editForm);
+            },
+            //判断可投金额事件
+            canMoney:function () {
+                var _self = this;
+                _self.loading = true;
+                axios.post("/infor/canMoney",{'BIDID':this.bidid,'BIDAMOUNT':this.editForm.BIDAMOUNT}).then(function (response) {
+                    if (response.data==1){
+                        _self.isDisabled=false;
+                        _self.$message({
+                            message:  '可以投资',
+                            type: 'success'
+                        });
+                    }else{
+                        _self.isDisabled=true;
+                        _self.$message({
+                            message:  '可投金额不足',
+                            type: 'error'
+                        });
+                    }
+                })
+            },
 
             //投资人列表重新加载数据
             loadingDataA:function() {

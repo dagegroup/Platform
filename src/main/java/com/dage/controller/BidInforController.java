@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 import javax.xml.transform.Source;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,22 +96,6 @@ public class BidInforController {
     }
 
     /**
-     * 投标时判断是否登录账号
-     * @param session
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("/bidIntercept")
-    public Object bidIntercept(HttpSession session){
-        Object biduser = session.getAttribute("username");
-        if (biduser!=null&&biduser!=""){
-            return "forward:/reception/infor/list";
-        }else {
-            return "redirect:/user/toLogin";
-        }
-    }
-
-    /**
      * 我要投标
      * @param map
      * @return
@@ -120,12 +105,55 @@ public class BidInforController {
     @ResponseBody
     @RequestMapping("/tender")
     public Object tender(@RequestBody Map map,HttpSession session){
+
         Object username = session.getAttribute("userName");
+
         if (username!=null&&username!=""){
             return bidInforService.tender(map);
         }else{
             return -1;
         }
     }
+
+    /**
+     * 投标提交至记录表
+     * @param map
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/bidSubmit")
+    public Object bidSubmit(@RequestBody Map map,HttpSession session){
+        return bidInforService.bidSubmit(map,session);
+    }
+
+    /**
+     * 判断投资金额与可投金额
+     * @param map
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/canMoney")
+    public Object canMoney(@RequestBody Map map){
+        int i = bidInforService.canMoney(map);
+        if (i>0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    /*public String getUser(@RequestBody HttpSession session){
+        // 获取session中所有的键值
+        Enumeration<String> attrs = session.getAttributeNames();
+        // 遍历attrs中的
+        while(attrs.hasMoreElements()){
+        // 获取session键值
+            String name = attrs.nextElement().toString();
+            // 根据键值取session中的值
+            Object vakue = session.getAttribute(name);
+            // 打印结果
+            System.out.println("------" + name + ":" + vakue +"--------\n");}
+        return bidInforService.getUser(username);
+    }*/
 
 }

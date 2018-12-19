@@ -4,6 +4,7 @@ import com.dage.dao.BidInforDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -67,13 +68,30 @@ public class BidInforServiceImpl implements BidInforService {
 
         return bidInforDao.tender(map);
     }
-
     /**
-     * 根据session里的username得到realname
-     * @param username
+     * 投标提交至记录表
+     * @param map
      * @return
      */
-    public Map getUser(String username){
-        return bidInforDao.getUser(username);
+    @Override
+    public int bidSubmit(Map map,HttpSession session) {
+        String userid = (String)session.getAttribute("userid");
+        map.put("userid",userid);
+        return bidInforDao.bidSubmit(map);
     }
+
+    /**
+     * 判断是否可投
+     * @param map
+     * @return
+     */
+    public int canMoney(Map map){
+        Integer canmoney = bidInforDao.canMoney(map);
+        Integer bidamount = Integer.valueOf(map.get("BIDAMOUNT").toString());
+        if (canmoney>=bidamount){
+            return 1;
+        }
+        return 0;
+    }
+
 }

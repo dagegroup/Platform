@@ -89,6 +89,6 @@ public interface UserDao {
      * author:ChenMing
      * creatTime:2018-12-10 16:39
      */
-    @Select("select  telephone,userName,password from TB_USER_INFO where telephone=#{param1} and password=#{param2} ")
+    @Select("select  userid,telephone,userName,password from TB_USER_INFO where telephone=#{param1} and password=#{param2} ")
     Map getByuserName(String telephone, String password);
 }

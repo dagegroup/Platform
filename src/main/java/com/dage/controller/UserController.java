@@ -107,6 +107,7 @@ public class UserController {
         Map user = userService.getByuserName(map.get("telephone").toString(),map.get("password").toString());
         if (user != null && user.size() > 0) {
               session.setAttribute("userName",user.get("USERNAME"));
+              session.setAttribute("userid",user.get("USERID"));
             return "forward:/user/toOwn";
 
         }else{

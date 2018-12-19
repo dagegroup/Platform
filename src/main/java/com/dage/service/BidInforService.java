@@ -2,6 +2,7 @@ package com.dage.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -47,9 +48,17 @@ public interface BidInforService {
     Map tender(Map map);
 
     /**
-     * 根据session里的username得到realname
-     * @param username
+     * 投标提交至记录表,根据session获取投资人记录
+     * @param map
      * @return
      */
-    Map getUser(String username);
+    int bidSubmit(Map map, HttpSession session);
+
+    /**
+     * 判断投资金额与可投金额
+     * @param map
+     * @return
+     */
+    int canMoney(Map map);
+
 }

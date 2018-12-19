@@ -70,26 +70,41 @@ public interface BidInforDao {
     List<Map> getRefundRecord(Map map);
 
     /**
-     * 我要投标
+     * 我要投标弹窗展示信息
      * @param map
      * @return
      */
     @Select("<script>" +
-            "select bidid,bidproject,bidrate,to_char(bidissuedate+5,'yyyy-MM-dd') as biddeaddate," +
+            "select bidid,bidproject,biddeadline,bidrate,to_char(bidissuedate+5,'yyyy-MM-dd') as biddeaddate," +
             "to_char((bidamount - bidcurrentamount), '9999990.00') as bidendmoney " +
             "from bid_info where bidid= #{bidid} and bidstate='待投标'" +
             "</script>")
     Map tender(Map map);
 
     /**
-     * 根据session里的username得到realname
-     * @param username
+     * 投标提交至投资记录表
+     * @param map
      * @return
      */
-    @Select("<script>" +
-            "select r.realname from tb_user_info u left join " +
-            "tb_realname_certification r on u.userid=r.userid " +
-            "where username=#{username}' " +
-            "</script>")
-    Map getUser(@Param("username") String username);
+    @Insert("insert into bid_submit(submitid,bidid,userid,bidamount,bidrate,biddate) " +
+            " values('BSUB'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0), " +
+            " #{BIDID},#{userid},#{BIDAMOUNT},#{BIDRATE},sysdate )")
+    int bidSubmit(Map map);
+
+    /**
+     * 根据标编号查询该标可投金额
+     * @param map
+     * @return
+     */
+    @Select("select bidamount-bidcurrentamount as canmoney from bid_info where bidid=#{BIDID} ")
+    Integer canMoney(Map map);
+
+    /**
+     * 从用户账户表获取账户余额
+     * @param map
+     * @return
+     */
+    @Select("select availablebalance from user_account where userid=#{userid} ")
+    Map ddd(Map map);
+
 }
