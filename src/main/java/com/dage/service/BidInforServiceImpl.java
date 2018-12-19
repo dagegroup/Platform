@@ -69,15 +69,20 @@ public class BidInforServiceImpl implements BidInforService {
         return bidInforDao.tender(map);
     }
     /**
-     * 投标提交至记录表
+     * 投标提交至记录表(比较投资金与账户余额)
      * @param map
      * @return
      */
     @Override
     public int bidSubmit(Map map,HttpSession session) {
-        String userid = (String)session.getAttribute("userid");
-        map.put("userid",userid);
-        return bidInforDao.bidSubmit(map);
+        String userid = (String)session.getAttribute("userid");//从session得到投资人id
+        map.put("USERID",userid);//将投资人id加到map里传到dao层
+        Integer availablebalance = bidInforDao.balance(map);//从数据库里得到账户余额
+        Integer bidamount = Integer.valueOf(map.get("BIDAMOUNT").toString());//从前台得到输入投标金额
+        if (availablebalance>=bidamount){
+            return bidInforDao.bidSubmit(map);//返回值为成功的行数
+        }
+        return 0;
     }
 
     /**
@@ -86,8 +91,8 @@ public class BidInforServiceImpl implements BidInforService {
      * @return
      */
     public int canMoney(Map map){
-        Integer canmoney = bidInforDao.canMoney(map);
-        Integer bidamount = Integer.valueOf(map.get("BIDAMOUNT").toString());
+        Integer canmoney = bidInforDao.canMoney(map);//从数据库获取可投金额
+        Integer bidamount = Integer.valueOf(map.get("BIDAMOUNT").toString());//从前台得到输入投标金额
         if (canmoney>=bidamount){
             return 1;
         }

@@ -88,7 +88,7 @@ public interface BidInforDao {
      */
     @Insert("insert into bid_submit(submitid,bidid,userid,bidamount,bidrate,biddate) " +
             " values('BSUB'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0), " +
-            " #{BIDID},#{userid},#{BIDAMOUNT},#{BIDRATE},sysdate )")
+            " #{BIDID},#{USERID},#{BIDAMOUNT},#{BIDRATE},sysdate )")
     int bidSubmit(Map map);
 
     /**
@@ -104,7 +104,7 @@ public interface BidInforDao {
      * @param map
      * @return
      */
-    @Select("select availablebalance from user_account where userid=#{userid} ")
-    Map ddd(Map map);
+    @Select("select availablebalance,receiveprincipal,receivenumbererest from user_account where userid=#{USERID} ")
+    Integer balance(Map map);
 
 }

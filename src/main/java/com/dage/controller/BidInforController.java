@@ -137,23 +137,9 @@ public class BidInforController {
         int i = bidInforService.canMoney(map);
         if (i>0){
             return 1;
-        }else{
-            return 0;
         }
+        return 0;
     }
 
-    /*public String getUser(@RequestBody HttpSession session){
-        // 获取session中所有的键值
-        Enumeration<String> attrs = session.getAttributeNames();
-        // 遍历attrs中的
-        while(attrs.hasMoreElements()){
-        // 获取session键值
-            String name = attrs.nextElement().toString();
-            // 根据键值取session中的值
-            Object vakue = session.getAttribute(name);
-            // 打印结果
-            System.out.println("------" + name + ":" + vakue +"--------\n");}
-        return bidInforService.getUser(username);
-    }*/
 
 }

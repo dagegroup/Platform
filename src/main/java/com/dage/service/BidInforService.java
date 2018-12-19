@@ -61,4 +61,5 @@ public interface BidInforService {
      */
     int canMoney(Map map);
 
+
 }
