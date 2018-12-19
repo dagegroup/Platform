@@ -37,12 +37,12 @@ public class RepayServiceImpl implements RepayService {
         double bidamount = Integer.valueOf(bidInfo.get("BIDAMOUNT")+"");
         double bidrate = Integer.valueOf(bidInfo.get("BIDRATE")+"");
         double biddeadline = Integer.valueOf(bidInfo.get("BIDDEADLINE")+"");
+        double money = bidamount * 0.95;
+        double smoney = bidamount-money;
         String bidid = bidInfo.get("BIDID")+"";
         String userid = bidInfo.get("USERID")+"";
         double bidamounts = bidamount * (bidrate / 100) / 12*biddeadline + bidamount;
         double x = bidamount * (bidrate / 100) / 12  + bidamount / biddeadline;
-        //System.out.println(x);
-        //System.out.println(bidamounts);
         Boolean flag = true;
         try {
             sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
@@ -53,6 +53,8 @@ public class RepayServiceImpl implements RepayService {
             mp.put("BIDREPAYAMOUNT",x);
             mp.put("nums",biddeadline);
             mp.put("BIDSTATE","待还款");
+            mp.put("MONEY",money);
+            mp.put("money",smoney);
             for(int y=1;y<=biddeadline;y++){
                 mp.put("num",y);
                 if(y==biddeadline){
@@ -61,13 +63,16 @@ public class RepayServiceImpl implements RepayService {
                     mp.put("BIDREPAYAMOUNT",z);
                 }
                 int i = repayDaos.addRepayPlan(mp);
-                repayDaos.updateUserState(userid);
                 if (i==0){
                     flag=false;
                 }
             }
+            int a = repayDaos.updateUserState(userid);
+            int b = repayDaos.updateUserAccount(mp);
+            int c = repayDaos.updateUserAccFlow(mp);
+            int d = repayDaos.updateSysAccFlow(mp);
             int j = submitDao.updateBidState(mp);
-            if(j<0){
+            if(j<0||a<0||b<0||c<0||d<0){
                 flag=false;
             }
             if (flag){

@@ -169,7 +169,7 @@
     </el-dialog>
 
     <!--还款详情界面-->
-    <el-dialog title="还款详情" :visible.sync="repayVisible" :close-on-click-modal="false" width="78%">
+    <el-dialog title="还款详情" :visible.sync="repayVisible" :close-on-click-modal="false" width="79%">
         <el-table
                 :data="repayData"
                 v-loading.body="loading"
@@ -210,14 +210,14 @@
             <el-table-column
                     prop="BIDERPAYDATE"
                     align="center"
-                    label="还款截至日期"
-                    width="130">
+                    label="每月还款截至日期"
+                    width="135">
             </el-table-column>
             <el-table-column
                     prop="BIDERPAYDEADDATE"
                     align="center"
-                    label="结束日期"
-                    width="120">
+                    label="预计还款结束日期"
+                    width="135">
             </el-table-column>
             <el-table-column
                     prop="BIDREPAYTOTPMTS"
@@ -229,7 +229,7 @@
                     prop="BIDREPAYSTATE"
                     align="center"
                     label="还款状态"
-                    width="120">
+                    width="100">
             </el-table-column>
         </el-table>
 

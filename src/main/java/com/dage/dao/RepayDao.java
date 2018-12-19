@@ -65,4 +65,33 @@ public interface RepayDao {
      */
     @Update("update tb_user_info set state='待还款' where userid =#{userid}")
     int updateUserState(String userid);
+
+    /**
+     * 根据用户id更改用户账户表余额
+     * @return
+     */
+    @Update("update user_account set availablebalance=availablebalance+#{MONEY} where userid =#{USERID}")
+    int updateUserAccount(Map map);
+
+    /**
+     * 往用户账户流水表插入一条数据
+     * @param map
+     * @return flowid userid accountid amount availablebalance flowdate flowtype
+     */
+
+    @Insert("insert into user_account_flow (flowid,userid,amount,flowdate,flowtype)" +
+            "values((select 'UFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
+            "#{USERID},#{MONEY},sysdate,'借款放款')")
+    int updateUserAccFlow(Map map);
+
+
+    /**
+     * 往系统账户流水表插入一条数据
+     * @param map
+     * @return systemflowid,orderid,userid,accountid,amount,availablebalance,flowdate,flowtype,banknumber
+     */
+    @Insert("insert into tb_system_account_flow(systemflowid,userid,amount,flowdate,flowtype)" +
+            "values((select 'SFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
+            " '#{USERID}',#{money},sysdate,'借款收入');")
+    int updateSysAccFlow(Map map);
 }
