@@ -308,8 +308,11 @@
             editLoading: false,
             goUrl:'',
             editFormRules: {
-                name: [
-                    { required: true, message: '请输入姓名', trigger: 'blur' }
+                INFOS: [
+                    { required: true, message: '必须填写该项', trigger: 'blur' }
+                ],
+                AUDITREMARKS: [
+                    { required: true, message: '必须填写该项', trigger: 'blur' }
                 ]
             },
             //借款详情界面数据 b.bidid,b.userid,b.bidamount,b.bidrepaymentmethod,b.bidrate||'%' as bidrate,b.biddeadline,b.bidproject,b.biddeadday,b.bidapplydate,u.telephone
@@ -443,7 +446,7 @@
             //保存点击事件
             editSubmit:function(msg){
                 var _self = this;
-                _self.loading = true;
+                //_self.loading = true;
                 _self.bidForm.BIDSTATE=msg;
                 var formData =this.bidForm;
                 axios.post("/audit/updbidstate",formData).then(function(response){
@@ -464,7 +467,7 @@
             },
             auditSubmit:function(msg){
                 var _self = this;
-                _self.loading = true;
+                //_self.loading = true;
                 _self.auditForm.AUDITRESULT=msg;
                 var formData =this.auditForm;
                 axios.post("/audit/updrealstate",formData).then(function(response){

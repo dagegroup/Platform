@@ -261,7 +261,7 @@
             },
             auditSubmit:function(msg){
                 var _self = this;
-                _self.loading = true;
+                //_self.loading = true;
                 axios.post("/floodmark/check",{BIDID:_self.BIDID,BIDSTATE:msg}).then(function(response){
                     // console.log(response.data);
                     // alert(222);

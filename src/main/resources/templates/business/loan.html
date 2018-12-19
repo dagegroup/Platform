@@ -261,7 +261,7 @@
             },
             auditSubmit:function(){
                 var _self = this;
-                _self.loading = true;
+                //_self.loading = true;
                 axios.post("/loan/check",{BIDID:_self.BIDID}).then(function(response){
                     if(response.data>0){
                         _self.editFormVisible = false;
