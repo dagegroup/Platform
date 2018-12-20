@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * className:UserService
  * discription:
- * author:CZP
+ * author:ChenMing
  * creatTime:2018-12-10 16:41
  */
 public interface UserService {
@@ -66,4 +66,8 @@ public interface UserService {
      * creatTime:2018-12-10 16:41
      */
     Map getByuserName(String telephone, String password);
+
+    String getUserid(String userid);
+
+    int addUserid(String userid);
 }

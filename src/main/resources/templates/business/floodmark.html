@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>借款审核</title>
+    <!-- 引入样式 -->
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <script type="text/javascript" src="/js/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="/elementui/elementui.css">
+    <!-- 引入组件库 -->
+    <script src="/elementui/elementui.js"></script>
+</head>
+<body>
+<div id="tableView">
+    <!--列表顶部搜索和工具条-->
+
+    <el-row>
+        <el-form :inline="true" :model="searchForm" class="demo-form-inline" style="float:right">
+            <el-form-item label="账户Id">
+                <el-input v-model="searchForm.USERID" placeholder="账户Id"></el-input>
+            </el-form-item>
+            <el-form-item label="借款人">
+                <el-input v-model="searchForm.REALNAME" placeholder="借款人"></el-input>
+            </el-form-item>
+            <el-form-item label="借款标号">
+                <el-input v-model="searchForm.BIDID" placeholder="借款标号"></el-input>
+            </el-form-item>
+           <el-form-item>
+                <el-button type="primary" icon="search" @click="searchClick">查询</el-button>
+           </el-form-item>
+        </el-form>
+    </el-row>
+    <!--列表-->
+    <el-row>
+        <!--bidid,b.userid,b.bidamount,b.bidrepaymentmethod,b.bidrate,b.biddeadline,b.bidproject,r.realname,r.auditresult -->
+
+        <el-table
+                :data="tableData"
+                v-loading.body="loading"
+                border
+                style="width: 100%">
+            <el-table-column
+                    prop="USERID"
+                    label="账户Id"
+                    align="center"
+                    v-if="false"
+                    width="120">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDID"
+                    label="借款标号"
+                    align="center"
+                    width="140">
+            </el-table-column>
+            <el-table-column
+                    prop="REALNAME"
+                    label="借款人"
+                    align="center"
+                    width="70">
+            </el-table-column>
+
+            <el-table-column
+                    prop="BIDAMOUNT"
+                    label="借款金额(元)"
+                    align="center"
+                    width="110">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDDEADLINE"
+                    align="center"
+                    label="借款期限(月)"
+                    width="110">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDRATE"
+                    label="年利率"
+                    align="center"
+                    width="70">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDREPAYMENTMETHOD"
+                    label="还款方式"
+                    align="center"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDPROJECT"
+                    label="借款描述"
+                    align="center"
+                    width="270">
+            </el-table-column>
+            <!--bidcurrentamount-->
+            <el-table-column
+                    prop="BIDCURRENTAMOUNT"
+                    align="center"
+                    label="已投标金额"
+                    width="120">
+            </el-table-column>
+            <el-table-column
+                    label="操作"
+                    align="center">
+                <template scope="scope">
+                    <el-button :plain="true" type="success" size="small" icon="edit" @click="editClick(scope.row)">投标详情</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </el-row>
+
+    <!--列表底部工具条和分页符-->
+    <el-row style="margin-top: 20px" type="flex" justify="end">
+        <el-col :span="24" >
+            <el-pagination
+                    style="float: right"
+                    @size-change="pageSizeChange"
+                    @current-change="currentPageChange"
+                    :current-page="currentPage"
+                    :page-sizes="[10, 20, 30, 50]"
+                    :page-size="pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="total">
+            </el-pagination>
+        </el-col>
+    </el-row>
+
+    <!--借款详情界面-->
+    <el-dialog title="借款详情" :visible.sync="editFormVisible" :close-on-click-modal="false">
+        <el-form-item label="借款标号" prop="BIDID">
+            <el-input v-model="BIDID" auto-complete="off" :readonly="true"></el-input>
+        </el-form-item>
+        <el-table
+                :data="submitData"
+                v-loading.body="loading"
+                border
+                style="width: 100%">
+            <el-table-column
+                    prop="USERID"
+                    label="账户Id"
+                    align="center"
+                    width="130">
+            </el-table-column>
+            <el-table-column
+                    prop="REALNAME"
+                    label="投资人"
+                    align="center"
+                    width="70">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDID"
+                    label="投资标号"
+                    align="center"
+                    width="130">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDAMOUNT"
+                    label="投标金额(元)"
+                    align="center"
+                    width="110">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDDATE"
+                    align="center"
+                    label="投资日期"
+                    width="150">
+            </el-table-column>
+        </el-table>
+
+        <div slot="footer" class="dialog-footer">
+            <el-button @click.native="editFormVisible = false">取消</el-button>
+            <el-button type="primary" @click.native="auditSubmit('待放款')" :loading="editLoading">审核通过</el-button>
+        </div>
+    </el-dialog>
+
+
+
+
+
+</div>
+
+
+<script type="text/javascript">
+    var tableView = new Vue({
+        el: '#tableView',
+        data: {
+            //列表数据
+            options:[],
+            tableData: [],
+            //显示加载中样式
+            loading:false,
+            //搜索表单
+            searchForm: {
+                USERID: '',
+                BIDID: '',
+                REALNAME: ''
+            },
+            //多选值
+            multipleSelection: [],
+            //当前页
+            currentPage:1,
+            //分页大小
+            pageSize:10,
+            //总记录数
+            total:800,
+            BIDID:'',
+            //编辑界面是否显示
+            editFormVisible: false,
+            editLoading: false,
+            goUrl:'',
+            editFormRules: {
+                name: [
+                    { required: true, message: '请输入姓名', trigger: 'blur' }
+                ]
+            },
+            //借款详情界面数据 b.bidid,b.userid,b.bidamount,b.bidrepaymentmethod,b.bidrate||'%' as bidrate,b.biddeadline,b.bidproject,b.biddeadday,b.bidapplydate,u.telephone
+            submitData:[],
+
+        },
+        created:function(){
+            //在 then的内部不能使用Vue的实例化的this, 因为在内部 this 没有被绑定。
+            var self = this;
+            var start =this.currentPage;
+            var end =this.pageSize;
+            axios.post('/floodmark/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
+                // console.log(response.data);
+                //alert(response.data.total);
+                self.total=response.data.page.total;
+                self.tableData = response.data.page.list;
+                // self.multipleSelection=response.data.data;
+            })
+        },
+        methods:{
+            //表格重新加载数据
+            loadingData:function() {
+                var _self = this;
+                _self.loading = true;
+                var start =this.currentPage;
+                var end =this.pageSize;
+                axios.post('/floodmark/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
+                    // console.log(response.data);
+                    //alert(response.data.total);
+                    _self.total=response.data.page.total;
+                    _self.tableData = response.data.page.list;
+                    // self.multipleSelection=response.data.data;
+                })
+                console.log(_self.currentPage);
+                setTimeout(function(){
+                    console.info("加载数据成功");
+                    _self.loading = false;
+                },300);
+            },
+            //表格编辑事件
+            editClick:function(row) {
+                var _self = this;
+                //_self.loading = true;
+                this.BIDID=row.BIDID;
+                axios.post('/submit/one?bidid='+row.BIDID).then(function(response){
+                   // alert(JSON.stringify(response.data.data))
+                    _self.submitData = response.data.data;
+                })
+                _self.editFormVisible=true;
+            },
+            auditSubmit:function(msg){
+                var _self = this;
+                //_self.loading = true;
+                axios.post("/floodmark/check",{BIDID:_self.BIDID,BIDSTATE:msg}).then(function(response){
+                    // console.log(response.data);
+                    // alert(222);
+                    // self.total=response.data.total;
+                    if(response.data>0){
+                        _self.editFormVisible = false;
+                        _self.$message({
+                            message:'操作成功',
+                            type: 'success'
+                        });
+                    }else{
+                        _self.$message({
+                            message:'操作有误',
+                            type: 'error'
+                        });
+                    }
+                    _self.loadingData();//重新加载数据
+                })
+            },
+            //表格查询事件
+            searchClick:function() {
+                var self = this;
+                self.loadingData();//重新加载数据
+            },
+            //分页大小修改事件
+            pageSizeChange:function(val) {
+                console.log('每页 ' + val +' 条');
+                this.pageSize = val;
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            },
+            //当前页修改事件
+            currentPageChange:function(val) {
+                this.currentPage = val;
+                console.log('当前页: ' + val);
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>

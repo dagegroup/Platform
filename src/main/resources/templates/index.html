@@ -13,10 +13,9 @@
 <body class="easyui-layout" >
 <div data-options="region:'north',border:false" style="height:55px;background:#202340;padding:10px;text-align:center;font-weight:bold;font-family:楷体;font-size:27px;color:#FFFFFF">
     <div style="float:left;width:200px;">达阁科技</div><div style="float:left;width:950px;" id="clock"></div>
-    <div style="float:right;width:290px;"><span th:text="${session.admin.name}">管理员</span>&nbsp<a href="/bklogout" Style="color:#FFFFFF">退出</a>
+    <div style="float:right;width:290px;"><span >管理员</span>&nbsp<a href="/bklogout" Style="color:#FFFFFF">退出</a>
     </div>
-</div>
-
+</div><!--th:text="${session.admin.name}"-->
 <div data-options="region:'west',split:true,title:'功能菜单'" style="width:220px;padding:10px;">
     <div class="easyui-panel" style="padding:5px">
         <ul id="tree" class="easyui-tree" data-options="url:'/tree',method:'get',animate:true"></ul>

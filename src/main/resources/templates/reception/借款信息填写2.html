@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>p2p网贷平台</title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <link href="../foreground/css/common.css" rel="stylesheet" />
+  <link href="../foreground/css/index.css" rel="stylesheet" type="text/css">
+  <link href="../foreground/css/detail.css" rel="stylesheet" type="text/css">
+  <link href="../foreground/css/borrower.css" rel="stylesheet">
+  <link href="../foreground/css/base.css" rel="stylesheet">
+  <link href="../foreground/css/lender.css" rel="stylesheet">
+  <!-- 引入样式 -->
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript" src="../js/axios.min.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
+  <script type="text/javascript" src="../foreground/script/common.js"></script>
+  <style type="text/css">
+    .ss{
+      width: 20%;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="header-top min-width" >
+    <div class="container fn-clear"> <strong class="fn-left">咨询热线：400-668-6698<span class="s-time">服务时间：9:00 - 18:00</span></strong>
+      <ul class="header_contact">
+        <li class="c_1"> <a class="ico_head_weixin" id="wx"></a>
+          <div class="ceng" id="weixin_xlgz" style="display: none;">
+            <div class="cnr"> <img src="../foreground/images/code.png"> </div>
+            <b class="ar_up ar_top"></b> <b class="ar_up_in ar_top_in"></b> </div>
+        </li>
+        <li class="c_2"><a href="#" target="_blank" title="官方QQ" alt="官方QQ"><b class="ico_head_QQ"></b></a></li>
+        <li class="c_4"><a href="#" target="_blank" title="新浪微博" alt="新浪微博"><b class="ico_head_sina"></b></a></li>
+      </ul>
+      <ul class="fn-right header-top-ul">
+        <!--用户名为空-->
+        <li th:if="${session.userName} eq null">
+          <div class="" >
+            <a href="/goto/register" class="" title="免费注册" >免费注册</a>
+          </div>
+        </li>
+        <li th:if="${session.userName} eq null">
+          <div class="" >
+            <a href="/user/toLogin" class="js-login" title="登录" >登录</a>
+          </div>
+        </li>
+        <!--用户名不为空-->
+        <li th:if="${session.userName} ne null">
+          <div class="">
+            <span th:text="欢迎您 "></span>
+            <span th:text="${session.userName}"></span>
+          </div>
+        </li>
+        <li th:if="${session.userName} ne null">
+          <div class="" >
+            <a href="/user/toLogin" class="js-login" title="退出">退出</a>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+  <div class="header min-width">
+    <div class="container">
+      <div class="fn-left logo"> <a class="" href="/goto/index"> <img src="../foreground/images/logo.png" title=""> </a> </div>
+      <ul class="top-nav fn-clear">
+        <li > <a href="/goto/index">首页</a> </li>
+        <li class="on"> <a href="/goto/list" class="">我要投资</a> </li>
+        <li> <a href="/goto/rent">我要融资</a> </li>
+        <li> <a href="/goto/helpInfo">安全保障</a> </li>
+        <li class="top-nav-safe"> <a href="/user/toOwn">我的账户</a> </li>
+        <li> <a href="/goto/comInfo">关于我们</a> </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!--列表-->
+  <div class="" style="float:right;width:1150px;background-color:#fff;padding-top:20px;height:auto">
+      <input type="hidden" name="yrd_token" value="KK37ZUJZY3B62WTI3BTIGE7XZEXCY6XG">
+
+      <div>
+
+        <div id="diva">
+          <el-form  :model="dataForm"    ref="dataForm" label-width="200px">
+            <el-row>
+            <el-col :span="6" >
+            <el-form-item label="真实姓名:">
+              <el-input v-model="dataForm.realName"   placeholder="请输入你的真实姓名" style="width:150px"></el-input>
+            </el-form-item>
+            </el-col>
+            <el-col :span="6">
+                <el-form-item label="性别:">
+                    <el-select v-model="dataForm.gender" placeholder="性别" style="width:150px">
+                        <el-option label="请选择" value=""></el-option>
+                        <el-option label="男" value="男"></el-option>
+                        <el-option label="女" value="女"></el-option>
+                    </el-select>
+                </el-form-item>
+            </el-col>
+            <el-col :span="6">
+            <el-form-item label="现住地址:" >
+                <div class="block">
+                    <el-cascader style="width:150px"
+                            :options="options"
+                            v-model="dataForm.address"
+                            @change="handleChange">
+                    </el-cascader>
+                </div>
+            </el-form-item>
+            </el-col>
+            </el-row>
+              <el-row>
+            <el-col :span="6">
+            <el-form-item label="邮箱:">
+              <el-input v-model="dataForm.email"   placeholder="请输入你的邮箱" style="width:150px"></el-input>
+            </el-form-item>
+            </el-col>
+            <el-col :span="6">
+            <el-form-item label="身份证号:">
+              <el-input v-model="dataForm.idcard"   placeholder="请输入你的身份证号" style="width:150px"></el-input>
+            </el-form-item>
+            </el-col>
+            <el-col :span="6">
+            <el-form-item label="最高学历:">
+              <el-select v-model="dataForm.maxdeucation" placeholder="学历" style="width:150px">
+                <el-option label="全部" value="0"></el-option>
+                <el-option label="初中" value="初中"></el-option>
+                <el-option label="高中" value="高中"></el-option>
+                <el-option label="中专" value="中专"></el-option>
+                <el-option label="大专" value="大专"></el-option>
+                <el-option label="本科" value="本科"></el-option>
+                <el-option label="硕士" value="硕士"></el-option>
+                <el-option label="博士" value="博士"></el-option>
+                <el-option label="博士后" value="博士后"></el-option>
+              </el-select>
+            </el-form-item>
+            </el-col>
+              </el-row>
+              <el-row>
+            <el-col :span="6">
+            <el-form-item label="住房:" >
+              <el-select v-model="dataForm.house" placeholder="房产" style="width:150px">
+              <el-option label="请选择" value=""></el-option>
+              <el-option label="有房有房贷" value="有房有房贷"></el-option>
+              <el-option label="有房无房贷" value="有房无房贷"></el-option>
+              <el-option label="无房" value="无房"></el-option>
+              </el-select>
+            </el-form-item>
+            </el-col>
+            <el-col :span="6">
+            <el-form-item   label="婚姻状况:">
+              <el-select v-model="dataForm.marriage" placeholder="婚姻" style="width:150px">
+              <el-option label="请选择" value=""></el-option>
+              <el-option label="未婚" value="未婚"></el-option>
+              <el-option label="离异" value="离异"></el-option>
+              <el-option label="丧偶" value="丧偶"></el-option>
+              <el-option label="已婚有子" value="已婚有子"></el-option>
+              <el-option label="已婚无子" value="已婚无子"></el-option>
+              </el-select>
+            </el-form-item>
+            </el-col>
+            <el-col :span="6">
+            <el-form-item label="年收入:">
+              <el-input v-model="dataForm.income"    style="width:150px"></el-input>
+            </el-form-item>
+            </el-col>
+              </el-row>
+              <el-row>
+            <el-col :span="6">
+            <el-form-item label="工作单位性质:" >
+              <el-select v-model="dataForm.jobtype" placeholder="工作单位性质" style="width:150px">
+              <el-option label="请选择" value=""></el-option>
+              <el-option label="机关及事业单位" value="机关及事业单位"></el-option>
+              <el-option label="国营" value="国营"></el-option>
+              <el-option label="三资企业" value="三资企业"></el-option>
+              <el-option label="民营" value="民营"></el-option>
+              <el-option label="其他" value="其他"></el-option>
+              </el-select>
+            </el-form-item>
+            </el-col>
+            <el-col :span="6">
+            <el-form-item label="工作单位:">
+              <el-input v-model="dataForm.comname"    style="width:150px"></el-input>
+            </el-form-item>
+            </el-col>
+            <el-col :span="6" >
+            <el-form-item label="本单位入职时间:">
+              <el-date-picker type="date" value-format="yyyy-MM-dd"  style="width:150px" placeholder="选择日期" v-model="dataForm.jointime"></el-date-picker>
+            </el-form-item>
+            </el-col>
+              </el-row>
+              <el-row>
+              <el-col :span="6"   class="ss">
+              <el-form-item label="家庭联系人:">
+                  <el-input v-model="dataForm.familyname"    style="width:150px"></el-input>
+              </el-form-item>
+              </el-col>
+              <el-col :span="6"  class="ss">
+              <el-form-item label="关系:">
+                  <el-input v-model="dataForm.familyrelationship"    style="width:150px"></el-input>
+              </el-form-item>
+              </el-col>
+              <el-col :span="6"  class="ss">
+              <el-form-item label="电话:">
+                  <el-input v-model="dataForm.familytel"    style="width:150px"></el-input>
+              </el-form-item>
+              </el-col>
+                <el-col :span="6"  class="ss">
+                  <el-form-item label="现住地址:" >
+                    <div class="block">
+                      <el-cascader style="width:150px"
+                                   :options="options"
+                                   v-model="dataForm.address"
+                                   @change="handleChange">
+                      </el-cascader>
+                    </div>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+              <el-col :span="6" class="ss">
+                  <el-form-item label="工作联系人:">
+                      <el-input v-model="dataForm.jobcontactname"    style="width:150px"></el-input>
+                  </el-form-item>
+              </el-col>
+              <el-col :span="6" class="ss">
+                  <el-form-item label="关系:">
+                      <el-input v-model="dataForm.jobrelationship"    style="width:150px"></el-input>
+                  </el-form-item>
+              </el-col>
+              <el-col :span="6" class="ss">
+                  <el-form-item label="电话:">
+                      <el-input v-model="dataForm.jobtel"    style="width:150px"></el-input>
+                  </el-form-item>
+              </el-col>
+                <el-col :span="6" class="ss">
+                  <el-form-item label="现住地址:" >
+                    <div class="block">
+                      <el-cascader style="width:150px"
+                                   :options="options"
+                                   v-model="dataForm.address"
+                                   @change="handleChange">
+                      </el-cascader>
+                    </div>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+              <el-col :span="6" class="ss">
+                  <el-form-item label="其他联系人:" >
+                      <el-input v-model="dataForm.othername"    style="width:150px"></el-input>
+                  </el-form-item>
+              </el-col>
+              <el-col :span="6" class="ss">
+                  <el-form-item label="关系:" >
+                      <el-input v-model="dataForm.otherrelationship"    style="width:150px"></el-input>
+                  </el-form-item>
+              </el-col>
+              <el-col :span="6" class="ss">
+                  <el-form-item label="电话:" >
+                      <el-input v-model="dataForm.othertel"    style="width: 150px"></el-input>
+                  </el-form-item>
+              </el-col>
+                <el-col :span="6" class="ss">
+                  <el-form-item label="现住地址:" >
+                    <div class="block">
+                      <el-cascader style="width:150px"
+                                   :options="options"
+                                   v-model="dataForm.address"
+                                   @change="handleChange">
+                      </el-cascader>
+                    </div>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <center>
+                <template >
+                  <el-button :plain="true" type="primary" size="small"  @click="nextin">下一步，填写详细信息</el-button>
+                </template>
+              </center>
+          </el-form>
+        </div>
+      </div>
+  <p class="loanApplicationNote"><span>亿人宝平台会严格保障您的隐私安全，请放心填写</span></p>
+</div>
+<!-- 借款人 左侧小菜单  -->
+<div class="lend-left-menu">
+  <a href="/goto/rentInfo" >
+    <span class="lend-menuIcon menuIcon-lendInfo png"></span>借款信息
+    <span class="completed png"></span>
+  </a>
+  <a href="/goto/rentInfo1" class="selected">
+    <span class="lend-menuIcon menuIcon-detialInfo png"></span>详细信息
+  </a>
+  <a href="/goto/rentInfo2">
+    <span class="lend-menuIcon menuIcon-uploadInfo png"></span>上传资料
+  </a>
+  <div class="loanApplicationMenuTxt">
+
+    为了尽快成功借款，请确保信息的真实性，我们将会对您填写的信息进行核实，一旦发现虚假信息将取消您的借款资格。
+  </div>
+</div>
+<script type="text/javascript">
+    var vm=new Vue({
+        el: "#diva",
+        data: {
+            loading: true,
+            options: [],
+            dataForm: {
+                realName:"",
+                gender:"",
+                address:[],
+                email:"",
+                idcard:"",
+                maxdeucation:"",
+                house:"",
+                marriage:"",
+                income:"",
+                jobtype:"",
+                comname:"",
+                jointime:"",
+                familyname:"",
+                familyrelationship:"",
+                familytel:"",
+                jobcontactname:"",
+                jobrelationship:"",
+                jobtel:"",
+                othername:"",
+                otherrelationship:"",
+                othertel:""
+            },
+
+
+        },
+        created:function(){
+            axios.post('/rent/cascade').then(function(response){
+
+                self.options=response.data;
+
+            })
+        },
+        methods: {
+            nextin: function () {
+                var _self = this;
+                _self.loading = true;
+                var formData = this.dataForm;
+                // alert(JSON.stringify(formData));
+                var goUrl = '/rent/rentInfo2';
+                //alert(goUrl);
+                //alert(JSON.stringify(formData));
+                axios.post(goUrl, formData).then(function (response) {
+                    // console.log(response.data);
+                    // alert(222);
+                    // self.total=response.data.total;
+                    if (response.data > 0) {
+                        location.href="/goto/rentInfo3"
+                    } else {
+                        _self.$message({
+                            message: '操作失败',
+                            type: 'error'
+                        });
+                    }
+                })
+            },
+            handleChange:function() {
+
+            }
+        }
+    } )
+</script>
+</div>
+<!--网站底部-->
+<div id="footer" class="ft">
+  <div class="ft-inner clearfix">
+    <div class="ft-helper clearfix">
+      <dl>
+        <dt>关于我们</dt>
+        <dd><a href="/goto/comInfo">公司简介</a><a href="/goto/ipmt">管理团队</a><a href="/goto/netNotice">网站公告</a></dd>
+      </dl>
+      <dl>
+        <dt>相关业务</dt>
+        <dd><a href="/goto/list">我要投资</a><a href="/goto/rent">我要借款</a></dd>
+      </dl>
+      <dl>
+        <dt>帮助中心</dt>
+        <dd><a href="/goto/helpInfo">新手入门</a><a href="/user/toOwn">我的账户</a><a href="/goto/list">债权转让</a></dd>
+      </dl>
+      <dl>
+        <dt>联系我们</dt>
+        <dd><a href="/goto/contactUs">联系我们</a></dd>
+      </dl>
+    </div>
+    <div class="ft-service">
+      <dl>
+        <dd>
+          <p><strong>400-660-1268</strong><br>
+            工作日 9:00-22:00<br>
+            官方交流群:<em>12345678</em><br>
+            工作日 9:00-22:00 / 周六 9:00-18:00<br>
+          </p>
+          <div class="ft-serv-handle clearfix"><a class="icon-hdSprite icon-ft-sina a-move a-moveHover" title="亿人宝新浪微博" target="_blank" href="#"></a><a class="icon-hdSprite icon-ft-qqweibo a-move a-moveHover" title="亿人宝腾讯微博" target="_blank" href="#"></a><a class="icon-ft-qun a-move a-moveHover" title="亿人宝QQ群" target="_blank" href="#"></a><a class="icon-hdSprite icon-ft-email a-move a-moveHover mrn" title="阳光易贷email" target="_blank" href="mailto:xz@yirenbao.com"></a></div>
+        </dd>
+      </dl>
+    </div>
+    <div class="ft-wap clearfix">
+      <dl>
+        <dt>官方二维码</dt>
+        <dd><span class="icon-ft-erweima"><img src="../foreground/images/code.png" style="display: inline;"></span></dd>
+      </dl>
+    </div>
+  </div>
+  <div class="ft-record">
+    <div class="ft-approve clearfix"><a class="icon-approve approve-0 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-1 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-2 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-3 fadeIn-2s" target="_blank" href="#"></a></div>
+    <div class="ft-identity">©2015 亿人宝 All rights reserved&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;安徽省亿人宝投资管理有限公司&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.miitbeian.gov.cn/">皖ICP备12345678号-1</a></div>
+  </div>
+</div>
+</body>
+</html>

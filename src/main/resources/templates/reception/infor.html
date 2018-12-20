@@ -14,8 +14,8 @@
 <script src="script/plugins.js"></script>
 <script src="script/detail.js"></script>
   <!-- 引入样式 -->
-  <script type="text/javascript" src="/js/vue.js"></script>
-  <script type="text/javascript" src="/js/axios.min.js"></script>
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript" src="../js/axios.min.js"></script>
   <!-- 引入样式 -->
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   <!-- 引入组件库 -->
@@ -23,7 +23,7 @@
 </head>
 <body>
 <header>
-  <div class="header-top min-width">
+  <div class="header-top min-width" >
     <div class="container fn-clear"> <strong class="fn-left">咨询热线：400-668-6698<span class="s-time">服务时间：9:00 - 18:00</span></strong>
       <ul class="header_contact">
         <li class="c_1"> <a class="ico_head_weixin" id="wx"></a>
@@ -35,35 +35,53 @@
         <li class="c_4"><a href="#" target="_blank" title="新浪微博" alt="新浪微博"><b class="ico_head_sina"></b></a></li>
       </ul>
       <ul class="fn-right header-top-ul">
-        <li> <a href="index.html" class="app">返回首页</a> </li>
-        <li>
-          <div class=""><a href="register.html" class="c-orange" title="免费注册">免费注册</a></div>
+        <!--用户名为空-->
+        <li th:if="${session.userName} eq null">
+          <div class="" >
+            <a href="register.html" class="" title="免费注册" >免费注册</a>
+          </div>
         </li>
-        <li>
-          <div class=""><a href="login.html" class="js-login" title="登录">登录</a></div>
+        <li th:if="${session.userName} eq null">
+          <div class="" >
+            <a href="/user/toLogin" class="js-login" title="登录" >登录</a>
+          </div>
         </li>
+        <!--用户名不为空-->
+        <li th:if="${session.userName} ne null">
+          <div class="">
+            <span th:text="欢迎您 "></span>
+            <span th:text="${session.userName}"></span>
+          </div>
+        </li>
+        <li th:if="${session.userName} ne null">
+          <div class="" >
+            <a href="/user/toLogin" class="js-login" title="退出">退出</a>
+          </div>
+        </li>
+
       </ul>
     </div>
   </div>
   <div class="header min-width">
     <div class="container">
-      <div class="fn-left logo"> <a class="" href="index.html"> <img src="../foreground/images/logo.png"  title=""> </a> </div>
+      <div class="fn-left logo"> <a class="" href="/goto/index"> <img src="../foreground/images/logo.png" title=""> </a> </div>
       <ul class="top-nav fn-clear">
-        <li class="on"> <a href="index.html">首页</a> </li>
-        <li> <a href="list.html" class="">我要投资</a> </li>
-        <li> <a href="register1.html">我要融资</a> </li>
-        <li> <a href="帮助中心.html">安全保障</a> </li>
-        <li class="top-nav-safe"> <a href="个人中心首页.html">我的账户</a> </li>
-        <li> <a href="公司简介.html">关于我们</a> </li>
+        <li > <a href="/goto/index">首页</a> </li>
+        <li class="on"> <a href="/goto/list" class="">我要投资</a> </li>
+        <li> <a href="/goto/rent">我要融资</a> </li>
+        <li> <a href="/goto/helpInfo">安全保障</a> </li>
+        <li class="top-nav-safe"> <a href="/user/toOwn">我的账户</a> </li>
+        <li> <a href="/goto/comInfo">关于我们</a> </li>
       </ul>
     </div>
   </div>
 </header>
 <!--信息详细-->
-<div class="item-detail wrap">
+<div class="item-detail wrap" id="personaldetails">
   <div class="breadcrumbs"> <a href="index.html">首页</a>&gt; <a href="#">散标投资列表</a>&gt; <span class="cur">项目详情</span> </div>
-  <div class="item-detail-head clearfix" data-target="sideMenu">
-    <div class="hd"> <i class="icon icon-che" title="车易贷"></i>
+  <div class="item-detail-head clearfix" data-target="sideMenu" id="detail">
+    <!--标详细信息-->
+    <!--<div class="hd"> <i class="icon icon-che" title="车易贷"></i>
       <h2>赵女士长安福特福克斯汽车质押贷款4万元</h2>
     </div>
     <div class="bd clearfix">
@@ -95,9 +113,10 @@
             下期还款日： <span class="f20 c-333">2015-10-13</span> </div>
           <i class="icon icon-status icon-status1"></i> </div>
       </div>
-    </div>
+    </div>-->
   </div>
   <div class="item-detail-body clearfix mrt30 ui-tab">
+    <!--投标详情页其他信息导航-->
     <div class="ui-tab-nav hd"> <i class="icon-cur" style="left: 39px;"></i>
       <ul>
         <li class="nav_li active" id="nav_1"><a href="javascript:;">借款信息</a></li>
@@ -106,294 +125,125 @@
       </ul>
     </div>
     <div class="bd">
-      <div class="ui-tab-item active" style="display: block;">
-        <div class="borrow-info">
-          <dl class="item">
-            <dt>
-              <h3>借款人介绍</h3>
-            </dt>
-            <dd>
-              <div class="text">
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 借款人信息介绍：</p>
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 借款人赵女士，<span>1988</span>年出生，大专学历，未婚，户籍地址为四川省古蔺县，现居住于成都市成华区。</p>
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 借款人工作情况：</p>
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 赵女士为成都某服装店老板，月收入<span>2</span>万元，收入居住稳定。</p>
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 借款人资产介绍：</p>
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 赵女士有<span>1</span>辆全款长安福特福克斯汽车。</p>
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 详细资金用途：</p>
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 借款人申请汽车质押贷款，贷款用于资金周转。</p>
-              </div>
-            </dd>
-          </dl>
-          <dl class="item">
-            <dt>
-              <h3>审核信息</h3>
-            </dt>
-            <dd>
-              <div class="verify clearfix">
-                <ul>
-                  <li><i class="icon icon-4"></i><br>
-                    身份证</li>
-                  <li><i class="icon icon-5"></i><br>
-                    户口本</li>
-                  <li><i class="icon icon-6"></i><br>
-                    结婚证</li>
-                  <li><i class="icon icon-7"></i><br>
-                    工作证明</li>
-                  <li><i class="icon icon-8"></i><br>
-                    工资卡流水</li>
-                  <li><i class="icon icon-9"></i><br>
-                    收入证明</li>
-                  <li><i class="icon icon-10"></i><br>
-                    征信报告</li>
-                  <li><i class="icon icon-11"></i><br>
-                    亲属调查</li>
-                  <li><i class="icon icon-19"></i><br>
-                    行驶证</li>
-                  <li><i class="icon icon-20"></i><br>
-                    车辆登记证</li>
-                  <li><i class="icon icon-21"></i><br>
-                    车辆登记发票</li>
-                  <li><i class="icon icon-22"></i><br>
-                    车辆交强险</li>
-                  <li><i class="icon icon-23"></i><br>
-                    车辆商业保险</li>
-                  <li><i class="icon icon-24"></i><br>
-                    车辆评估认证</li>
-                </ul>
-              </div>
-            </dd>
-          </dl>
-          <dl class="item">
-            <dt>
-              <h3>风控步骤</h3>
-            </dt>
-            <dd>
-              <div class="text">
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 调查：风控部对借款人各项信息进行了全面的电话征信，一切资料真实可靠。<span></span> </p>
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 抵押物：全款长安福特福克斯汽车，车牌号：川<span>AYY***</span>，新车购买于<span>2013</span>年，裸车价<span>14</span>万，评估价<span>5</span>万。 </p>
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 权证：汽车已入库、已办理相关手续等。 </p>
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 担保：质押物担保。 </p>
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 结论：此客户为老客户，上笔贷款<span>4</span>万元，标的号为<span>20150745682</span>，已结清，现因资金周转，再次申请贷款。借款人居住稳定，收入来源可靠，经风控综合评估，同意放款<span>4</span>万。 </p>
-                <p class="MsoNormal" style="margin-left:0cm;text-indent:0cm;"> 保障：借款逾期<span>48</span>小时内，易贷风险准备金先行垫付。 </p>
-              </div>
-              <div class="step clearfix">
-                <ul>
-                  <li><i class="icon icon-1"></i>资料审核</li>
-                  <li><i class="icon icon-2"></i>实地调查</li>
-                  <li><i class="icon icon-3"></i>资产评估</li>
-                  <li class="no"><i class="icon icon-4"></i>发布借款</li>
-                </ul>
-              </div>
-              <div class="conclusion f16"> 结论：经风控部综合评估， <span class="c-orange">同意放款40,000.00元；</span> <i class="icon icon-status icon-status1"></i> </div>
-            </dd>
-          </dl>
-          <dl class="item">
-            <dt>
-              <h3>权证信息</h3>
-            </dt>
-            <dd>
-              <div class="warrant"> <span class="f14 c-888">（注：为保护借款人的个人隐私信息，实物材料对部分信息进行了隐藏处理）</span>
-                <div class="album" id="album">
-                  <div class="album-show">
-                    <div class="loading" style="display: none;"></div>
-                    <img src="../foreground/images/news.jpg"> </div>
-                  <div class="album-thumb"> <a href="javascript:;" class="btn btn-prev"></a> <a href="javascript:;" class="btn btn-next"></a>
-                    <div style="visibility: visible; overflow: hidden; position: relative; z-index: 2; left: 0px; width: 1070px;" class="container" id="albumThumb">
-                      <ul style="margin: 0px; padding: 0px; position: relative; list-style-type: none; z-index: 1; width: 1926px; left: 0px;">
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                        <li style="overflow: hidden; float: left; width: 164px; height: 108px;"><a class="small_img" id="../foreground/images/news.jpg"><img src="../foreground/images/news.jpg"></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </dd>
-          </dl>
-        </div>
+      <!--导航：借款人介绍-->
+      <div class="ui-tab-item active" style="display: block;" id="borrowermessage">
+        <!--第二个axaj遍历其数据-->
       </div>
-      <div class="ui-tab-item" style="display: none;">
-        <div class="repayment-list"> 目前投标总额：<span class="c-orange">40,000.00 元</span>&nbsp;&nbsp;
-          剩余投标金额：<span class="c-orange">0.00 元</span>
-          <table border="0" cellpadding="0" cellspacing="0" width="100%">
-            <tbody>
-              <tr>
-                <th>投标人</th>
-                <th>投标金额</th>
-                <th>投标时间</th>
-                <th>投标方式</th>
-              </tr>
-            </tbody>
-            <tbody id="repayment_content">
-              <tr>
-                <td>筱*** </td>
-                <td><span class="c-orange">￥652.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>大*** </td>
-                <td><span class="c-orange">￥94.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>p*** </td>
-                <td><span class="c-orange">￥796.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>t*** </td>
-                <td><span class="c-orange">￥4,000.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>湘*** </td>
-                <td><span class="c-orange">￥5,642.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>A*** </td>
-                <td><span class="c-orange">￥3,336.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>蒲*** </td>
-                <td><span class="c-orange">￥2,582.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>c*** </td>
-                <td><span class="c-orange">￥683.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>豆*** </td>
-                <td><span class="c-orange">￥8,000.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>j*** </td>
-                <td><span class="c-orange">￥2,725.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>l*** </td>
-                <td><span class="c-orange">￥1,242.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>郑*** </td>
-                <td><span class="c-orange">￥624.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>神*** </td>
-                <td><span class="c-orange">￥100.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>快*** </td>
-                <td><span class="c-orange">￥2,279.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>一*** </td>
-                <td><span class="c-orange">￥500.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>思*** </td>
-                <td><span class="c-orange">￥54.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>b*** </td>
-                <td><span class="c-orange">￥1,027.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>林*** </td>
-                <td><span class="c-orange">￥969.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>小*** </td>
-                <td><span class="c-orange">￥81.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-              <tr>
-                <td>V*** </td>
-                <td><span class="c-orange">￥77.00</span></td>
-                <td>2015-09-13 14:22:01</td>
-                <td>自动</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr class="page-outer">
-                <td colspan="4" align="center"><div class="pagination clearfix"><span class="page" id="repayment_content_pager"><a class="disabled"> 上一页 </a><a class="curr">1</a><a href="javascript:void(0)">2</a><a href="javascript:void(0)" next="2">下一页</a><em>共2页</em>
-                    <dl class="page-select">
-                      <dt><span>1</span><i class="icon icon-down"></i></dt>
-                      <dd style="display: none;"><a href="javascript:;" total="23" spaninterval="2" content="repayment_content">1</a><a href="javascript:;" total="23" spaninterval="2" content="repayment_content">2</a></dd>
-                    </dl>
-                    </span></div></td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
+      <!--导航：投资记录-->
+      <div class="ui-tab-item" style="display: none;" >
+          <div class="repayment-list">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tbody>
+                <tr>
+                  <th>投标人</th>
+                  <th>投标金额</th>
+                  <th>投标时间</th>
+                </tr>
+              </tbody>
+              <!--投资记录表-->
+              <tbody id="repayment_content" class="investor">
+                <!--通过初始化函数里的第二个axaj遍历数据 -->
+              </tbody>
+            </table>
+          </div>
+          <!--分页-->
+          <div>
+              <!--投资列表底部工具条和分页符-->
+              <el-row style="margin-top: 20px" type="flex" justify="end">
+                  <el-col :span="18" >
+                      <el-pagination
+                              style="float: right"
+                              @size-change="pageSizeChangeA"
+                              @current-change="currentPageChangeA"
+                              :current-page="currentPageA"
+                              :page-sizes="[10, 20, 30, 50]"
+                              :page-size="pageSizeA"
+                              layout="total, sizes, prev, pager, next, jumper"
+                              :total="totalA">
+                      </el-pagination>
+                  </el-col>
+              </el-row>
+          </div>
       </div>
+      <!--导航：还款列表-->
       <div class="ui-tab-item" style="display: none;">
-        <div class="repayment-list"> 已还本息：<span class="c-orange">0.00元</span>&nbsp;&nbsp;
-          待还本息：<span class="c-orange">40,400.00元</span>&nbsp;&nbsp;(待还本息因算法不同可能会存误差，实际金额以到账金额为准！)
+        <div class="repayment-list">
+          温馨提示：<span class="c-orange">招标人历史还款记录，可作为投标的依据哦~~</span>
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tbody>
               <tr>
                 <th>合约还款日期</th>
-                <th>期数</th>
-                <th>应还本金</th>
-                <th>应还利息</th>
-                <th>应还本息</th>
+                <th>实际还款日期</th>
+                <th>总期数</th>
+                <th>还款期数</th>
+                <th>还款金额</th>
                 <th>还款状态</th>
               </tr>
-              <tr>
-                <td>2015-10-13</td>
-                <td>1</td>
-                <td>40,000.00元</td>
-                <td>400.00元</td>
-                <td>40,400.00元</td>
-                <td>还款中</td>
-              </tr>
+            </tbody>
+            <tbody id="" class="refund">
+              <!--第三个axaj遍历数据-->
             </tbody>
           </table>
+        </div>
+
+        <!--分页-->
+        <div>
+          <!--还款列表底部工具条和分页符-->
+          <el-row style="margin-top: 20px" type="flex" justify="end">
+            <el-col :span="18" >
+              <el-pagination
+                      style="float: right"
+                      @size-change="pageSizeChangeB"
+                      @current-change="currentPageChangeB"
+                      :current-page="currentPageB"
+                      :page-sizes="[10, 20, 30, 50]"
+                      :page-size="pageSizeB"
+                      layout="total, sizes, prev, pager, next, jumper"
+                      :total="totalB">
+              </el-pagination>
+            </el-col>
+          </el-row>
         </div>
       </div>
     </div>
   </div>
+
+
+  <!--我要投标界面-->
+  <div>
+    <el-dialog title="我要投标" :visible.sync="editFormVisible" :close-on-click-modal="false">
+
+      <el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
+        <el-form-item label="项目名" prop="BIDPROJECT">
+          <el-input v-model="editForm.BIDPROJECT" auto-complete="off" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="截止日期" prop="BIDDEADDATE">
+          <el-date-picker type="date" placeholder="选择日期" :disabled="true" v-model="editForm.BIDDEADDATE" value-format="yyyy-MM-dd"></el-date-picker>
+        </el-form-item>
+        <el-form-item label="回款期数" prop="BIDDEADLINE">
+          <el-input v-model="editForm.BIDDEADLINE" auto-complete="off" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="可投金额" prop="BIDENDMONEY">
+          <el-input v-model="editForm.BIDENDMONEY" auto-complete="off" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="还款利率" prop="BIDRATE">
+          <el-input v-model="editForm.BIDRATE" auto-complete="off" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="我要投" prop="BIDAMOUNT">
+          <el-input v-model="editForm.BIDAMOUNT" auto-complete="off" @blur="canMoney" ></el-input>
+        </el-form-item>
+
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click.native="editFormVisible = false">取消</el-button>
+        <el-button type="primary" v-if="isDisabled" disabled @click.native="editSubmit" :loading="editLoading">提交</el-button>
+        <el-button type="primary" v-else="!isDisabled" @click.native="editSubmit" :loading="editLoading">提交</el-button>
+      </div>
+    </el-dialog>
+  </div>
 </div>
+
+
 <!--网站底部-->
 <div id="footer" class="ft">
   <div class="ft-inner clearfix">
@@ -439,5 +289,483 @@
     <div class="ft-identity">©2015 亿人宝 All rights reserved&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;安徽省亿人宝投资管理有限公司&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.miitbeian.gov.cn/">皖ICP备12345678号-1</a></div>
   </div>
 </div>
+
+<!--vue-->
+<script type="text/javascript">
+
+    var personaldetails = new Vue({
+        el: '#personaldetails',
+        data: {
+            isDisabled:false,
+            bidid:'',
+            //列表数据
+            tableData: [],
+            //显示加载中样式
+            loading:false,
+            //搜索表单(模糊查询)
+            searchForm: {
+                bidid: '',//标的编号
+                userid: '',//用户信息表id
+                auditid:'',//标审核表id
+                bidproject:'',//招标项目
+                bidamount:'',//招标金额
+                bidcurrentamount:'',//已投标金额
+                bidschedule:'',//招标进度
+                bidrepaymentmethod:'',//还款方式
+                bidrate:'',//还款利率
+                biddeadline:'',//还款期限
+                bidissuedate:'',//开始招标时间
+                biddeadday:'',//招标天数
+                biddeaddate:'',//招标结束时间
+                biddesc:''//借款描述
+            },
+            //当前页
+            currentPageA:1,
+            currentPageB:1,
+            //分页大小
+            pageSizeA:10,
+            pageSizeB:10,
+            //总记录数
+            totalA:0,
+            totalB:0,
+
+            //编辑界面是否显示
+            editFormVisible: false,
+            editLoading: false,
+            goUrl:'',
+            editFormRules: {
+                BIDAMOUNT: [{ required: true, message: '请输入要投金额', trigger: 'blur' }]
+            },
+            //编辑界面数据
+            editForm:{
+                BIDPROJECT: '',
+                BIDRATE:'',
+                BIDDEADDATE: '',
+                BIDENDMONEY: '',
+                BIDAMOUNT:'',
+                BIDDEADLINE:''
+            },
+        },
+
+        created:function(){
+            //在 then的内部不能使用Vue的实例化的this, 因为在内部 this 没有被绑定。
+            var self = this;
+            /* 用途: 接收地址栏参数 取id=1 根据ID的值 */
+            var urlinfo=window.location.href; //获取当前页面的url
+            var len=urlinfo.length;//获取url的长度
+            var offset=urlinfo.indexOf("?");//设置参数字符串开始的位置
+            var bididinfo=urlinfo.substr(offset,len);//取出参数字符串 这里会获得类似“id=1”这样的字符串
+            var bidids=bididinfo.split("=");//对获得的参数字符串按照“=”进行分割
+            var bidid=bidids[1];//得到参数值
+            this.bidid=bidid;
+            /*alert("URL:"+urlinfo+"长度："+len+"--开始位置："+offset+"--字符串："+newsidinfo+
+                           "--分割："+newsids+"--参数："+newsid+"--名字："+newsname);*/
+
+
+            /*项目详情列表：标信息模块*/
+            $.ajax({
+                url: "/infor/list",
+                async:false,//同步
+                data:{bidid:bidid},
+                type:"post",
+                dataType:"json",
+                success: function(data){
+                    $('#detail').empty();
+                    var str="";
+                    if(data!=null){
+
+                          str="<div class='hd'><h2>"+data[0].BIDPROJECT+"</h2></div>\n" +
+                          "<div class='bd clearfix'><div class='data'>" +
+                          "<ul>" +
+                          "   <li><span class='f16'>借款金额</span><br>" +
+                          "       <span class='f30 c-333' id='account'>"+data[0].BIDAMOUNT+"</span>元 </li>" +
+                          "   <li class='relative'><span class='f16'>年利率</span><br>\n" +
+                          "       <span class='f30 c-orange'>"+data[0].BIDRATE+" </span>% </li>\n" +
+                          "   <li><span class='f16'>借款期限</span><br>\n" +
+                          "       <span class='f30 c-333'>"+data[0].BIDDEADLINE+"</span>个月</li>\n" +
+                          "   <li><span class='c-888'>借款编号：</span>"+data[0].BIDID+"</li>\n" +
+                          "   <li><span class='c-888'>发标日期： </span>"+data[0].BIDISSUEDATE+"</li>\n" +
+                          "   <li><span class='c-888'>保障方式：</span>100%本息垫付</li>\n" +
+                          "   <li><span class='c-888'>还款方式：</span>"+data[0].BIDREPAYMENTMETHOD+"</li>\n" +
+                          "   <li><span class='c-888'>需还本息：</span>"+data[0].BIDMONEY+" </li>\n" +
+                          "   <li><span class='c-888'>借款用途：</span>"+data[0].BIDDESC+"</li>" +
+                          "   <li class='colspan'> <span class='c-888 fl'>投标进度:</span>\n" +
+                          " <div class='progress-bar fl'> <span style='width:"+data[0].BIDSCHEDULE+"  '></span> </div>\n" +
+                          "       <span class='c-green'>"+data[0].BIDSCHEDULE+"</span> </li>\n" +
+                          "   <li> <span class='c-888'>投资范围：</span> <span id='account_range'> 50元~不限 </span> </li>" +
+                          "</ul></div>" +
+                          "<div class='mod-right mod-status'>\n" +
+                          "   <div class='inner'>\n" +
+                          "   <div class='text'> " +
+                          "         截止日期：<span class='f24 c-333'>"+data[0].BIDDEADDATE+"</span><br>" +
+                          "         剩余期限：<span class='f24 c-333'>"+data[0].BIDENDDAY+"</span>天<br>\n" +
+                          "         可投金额：<span class='f24 c-333'>"+data[0].BIDENDMONEY+"</span>元<br>\n" +
+                          "         <ul><li class='col-120-2'>\n" +
+                          "             <a class='ui-btn btn-gray'  href='javascript:void(0);' @click='editClick()'>我要投标</a>" +
+                          "         </li></ul>\n" +
+                          "   </div>" +
+                          "</div></div>"
+                    }
+                    $('#detail').append(str);
+
+                },
+                error : function(data) {
+                    alert(data);
+                }
+            })
+
+            /*项目详情列表：借款人信息*/
+            $.ajax({
+                url: "/infor/userList",
+                async:false,//同步
+                data:{bidid:bidid},
+                type:"post",
+                dataType:"json",
+                success: function(data){
+                    /*alert(JSON.stringify(data));*/
+                    $('#borrowermessage').empty();
+                    var str="";
+                    if(data!=null){
+                          str=
+                              /*<!--导航：借款人介绍-->*/
+                              " <div class='borrow-info'>" +
+                              "     <dl class='item'>" +
+                              "         <dt>" +
+                              "             <h3>借款人介绍</h3>" +
+                              "         </dt>" +
+                              "         <dd>" +
+                              "             <div class='text'>" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 借款人信息介绍：</p>\n" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> "+data[0].REALNAME+","+data[0].ACADEMIC+"学历，"+data[0].MARRIAGE+"，现居住于"+data[0].ADDRESS+"。</p>\n" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 借款人工作情况：</p>\n" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 赵女士为成都某服装店老板，月收入"+data[0].INCOME+"元，收入居住稳定。</p>\n" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 借款人资产介绍：</p>\n" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 赵女士有<span>1</span>辆全款长安福特福克斯汽车。</p>\n" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 详细资金用途：</p>\n" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 借款人申请汽车质押贷款，贷款用于资金周转。</p>" +
+                              "             </div>" +
+                              "         </dd>" +
+                              "     </dl>" +
+                              "     <dl class='item'>" +
+                              "         <dt>" +
+                              "             <h3>审核信息</h3>" +
+                              "         </dt>" +
+                              "         <dd>" +
+                              "             <div class='verify clearfix'>" +
+                              "                 <ul>" +
+                              "                     <li><i class='icon icon-4'></i><br>身份证</li>" +
+                              "                     <li><i class='icon icon-5'></i><br>户口本</li>" +
+                              "                     <li><i class='icon icon-6'></i><br>结婚证</li>" +
+                              "                     <li><i class='icon icon-7'></i><br>工作证明</li>" +
+                              "                     <li><i class='icon icon-8'></i><br>工资卡流水</li>" +
+                              "                     <li><i class='icon icon-9'></i><br>收入证明</li>" +
+                              "                     <li><i class='icon icon-10'></i><br>征信报告</li>" +
+                              "                     <li><i class='icon icon-11'></i><br>亲属调查</li>" +
+                              "                     <li><i class='icon icon-19'></i><br>行驶证</li>" +
+                              "                     <li><i class='icon icon-20'></i><br>车辆登记证</li>" +
+                              "                     <li><i class='icon icon-21'></i><br>车辆登记发票</li>" +
+                              "                     <li><i class='icon icon-22'></i><br>车辆交强险</li>" +
+                              "                     <li><i class='icon icon-23'></i><br>车辆商业保险</li>" +
+                              "                     <li><i class='icon icon-24'></i><br>车辆评估认证</li>" +
+                              "                 </ul>" +
+                              "             </div>" +
+                              "         </dd>" +
+                              "     </dl>" +
+                              "     <dl class='item'>" +
+                              "         <dt>" +
+                              "             <h3>风控步骤</h3>" +
+                              "         </dt>" +
+                              "         <dd>" +
+                              "             <div class='text'>" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 调查：风控部对借款人各项信息进行了全面的电话征信，一切资料真实可靠。</p>" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 抵押物：全款长安福特福克斯汽车，车牌号：川<span>AYY***</span>，新车购买于2013年，裸车价14万，评估价5万</p>" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 权证：汽车已入库、已办理相关手续等。</p>" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 担保：质押物担保。</p>" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 结论：此客户为老客户，上笔贷款4万元，标的号为20150745682已结清，现因资金周转，再次申请贷款。借款人居住稳定，收入来源可靠，经风控综合评估，同意放款4万元</p>" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 保障：借款逾期48小时内，易贷风险准备金先行垫付。</p>" +
+                              "             </div>" +
+                              "             <div class='step clearfix'>" +
+                              "                 <ul>" +
+                              "                   <li><i class='icon icon-1'></i>资料审核</li>" +
+                              "                   <li><i class='icon icon-2'></i>实地调查</li>" +
+                              "                   <li><i class='icon icon-3'></i>资产评估</li>" +
+                              "                   <li class='no'><i class='icon icon-4'></i>发布借款</li>" +
+                              "                 </ul>" +
+                              "             </div>" +
+                              "             <div class='conclusion f16'> 结论：经风控部综合评估， " +
+                              "                   <span class='c-orange'>同意放款40,000.00元；</span> " +
+                              "                   <i class='icon icon-status icon-status1'></i> " +
+                              "             </div>" +
+                              "         </dd>" +
+                              "     </dl>" +
+                              "     <dl class='item'>" +
+                              "         <dt>" +
+                              "             <h3>权证信息</h3>" +
+                              "         </dt>" +
+                              "         <dd>" +
+                              "             <div class='warrant'> <span class='f14 c-888'>（注：为保护借款人的个人隐私信息，实物材料对部分信息进行了隐藏处理）</span>" +
+                              "                 <div class='album' id='album'>" +
+                              "                     <div class='album-show'><div class='loading' style='display: none;'></div><img src='../foreground/images/news.jpg'></div>" +
+                              "                     <div class='album-thumb'> <a href='javascript:;' class='btn btn-prev'></a> <a href='javascript:;' class='btn btn-next'></a>" +
+                              "                         <div style='visibility: visible; overflow: hidden; position: relative; z-index: 2; left: 0px; width: 1070px;' class='container' id='albumThumb'>" +
+                              "                             <ul style='margin: 0px; padding: 0px; position: relative; list-style-type: none; z-index: 1; width: 1926px; left: 0px;'>" +
+                              "                             <li style='overflow: hidden; float: left; width: 164px; height: 108px;'><a class='small_img' id='../foreground/images/news.jpg'><img src='../foreground/images/news.jpg'></a></li>" +
+                              "                             <li style='overflow: hidden; float: left; width: 164px; height: 108px;'><a class='small_img' id='../foreground/images/news.jpg'><img src='../foreground/images/news.jpg'></a></li>" +
+                              "                             <li style='overflow: hidden; float: left; width: 164px; height: 108px;'><a class='small_img' id='../foreground/images/yue.jpg'><img src='../foreground/images/yue.jpg'></a></li>" +
+                              "                             <li style='overflow: hidden; float: left; width: 164px; height: 108px;'><a class='small_img' id='../foreground/images/news.jpg'><img src='../foreground/images/news.jpg'></a></li>" +
+                              "                             <li style='overflow: hidden; float: left; width: 164px; height: 108px;'><a class='small_img' id='../foreground/images/news.jpg'><img src='../foreground/images/news.jpg'></a></li>" +
+                              "                             </ul>" +
+                              "                         </div>" +
+                              "                     </div>" +
+                              "                 </div>" +
+                              "             </div>" +
+                              "         </dd>" +
+                              "     </dl>" +
+                              " </div>"
+                    }
+                    $('#borrowermessage').append(str);
+
+                },
+                error : function(data) {
+                    alert("借款人信息错误");
+                }
+            })
+
+            /*项目详情列表：标投资记录*/
+            $.ajax({
+                url: "/infor/userInvest",
+                async:false,//同步
+                data:{start:this.currentPageA,end:this.pageSizeA,bidid:bidid},
+                type:"post",
+                dataType:"json",
+                success: function(data){
+                    $('.investor').empty();
+                    var str="";
+                    if(data!=null){
+                        for (var i = 0; i < data.page.list.length; i++) {
+                            str+=
+                            /*<!--导航：投资记录-->*/
+                          "           <tr>" +
+                          "             <td>"+data.page.list[i].REALNAME+"</td>" +
+                          "             <td><span class='c-orange'>￥"+data.page.list[i].BIDAMOUNT+"</span></td>" +
+                          "             <td>"+data.page.list[i].BIDDATE+"</td>" +
+                          "           </tr>"
+                        }
+                        self.totalA=data.page.total;
+                    }
+                    $('.investor').append(str);
+
+                },
+                error : function(data) {
+                    alert("投资列表错误");
+                }
+            })
+
+            /*项目详情列表：还款记录表*/
+            $.ajax({
+                url: "/infor/refundRecord",
+                async:false,//同步
+                data:{start:this.currentPageB,end:this.pageSizeB,bidid:bidid},
+                type:"post",
+                dataType:"json",
+                success: function(data){
+                    $('.refund').empty();
+                    var str="";
+                    if(data!=null){
+                        for (var i = 0; i < data.page.list.length; i++) {
+                            str+=
+                                /*<!--导航：还款列表-->*/
+                                "           <tr>" +
+                                "             <td>"+data.page.list[i].BIDREPAYDATE+"</td>" +
+                                "             <td>"+data.page.list[i].BIDREPAYDEADDATE+"</td>" +
+                                "             <td>"+data.page.list[i].BIDREPAYTOTPMTS+"</td>" +
+                                "             <td>"+data.page.list[i].BIDREPAYNUMBER+"</td>" +
+                                "             <td>"+data.page.list[i].BIDREPAYAMOUNT+"元</td>" +
+                                "             <td>"+data.page.list[i].BIDREPAYSTATE+"</td>" +
+                                "           </tr>"
+                        }
+                        self.totalB=data.page.total;
+                    }
+                    $('.refund').append(str);
+
+                },
+                error : function(data) {
+                    alert("还款列表错误");
+                }
+            })
+
+
+        },
+
+        methods:{
+            //表格编辑事件
+            editClick:function() {
+                var bidid = this.bidid;
+                var _self = this;
+                _self.editFormVisible = true;
+                axios.post("/infor/tender",{bidid:bidid}).then(function(response) {
+                     //alert(JSON.stringify(response.data));
+                     if(response.data!=null&&response.data!=''){
+                             if(response.data==-1){
+                                 _self.$message({
+                                     message:'请在登录后进行投标操作',
+                                     type: 'error'
+                                 });
+                                 _self.editFormVisible = false;
+                             }
+                         _self.editForm = response.data;
+                     }
+                })
+
+            },
+            //保存点击事件
+            editSubmit:function(){
+                var _self = this;
+                _self.loading = true;
+                var formData =this.editForm;
+                //alert(formData);
+                //alert(JSON.stringify(formData));
+                axios.post("/infor/bidSubmit",formData).then(function(response){
+                    // console.log(response.data);
+                    // alert(222);
+                    // self.total=response.data.total;
+                    if(response.data>0){
+                        _self.editFormVisible = false;
+                    }else {
+                        _self.$message({
+                            message:  '账户余额不足',
+                            type: 'error'
+                        });
+                    }
+                    _self.loadingData();//重新加载数据
+                })
+                console.info(this.editForm);
+            },
+            //判断可投金额事件
+            canMoney:function () {
+                var _self = this;
+                _self.loading = true;
+                axios.post("/infor/canMoney",{'BIDID':this.bidid,'BIDAMOUNT':this.editForm.BIDAMOUNT}).then(function (response) {
+                    if (response.data==1){
+                        _self.isDisabled=false;
+                        _self.$message({
+                            message:  '可以投资',
+                            type: 'success'
+                        });
+                    }else{
+                        _self.isDisabled=true;
+                        _self.$message({
+                            message:  '可投金额不足',
+                            type: 'error'
+                        });
+                    }
+                })
+            },
+
+            //投资人列表重新加载数据
+            loadingDataA:function() {
+                var _self = this;
+                _self.loading = true;
+                var self = this;
+                $.ajax({
+                    url: "/infor/userInvest",
+                    async:false,//同步
+                    data:{start:this.currentPageA,end:this.pageSizeA,bidid:bidid},
+                    type:"post",
+                    dataType:"json",
+                    success: function(data){
+                        $('.investor').empty();
+                        var str="";
+                        if(data!=null){
+                            for (var i = 0; i < data.page.list.length; i++) {
+                                str+=
+                                    /*<!--导航：投资记录-->*/
+                                    "           <tr>" +
+                                    "             <td>"+data.page.list[i].REALNAME+"</td>" +
+                                    "             <td><span class='c-orange'>￥"+data.page.list[i].BIDAMOUNT+"</span></td>" +
+                                    "             <td>"+data.page.list[i].BIDDATE+"</td>" +
+                                    "           </tr>"
+                            }
+                            self.totalA=data.page.total;
+                        }
+                        $('.investor').append(str);
+
+                    },
+                    error : function(data) {
+                        alert("投资列表错误");
+                    }
+                })
+            },
+            //还款列表重新加载数据
+            loadingDataB:function() {
+                var _self = this;
+                _self.loading = true;
+                var self = this;
+                $.ajax({
+                    url: "/infor/refundRecord",
+                    async:false,//同步
+                    data:{start:this.currentPageB,end:this.pageSizeB,bidid:bidid},
+                    type:"post",
+                    dataType:"json",
+                    success: function(data){
+                        $('.refund').empty();
+                        var str="";
+                        if(data!=null){
+                            for (var i = 0; i < data.page.list.length; i++) {
+                                str+=
+                                    /*<!--导航：还款列表-->*/
+                                    "           <tr>" +
+                                    "             <td>"+data.page.list[i].BIDREPAYDATE+"</td>" +
+                                    "             <td>"+data.page.list[i].BIDREPAYDEADDATE+"</td>" +
+                                    "             <td>"+data.page.list[i].BIDREPAYTOTPMTS+"</td>" +
+                                    "             <td>"+data.page.list[i].BIDREPAYNUMBER+"</td>" +
+                                    "             <td>"+data.page.list[i].BIDREPAYAMOUNT+"元</td>" +
+                                    "             <td>"+data.page.list[i].BIDREPAYSTATE+"</td>" +
+                                    "           </tr>"
+                            }
+                            self.totalB=data.page.total;
+                        }
+                        $('.refund').append(str);
+
+                    },
+                    error : function(data) {
+                        alert("还款列表错误");
+                    }
+                })
+            },
+
+
+            //投资分页大小修改事件
+            pageSizeChangeA:function(val) {
+                console.log('每页 ' + val +' 条');
+                this.pageSizeA = val;
+                var _self = this;
+                _self.loadingDataA();//重新加载数据
+            },
+            //投资当前页修改事件
+            currentPageChangeA:function(val) {
+                this.currentPageA = val;
+                console.log('当前页: ' + val);
+                var _self = this;
+                _self.loadingDataA();//重新加载数据
+            },
+            //还款分页大小修改事件
+            pageSizeChangeB:function(val) {
+                console.log('每页 ' + val +' 条');
+                this.pageSizeB = val;
+                var _self = this;
+                _self.loadingDataB();//重新加载数据
+            },
+            //还款  当前页修改事件
+            currentPageChangeB:function(val) {
+                this.currentPageB = val;
+                console.log('当前页: ' + val);
+                var _self = this;
+                _self.loadingDataB();//重新加载数据
+            },
+        }
+
+    })
+</script>
 </body>
 </html>

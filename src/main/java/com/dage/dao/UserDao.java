@@ -121,4 +121,9 @@ public interface UserDao {
             " where rownum =1)+#{money} from dual),sysdate,'手续费',null,123);")
     int system(Map map);
 
+    @Select("select userid from user_account where userid=#{userid}")
+    String getUserbyUserid(String userid);
+
+    @Insert("insert into user_account(accountid,userid) values('A'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid})")
+    int adduserid(String userid);
 }

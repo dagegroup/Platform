@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>p2p网贷平台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="../foreground/css/common.css" rel="stylesheet" />
+<link href="../foreground/css/index.css" rel="stylesheet" type="text/css">
+<link href="../foreground/css/detail.css" rel="stylesheet" type="text/css">
+<link href="../foreground/css/borrower.css" rel="stylesheet">
+<link href="../foreground/css/base.css" rel="stylesheet">
+<link href="../foreground/css/lender.css" rel="stylesheet">
+  <!-- 引入样式 -->
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript" src="../js/axios.min.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
+<script type="text/javascript" src="../foreground/script/common.js"></script>
+</head>
+<body>
+<header>
+  <div class="header-top min-width" >
+    <div class="container fn-clear"> <strong class="fn-left">咨询热线：400-668-6698<span class="s-time">服务时间：9:00 - 18:00</span></strong>
+      <ul class="header_contact">
+        <li class="c_1"> <a class="ico_head_weixin" id="wx"></a>
+          <div class="ceng" id="weixin_xlgz" style="display: none;">
+            <div class="cnr"> <img src="../foreground/images/code.png"> </div>
+            <b class="ar_up ar_top"></b> <b class="ar_up_in ar_top_in"></b> </div>
+        </li>
+        <li class="c_2"><a href="#" target="_blank" title="官方QQ" alt="官方QQ"><b class="ico_head_QQ"></b></a></li>
+        <li class="c_4"><a href="#" target="_blank" title="新浪微博" alt="新浪微博"><b class="ico_head_sina"></b></a></li>
+      </ul>
+      <ul class="fn-right header-top-ul">
+        <!--用户名为空-->
+        <li th:if="${session.userName} eq null">
+          <div class="" >
+            <a href="/goto/register" class="" title="免费注册" >免费注册</a>
+          </div>
+        </li>
+        <li th:if="${session.userName} eq null">
+          <div class="" >
+            <a href="/user/toLogin" class="js-login" title="登录" >登录</a>
+          </div>
+        </li>
+        <!--用户名不为空-->
+        <li th:if="${session.userName} ne null">
+          <div class="">
+            <span th:text="欢迎您 "></span>
+            <span th:text="${session.userName}"></span>
+          </div>
+        </li>
+        <li th:if="${session.userName} ne null">
+          <div class="" >
+            <a href="/user/toLogin" class="js-login" title="退出">退出</a>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+  <div class="header min-width">
+    <div class="container">
+      <div class="fn-left logo"> <a class="" href="/goto/index"> <img src="../foreground/images/logo.png" title=""> </a> </div>
+      <ul class="top-nav fn-clear">
+        <li > <a href="/goto/index">首页</a> </li>
+        <li class="on"> <a href="/goto/list" class="">我要投资</a> </li>
+        <li> <a href="/goto/rent">我要融资</a> </li>
+        <li> <a href="/goto/helpInfo">安全保障</a> </li>
+        <li class="top-nav-safe"> <a href="/user/toOwn">我的账户</a> </li>
+        <li> <a href="/goto/comInfo">关于我们</a> </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!--列表-->
+<div class="page-filter wrap" >
+  <div class="" style="float:right;width:950px;background-color:#fff;padding-top: 10px;">
+      <div class="common_box">
+          <div class="m-row m-row-mini" id="content">
+            <input type="hidden" name="yrd_token" value="KK37ZUJZY3B62WTI3BTIGE7XZEXCY6XG">
+            <h2><span class="icontit icontit12 png"></span>借款信息</h2>
+            <div>
+              <div id="diva">
+                <el-form  :model="dataForm"    ref="dataForm" label-width="200px">
+                  <el-input v-model="dataForm.id"  type="hidden"></el-input>
+                  <el-col :span="12">
+                    <el-form-item label="借款用途">
+                      <el-select v-model="dataForm.useInfo" placeholder="请选择">
+                        <el-option label="买房" value="买房"></el-option>
+                        <el-option label="买车" value="买车"></el-option>
+                        <el-option label="结婚" value="结婚"></el-option>
+                        <el-option label="兼职创业" value="兼职创业"></el-option>
+                        <el-option label="教育培训" value="教育培训"></el-option>
+                        <el-option label="装修" value="装修"></el-option>
+                        <el-option label="旅游" value="旅游"></el-option>
+                        <el-option label="医疗" value="医疗"></el-option>
+                        <el-option label="日常消费" value="日常消费"></el-option>
+                        <el-option label="偿还债务" value="偿还债务"></el-option>
+                        <el-option label="其他" value="其他"></el-option>
+                      </el-select>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="申请金额">
+                      <el-input v-model="dataForm.money" @blur="countAllMoney"  placeholder="借款额度为10000-500000" style="width: 180px"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="借款期限">
+              <el-select v-model="dataForm.month" @change="countAllMoney" placeholder="月份">
+              <el-option label="全部" value="0"></el-option>
+                <el-option label="1个月" value="1"></el-option>
+                <el-option label="3个月" value="3"></el-option>
+                <el-option label="6个月" value="6"></el-option>
+                <el-option label="9个月" value="9"></el-option>
+              <el-option label="12个月" value="12"></el-option>
+                <el-option label="18个月" value="18"></el-option>
+              <el-option label="24个月" value="24"></el-option>
+                <el-option label="36个月" value="36"></el-option>
+              <el-option label="48个月" value="48"></el-option>
+            </el-select>
+            </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+              <el-form-item label="年利率">
+                <el-input v-model="dataForm.apr"  @blur="countAllMoney"   placeholder=" 请保持在6-20个百分点 " style="width: 180px"></el-input>
+            </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="招标天数">
+                      <el-input v-model="dataForm.biddeadday"   placeholder="请输入你想招标的天数" style="width: 200px"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="申请时间">
+                      <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="dataForm.bidapplydate"></el-date-picker>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+              <el-form-item label="还款方式">
+                  <el-select v-model="dataForm.backtype"  disabled >
+                      <el-option label="等额本息" value="等额本息" ></el-option>
+                  </el-select>
+              </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+            <el-form-item label="借款描述">
+              <el-input v-model="dataForm.desc" placeholder="请输入你的借款描述" type="textarea" style="width: 180px"></el-input>
+            </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+            <el-form-item label="可接受月最高还款额度">
+                <el-input-number v-model="dataForm.perMonth"  :min="1"   ></el-input-number>
+            </el-form-item>
+                  </el-col>
+                <center>
+                <template >
+                    <el-button :plain="true" type="primary" size="small"  @click="nextin">下一步，填写详细信息</el-button>
+                </template>
+                </center>
+          </el-form>
+              <el-dialog title="查看费用详情" :visible.sync="dataFormVisible" :close-on-click-modal="false">
+
+                  <div slot="footer" class="dialog-footer">
+                       <el-button @click.native="dataFormVisible = false">取消</el-button>
+                  </div>
+              </el-dialog>
+                <div id="counterNote" class="counterNote counterNote-top" style="width:400px;height:100px">
+                  <p>根据您填写的申请金额和借款期限计算得出</p>
+                  <p>借款成本：<strong id="totalFee">{{dataForm.money}}</strong> 元</p>
+                  <p> 还款总额：<strong id="payallMoney">{{dataForm.allMoney}}</strong> 元&nbsp;&nbsp;&nbsp;&nbsp;月还款额：<strong id="monthlyRePayAmt">{{dataForm.monthMoney}}</strong> 元</p>
+                  <template >
+                    <el-button :plain="true" type="success" size="small" icon="edit" @click="editClick()">查看费用详情</el-button>
+                  </template>
+                </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <p class="loanApplicationNote"><span>亿人宝平台会严格保障您的隐私安全，请放心填写</span></p>
+  </div>
+  <!-- 借款人 左侧小菜单  -->
+  <div class="lend-left-menu">
+    <a href="/goto/rentInfo" class="selected">
+      <span class="lend-menuIcon menuIcon-lendInfo png"></span>借款信息
+      <span class="completed png"></span>
+    </a>
+    <a href="/goto/rentInfo1">
+      <span class="lend-menuIcon menuIcon-detialInfo png"></span>详细信息
+    </a>
+    <a href="/goto/rentInfo2">
+      <span class="lend-menuIcon menuIcon-uploadInfo png"></span>上传资料
+    </a>
+    <div class="loanApplicationMenuTxt">
+
+      为了尽快成功借款，请确保信息的真实性，我们将会对您填写的信息进行核实，一旦发现虚假信息将取消您的借款资格。
+    </div>
+  </div>
+  <script type="text/javascript">
+    var vm=new Vue({
+        el: "#diva",
+        data: {
+            show: false,
+            loading: true,
+            dataFormVisible: false,
+            options: [],
+            dataForm: {
+                id: 0,
+                useInfo: "",
+                money: "",
+                month: "",
+                desc: "",
+                perMonth: "",
+                allMoney: 0,
+                monthMoney: 0,
+                backtype: "等额本息",
+                apr:6,
+                biddeadday:"",
+                bidapplydate:""
+
+            }
+        },
+        methods: {
+            nextin: function () {
+                var _self = this;
+                _self.loading = true;
+                var formData = this.dataForm;
+                // alert(JSON.stringify(formData));
+                var goUrl = '/rent/rentInfo1';
+                //alert(goUrl);
+                //alert(JSON.stringify(formData));
+                axios.post(goUrl, formData).then(function (response) {
+                    // console.log(response.data);
+                    // alert(222);
+                    // self.total=response.data.total;
+                    if (response.data > 0) {
+                        location.href = "/goto/rentInfo1"
+                    } else {
+                        _self.$message({
+                            message: '操作失败',
+                            type: 'error'
+                        });
+                    }
+                })
+            },
+            countAllMoney: function () {
+                var dataF = this.dataForm;
+                if (dataF.month == 0 && dataF.money == 0) {
+                    dataF.money = null;
+                } else {
+                    dataF.allMoney = ((dataF.money) * (1 + ((dataF.apr/100) * (dataF.month / 12)))).toFixed(2);
+                    dataF.monthMoney = (dataF.allMoney / dataF.month).toFixed(2);
+                }
+
+            },
+        editClick: function () {
+            this.dataFormVisible = true;
+        }}
+
+            })
+  </script>
+</div>
+<!--网站底部-->
+<div id="footer" class="ft">
+  <div class="ft-inner clearfix">
+    <div class="ft-helper clearfix">
+      <dl>
+        <dt>关于我们</dt>
+        <dd><a href="/goto/comInfo">公司简介</a><a href="/goto/ipmt">管理团队</a><a href="/goto/netNotice">网站公告</a></dd>
+      </dl>
+      <dl>
+        <dt>相关业务</dt>
+        <dd><a href="/goto/list">我要投资</a><a href="/goto/rent">我要借款</a></dd>
+      </dl>
+      <dl>
+        <dt>帮助中心</dt>
+        <dd><a href="/goto/helpInfo">新手入门</a><a href="/user/toOwn">我的账户</a><a href="/goto/list">债权转让</a></dd>
+      </dl>
+      <dl>
+        <dt>联系我们</dt>
+        <dd><a href="/goto/contactUs">联系我们</a></dd>
+      </dl>
+    </div>
+    <div class="ft-service">
+      <dl>
+        <dd>
+          <p><strong>400-660-1268</strong><br>
+            工作日 9:00-22:00<br>
+            官方交流群:<em>12345678</em><br>
+            工作日 9:00-22:00 / 周六 9:00-18:00<br>
+          </p>
+          <div class="ft-serv-handle clearfix"><a class="icon-hdSprite icon-ft-sina a-move a-moveHover" title="亿人宝新浪微博" target="_blank" href="#"></a><a class="icon-hdSprite icon-ft-qqweibo a-move a-moveHover" title="亿人宝腾讯微博" target="_blank" href="#"></a><a class="icon-ft-qun a-move a-moveHover" title="亿人宝QQ群" target="_blank" href="#"></a><a class="icon-hdSprite icon-ft-email a-move a-moveHover mrn" title="阳光易贷email" target="_blank" href="mailto:xz@yirenbao.com"></a></div>
+        </dd>
+      </dl>
+    </div>
+    <div class="ft-wap clearfix">
+      <dl>
+        <dt>官方二维码</dt>
+        <dd><span class="icon-ft-erweima"><img src="../foreground/images/code.png" style="display: inline;"></span></dd>
+      </dl>
+    </div>
+  </div>
+  <div class="ft-record">
+    <div class="ft-approve clearfix"><a class="icon-approve approve-0 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-1 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-2 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-3 fadeIn-2s" target="_blank" href="#"></a></div>
+    <div class="ft-identity">©2015 亿人宝 All rights reserved&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;安徽省亿人宝投资管理有限公司&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.miitbeian.gov.cn/">皖ICP备12345678号-1</a></div>
+  </div>
+</div>
+</body>
+</html>

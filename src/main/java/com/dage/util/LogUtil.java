@@ -17,7 +17,7 @@ public class LogUtil {
     /**
      * 切入点配置
      */
-    @Pointcut(value = "execution(* com.aaa.sboot.service..*.*(..))")
+    @Pointcut(value = "execution(* com.dage.service..*.*(..))")
     public void one(){}
 
     /**

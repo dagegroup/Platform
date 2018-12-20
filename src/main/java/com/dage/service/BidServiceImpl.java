@@ -1,9 +1,12 @@
 package com.dage.service;
 
 import com.dage.dao.BidDao;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +39,14 @@ public class BidServiceImpl implements BidService{
      */
     @Override
     public List<Map> getTerm(Map map) {
+        /*List<Map> term = bidDao.getTerm(map);
+        PageHelper.startPage(Integer.valueOf(map.get("start")+""),Integer.valueOf(map.get("end")+""));
+        PageInfo<Map> info = new PageInfo<>(term);
+        Map mp = new HashMap();
+        mp.put("page",info);
+        return mp;*/
+
+
         return bidDao.getTerm(map);
     }
 

@@ -31,6 +31,7 @@ public class PermissionServiceImpl implements PermissionService{
     @Autowired
     private SqlSessionFactory sqlSessionFactory;
 
+
     /**
      * 根据角色信息获取对应权限
      * @param
@@ -82,6 +83,7 @@ public class PermissionServiceImpl implements PermissionService{
      */
     @Override
     public int add(Map map) {
+
         if (map.get("pid")==null||map.get("pid")=="null"||map.get("pid")==""){
             map.put("pid","0");
         }
@@ -90,7 +92,18 @@ public class PermissionServiceImpl implements PermissionService{
 
     @Override
     public List<Permission> getList() {
-        return permissionDao.getList();
+        List<Permission> pList = permissionDao.getList();
+        List<Permission> list = new ArrayList<>();
+        if (pList!=null&&pList.size()>0){
+            for (Permission permission : pList) {
+                if (permission.getPid()==0){
+                    list.add(permission);
+                    bindChirldren(permission,pList);
+                }
+            }
+        }
+        return list;
+
     }
 
     @Override
