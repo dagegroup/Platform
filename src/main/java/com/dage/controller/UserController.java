@@ -37,7 +37,7 @@ public class UserController {
     public String toOwn(HttpSession session){
         Object userName = session.getAttribute("userName");
         if(userName!=null&&userName!=""){
-            return "个人中心首页";
+            return "redirect:/skip/toPersonIndex";
         }
         return "redirect:/user/toLogin";
 

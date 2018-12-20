@@ -2,17 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>p2p网贷平台</title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<link href="../static/foreground/css/common.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="../static/foreground/css/user.css" />
-<link rel="stylesheet" type="text/css" href="../static/foreground/css/jquery.datetimepicker.css"/>
-<script type="text/javascript" src="../static/foreground/script/jquery.min.js"></script>
-<script type="text/javascript" src="../static/foreground/script/common.js"></script>
-<script src="../static/foreground/script/user.js" type="text/javascript"></script>
-</head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>p2p网贷平台</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="../foreground/css/common.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../foreground/css/user.css" />
+    <link rel="stylesheet" type="text/css" href="../foreground/css/jquery.datetimepicker.css"/>
+    <script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
+    <script type="text/javascript" src="../foreground/script/common.js"></script>
+    <script src="../foreground/script/user.js" type="text/javascript"></script>
+  </head>
 <body>
 <header>
   <div class="header-top min-width">
@@ -75,16 +75,13 @@
     <div class="credit-ad"><img src="../foreground/images/clist1.jpg" width="1200" height="96"></div>
     <div id="personal-left" class="personal-left">
       <ul>
-        <li class="pleft-cur"><span><a href="toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
+        <li class="pleft-cur"><span><a href="/skip/toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Record">资金记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Investment">投资记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Plan">回款计划</a></span></li>
-        <li class=""><span><a href="Thirdparty1"><i class="dot dot02"></i>开通第三方</a> </span> </li>
+        <li > <span> <a href="Packet"> <i class="dot dot02"></i> 还款 </a> </span> </li>
         <li><span><a href="Recharge1"><i class="dot dot03"></i>充值</a></span></li>
         <li class=""><span><a href="Withdraw"><i class="dot dot04"></i>提现</a></span></li>
-        <li style="position:relative;" class=""> <span> <a href="Packet"> <i class="dot dot06"></i> 我的红包 </a> </span> </li>
-        <li class=""><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Conversion">兑换历史</a></span></li>
-        <li style="position:relative;"> <span> <a href="Messages"><i class="dot dot08"></i>系统信息 </a> </span> </li>
         <li><span><a href="Setting"><i class="dot dot09"></i>账户设置</a></span></li>
       </ul>
     </div>
@@ -454,7 +451,7 @@
               <div> <span><font style=" color:#848484;font-weight:bold; margin-left:80px; height:32px; line-height:32px; font-size:12px;">亿人宝提醒您：充值前，请核实您的可用支付额度！</font></span> </div>
               <div class="pay-bank" id="pay-bank">
                 <h6>请选择充值银行</h6>
-                <span id="showpay" style="display:none;">icbc</span>
+                <sp an id="showpay" style="display:none;">icbc</span>
                 <ul id="paysSpan" style="height:150px;">
                   <li><img src="/foreground/images/bank_002.png" property1="icbc"><em class="img"></em><span class="check"></span></li>
                   <li><img src="/foreground/images/bank_006.png" property1="abc"><em class="img"></em><span class="check"></span></li>

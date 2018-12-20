@@ -5,46 +5,88 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
-import java.util.List;
 import java.util.Map;
 
 /**
  * className:UserDao
  * discription:
- * author:ChenMing
- * creatTime:2018-12-10 16:39
+ * author:CZP
+ * creatTime:2018-12-19 14:39
  */
 public interface UserDao {
 
-    @Select("select userid from user_account where userid=#{userid}")
-    String getUserbyUserid(String userid);
-    @Insert("insert into user_account(accountid,userid) values('A'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid})")
-    int adduserid(String userid);
+    /**
+     * author:ChenMing
+     * creatTime:2018-12-10 16:39
+     */
+    @Select("select  telephone,userName,password from TB_USER_INFO where telephone=#{param1} and password=#{param2} ")
+    Map getByuserName(String telephone, String password);
+
 
     /**
-     * 根据用户编号查询
-     * @param userId
+     * 根据session里 获取的用户姓名 查询用户的信息
+     * @param userName
      * @return
      */
-    @Select("select userid,bidrepayuserid,BIDREPAYMETHOD,to_char(biderpaydeaddate,'yyyy-mm-dd') as bidrepaydate,bidrepaynumber,bidrepayamount from bid_repay_info where userid=#{userId}")
-    List<Map> getList(String userId);
+    @Select("select * from tb_user_info where username=#{userName}")
+    Map getUserByUserName(String userName);
+
+    /**
+     * 根据用户id查询用户的个人信息
+     * @param map
+     * @return
+     */
+    @Select("select * from tb_user_info where userid=#{userId}")
+    List<Map> getUser(Map map);
+
+    /**
+     * 根据用户编号查询用户回款计划
+     *
+     * 还款计划表
+     * @param
+     * @return
+     */
+    @Select("<script>select userid,bidrepayuserid,BIDREPAYMETHOD,to_char(biderpaydeaddate,'yyyy-mm-dd') as bidrepaydate,bidrepaynumber,bidrepayamount" +
+            " from bid_repay_info where userid=#{userId}" +
+            "<if test=\" time1!=null and time1!='' \"> and to_char(biderpaydate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
+            "<if test=\" time2!=null and time2!='' \"> and biderpaydate &gt;= trunc(next_day(sysdate-8,1)+1) and biderpaydate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
+            "<if test=\" time3!=null and time3!='' \"> and to_char(biderpaydate,'yyyy-mm')=to_char(sysdate,'yyyy-mm')</if>"+
+            "<if test=\" time4!=null and time4!='' \"> and to_char(biderpaydate,'yyyy')=to_char(sysdate,'yyyy')</if>"+
+            "</script>")
+    List<Map> getList(Map map);
 
     /**
      * 根据用户编号查询用户流水
-     * @param userId
+     * @param map
      * @return
      */
-    @Select("select to_char(flowdate,'yyyy-mm-dd') flowdate,availablebalance,flowtype,amount,flowtype from user_account_flow where userid=#{userId}")
-    List<Map> getFlow(String userId);
+    @Select("<script>"+
+            "select to_char(flowdate,'yyyy-mm-dd') flowdate,availablebalance,flowtype,amount,flowtype " +
+            "from user_account_flow where userid=#{userId}" +
+            "<if test=\" type!=null and type!=''\"> and flowtype=#{type}</if>" +
+            "<if test=\" time1!=null and time1!='' \"> and to_char(flowdate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
+            "<if test=\" time2!=null and time2!='' \"> and flowdate &gt;= trunc(next_day(sysdate-8,1)+1) and flowdate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
+            "<if test=\" time3!=null and time3!='' \"> and to_char(flowdate,'yyyy-mm')=to_char(sysdate,'yyyy-mm')</if>"+
+            "<if test=\" time4!=null and time4!='' \"> and to_char(flowdate,'yyyy')=to_char(sysdate,'yyyy')</if>"+
+            "</script>")
+    List<Map> getFlow(Map map);
 
     /**
      * 根据用户编号查询用户投资记录
-     * @param userId
+     * 用户 投资记录表
+     * @param map
      * @return
      */
-    @Select("select to_char(biddate,'yyyy-mm-dd') " +
-            "biddate,submitid,bidid,userid,bidamount,bidrate from bid_submit where userid=#{userId}")
-    List<Map> getSubmit(String userId);
+    @Select("<script>select to_char(biddate,'yyyy-mm-dd') " +
+            "biddate,submitid,bidid,userid,bidamount,bidrate,bidstate " +
+            "from bid_submit where userid=#{userId} " +
+            "<if test=\" type!=null and type!=''\"> and bidstate=#{type}</if>" +
+            "<if test=\" time1!=null and time1!='' \"> and to_char(biddate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
+            "<if test=\" time2!=null and time2!='' \"> and biddate &gt;= trunc(next_day(sysdate-8,1)+1) and biddate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
+            "<if test=\" time3!=null and time3!='' \"> and to_char(biddate,'yyyy-mm')=to_char(sysdate,'yyyy-mm')</if>"+
+            "<if test=\" time4!=null and time4!='' \"> and to_char(biddate,'yyyy')=to_char(sysdate,'yyyy')</if>"+
+            "</script>")
+    List<Map> getSubmit(Map map);
 
     /**
      * 根据用户编号查询用户还款计划
@@ -52,7 +94,7 @@ public interface UserDao {
      * @return
      */
     @Select("select * from bid_repay_info where userid=#{userId} ")
-    List<Map> getRepay(String userId);
+    List<Map> getRepay(Map userId);
 
 
     /**
@@ -77,7 +119,7 @@ public interface UserDao {
     List<Map> getAccount(String userid);
 
     /**
-     * 用户提现之后更新用户账户表
+     * 用户提现 或者充值  之后更新用户账户表
      * @param map
      * @return
      */
@@ -89,12 +131,16 @@ public interface UserDao {
      * @param map
      * @return
      */
-    @Insert("insert into")
+    @Insert("insert into tb_system_account_flow" +
+            "values((select 'SFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
+            " '#{userId}','A111111111',#{money},(select (select availablebalance from" +
+            " (select flowdate,availablebalance from tb_system_account_flow where userid='U201812071032' order by flowdate  desc)" +
+            " where rownum =1)+#{money} from dual),sysdate,'手续费',null,123);")
     int system(Map map);
-    /**
-     * author:ChenMing
-     * creatTime:2018-12-10 16:39
-     */
-    @Select("select  userid,telephone,userName,password from TB_USER_INFO where telephone=#{param1} and password=#{param2} ")
-    Map getByuserName(String telephone, String password);
+
+    @Select("select userid from user_account where userid=#{userid}")
+    String getUserbyUserid(String userid);
+
+    @Insert("insert into user_account(accountid,userid) values('A'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid})")
+    int adduserid(String userid);
 }
