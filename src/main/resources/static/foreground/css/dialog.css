@@ -1,0 +1,137 @@
+<!-- 修改用户浮动窗 -->
+#main {
+	padding-top: -10px;
+	text-align: left;
+}
+#main_sc {
+	padding-top: 10px;
+	text-align: center;
+}
+
+#main_bid {
+	padding-top: 10px;
+	text-align: center;
+}
+
+#fullbg {
+	background-color: gray;
+	left: 0;
+	opacity: 0.5;
+	position: absolute;
+	top: 0;
+	z-index: 3;
+	filter: alpha(opacity =   50);
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+}
+
+#dialog {
+	background-color: #fff;
+	border: 5px solid rgba(0, 0, 0, 0.4);
+	height: 240px;
+	left: 50%;
+	margin: -200px 0 0 -200px;
+	padding: 1px;
+	position: fixed !important; /* 浮动对话框 */
+	position: absolute;
+	top: 50%;
+	width: 540px;
+	z-index: 5;
+	border-radius: 5px;
+	display: none;
+	
+	text-align: center;
+	
+}
+
+#dialog p.close {
+	text-align: right;
+	padding-right: 10px;
+}
+
+#dialog p.close a {
+	color: #fff;
+	width: 20px;
+}
+#one{
+position: relative;
+top:10px;
+left: -420px;
+
+}
+
+#dialog_sc {
+	background-color: #fff;
+	border: 5px solid rgba(0, 0, 0, 0.4);
+	height: 240px;
+	left: 50%;
+	margin: -200px 0 0 -200px;
+	padding: 1px;
+	position: fixed !important; /* 浮动对话框 */
+	position: absolute;
+	top: 50%;
+	width: 540px;
+	z-index: 5;
+	border-radius: 5px;
+	
+	display: none;
+}
+
+#dialog_sc p {
+	margin: 0 0 12px;
+	height: 24px;
+	line-height: 24px;
+	background: #CCCCCC;
+   text-align: left;
+}
+
+#dialog_sc p.close {
+	text-align: right;
+	padding-right: 10px;
+}
+
+#dialog_sc p.close a {
+	color: #fff;
+	text-decoration: none;
+}
+
+#dialog_bid {
+	background-color: #fff;
+	border: 5px solid rgba(0, 0, 0, 0.4);
+	height: 350px;
+	left: 50%;
+	margin: -200px 0 0 -200px;
+	padding: 1px;
+	position: fixed !important; /* 浮动对话框 */
+	position: absolute;
+	top: 50%;
+	width: 540px;
+	z-index: 5;
+	border-radius: 5px;
+	display: none;
+}
+
+#dialog_bid p1 {
+	margin: 0 0 12px;
+	height: 24px;
+	line-height: 24px;
+	background: #CCCCCC;
+   text-align: left;
+}
+
+#dialog_bid p.close {
+	text-align: right;
+	padding-right: 10px;
+}
+
+#dialog_bid p.close a {
+	color: #fff;
+	text-decoration: none;
+}
+
+
+#but_tijiao {
+	border: 1px thin #CCC;
+	width: 60px;
+	height: 40px;
+}

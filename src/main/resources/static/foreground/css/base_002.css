@@ -1,0 +1,688 @@
+@charset "utf-8";
+/*whole*/
+body{color:#666666;}
+body,input, label, select, option, textarea, button, fieldset, legend {font:12px/1.5 tahoma,arial,\5b8b\4f53,SimSun,STSong,sans-serif;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    margin:0;padding:0;
+}
+ul,ol{padding-left:0;list-style-type:none;}
+/*image with no-border*/
+a img,img{border:0;}
+a{text-decoration:none; color:#0098e0; outline:none; blr:expression(this.onFocus=this.blur())}
+a:hover{text-decoration:underline; cursor:pointer;}
+/*float*/
+.l{float:left;}.r{float:right;}
+/*clear float*/
+.clearfix{*zoom:1;}
+.clearline, .clearfix:after{content:"\200B"; display:block; height:0; clear:both;overflow:hidden; visibility:hidden; }
+input , select, textarea {vertical-align:middle;}
+.money{color:#c10000;}
+.orange{color:#ff7200;}
+.bg{background:#f4f4f4;}
+.none{display:none;}
+
+/*==== layout ====*/
+/*header*/
+.header{height:118px; background:#fff;_position:relative}
+.innerbox, .header_main{width:1000px; margin:0px auto;}
+.header_top{background:#f7f7f7; color:#909090; height:28px; border-top:1px solid #e9e9e9; border-bottom:1px solid #e9e9e9;}
+.header_login{float:right; height:28px; line-height:28px;}
+.header_login li{float:left;}
+.header_login li.gray{color:#c8c8c8; padding:0 6px;}
+.header_login li a{color:#909090;}
+.header_login li a.orange, .header_login li .orange{color:#ff7200}
+.header_login .shoppingcart{background:transparent url("../../../images/hd_ft.gif-v=2.gif")/*tpa=http://www.yirendai.com/static/images/hd_ft.gif?v=2*/ 0 -209px; padding-left:22px;_background-position:4px -209px}
+.shoppingcart_money{color:#0079d2; font-size:14px; margin:0 5px;}
+.header_contact{float:left;}
+.header_contact li{float:left;  padding-left:20px; margin-right:15px; background:transparent url("../../../images/hd_ft.gif-v=2.gif")/*tpa=http://www.yirendai.com/static/images/hd_ft.gif?v=2*/ -161px -149px no-repeat; height:28px; line-height:28px; }
+.header_contact a{display:inline-block; color:#909090;}
+/*.header_contact li.header_ico_app{background-position:-242px -149px;}*/
+.header_contact li.header_ico_app{background:url("../../../images/download_mobile-1.gif")/*tpa=http://www.yirendai.com/static/images/download_mobile.gif*/ no-repeat scroll left top rgba(0, 0, 0, 0);}
+.header_contact li.header_ico_tel{background:transparent url("../../../images/hd_ft.gif-v=2.gif")/*tpa=http://www.yirendai.com/static/images/hd_ft.gif?v=2*/ -372px -151px no-repeat; display:inline-block; width:130px;}
+.logo{display:block; float:left; width:232px; height:50px; background:transparent url("../../../images/hd_ft.gif-v=4.gif")/*tpa=http://www.yirendai.com/static/images/hd_ft.gif?v=4*/ no-repeat -556px -90px; margin-top:21px;}
+.header_nav{float:right; font-family:"microsoft yahei"; font-size:18px; margin-right:21px;}
+.header_nav li{float:left; margin-left:42px; height:25px; line-height:25px; margin-top:35px;}
+.header_nav li.qa-link {
+    background: url("../../../images/new-1.gif")/*tpa=http://www.yirendai.com/static/images/new.gif*/ right 3px no-repeat;
+    width: 92px;
+}
+.header_nav a{color:#666666;}
+.header_nav a.live, .header_nav a:hover{color:#0098e0; text-decoration:none;}
+.header_tit{height:32px; background:#0098e0; color:#fff; line-height:32px; margin-top:-2px;}
+.header_tit h1, .header_tit h2, .header_tit h3{display:inline; font-size:12px; font-weight:normal;}
+.header_tit a{color:#ffffff;}
+.tit_tohome{float:right; display:inline-block; width:120px; height:32px; text-align:center; background:#429ff2; color:#fff;}
+
+/*移动客户端*/
+.navMobile{position:relative;z-index:10; width:90px; height:53px;}
+.navMobileBox{width:590px;height:167px;position:absolute;background-color:#fff;top:53px;right:-120px;border:1px solid #e9e9e9; padding-left: 40px;}
+.navMobilePoint{display:block;background:url("../../../images/mobilePoint-1.gif")/*tpa=http://www.yirendai.com/static/images/mobileImg/mobilePoint.gif*/ no-repeat;width:18px;height:10px;position:absolute;top:-10px;right:126px;}
+.navMobileBoxApp1{background:url("../../../images/mobileCode1.jpg-v=3.jpg")/*tpa=http://www.yirendai.com/static/images/mobileImg/mobileCode1.jpg?v=3*/ no-repeat 132px 50%;border-right:1px solid #e9e9e9;height:120px;float:left;width:280px; margin-right: 40px; margin-top: 22px;}
+.navMobileBoxApp2{background:url("../../../images/mobileCode2.jpg-v=2.jpg")/*tpa=http://www.yirendai.com/static/images/mobileImg/mobileCode2.jpg?v=2*/ no-repeat right 50%;height:120px;float:left;width:225px;margin-top: 22px;}
+.navMobileBoxApp1 a,.navMobileBoxApp1 a:visited,.navMobileBoxApp2 a,.navMobileBoxApp2 a:visited{display:block;width:114px;height:108px;}
+.navMobileBoxApp1 a,.navMobileBoxApp1 a:visited{background:url("../../../images/mobileWeb1.png-v=1.png")/*tpa=http://www.yirendai.com/static/images/mobileImg/mobileWeb1.png?v=1*/ no-repeat center 50%;}
+.navMobileBoxApp2 a,.navMobileBoxApp2 a:visited{background:url("../../../images/mobileWeb2-1.png-v=1.png")/*tpa=http://www.yirendai.com/static/images/mobileImg/mobileWeb2.png?v=1*/ no-repeat center 50%;}
+
+/*footer*/
+.footer{border-top:1px solid #e9e9e9; text-align:center; padding-bottom:30px; background:#fff;}
+.footer .footer_link{height:22px; line-height:22px; color:#696969; padding:24px 0 6px;}
+.footer .footer_link a{padding: 0 13px; color:#696969;}
+.footer_tel{background:transparent url("../../../images/hd_ft.gif-v=2.gif")/*tpa=http://www.yirendai.com/static/images/hd_ft.gif?v=2*/ no-repeat left -153px; width:161px; height:21px; display:inline-block; vertical-align:middle; margin-left:13px;}
+.footer_cont, .footer_cont a{color:#aaaaaa;}
+.footer_banner{margin-top:10px;}
+.footer_main{height:90px; overflow:hidden; background:#f3f3f2 url("../../../images/hd_ft.gif-v=2.gif")/*tpa=http://www.yirendai.com/static/images/hd_ft.gif?v=2*/ no-repeat top center; height:90px; border-bottom:1px solid #e9e9e9; margin-bottom:20px; text-align:left;  color:#666; }
+.footer_main a{color:#666;}
+.footer_link_list{float:left; width:250px; margin-top:22px;}
+.footer_link_list li{float:left; padding-left:13px; margin-bottom:10px;}
+.footer_service{float:left; padding:50px 0 0 85px; width:193px;}
+.footer_post_list{float:right; margin-top:19px; margin-right:10px; overflow: hidden;}
+.footer_post_list li{float:left; background:transparent url("../../../images/hd_ft.gif-v=2.gif")/*tpa=http://www.yirendai.com/static/images/hd_ft.gif?v=2*/ no-repeat 0 -90px; height:50px; margin-left:25px; padding-top:5px; line-height:20px;}
+.footer_post_list li.footer_weixin{padding-left:0px; background:none; padding-top:0px;}
+.footer_weixin .images{width:50px; height:50px; overflow: hidden; float:left;}
+.footer_weixin .cont{float:left; width:50px; padding-left:5px; padding-top:5px;}
+.footer_post_list li.footer_sina{padding-left:35px; background-position:-126px -90px;}
+.footer_post_list li.footer_qq{padding-left:36px;  background-position:-248px -90px;}
+.footer_main a.footer_focus{color:#fff;  background:#cfcfcf; display:inline-block; padding:0 5px; height:20px; line-height:18px;}
+.footer_main a.footer_focus:hover{background-color:#cf102d; cursor:pointer;}
+.footer_sina_p{padding-left:5px;}
+
+/*左右结构*/
+.container{margin:20px auto;width:1000px;background:url("../../../images/container_bg-1.jpg")/*tpa=http://www.yirendai.com/static/images/container_bg.jpg*/ repeat-y;}
+.full_container , .common_box{background:#fff; border:1px solid #dfdfdf; margin-bottom:10px;}
+/*带ICO带标题的通用框*/
+.common_box h2{height:42px; line-height:42px; padding-left:20px; background:#fafcfb;  border-bottom:1px solid #dfdfdf; font-size:14px; font-weight:normal; color:#656565;}
+.common_box h2.tips{font-size:12px;}
+.inner_box{padding:20px;}
+.common_box h2 .icontit{float:left; margin-top:13px;}
+/*大字号标题通用框*/
+.common_box h1{font-size:24px;font-family:"microsoft yahei";font-weight:normal;padding-left:30px;background:#f5f7f6;border-bottom:1px solid #dfdfdf;height:60px;line-height:60px;color:#414141;}
+/* 我的账户左侧导航 */                                                                                                                          /*IE6最小高度*/ 
+.left-menu li a.selected,.left-menu li a.selected:hover,.menuIcon,.lend-menuIcon,.icon-error,.completed{background:url("../../../images/menuIcons-1.png")/*tpa=http://www.yirendai.com/static/images/menuIcons.png*/ no-repeat;}
+.left-menu-bg{width:160px;float:left;height:auto;_height:600px;min-height:600px;background-color:#e5e6e7;border:1px solid #dfdfdf;border-top:none;border-bottom:none;box-sizing:border-box;-moz-box-sizing:border-box;_border:none}
+.left-menu{padding:0 8px;_padding-right:0;}
+.left-menu-hd{background-color:#194074;height:5px;_overflow:hidden;}
+.left-menu h3{border-bottom: 1px solid #d5d5d5;padding:15px 0 10px 7px;font-family:"microsoft yahei";color:#194074;line-height:21px;font-size:14px;}
+.left-menu ul{border-top:1px solid #fff;} 
+.left-menu li{position:relative;padding-top:3px;} 
+.left-menu li a{display:block ;padding-left:16px;color:#767676;height:22px;line-height:22px;border:1px solid #e5e6e7;font-family:"microsoft yahei"}
+.left-menu li a:hover{border:1px solid #dadada;width:133px;margin-left:-4px;padding-left:20px;background:#fff;} 
+.left-menu li a.selected,.left-menu li a.selected:hover{background-position:0 -78px;background-color:#fff;border:1px solid #dadada;width:134px;margin-left:-4px;padding-left:19px;}
+.menuIcon{width:21px;height:21px;margin-right:10px;display:inline-block;vertical-align:bottom;} 
+.menuIcon-lend{background-position:-2px -2px;}
+.menuIcon-finance{background-position:-26px -2px;}
+.menuIcon-data{background-position:-52px -2px;}
+.menuIcon-coins{background-position:-76px -2px;}
+.right-container{float:right;width:830px;box-sizing:border-box;-moz-box-sizing:border-box;min-height:600px;_height:600px;height:auto; overflow-x:hidden;}
+.onlyone_box .common_box{min-height:600px; _hieght:600px; }
+/* 出借账户左侧导航 */
+.lend-left-menu{background-color:#e4e4e4;width:210px;padding-top:15px;overflow:hidden;}
+.lend-left-menu a{width:200px;border:1px solid #dadada;background-color:#fff;margin:0 auto 7px;color:#666;font-size:14px;font-weight:bold;display:block;padding:10px 0;font-family:"microsoft yahei";}
+.lend-left-menu a.selected{width:100%;border-left:4px solid #2c94f3;border-right:1px solid #fff;box-sizing:border-box;-moz-box-sizing:border-box;box-shadow:0 3px 3px #cacaca;}
+.lend-menuIcon{width:27px;height:27px;display:inline-block;vertical-align:middle;margin:0 35px 0 15px}
+.menuIcon-lendInfo{background-position:-2px -28px;}
+.menuIcon-detialInfo{background-position:-33px -28px;}
+.menuIcon-uploadInfo{background-position:-63px -28px;}
+.menuIcon-supplyInfo{background-position:-93px -28px;margin-right:15px;}
+.menuIcon-editCard{background-position:-123px -28px;}
+
+/*身份验证部分*/
+.idcard_validate_box{position:relative; margin-top:20px; padding:10px 0 20px 220px;}
+.idcard_validate_box .iconpic{position:absolute;top:0px;left:100px; text-align:left;}
+.idcard_validate_box p.notice{color:#ff6f36; margin-top:10px; padding: 0 0 0 10px;}
+.validateId{margin-left:150px;}
+.validateId .validateId .m-row{padding-left:200px;}
+.validateId .idno_error_tips{line-height:26px; padding-left:120px; text-indent:0px; height:50px; color:#FF0000; margin-bottom:10px;}
+.idcard_validate_box h4{font-size:14px; color:#ff6f36; line-height:24px; margin-bottom:5px;}
+.idcard_validate_box h4.middle{margin-top:15px;}
+.idcard_manual_box{padding-left:175px; margin:30px 0 40px;}
+.idcard_manual_box h4{color:#ff6f36; line-height:24px; margin-bottom:5px;}
+#idcard_validate_fail{ background:transparent url("../../../images/fail-1.png")/*tpa=http://www.yirendai.com/static/images/icon/fail.png*/ no-repeat; padding-left:60px; margin:30px 0px 30px 115px;}
+#idcard_validate_fail .dialog_manual_footer.aui_buttons{text-align:left; margin-top:20px;  padding-bottom:0px;}
+#idcard_validate_fail .dialog_manual_footer.aui_buttons a{font-size:12px;}
+.manual_box .notice_box{margin:50px 20px; border-top:1px dashed #e9e9e9; padding:30px 10px 0; line-height:22px;}
+.manual_box .notice_box h3{font-size:12px;}
+.manual_box .m-holderBox p{line-height:24px; margin-bottom:10px;}
+.manual_form{margin-left:130px;}
+.manualcode_errortip{padding-left:120px; line-height:18px; color:#FF0000;}
+/*==== icon ====*/
+.icon{background:url("../../../images/icon-bag-1.png")/*tpa=http://www.yirendai.com/static/images/icon/icon-bag.png*/ no-repeat left 50%;padding-left: 27px;}
+.icon-yuan{background:url("../../../images/icon-r-yuan-1.png")/*tpa=http://www.yirendai.com/static/images/icon/icon-r-yuan.png*/ no-repeat right 50%;}
+.icon-l,.icon-r{width:4px;height:7px;display:block;font-size:0;}
+.icon-l{background:url("../../../images/icon-lr-1.png")/*tpa=http://www.yirendai.com/static/images/icon/icon-lr.png*/ no-repeat left 0;}
+.icon-r{background:url("../../../images/icon-lr-1.png")/*tpa=http://www.yirendai.com/static/images/icon/icon-lr.png*/ no-repeat left -8px;}
+.icon-warrant{margin-left:5px; background:url("../../../images/icon-warrant-1.png")/*tpa=http://www.yirendai.com/static/images/icon/icon-warrant.png*/ no-repeat;width:21px;height:22px;display:inline-block;zoom:1;*display:inline;vertical-align:text-top}
+/* .icon-tips{background: url(../images/icon/icon-tips.png) no-repeat;width:15px;height:15px;display:inline-block;zoom:1;*display:inline;vertical-align:text-bottom;}
+.icon-more{background: url(../images/icon/icon-more.png) no-repeat;width:15px;height:15px;display:inline-block;zoom:1;*display:inline;margin:10px 10px 0 0}
+ */
+ .m-tooltips {
+    background: url("../../../images/icon-tips-1.png")/*tpa=http://www.yirendai.com/static/images/icon/icon-tips.png*/ no-repeat;
+    display: inline-block;
+    height: 15px;
+    vertical-align: text-bottom;
+    width: 15px;
+}
+.m-toolwarning {
+    background: url("../../../images/icon-warning.png")/*tpa=http://www.yirendai.com/static/images/icon/icon-warning.png*/ no-repeat;
+    display: inline-block;
+    height: 15px;
+    vertical-align: text-bottom;
+    width: 15px;
+}
+.tooltips-arrow {
+    background: url("../../../images/tooltips-arrow-1.png")/*tpa=http://www.yirendai.com/static/images/tooltips-arrow.png*/ no-repeat;
+    bottom: -7px;
+    height: 7px;
+    left: 92px;
+    position: absolute;
+    width: 12px;
+    _overflow:hidden;
+}
+ /*icontit*/
+.icontit{background-image:url("../../../images/icontit-1.png")/*tpa=http://www.yirendai.com/static/images/icon/icontit.png*/;background-repeat:no-repeat;display:block;width:28px;height:20px;text-align:center;}
+.icontit01{background-position:0 0;}
+.icontit02{background-position:0 -35px;}
+.icontit03{background-position:0 -70px;}
+.icontit04{background-position:0 -105px;}
+.icontit05{background-position:0 -140px;}
+.icontit06{background-position:0 -175px;}
+.icontit07{background-position:0 -210px;}
+.icontit08{background-position:0 -245px;}
+.icontit09{background-position:0 -280px;}
+.icontit10{background-position:0 -315px;}
+.icontit11{background-position:0 -350px;}
+.icontit12{background-position:0 -385px;}
+.icontit13{background-position:0 -420px;}
+.icontit14{background-position:0 -455px;}
+.icontit15{background-position:0 -490px;}
+.icontit16{background-position:0 -525px;}
+.icontit17{background-position:0 -560px;}
+.icontit18{background-position:0 -595px;}
+.icontit19{background-position:0 -630px;}
+.icontit20{background-position:0 -665px;}
+.icontit21{background-position:0 -700px;}
+.icontit22{background-position:0 -735px;}
+.icontit23{background-position:0 -770px;}
+.icontit24{background-position:0 -805px;}
+.icontit25{background-position:0 -840px;}
+.icontit26{background-position:0 -875px;}
+.icontit27{background-position:0 -910px;}
+.icontit28{background-position:0 -945px;}
+.icontit29{background-position:0 -980px;}
+.icontit30{background-position:0 -1015px;}
+.icontit31{background-position:0 -1050px;}
+.icontit32{background-position:0 -1085px;}
+.icontit33{background-position:0 -1120px;}
+.icontit34{background-position:0 -1155px;}
+.icontit35{background-position:0 -1183px;height:22px;}
+.icontit36{background-position:0 -1222px;height:22px;}
+.icontit37{background-position:0 -1263px;height:22px;}
+.icontit38{background-position:0 -1305px;height:22px;}
+.icontit39{background-position:0 -1349px;height:23px;}
+.icontit40{background-position:0 -1390px;height:23px;}
+.icontit41{background-position:0 -1427px;}
+.icontit42{background-position:0 -1537px;}
+.icontit43{background-position:0 -1573px;}
+.icontit44{background-position:0 -1612px;}
+/*iconpic*/
+.iconpic{background-image:url("../../../images/iconpic-1.png")/*tpa=http://www.yirendai.com/static/images/icon/iconpic.png*/;background-repeat:no-repeat;display:block;text-align:center;width:106px;height:80px;}
+.iconpic01{background-position:0 0;}
+.iconpic02{background-position:0 -100px;}
+.iconpic03{background-position:0 -200px;}
+.iconpic04{background-position:0 -300px;}
+.iconpic05{background-position:0 -400px;}
+.iconpic06{background-position:0 -500px;}
+.iconpic07{background-position:0 -600px;}
+.iconpic08{background-position:0 -700px;}
+.iconpic09{background-position:0 -800px;}
+.iconpic10{background-position:0 -900px;}
+.iconpic11{background-position:0 -1000px;}
+.iconpic12{background-position:0 -1100px;}
+.iconpic13{background-position:0 -1200px;}
+.iconpic14{background-position:0 -1300px;}
+.iconpic15{background-position:0 -1400px;}
+.iconpic16{background-position:0 -1500px;}
+.iconpic17{background-position:0 -1600px;}
+.iconpic18{background-position:0 -1700px;}
+.iconpic19{background-position:0 -1800px;}
+.iconpic20{background-position:0 -1900px;}
+.iconpic21{background-position:0 -2000px;}
+.iconpic22{background-position:0 -2100px;}
+.iconpic23{background-position:0 -2200px;}
+.iconpic24{background-position:0 -2300px;}
+.iconpic25{background-position:0 -2400px;}
+.iconpic26{background-position:0 -2500px;}
+.iconpic27{background-position:0 -2600px;}
+.iconpic28{background-position:0 -2700px;}
+.iconpic29{background-position:0 -2800px;}
+.iconpic30{background-position:0 -2900px;}
+.iconpic31{background-position:0 -3018px;}
+.iconpic32{background-position:0 -3122px;}
+.iconpic33{background-position:0 -3300px;}
+.iconpic34{background-position:0 -3400px;}
+.iconpic35{background-position:0 -3500px;}
+.iconpic36{background-position:0 -3600px;}
+.iconpic37{background-position:0 -3705px;}
+.iconpic38{background-position:0 -3810px;}
+.iconpic39{background-position:0 -3900px;}
+.iconpic40{background-position:0 -4000px;}
+.iconpic41{background-position:0 -4100px;}
+.iconpic42{background-position:0 -4200px;}
+/*==== button ====*/
+/*标准Button*/
+.input_btn{
+    height:30px; 
+    line-height:30px; 
+    *line-height:26px;
+    vertical-align:middle; 
+    padding: 0 20px; 
+    display:inline-block; 
+    border:1px solid #e7e8e8; 
+    text-align:center;
+    font-family:"microsoft yahei"; 
+    font-size:16px;    
+    cursor:pointer;
+    margin: 0;
+    overflow: visible;
+    *width: 0;
+    width: auto;
+    text-transform: uppercase;
+    color:#0079d2;
+    background:#fafbfc; 
+    border:1px solid #0079d2;
+    vertical-align:middle;
+    overflow-y:hidden;
+    -webkit-appearance: none;
+    blr:expression(this.onFocus=this.blur())
+    
+}
+a.input_btn{height:28px; line-height:28px; text-decoration:none;}
+.input_btn:hover{background-color:#0079d2; border-color:#0079d2; color:#fff; text-decoration:none;}
+.btn_light, .btn_light:hover, .btn_light:active{color:#999999; border:1px solid #e7e8e8; background:#fafbfc; }
+.btn_blue{border:none; background:#0079d2; color:#ffffff; padding:0 21px; _padding: 0 22px;}
+.btn_blue:hover{background-color:#006dbd;}
+.btn_orange{background-color:#f36245;color:#fff;font-size:14px;border:none;margin:0 auto;outline:0}
+.btn_orange:hover,.btn_orange:active{background-color:#f36245;color:#fff;}
+.btn_boldOrange{border:none; background:#f9a31a; color:#ffffff; padding:0 21px; _padding: 0 22px;}
+.btn_boldOrange:hover{background-color:#f89d0d;}
+a.btn_blue{height:30px; line-height:30px;}
+.btn_normal{width:120px;}
+a.btn_normal,a:visited.btn_normal{width:78px;}
+input:disabled{cursor:not-allowed}
+/*特殊BUTTON*/
+
+
+.m-financeList .input_btn{width:176px; padding:0px;}
+
+/*==== table ====*/
+/*标准蓝色表头的Table2*/
+.table_blue, .table_gray{ border-collapse:collapse; width:100%; text-align:center; border:1px solid #E9E9E9;}
+.table_blue  th{ color:#fff; height:42px; line-height:42px;background:#0098e1;}
+.table_blue  th div{ position:relative;  height:42px; line-height:42px;}
+.table_blue  th div i{background:#0098e1 url("../../../images/table_bg-1.gif")/*tpa=http://www.yirendai.com/static/images/table_bg.gif*/ no-repeat top right; position:absolute; top:0px; right:-1px; display:block; height:42px; width:1px; _right:-2px;}
+@-moz-document url-prefix(){.table_blue2  th div i{right:0px;}}
+.table_blue  th.table_blue_last{background-image:none;}
+.table_blue td{height:40px; line-height:40px; border:1px solid #e9e9e9;}
+.table_blue tr.gray_row{background:#f4f4f4;}
+
+/*标准灰色表头的Table2*/
+.table_gray{border:1px solid #e9e9e9;}
+.table_gray td{height:40px;line-height:40px;border:1px solid #e9e9e9;}
+.table_gray  th{ color:#666666; height:33px; line-height:33px;background:#eee;}
+.table_gray th div{height:33px; line-height:33px; position:relative;}
+.table_gray th div i{ position:absolute; top:0px; right:-1px; display:block; height:33px; width:1px; background:transparent url("../../../images/tb_gbg-1.gif")/*tpa=http://www.yirendai.com/static/images/tb_gbg.gif*/ no-repeat top right; _right:-2px;}
+@-moz-document url-prefix(){.table_gray2  th div i{right:0px;}}
+.table_gray  th.table_blue_last{background-image:none;}
+.payback_detail .table_gray td{height:31px; line-height:31px; border:1px solid #ddd;background-color:#eee}
+.payback_detail .table_gray td div{height:31px; line-height:31px; overflow:hidden;}
+.payback_detail .table_gray th{border:1px solid #ddd;}
+.table_gray td p{line-height:20px;}
+.table_gray tr.gray_row{background:#f9f9f9;}
+.table_gray td .money{color:#ec3535;}
+table .green{color:#00d053;}
+table .orange{color:#ff7200;}
+.table_hide{height:227px;overflow:hidden;margin-top:10px}
+table .text-overflow{height:40px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding:0 0 0 5px;}
+.empty_cont{text-align:center; height:48px; line-height:48px; background:#f5f7f6; border:1px solid #dfdfdf;} /*暂无记录*/
+table .empty_cont{background:transparent; border:none;}
+.table_detail{height:420px;overflow:auto;font-size:12px}
+.longtd{width:220px;line-height:20px}
+/*伸缩表格*/
+.detail_tr_div{padding:20px;background-color:#f9f9f9}
+.detail_tr_tips{text-align:left;line-height:20px}
+.flex_td{width:36px;}
+.flex_a:hover{text-decoration:none;}
+.flex_plus{background:transparent url("../../../images/flex_plus-1.png")/*tpa=http://www.yirendai.com/static/images/flex_plus.png*/ no-repeat -1px 0px;  display:block; width:36px; height:40px; overflow:hidden;cursor: pointer;}
+.flex_minus{background:transparent url("../../../images/flex_plus-1.png")/*tpa=http://www.yirendai.com/static/images/flex_plus.png*/ no-repeat -1px -42px;  display:block; width:36px; height:40px; cursor: pointer;}
+.detail_tr{display:none;}
+/*==== form ====*/
+.m-row,.m-page{*zoom:1;}.m-row:after,.m-page:after{content:"\200B"; display:block; height:0; clear:both;overflow:hidden; visibility:hidden; }
+.m-row .m-rowLabel{width:110px;text-align:right;color:#414141;margin-right: 5px;height:34px;line-height:34px;}
+.m-row .m-drop,.m-row .m-textFocus{height:34px; line-height:34px;}
+.m-row-mini .m-rowLabel,.m-row-mini .m-textFocus,.m-row-mini .m-drop{height:24px; line-height:24px;}
+.m-row-mini .m-rowLabel{line-height:24px;}
+.m-rowTextarea{border:1px solid #ccc;background-color:#fff;}
+.m-row .m-holderBox input{line-height:34px;}
+.m-row.m-row-mini .m-holderBox input{line-height:24px;}
+/*==== tab ====*/
+.m-tab{width:100%;border-left:1px solid #e9e9e9;border-bottom:1px solid #e9e9e9;border-right:1px solid #e9e9e9; background:#fff;}
+.m-tabT{height:47px;}
+.m-tabT a.m-tabTA,
+.m-tabT a.m-tabTA:visited{border-right:1px solid #dedede; display:block;height:47px;line-height:47px;width:190px;color:#676767;text-align:center;font-size:14px;float:left;text-decoration:none;margin-bottom: -1px;margin-left: -1px;_position:relative;} /*_position:relative解决ie负margin不显示问题*/
+.m-tabT a.m-tabTActive,
+.m-tabT a:visited.m-tabTActive{height:45px;background-color:#fff;color:#0198df;font-weight:bold;border-left:1px solid #e9e9e9;border-right:1px solid #e9e9e9;border-top:2px solid #0098e1;border-bottom:1px solid #fff;}
+.m-tabT{*zoom:1;background-color:#fcfcfc;border-top:1px solid #e9e9e9;border-bottom:1px solid #e9e9e9;}
+.m-tabT:after{content:"\200B"; display:block; height:0; clear:both;overflow:hidden; visibility:hidden; }
+
+/*tab-r*/
+.m-tab-r .m-tabT{padding-left: 32px;}
+.m-tab-r .m-tabT strong{font-weight:normal;font-size:14px;line-height:45px;color:#666;display:block;}
+.m-tab-r .m-tabT strong .icontit{margin-top:10px;}
+.m-tab-r .m-tabT strong a,
+.m-tab-r .m-tabT strong a:visited{color:#666;font-size:14px;text-decoration:none;}
+.m-tab-r .m-tabT a.m-tabTA,
+.m-tab-r .m-tabT a.m-tabTA:visited{float:right;}
+.m-tab-r .m-tabT a.m-tabTA,
+.m-tab-r .m-tabT a.m-tabTA:visited{margin-right: -1px;}
+
+/*tab-w*/
+.m-tab-w .m-tabT{position:relative;}
+.m-tab-w .m-tabT a.m-tabTA,
+.m-tab-w .m-tabT a.m-tabTA:visited{width:33%;}
+.m-tab-w .m-tabT a.m-tabTAr,
+.m-tab-w .m-tabT a.m-tabTAr:visited{width:34%;margin-right:-1px;position:absolute;right:0;}
+
+/*m-tab2*/
+.m-tab2 .m-tabT{background-color:#fff;height:37px;padding-left: 4px;border-top:0;}
+.m-tab2 .m-tabT a.m-tabTA,
+.m-tab2 .m-tabT a.m-tabTA:visited{display:block;height:37px;line-height:37px;width:138px;color:#696969;background-color:#e5e6e7;text-align:center;font-size:14px;text-decoration:none;font-weight:bold;margin-right: 4px;}
+.m-tab2 .m-tabT a.m-tabTActive,
+.m-tab2 .m-tabT a:visited.m-tabTActive{background-color:#0098e1;color:#fff;border:0;}
+.m-tab2.m-tab-r{border:1px solid #dfdfdf; background:#fff; margin-bottom:10px;}
+.m-tab2.m-tab-r .m-tabT strong{line-height:37px;margin-top: -5px;}
+.m-tab2.m-tab-r .m-tabT{background-color:#fafcfb;padding-top: 8px;padding-left: 17px;}
+
+/*==== holder ====*/
+/*position*/
+.m-holderBox{position:relative;}
+.m-holderTxt{position:absolute;z-index:2;}
+/**/
+.m-holderTxt{top:0;left:12px;color:#9b9b9b;cursor:text; line-height:34px;}
+.m-row-mini .m-holderTxt{line-height:24px;}
+.m-holderBox{background-color:#fff;}
+.m-holderInput{background-color:none;border:0;width:100%;text-indent:12px;}
+
+/*==== drop ====*/
+/*position*/
+.m-drop{position:relative;}
+.m-dropList{position:absolute;}
+/*z-index*/
+/*float*/
+.m-dropInput{float:left;}
+.m-dropIcon{float:right;}
+/**/
+.m-input-normal{height:34px;line-height:34px;}
+.m-input-mini{height:24px;line-height:24px;}
+.m-drop{border:1px solid #d7d8d8;}
+.m-dropInput{border:0;text-indent:12px;color:#aaa;cursor:text;overflow:hidden;}
+a.m-dropIcon,a:visited.m-dropIcon{width:33px;border-left:1px solid #d7d8d8;background:url("../../../images/dropIcon-1.gif")/*tpa=http://www.yirendai.com/static/images/dropIcon.gif*/ no-repeat center 50% #fff;display:block;}
+a:hover.m-dropIcon,.m-drop a.on,.m-drop a:visited.on{background:url("../../../images/dropIcon-1.gif")/*tpa=http://www.yirendai.com/static/images/dropIcon.gif*/ no-repeat center 50% #f4f4f4;}
+.m-dropList{left:-1px;border:1px solid #d7d8d8;background:#fff;display:none;overflow-y:auto;clear:both;
+    -webkit-box-shadow: 0px 0px 4px #d7d8d8;
+    -moz-box-shadow: 0px 0px 4px #d7d8d8;
+    box-shadow: 0px 0px 4px #d7d8d8;
+}
+.m-dropList li{cursor:pointer;border-bottom:1px solid #d7d8d8;height:38px;line-height:38px;color:#666;background:#fff;text-indent:12px;}
+.m-dropList li.active{background:#f4f4f4;text-shadow:0 1px 0 #fff;}
+
+/*==== textFocus ====*/
+.m-textFocus{border:1px solid #d7d8d8;text-indent:12px;display:block;}
+.m-holderBox .m-input-mini{height:24px;line-height:24px;}
+.m-textFocusActive{border:1px solid #4d8fcb;
+    -webkit-box-shadow:0 0 2px #4d8fcb;
+    -moz-box-shadow:0 0 2px #4d8fcb;
+    box-shadow:0 0 2px #4d8fcb;}
+.m-textFocus-error{border:1px solid #eb5439;
+    -webkit-box-shadow:0 0 2px #eb5439;
+    -moz-box-shadow:0 0 2px #eb5439;
+    box-shadow:0 0 2px #eb5439;}
+
+/*==== checkbox====*/
+a.m-checkbox,a:visited.m-checkbox, a.m-checkbox2,a:visited.m-checkbox2{border:1px solid #c8c9ca;width:14px;height:14px;background-color:#fff;cursor:pointer;display:inline-block;*zoom:1;*display:inline;}
+a:hover.m-checkbox, a:hover.m-checkbox2{border:1px solid #007ab4;}
+.m-checkboxChecked{background-image:url("../../../images/checkbox-1.png")/*tpa=http://www.yirendai.com/static/images/icon/checkbox.png*/;background-repeat:no-repeat;}
+.m-checkboxDisabled{background-image:url("../../../images/checkbox-1.png")/*tpa=http://www.yirendai.com/static/images/icon/checkbox.png*/;background-repeat:no-repeat;background-position:0 -14px;}
+.m-checkboxunDisabled{border:1px solid #c8c9ca;width:14px;height:14px;background-color:#fff;display:inline-block;*zoom:1;*display:inline;}
+a:hover.m-checkbox.m-checkboxDisabled, a:hover.m-checkbox2.m-checkboxDisabled{border:1px solid #c8c9ca;cursor:default;}
+
+/*==== radio ====*/
+a.m-radio,a:visited.m-radio{vertical-align:middle; background-image:url("../../../images/radio-1.png")/*tpa=http://www.yirendai.com/static/images/icon/radio.png*/;_background-image:url("../../../images/radio-1.gif")/*tpa=http://www.yirendai.com/static/images/icon/radio.gif*/;background-repeat:no-repeat;display:block;width:14px;height:15px;display:inline-block;*zoom:1;*display:inline;}
+a:hover.m-radio{background-position:0 -16px;}
+a.m-radioChecked,a:visited.m-radioChecked{background-position:0 -32px;}
+a.m-radio2{ padding:0 10px;}
+a.m-radio2.m-radioChecked,a:visited.m-radio2.m-radioChecked{color:#fff; background-color:#0098E1; }
+.m-raidoDisabled{vertical-align:middle; background-image:url("../../../images/radio-1.png")/*tpa=http://www.yirendai.com/static/images/icon/radio.png*/;_background-image:url("../../../images/radio-1.gif")/*tpa=http://www.yirendai.com/static/images/icon/radio.gif*/;background-repeat:no-repeat;display:block;width:14px;height:15px;display:inline-block;*zoom:1;*display:inline;}
+a:hover.m-radioChecked{background-position:0 -48px;}
+/*==== page ====*/
+.m_pages_box{margin:20px 0;}
+a.m-pageUp,
+a:visited.m-pageUp,
+a.m-pageDown,
+a:visited.m-pageDown,
+a.m-pageNum,
+a:visited.m-pageNum,
+a.m-pageTurn,
+a:visited.m-pageTurn,
+a.m-pageHellip,
+a:visited.m-pageHellip{border:1px solid #d5d5d5;display:block;float:left;text-decoration:none;color:#3e454c;}
+a.m-pageUp,a:visited.m-pageUp,a.m-pageDown,a:visited.m-pageDown{width:48px;height:28px;line-height:28px;padding-left:7px;padding-right:7px;margin-right: 5px;}
+.m-page a:hover, .m-page a.on{background-color:#0079d2;color:#fff;border:1px solid #0079d2;text-decoration:none;}
+.m-page a span{cursor:pointer}
+.m-page a:hover span.icon-l{background:url("../../../images/icon-lr-1.png")/*tpa=http://www.yirendai.com/static/images/icon/icon-lr.png*/ no-repeat left -16px;}
+.m-page a:hover span.icon-r{background:url("../../../images/icon-lr-1.png")/*tpa=http://www.yirendai.com/static/images/icon/icon-lr.png*/ no-repeat left -24px;}
+a.m-pageNum,a:visited.m-pageNum{width:28px;height:28px;line-height:28px;text-align:center;margin-right: 5px; *padding:0 10px;}
+.m-page a.m-pageHellip,.m-page a:visited.m-pageHellip{width:28px;height:28px;line-height:28px;text-align:center;border:0;margin-right: 5px;}
+.m-page a.m-pageTurn,.m-page a:visited.m-pageTurn{width:30px;height:28px;line-height:28px;border:1px solid #d5d5d5;padding-left: 7px;padding-right:7px;}
+.icon-l,.icon-r{margin-top: 12px;}
+.m-pageInput{width:45px;height:28px;line-height:30px;border:1px solid #d5d5d5;margin-right: 5px;text-indent:5px;}
+.m-page-min a.m-pageNum, a.m-pageNum:visited{}
+
+/*page-min*/
+.m-page-min a.m-pageUp,.m-page-min a:visited.m-pageUp,.m-page-min a.m-pageDown,.m-page-min a:visited.m-pageDown{width:22px; height:22px; line-height:22px; padding:0;  margin-left:10px;}
+.m-page-min .icon-l,.m-page-min .icon-r{margin:8px auto;}
+.m-page-min a.m-pageNum,.m-page-min a:visited.m-pageNum{border:0; height:24px; line-height:24px;}
+.m-page-min a:hover.m-pageNum,.m-page-min a:hover.m-pageHellip{background:none;color:#0079d2;font-weight:bold;}
+.m-page-min .m-pageInput{height:22px; _height:23px; line-height:22px; width:50px;}
+
+.m-page.m-page-min a.m-pageTurn, .m-page.m-page-min a.m-pageTurn:visited{height:22px; line-height:22px;} 
+
+.pageTxt{height:28px;line-height:28px;}
+.m-page .m-drop,.m-page .pageTxt{margin-right: 10px;}
+.m-page .m-input-mini{height:28px;}
+.m-page .m-drop{width:70px;}
+.m-page .r .pageTxt,.m-page .r .m-input-mini{margin-right: 10px;}
+.m-page .r a.m-pageDown,.m-page .r a:visited.m-pageDown{margin-right: 10px;}
+a.pageBtn,a:visited.pageBtn{width:54px;border:1px solid #d5d5d5;background-color:#fff;color:#666;text-align:center;height:28px;line-height:28px;display:block;}
+.m-page a.pageBtn,.m-page a:visited.pageBtn{}
+.outerPage{margin:20px 0}
+/*==== chooseBox ====*/
+.m-chooseBox{margin-bottom: 25px;}
+.m-chooseBox .m-rowLabel{font-weight:bold;color:#666;display:block;height:28px;line-height:28px;}
+.m-chooseBox .m-labelClick{margin-right: 25px;height:28px;line-height:28px;}
+.m-chooseBox .m-labelClick a,.m-chooseBox .m-labelClick a:visited,.m-chooseBox .m-labelClick span{float:left;}
+.m-chooseBox .m-labelClick a,.m-chooseBox .m-labelClick a:visited{margin-right: 8px;margin-top: 6px;}
+.m-chooseBox .m-labelClick a.m-radio2, .m-chooseBox .m-labelClick a.m-radio2:visited{margin:0px;}
+.m-chooseBox .m-labelClick span{color:#666;}
+.m-chooseBox .m-spaceline{margin-right: 8px; display:inline-block; height:30px; line-height:30px;}
+.time_chooseBox.m-chooseBox .m-textFocus{width:104px; height:28px;margin-right: 8px;}
+
+.m-chooseBoxBg{background-color:#f6f6f6;padding:10px 48px;}
+.m-chooseBoxBg .m-rowLabel{height:34px;line-height:34px;color:#414141;}
+.m-chooseBoxBg .m-drop{background-color:#fff;}
+
+
+/*Wdate*/
+.Wdate{color:#666;}
+
+/*==== 提示框 ====*/
+/* 提示框 */
+.tips{padding:7px 12px;border:1px solid transparent;margin-bottom:20px;}
+.tips-info{color:#909090;border-color:#feb652;background-color:#fff8db;}
+.tips-error{color:#b71f07;border-color:#b71f07;background-color:#fde1dd;}
+.tips-warning{color:#ff5a00;border-color:#feb652;background-color:#fff8db;line-height:20px;}
+.number{color:#b71f07;}
+.icon-error{background-position:-26px -56px;width:20px;height:20px;display:inline-block;vertical-align:middle;margin-right:5px;}
+.completed{background-position:0 -55px;width:26px;height:27px;display:inline-block;vertical-align:middle;margin-left:30px;}
+.tooltips .tips{margin-bottom:0;}
+/*form表单错误提示样式*/
+.m-row-error{text-indent: 120px;color: #f00;margin-bottom:3px;height:18px;}
+
+/*无搜索内容样式*/
+.empty_search{background:transparent url("../../../images/empty_search-1.jpg")/*tpa=http://www.yirendai.com/static/images/empty_search.jpg*/ no-repeat top center; width:475px; height:150px; padding:117px 0 0 485px; font-size:18px; font-family:"microsoft yahei"; margin:15px auto; }
+.empty_transferin{background:transparent url("../../../images/empty_transferin-1.jpg")/*tpa=http://www.yirendai.com/static/images/empty_transferin.jpg*/ no-repeat top center; width:475px; height:164px; padding:117px 0 0 485px; font-size:18px; font-family:"microsoft yahei"; margin:15px auto; }
+
+/** 银行LOGO      **/
+.banksList li{float:left;margin:10px 30px 10px 0}
+.bank-icon{background:url("../../../images/banks_logo_map-1.png")/*tpa=http://www.yirendai.com/static/images/banks_logo_map.png*/ no-repeat 25px 0;width:154px;height:42px;display:inline-block;cursor:pointer;}
+.bank-icon a{margin-top:15px;}
+.bank-icon-icbc,.bank_1{background-position:25px 0;}
+.bank-icon-abc,.bank_3{background-position:25px -132px}
+.bank-icon-ccb,.bank_4{background-position:25px -44px;}
+.bank-icon-boc,.bank_5{background-position:25px -308px}
+.bank-icon-cmb,.bank_6{background-position:25px -88px}
+.bank-icon-cmbc,.bank_7{background-position:25px -484px}
+.bank-icon-spdb,.bank_9{background-position:25px -176px}
+.bank-icon-post,.bank_10{background-position:25px -352px}
+.bank-icon-comm,.bank_11{background-position:25px -396px}
+.bank-icon-gdb,.bank_13{background-position:25px -528px}
+.bank-icon-ceb,.bank_14{background-position:25px -264px}
+.bank-icon-sdb,.bank_15{background-position:25px -572px}
+.bank-icon-cib,.bank_16{background-position:25px -616px}
+.bank-icon-citic,.bank_17{background-position:25px -660px}
+.bank_18{background-position:25px -748px}
+.bank-icon-hxb,.bank_19{background-position:25px -220px}
+.bank-icon-pab,.bank_20{background-position:25px -704px}
+.bank-icon-other,.bank_8,.bank_12{background-position:25px -440px}
+.bank-icon-bob{background-position:25px -748px}
+.bank-icon-srcb{background-position:25px -792px}
+.bank-icon-bea{background-position:25px -836px}
+.bank-icon-nbcb{background-position:25px -880px}
+.bank-icon-njcb{background-position:25px -924px}
+.bank-icon-psbc,.bank_10{background-position:25px -352px}
+/*银行小图标*/
+.banksMiniList{width:550px;margin:20px auto 0}
+.banksMiniList li{float:left;width:110px;font-family:"microsoft yahei";font-size:12px;color:#696969;line-height:24px;margin-bottom:10px ;}
+.bank-iconMini{background:url("../../../images/banksMini_logo_map.png")/*tpa=http://www.yirendai.com/static/images/banksMini_logo_map.png*/ no-repeat 0 0;height:20px;display:inline-block;padding-left:25px;}
+.bank-iconMini-ccb{background-position:0 0}
+.bank-iconMini-icbc{background-position:0 -20px}
+.bank-iconMini-boc{background-position:0 -41px}
+.bank-iconMini-abc{background-position:0 -61px}
+.bank-iconMini-hxb{background-position:0 -80px}
+.bank-iconMini-psbc{background-position:0 -98px}
+.bank-iconMini-cgb{background-position:0 -116px}
+.bank-iconMini-comm{background-position:0 -135px}
+.bank-iconMini-citic{background-position:0 -154px}
+.bank-iconMini-ceb{background-position:0 -172px}
+.bank-iconMini-cib{background-position:0 -190px}
+.bank-iconMini-cmb{background-position:0 -210px}
+.bank-iconMini-spdb{background-position:0 -230px}
+.bank-iconMini-pab{background-position:0 -248px}
+.bank-iconMini-cmbc{background-position:0 -264px}
+.bank-iconMini-bob{background-position:0 -284px}
+#showBanklist{cursor:pointer}
+
+
+
+
+
+
+/*404跳转页面*/
+.jump_box{border: 1px solid #DFDFDF;height: auto;margin: 10px auto;padding: 20px;width: 1000px;}
+.jump_img{background:url("../../../images/tiaoz_img-1.gif")/*tpa=http://www.yirendai.com/static/images/tiaoz_img.gif*/ no-repeat 0 0;width:109px;height:102px;margin:0 50px 0 145px;display:inline;}
+.jump_img_two{ background-position:0 -170px;}
+.jump_con{background:url("../../../images/dotline-1.gif")/*tpa=http://www.yirendai.com/static/images/icon/dotline.gif*/ repeat-x 0 bottom;overflow:hidden;padding:30px 0px;margin:0 40px;}
+.jump_con h3{font-size:24px;font-family:\5FAE\8F6F\96C5\9ED1,'Microsoft YaHei',SimHei,SimSun;color:#f88b19;padding-bottom:30px;}
+.jump_con p{line-height:24px;}
+.jump_nav{text-align:center;margin:20px 0 50px 0;color:#0098E0;}
+.jump_nav a{padding:0 10px;}
+.customer_service{padding:20px 0 40px 342px;}
+.customer_service p{padding-top:20px;height:30px;}
+.customer_service strong{padding:0 50px 0 0;color:#16406a;font-family:Arial;font-size:18px;font-weight:normal;float:left;}
+.customer_service .photo_icon,.customer_service .mail_icon{margin-top:3px;padding-right:8px;display:block;width:22px;height:22px;background:url("../../../images/icon_tiaoz-1.gif")/*tpa=http://www.yirendai.com/static/images/icon_tiaoz.gif*/ no-repeat 0 0;}
+.customer_service .mail_icon{ background-position:0 -44px;}
+.jump_con_left{width:470px;}
+.jump_con_left .customer_service{padding:20px 0 40px 42px}
+.jump_con_left .jump_nav{text-align:left;padding:0 0 0 32px;}
+.jump_con_left .jump_con{margin:0 0 0 40px;}
+.jump_bigimg{padding-left:80px;}
+.mobile_services_con .bind_h3{margin-bottom:56px;}
+.mobile_services_con .bind_h3 h3{font-size:12px;color:#414141;padding:5px 0 0 0;}
+.mobile_services_con .bind_h3 p{border:1px solid #fcb651;background:#fff7db;padding:5px 10px;color:#aaa;}
+.mobile_photo_con .m-row{margin-bottom:26px;}
+.mobile_services_con .mobile_photo_con .pt_get{margin-right:15px;}
+.mobile_services_con .mobile_photo_con .no_cost{padding: 0 0 0 25px;}
+
+/*header新手引导浮动层*/
+.guide{position:relative;height:36px;_height:30px;display:block; z-index:999;}
+.guideMenu{position:absolute;top:34px;z-index:8;display:none;border-bottom:1px solid #dbdbdb;}
+.guideLink{text-align:center;display:block;width:70px;cursor:pointer;}
+.guideMenu li a,.guideMenu li a:visited{display:block;padding:0 6px;background-color:#f7f9fc;color:#909090;border:1px solid #dbdbdb;_border-bottom:0;width:62px;}
+.guideMenu li a:hover{background-color:#0079d2;border:1px solid #0079d2;color:#fff;text-decoration:none;}
+.header_login .guideMenu li{float:none; margin-bottom: -1px;_margin-bottom:0;}
+.guideMenu li a.guideMenuIcon,.guideMenu li a:visited.guideMenuIcon,.guideMenu li a:hover.guideMenuIcon{}
+.guideIcon{position:absolute;z-index:10;display:none;width:9px;height:5px;overflow:hidden;top:30px;left:50%;margin-left:-4px;background-image:url("../../../images/guide-1.gif")/*tpa=http://www.yirendai.com/static/images/guide.gif*/;background-repeat:no-repeat;background-position:0 0;}
+
+/*新增侧边栏*/
+* html,* html body{background-image:url(../../../images/about:blank);background-attachment:fixed;width:100%;}
+.asideBg{background:#fff;opacity:.7;width:40px;position:fixed;top:0;right:0;height:100%;z-index:100;filter:alpha(opacity=70);-moz-opacity:.7;-khtml-opacity: 0.5;}
+.aside{width:40px;position:fixed;top:0;right:0;height:100%;z-index:100;}
+.aside,.asideBg{
+ _position:absolute; _height:expression(window.screen.availHeight-130);
+_left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft,10)||0)-(parseInt(this.currentStyle.marginRight,10)||0));
+_top:expression(eval(document.documentElement.scrollTop));
+_overflow-y:auto;
+_overflow:hidden;
+}
+/*IE6侧边栏*/
+
+.aside .top a,.aside .bottom a{display:block;background:url("../../../images/aside_icons-1.png")/*tpa=http://www.yirendai.com/static/images/aside/aside_icons.png*/ no-repeat transparent;width:40px;padding-left:40px;color:#fff;font-weight:bold;text-align:center;height:33px;margin-bottom:2px;text-decoration:none;font-family:"microsoft yahei";padding-top:7px;line-height:14px;}
+.aside .top a:hover,.aside .bottom a:hover{background-color:#2886e0;padding-left:0;background-image:none;}
+.aside .top{top:30%;position:absolute;}
+.aside .bottom{top:70%;position:absolute;}
+.aside .top .suggestion{background-position:0 -40px}
+.aside .top .downloadApp{background:url("../../../images/mobile_icons-1.gif")/*tpa=http://www.yirendai.com/static/images/aside/mobile_icons.gif*/ no-repeat 12px 0;}
+.aside .bottom .qrCode{background-position:0 -120px;}
+.aside .bottom .qrCode:hover{background:url("../../../images/aside_icons-1.png")/*tpa=http://www.yirendai.com/static/images/aside/aside_icons.png*/ no-repeat 0 -200px #2886e0}
+.aside .bottom .goTop{background-position:0 -160px}
+.qrCode-tips{background:url("../../../images/qrcode-1.png-v=2.png")/*tpa=http://www.yirendai.com/static/images/aside/qrcode.png?v=2*/ no-repeat;width:332px;height:179px;position:absolute;top:70%;right:40px;}
+
+
+.aside .close{background:url("../../../images/close-1.png")/*tpa=http://www.yirendai.com/static/images/aside/close.png*/ no-repeat -18.5px 0;_width:40px;height:16px;display:block;margin-top:30px;cursor:pointer;}
+#asideHide{background:url("../../../images/close-1.png")/*tpa=http://www.yirendai.com/static/images/aside/close.png*/ no-repeat 0 -24px;width:76px;height:25px;position:fixed;top:30px;right:-76px;cursor:pointer;_right:0;_display:none}
+#asideHide{ _position:absolute;
+    _left:expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft,10)||0)-(parseInt(this.currentStyle.marginRight,10)||0));
+    _top:expression(eval(document.documentElement.scrollTop)+30);
+    _overflow-y:auto;
+_display:none}
+/** html .aside{*//*
+.aside .top a,.aside .bottom a{display:block;background:url(../images/aside/aside_icons.png) no-repeat transparent;width:40px;padding-left:40px;color:#fff;font-weight:bold;text-align:center;height:33px;margin-bottom:2px;text-decoration:none;font-family:"microsoft yahei";padding-top:7px;line-height:14px;}
+.aside .top a:hover,.aside .bottom a:hover{background-color:#2886e0;padding-left:0;background-image:none;}
+.aside .top{top:30%;position:absolute;}
+.aside .bottom{top:70%;position:absolute;}
+.aside .top .suggestion{background-position:0 -40px}
+*//*.aside .top .downloadApp{background-position:0 -80px}*//*
+.aside .top .downloadApp{background:url("../../../images/../images/mobile_icons.gif") no-repeat scroll 8px 0 rgba(0, 0, 0, 0);}
+.aside .bottom .qrCode{background-position:0 -120px;}
+.aside .bottom .qrCode:hover{background:url(../images/aside/aside_icons.png) no-repeat 0 -200px #2886e0}
+.aside .bottom .goTop{background-position:0 -160px}
+.qrCode-tips{background:url(../images/aside/qrcode.png?v=1) no-repeat;width:164px;height:188px;position:absolute;top:70%;right:40px;}
+.aside .top a.on,.aside .bottom a.on{background-color:#2886e0;padding-left:0;background-image:none;}
+.aside .bottom .qrCode.on{background:url(../images/aside/aside_icons.png) no-repeat 0 -200px #2886e0}*/
+/*意见反馈弹框*/
+.luo_mGBox{width:510px;margin:20px auto;}
+.formBox label{width:60px;line-height:30px;}
+
+i.iconNew{background:url("../../../images/iconNew.png")/*tpa=http://www.yirendai.com/static/images/invite/iconNew.png*/ no-repeat;display:block;width:22px;height:9px;  position:absolute; right:25px; top:11px;}
+
+.leadBox{background:url("../../../images/leadBg.png")/*tpa=http://www.yirendai.com/static/images/invite/leadBg.png*/ repeat;width:100%;height:100%;position:absolute;z-index:1000;}
+
+a.leadBoxClose,a:visited.leadBoxClose{background:url("../../../images/leadClose.png")/*tpa=http://www.yirendai.com/static/images/invite/leadClose.png*/ no-repeat;width:42px;height:42px;display:block;float:right;margin-top:54px; margin-right: 20px;}

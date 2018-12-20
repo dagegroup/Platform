@@ -1,0 +1,85 @@
+/*calmini*/
+a.calminiPic img,a:visited.calminiPic img{border:0;}
+.calmini{position:absolute;top:30%;right:40px;display:none;}
+/*common*/
+.calmini,a.calminiLBar,a:visited.calminiLBar{height:250px;}
+.calminiRTabC{height:248px;}
+/*L*/
+.calminiL{position:absolute;left:0;border:1px solid #a1a1a1;border-top-left-radius:5px;
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+    border-bottom-left-radius:5px;border-right:1px solid #fff;background-color:#fff;}
+/*L bar*/
+a.calminiLBar,a:visited.calminiLBar{float:left;width:29px;display:block;background:url("../../../images/miniBg2-1.gif")/*tpa=http://www.yirendai.com/static/images/minical/miniBg2.gif*/ repeat #8d9399;}
+.calminiLBar span{background:url("../../../images/miniBarIcon-1.png")/*tpa=http://www.yirendai.com/static/images/minical/miniBarIcon.png*/ no-repeat 0 0;width:22px;height:22px;display:block;margin-top: 120px;margin-left:3px;}
+.calminiLBar.barOn span{background:url("../../../images/miniBarIcon-1.png")/*tpa=http://www.yirendai.com/static/images/minical/miniBarIcon.png*/ no-repeat 0 -22px;}
+.calminiLBar.defaultOn span{background:url("../../../images/miniBarIcon-1.png")/*tpa=http://www.yirendai.com/static/images/minical/miniBarIcon.png*/ no-repeat 0 -44px;}
+/*L M*/
+.calminiLM{float:left;width:400px;margin-top:30px;padding-left: 20px;padding-right: 20px;}
+.calminiLMT{margin-bottom:10px;color:#3d3f42;}
+.calminiLMT strong{font-size:18px;font-weight:normal;font-family:\5FAE\8F6F\96C5\9ED1,'Microsoft YaHei',SimHei,SimSun;float:left;}
+.calminiLMT span{float:right;margin-top:6px;}
+.calminiLMT span a,.calminiLMT span a:visited{color:#2e69ef;text-decoration:underline;}
+.calminiLMTable{width:400px;}
+.calminiLMTable table{width:400px;border-collapse:collapse;
+    -webkit-box-shadow: inset 0px -2px 2px #ccc;
+    -moz-box-shadow: inset 0px -2px 2px #ccc;
+    -o-box-shadow: inset 0px -2px 2px #ccc;
+    -ms-box-shadow: inset 0px -2px 2px #ccc;
+    box-shadow: inset 0px -2px 2px #ccc;
+}
+.calminiLMTable table,.calminiLMTable table tr,.calminiLMTable table tr th,.calminiLMTable table td{border-collapse:collapse;border:1px solid #a6a6a6;color:#515151;}
+.calminiLMTable table tr th,.calminiLMTable table td{height:36px;line-height:36px;padding-left:15px;font-weight:normal;}
+.calminiLMTable table td strong{color:#C10000;}
+/*R*/
+.calminiR{width:226px;position:absolute;right:11px;border:1px solid #a1a1a1;background-color:#f1f1f1;-webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;}
+.calminiArrow{background:url("../../../images/mini_arrow-1.png")/*tpa=http://www.yirendai.com/static/images/minical/mini_arrow.png*/ no-repeat -12px 0;width:12px;height:23px;position:absolute;right:0;top:10px;}
+/*R T*/
+.calminiT{float:right;width:25px;}
+.calminiRT{width:25px;text-align:center;float:right;}
+.calminiClose{display:block;width:15px;height:15px;background:url("../../../images/miniCloseIcon-1.png")/*tpa=http://www.yirendai.com/static/images/minical/miniCloseIcon.png*/ no-repeat;margin-top: 10px;margin-bottom: 15px;margin-left: 5px;_margin-left:0;}
+.calminiRTabT a,.calminiRTabT a:visited{display:block;width:14px;padding:10px 5px;font-size:14px;color:#fff;background:url("../../../images/miniBg2-1.gif")/*tpa=http://www.yirendai.com/static/images/minical/miniBg2.gif*/ repeat #6f7479;font-family:\5FAE\8F6F\96C5\9ED1,'Microsoft YaHei',SimHei,SimSun;border:1px solid #717171;border-left:0;line-height:100%;text-decoration:none;
+    -webkit-border-radius: 0px 5px 5px 0px;
+    -moz-border-radius: 0px 5px 5px 0px;
+    -o-border-radius: 0px 5px 5px 0px;
+    -ms-border-radius: 0px 5px 5px 0px;
+    border-radius: 0px 5px 5px 0px;
+}
+.calminiRTabT a.curr,.calminiRTabT a:visited.curr{
+    background:url("../../../images/miniBg-1.gif")/*tpa=http://www.yirendai.com/static/images/minical/miniBg.gif*/ repeat #9da4ab;margin-left: -1px;width:15px;
+}
+/*R C*/
+.calminiRTabC{width:199px;float:left;background:url("../../../images/miniBg-1.gif")/*tpa=http://www.yirendai.com/static/images/minical/miniBg.gif*/ repeat #9da4ab;border:1px solid #717171;
+    -webkit-border-radius: 0px 5px 5px 0px;
+    -moz-border-radius: 0px 5px 5px 0px;
+    -o-border-radius: 0px 5px 5px 0px;
+    -ms-border-radius: 0px 5px 5px 0px;
+    border-radius: 0px 5px 5px 0px;
+}
+.calminiRTabC_t{width:160px;background-color:#70747a;color:#fff;line-height:20px;padding-top: 10px;padding-bottom: 10px;margin-top: 15px;margin-left: 19px;margin-bottom: 7px;}
+.calminiRTabC_t ul{margin-left:10px;}
+.calminiRTabC_m{margin-left: 20px;margin-top: 7px;}
+.miniText,.miniSelInput{border:1px solid #7e8a8e;background-color:#f1f2f1;color:#515151;height:26px;line-height:26px;padding-left:8px;
+    -webkit-box-shadow: inset 1px 1px 2px #c0c0bf;
+    -moz-box-shadow: inset 1px 1px 2px #c0c0bf;
+    -o-box-shadow: inset 1px 1px 2px #c0c0bf;
+    -ms-box-shadow: inset 1px 1px 2px #c0c0bf;
+    box-shadow: inset 1px 1px 2px #c0c0bf;
+}
+.miniText{width:150px;margin-bottom:5px;}
+.miniSel{margin-bottom:5px;position:relative;width:160px}
+.miniSelList{position:absolute;width:159px;border:1px solid #999;background:#f1f2f1;padding-top: 5px;padding-bottom: 5px;height:66px;overflow:hidden;}
+.miniSelList ul li{width:100%;line-height:20px;text-indent:10px;color:#515151;cursor:pointer;}
+.miniSelList ul li.on{background-color:#8e9499;color:#fff;}
+.miniSelT{width:160px;}
+.miniSelInput{width:120px;float:left;}
+a.miniSelIcon,a:visited.miniSelIcon{background:url("../../../images/miniSelIcon-1.gif")/*tpa=http://www.yirendai.com/static/images/minical/miniSelIcon.gif*/ no-repeat 0 0;display:block;width:28px;height:28px;float:right;border:1px solid #7c888c;border-left:0;}
+a.miniSelIcon.curr,a:visited.miniSelIcon.curr{background:url("../../../images/miniSelIcon-1.gif")/*tpa=http://www.yirendai.com/static/images/minical/miniSelIcon.gif*/ no-repeat 0 -28px;}
+a.miniBtn,a:visited.miniBtn{display:block;border:1px solid #c86916;color:#fff;font-size:14px;font-family:\5FAE\8F6F\96C5\9ED1,'Microsoft YaHei',SimHei,SimSun;height:25px;line-height:25px;width:113px;text-align:center;background:url("../../../images/miniBtn-1.gif")/*tpa=http://www.yirendai.com/static/images/minical/miniBtn.gif*/ repeat-x 0 0;text-decoration:none;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;}
+#miniSel0 .miniSelList,#miniSel1 .miniSelList,#miniSel2 .miniSelList{height:100px;}
+.calmini .gray_btn{margin-top:20px;margin-left:43%;}

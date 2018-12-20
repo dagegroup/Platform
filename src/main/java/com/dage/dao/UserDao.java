@@ -5,15 +5,21 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
+import java.util.List;
 import java.util.Map;
 
 /**
  * className:UserDao
  * discription:
- * author:CZP
+ * author:ChenMing
  * creatTime:2018-12-10 16:39
  */
 public interface UserDao {
+
+    @Select("select userid from user_account where userid=#{userid}")
+    String getUserbyUserid(String userid);
+    @Insert("insert into user_account(accountid,userid) values('A'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid})")
+    int adduserid(String userid);
 
     /**
      * 根据用户编号查询

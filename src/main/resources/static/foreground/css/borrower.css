@@ -2,7 +2,7 @@
 .loanApplication{width:1000px;margin:0 auto 16px;background-color:#E4E4E4;}
 .loanApplication .lend-left-menu{float:left;}
 .loanApplication .m-drop,.loanApplication .m-input-mini,.loanApplication .m-textFocus{width:180px;}
-.loadApplicationCon{width:790px;float:right;background-color:#fff;padding-top: 16px;}
+.loadApplicationCon{width:650px;float:right;background-color:#fff;padding-top: 20px;}
 .loadApplicationCon .common_box{margin-left:16px;margin-right:16px;width:754px;}
 .loadApplicationCon .common_box .innerbox{width:100%;padding:22px 0;}
 .loadApplicationCon .common_box .innerbox .m-row{margin-left: 16px;margin-right: 16px;}
@@ -424,7 +424,7 @@ span.verifica_bg{background:url(../images/verifica_bg.gif) no-repeat 0 2px;paddi
 .calculator_box_ul{padding-left:20px; color:#a7a7a7;}
 .calculator_box_ul p{margin-bottom:5px;}
 
-.counterNote-top{top:-48px;right:60px;}
+.counterNote-top{top:650px;right:630px;}
 .calculators_box_pInfo{padding-top:10px;line-height:180%;clear:both;color:#969696;}
 .calculators_box_pInfo i{color:#c10000;font-style:normal;}
 .calculators_box_pInfo strong{color:#969696;font-weight:bold;}

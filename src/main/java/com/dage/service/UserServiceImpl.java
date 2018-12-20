@@ -20,6 +20,18 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
+    public int addUserid(String userid) {
+        return userDao.adduserid(userid);
+    }
+
+    @Override
+    public String getUserid(String userid) {
+
+        return userDao.getUserbyUserid(userid);
+    }
+
+
+    @Override
     public int withdraw(Map map) {
         return userDao.withdraw(map);
     }

@@ -1,4 +1,4 @@
-.wrap{ width: 1200px; margin: 0 auto;}
+.wrap{ float:right; width: 1180px; }
 .bold{ font-weight: bold;}
 .f20{ font-size: 20px;}
 .f16 {font-size: 16px;}
