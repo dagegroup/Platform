@@ -44,6 +44,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public int insertInfo(Map map) {
+        map.put("state","正常");
         return userInfoDao.insetInfo(map);
     }
 }

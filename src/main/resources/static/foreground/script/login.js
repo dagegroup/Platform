@@ -5,6 +5,7 @@
         var subFlag = "1";
         var flag = 0;
         var wait = 300;
+        var flagJPG=0;
         var verify1 = "";
         var verify2 = "";
         var flag1 = false;
@@ -63,6 +64,11 @@
                     login.strVerify($(this));
                     return false;
                 });
+                $yanzhengma.on('blur', function(event) {
+                    event.preventDefault();
+                    login.checkCode($(this));
+                    return false;
+                });
                 $phoneyanzhengma.on('blur', function(event) {
                     event.preventDefault();
                     login.verify($(this));
@@ -83,6 +89,19 @@
                     flag4 = 1;
                 }
             },
+         checkCode:  function () {
+
+            var inputCode = document.getElementById("jpgVerify").value.toUpperCase();
+            var codeToUp = code.toUpperCase();
+            if (inputCode.length = 0) {
+                $("#jpgVerifys").html("验证码不能为空").css("color", "red");
+            } else if (inputCode != codeToUp) {
+                $("#jpgVerifys").html("验证码输入错误").css("color", "red");
+            } else {
+                $("#jpgVerifys").html("验证码输入正确").css("color", "green");
+                flagJPG = 1;
+            }
+        },
             phoneYz: function() { // 手机号验证
                 var utel = $("#phone");
                 var str = utel.val();
@@ -111,12 +130,16 @@
                 }
             },
             phoneSend: function(o) {
+                if(flagJPG==0){
+                    return false;
+                }
                 if (!login.phoneYz()) {
                     return false;
                 }
                 if (flag == "1") {
                     return false;
                 }
+
                 var isSuccess = false;
                 $.ajax({
                     type: "post", //请求方式

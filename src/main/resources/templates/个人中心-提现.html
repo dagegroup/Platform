@@ -61,7 +61,7 @@
       <ul class="top-nav fn-clear">
         <li class="on"> <a href="/goto/index">首页</a> </li>
         <li> <a href="/goto/list" class="">我要投资</a> </li>
-        <li> <a href="#">我要融资</a> </li>
+        <li> <a href="/goto/rent">我要融资</a> </li>
         <li> <a href="/goto/helpInfo">安全保障</a> </li>
         <li class="top-nav-safe"> <a href="/user/toOwn">我的账户</a> </li>
         <li> <a href="/goto/comInfo">关于我们</a> </li>
@@ -75,17 +75,17 @@
     <div class="credit-ad"><img src="../foreground/images/clist1.jpg" width="1200" height="96"></div>
     <div id="personal-left" class="personal-left">
       <ul>
-        <li class="pleft-cur"><span><a href="/user/toOwn"><i class="dot dot1"></i>账户总览</a></span></li>
-        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="/user/toOwn1">资金记录</a></span></li>
-        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="/user/toOwn2">投资记录</a></span></li>
-        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="/user/toOwn3">回款计划</a></span></li>
-        <li class=""><span><a href="/user/toOwn4"><i class="dot dot02"></i>开通第三方</a> </span> </li>
-        <li><span><a href="/user/toOwn5"><i class="dot dot03"></i>充值</a></span></li>
-        <li class=""><span><a href="/user/toOwn6"><i class="dot dot04"></i>提现</a></span></li>
-        <li style="position:relative;" class=""> <span> <a href="/user/toOwn7"> <i class="dot dot06"></i> 我的红包 </a> </span> </li>
-        <li class=""><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="/user/toOwn8">兑换历史</a></span></li>
-        <li style="position:relative;"> <span> <a href="/user/toOwn9"><i class="dot dot08"></i>系统信息 </a> </span> </li>
-        <li><span><a href="/user/toOwn10"><i class="dot dot09"></i>账户设置</a></span></li>
+        <li class="pleft-cur"><span><a href="toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
+        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Record">资金记录</a></span></li>
+        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Investment">投资记录</a></span></li>
+        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Plan">回款计划</a></span></li>
+        <li class=""><span><a href="Thirdparty1"><i class="dot dot02"></i>开通第三方</a> </span> </li>
+        <li><span><a href="Recharge1"><i class="dot dot03"></i>充值</a></span></li>
+        <li class=""><span><a href="Withdraw"><i class="dot dot04"></i>提现</a></span></li>
+        <li style="position:relative;" class=""> <span> <a href="Packet"> <i class="dot dot06"></i> 我的红包 </a> </span> </li>
+        <li class=""><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Conversion">兑换历史</a></span></li>
+        <li style="position:relative;"> <span> <a href="Messages"><i class="dot dot08"></i>系统信息 </a> </span> </li>
+        <li><span><a href="Setting"><i class="dot dot09"></i>账户设置</a></span></li>
       </ul>
     </div>
     <label id="typeValue" style="display:none;"> </label>
@@ -93,9 +93,9 @@
 		//<![CDATA[
 			function showSpan(op){
 				$("body").append("<div id='mask'></div>");
-				$("#mask").addClass("mask").css("display","block");
+				$("#mask").addClass("mask").css("display","none");
 	
-				$("#"+op).css("display","block");
+				$("#"+op).css("display","none");
 			}
 	
 			function displaySpan(op){
@@ -199,16 +199,16 @@
             <h6>填写提现金额</h6>
             <ul>
               <li> <span class="deposit-formleft">可用金额</span> <span class="deposit-formright"> <i>
-                <label id="form:blance"> 0.00</label>
+                <label id="form:blance"><span id="blance"> </span> </label>
                 </i>元 </span> </li>
               <li> <span class="deposit-formleft">提现金额</span> <span class="deposit-formright">
-                <input type="text" class="deposite-txt" maxlength="10" >
+                <input type="text" id="money" name="money" class="deposite-txt" maxlength="10" onblur="Commission()" >
                 元 </span> <span id="actualMoneyErrorDiv"><span id="actualMoney_message" style="display:none" class="error"></span></span> </li>
               <li> <span class="deposit-formleft">提现费用</span> <em id="txfy" class="markicon fl"></em> <span class="deposit-formright deposit-formright1"> <i>
-                <label id="form:fee"> 0.00</label>
+                <label id="form:fee"> <span id="commission">0.00 </span><input type="text" style="display:none" id="procedure" name="procedure"></label>
                 </i>元 </span> <span class="txarrow-show">提现金额的0.1%，最低不低于2元，最高100元封顶</span><span class="txicon-show"></span> </li>
               <li><span class="deposit-formleft">实际到账金额</span> <em id="dzje" class="markicon fl"></em> <span class="deposit-formright deposit-formright1"> <i>
-                <label id="form:cashFine"> 0.00</label>
+                <label id="form:cashFine"><span id="practical">0.00 </span></label>
                 </i> 元</span> <span class="dzarrow-show">提现金额 - 提现费用</span><span class="dzicon-show"></span> </li>
               <li>
                 <input type="submit" name="form:j_idt78" value="提现" class="btn-depositok" onclick="return checkActualMoney()">
@@ -216,6 +216,65 @@
             </ul>
           </div>
         </form>
+        <script>
+            $(function(){
+                $.ajax({
+                    url: "/person/account",
+                    data:{userId:'U201812071032'},
+                    async:false,//同步
+                    type:"post",
+                    dataType:"json",
+                    success: function(data){
+                        //s=JSON.stringify(data[0]);
+                        //alert(s);
+                        //alert(data[0].ENAME);
+                        $('#blance').html(data[0].AVAILABLEBALANCE);
+
+                    },
+                    error : function(data) {
+                        alert(data);
+                    }
+                })
+            });
+            function Commission() {
+                var str=document.getElementById("money").value;
+                var str1=document.getElementById('blance').innerText;
+                /*alert(parseInt(str));
+                alert(str1);*/
+                if(parseInt(str)>parseInt(str1)){
+                    alert("你有那么多钱吗？穷逼！！！");
+                }else if(parseInt(str)<100){
+                    alert("提现不能低于100元");
+                }else{
+                    if (str <= 200){
+                        $('#commission').html(2);
+                        $('#practical').html(str-2);
+                        document.getElementById("procedure").value=(2);
+                    }else if(str < 10000){
+                        $('#commission').html(str*0.01);
+                        $('#practical').html(str-str*0.01);
+                        document.getElementById("procedure").value=(str*0.01);
+                    }else{
+                        $('#commission').html(100);
+                        $('#practical').html(str-100);
+                        document.getElementById("procedure").value=(100);
+                    }
+                }
+            }
+            function checkActualMoney() {
+                var str=document.getElementById("money").value;
+                var str1=document.getElementById('blance').innerText;
+                if (parseInt(str)>parseInt(str1)){
+                    return false;
+                }else if(parseInt(str)<100){
+                    return false;
+                }else{
+                    return true;
+                }
+
+            }
+
+        </script>
         <div class="deposit-tip"> 温馨提示：<br>
           1、用户需在完成身份认证、开通丰付托管账户并绑定银行卡后，方可申请提现；<br>
           2、请务必在提现时使用持卡人与身份认证一致的银行卡号，且确保填写信息准确无误；<br>
@@ -225,7 +284,7 @@
         </div>
       </div>
     </div>
-    <div class="alert-450 alert-h220" id="alert-notOpenAccount" style="display: block;">
+    <div class="alert-450 alert-h220" id="alert-notOpenAccount" style="display: none;">
       <div class="alert-title">
         <h3>提示</h3>
       </div>
@@ -291,7 +350,7 @@
       </dl>
       <dl>
         <dt>帮助中心</dt>
-        <dd><a href="/goto/helpInfo">新手入门</a><a href="/user/toOwn">我的账户</a><a href="/goto/list">债权转让</a></dd>
+        <dd><a href="/goto/helpInfo">新手入门</a><a href="个人中心首页.html">我的账户</a><a href="/goto/list">债权转让</a></dd>
       </dl>
       <dl>
         <dt>联系我们</dt>

@@ -59,21 +59,8 @@
              $("#checkNode").val(code);
          }
 
-         //验证图片验证码
 
-         function checkCode() {
-             var flagJPG = 0;
-             var inputCode = document.getElementById("jpgVerify").value.toUpperCase();
-             var codeToUp = code.toUpperCase();
-             if (inputCode.length = 0) {
-                 $("#jpgVerifys").html("验证码不能为空").css("color", "red");
-             } else if (inputCode != codeToUp) {
-                 $("#jpgVerifys").html("验证码输入错误").css("color", "red");
-             } else {
-                 $("#jpgVerifys").html("验证码输入正确").css("color", "green");
-                 flagJPG = 1;
-             }
-         };
+
 
   </script>
 </head>
@@ -155,7 +142,7 @@
           <input type="password" name="repeatPassword" id="repeatPassword" class="input _repeatPassword" maxlength="24" tabindex="1">
           <span id="repeatPasswordAlt" data-info="请再次输入密码">请再次输入密码</span></li>
         <li> <span class="dis">验证码:</span>
-          <input type="text" id="jpgVerify" onblur="checkCode()" class="input input1 _yanzhengma" name="yzm" maxlength="4" tabindex="1">
+          <input type="text" id="jpgVerify"  class="input input1 _yanzhengma" name="yzm" maxlength="4" tabindex="1">
           <input type="text" id="checkNode" disabled="disabled"/>
           <a class="look blue _changeCapcherButton" id="look" href="javascript:void(0);" onclick="createCode()">看不清？换一张</a>
           <span class="info" id="jpgVerifys"></span>

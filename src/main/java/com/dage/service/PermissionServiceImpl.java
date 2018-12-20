@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,27 +72,8 @@ public class PermissionServiceImpl implements PermissionService{
      */
     @Override
     public List<Permission> getCheckList(Integer roleid) {
-        List<Permission> list = permissionDao.getList();
         List<Permission> listByRole = permissionDao.getListByRole(roleid);
-        List<Permission> lists = new ArrayList<>();
-        if(list!=null&&list.size()>0){
-            for (Permission permission : list) {
-                permission.setState("open");
-                if(listByRole!=null&&listByRole.size()>0){
-                    for (Permission roles : listByRole) {
-                        if(roles.getId()==permission.getId()){
-                            permission.setChecked(true);
-                            break;
-                        }
-                    }
-                }
-                if (permission.getPid()==0){
-                    lists.add(permission);
-                    bindChirldren(permission,list);
-                }
-            }
-        }
-        return lists;
+        return listByRole;
     }
 
     /**
@@ -101,6 +83,7 @@ public class PermissionServiceImpl implements PermissionService{
      */
     @Override
     public int add(Map map) {
+
         if (map.get("pid")==null||map.get("pid")=="null"||map.get("pid")==""){
             map.put("pid","0");
         }
@@ -109,7 +92,18 @@ public class PermissionServiceImpl implements PermissionService{
 
     @Override
     public List<Permission> getList() {
-        return permissionDao.getList();
+        List<Permission> pList = permissionDao.getList();
+        List<Permission> list = new ArrayList<>();
+        if (pList!=null&&pList.size()>0){
+            for (Permission permission : pList) {
+                if (permission.getPid()==0){
+                    list.add(permission);
+                    bindChirldren(permission,pList);
+                }
+            }
+        }
+        return list;
+
     }
 
     @Override

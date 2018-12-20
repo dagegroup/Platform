@@ -10,10 +10,7 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!-- 引入组件库 -->
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
-    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
-    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+
 </head>
 <body>
 <div id="tableView">
@@ -104,10 +101,17 @@
             <el-form-item label="角色名称" prop="rolename">
                 <el-input v-model="editForm.rolename" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="权限选择">
-                <div class="easyui-panel" style="padding:5px">
-                    <ul id="ttree" class="easyui-tree" data-options="method:'get',animate:true,checkbox:true"></ul>
-                </div>
+            <el-form-item label="权限选择" >
+                <el-tree style="width: 200px"
+                         :data="tree"
+                         show-checkbox
+                         :props="defaultProps"
+                         ref="tree"
+                         node-key="id"
+                         :default-checked-keys="checked"
+                         :default-expanded-keys="expanded"
+                >
+                </el-tree>
             </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -132,11 +136,17 @@
             //编辑界面是否显示
             editFormVisible: false,
             editLoading: false,
+            isExpand:true,
             goUrl:'',
             editFormRules: {
                 name: [
                     { required: true, message: '请输入姓名', trigger: 'blur' }
                 ]
+            },
+            tree: [],
+            defaultProps: {
+                children: 'children',
+                label:'text'
             },
             //编辑界面数据
             editForm: {
@@ -144,8 +154,10 @@
                 rolename: '',
                 roledesc:'',
                 rolestate:'',
-                powersid:''
+                powersid:'',
             },
+            expanded:[],
+            checked:[],
             //当前页
             currentPage:1,
             //分页大小
@@ -161,6 +173,15 @@
             axios.post('/role/list',{'start':start,'end':end}).then(function(response){
                 self.total = response.data.page.total;
                 self.tableData = response.data.page.list;
+            });
+            axios.post('/power/tree').then(function(response){
+                self.tree = response.data;
+                var arr = response.data
+                for (var i=0;i<arr.length;i++){
+                    self.expanded.push(arr[i].id)
+                }
+                //alert(JSON.stringify(self.tree))
+                // self.multipleSelection=response.data.data;
             })
         },
         methods:{
@@ -182,24 +203,30 @@
             addPower:function (row) {
                 //alert(row)
                 var self = this;
+                self.checked.length=0;
+                //self.authorization = true;
+                axios.post('/power/checktree?roleid='+row.roleid).then(function(response){
+                    var arr = response.data
+                    for (var i=0;i<arr.length;i++){
+                        self.checked.push(arr[i].id)
+                    }
+                    self.$refs.tree.setCheckedKeys(self.checked);
+                })
                 this.editForm = Object.assign({}, row);
-                $("#ttree").tree({
-                    url:'/power/checktree?roleid='+row.roleid
-                });
-                setTimeout(function(){
-                    self.authorization = true;
-                },1000);
+                self.authorization = true;
 
             },
             powerSubmit:function () {
                 var _self = this;
-                var nodes = $('#ttree').tree('getChecked');
                 var s = '';
                 //循环每一个节点
-                for(var i=0; i<nodes.length; i++){
+                this.checked =  this.$refs.tree.getCheckedKeys();
+                //alert(this.checked)
+                for(var i=0; i<this.checked.length; i++){
                     if (s != '') s += ',';
-                    s += nodes[i].id;
+                    s +=this.checked[i];
                 }
+                //alert(s)
                 _self.editForm.powersid = s;
                // alert(_self.editForm.powersid)
                 var formData = _self.editForm;
@@ -244,6 +271,20 @@
             searchClick:function() {
                 var self = this;
             },
+            //分页大小修改事件
+            pageSizeChange:function(val) {
+                console.log('每页 ' + val +' 条');
+                this.pageSize = val;
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            },
+            //当前页修改事件
+            currentPageChange:function(val) {
+                this.currentPage = val;
+                console.log('当前页: ' + val);
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            },
             //保存点击事件
             editSubmit:function(){
                 var _self = this;
@@ -261,6 +302,7 @@
                         _self.$message({
                             message:'该角色下有员工，请删除后重试！',
                             type: 'error'
+
                         });
                     }else{
                          _self.$message({
