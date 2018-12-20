@@ -256,11 +256,10 @@
                     <!--列表底部工具条和分页符-->
                     <el-row style="margin-top: 20px" type="flex" justify="end">
                       <el-col :span="6" >
-                        <el-button :plain="true" type="danger" size="small" icon="delete" @click="removeSelection">删除所选</el-button>
                       </el-col>
                       <el-col :span="18" >
                         <el-pagination
-                                style="float: right"
+                                style="float: left"
                                 @size-change="pageSizeChange"
                                 @current-change="currentPageChange"
                                 :current-page="currentPage"
