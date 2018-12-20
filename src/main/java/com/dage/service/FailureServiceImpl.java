@@ -78,13 +78,7 @@ public class FailureServiceImpl implements FailureService {
                     m.put("FLOWTYPE", "投资");
                     m.put("AMOUNT",amount);
                     int i = failureDaos.updateUserAccount(m);
-                    System.out.println(m);
-                    System.out.println("________________________");
-                    System.out.println(i);
-
                     int x= failureDaos.insertUserFlow(m);
-                    System.out.println("//////////////////////////");
-                    System.out.println(x);
                     if (i <0||x<0) {
                         sqlSession.rollback();
                         return 0;

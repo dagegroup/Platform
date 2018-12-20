@@ -55,8 +55,6 @@ public class FailureController {
     @RequestMapping("update")
     public Object toUpdate(@RequestBody Map map) {
         String bidid = (map.get("bidid") + "");
-        System.out.println("+++++++++++++++++++++++++++++++");
-        System.out.println(failureService.repayFailure(bidid));
         return   failureService.repayFailure(bidid);
     }
 
