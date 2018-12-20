@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>p2p网贷平台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+  <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+<link href="../foreground/css/common.css" rel="stylesheet" />
+<link href="../foreground/css/index.css" rel="stylesheet" type="text/css">
+<link href="../foreground/css/detail.css" rel="stylesheet" type="text/css">
+<link href="../foreground/css/borrower.css" rel="stylesheet">
+<link href="../foreground/css/base.css" rel="stylesheet">
+<link href="../foreground/css/lender.css" rel="stylesheet">
+  <link href="../foreground/css/base.css" rel="stylesheet">
+  <link href="../foreground/css/borrower.css" rel="stylesheet">
+  <link href="../foreground/css/lender.css" rel="stylesheet">
+  <link href="../foreground/css/lender_002.css" rel="stylesheet">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <link href="../foreground/css/miniCal.css" rel="stylesheet">
+  <link rel="stylesheet" href="../foreground/css/qqqq.css" type="text/css">
+  <link rel="stylesheet" href="../foreground/css/jquery-ui_006.css" type="text/css">
+  <link rel="stylesheet" href="../foreground/css/jquery-ui_002.css" type="text/css">
+  <link rel="stylesheet" href="../foreground/css/jquery-ui_004.css" type="text/css">
+  <link rel="stylesheet" href="../foreground/css/jquery-ui_003.css" type="text/css">
+  <link rel="stylesheet" href="../foreground/css/jquery-ui_005.css" type="text/css">
+  <link rel="stylesheet" href="../foreground/css/jquery-ui.css" type="text/css">
+  <script type="text/javascript" src="../foreground/script/jquery.js"></script>
+  <script type="text/javascript" src="../foreground/script/jquery-ui.js"></script>
+  <script type="text/javascript" src="../foreground/script/jquery-ui_002.js"></script>
+  <script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
+  <script type="text/javascript" src="../foreground/script/common.js"></script>
+  <script type="text/javascript" async="" id="inspsync" src="../foreground/script/inspectlet.js"></script><script async="" src="../foreground/script/analytics.js"></script><script src="../foreground/script/address.js" type="text/javascript"></script>
+  <script src="../foreground/script/citylinkage.js" type="text/javascript"></script>
+  <!-- 引入样式 -->
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript" src="../js/axios.min.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="/elementui/elementui.css">
+  <!-- 引入组件库 -->
+  <script src="/elementui/elementui.js"></script>
+
+  <script type="text/javascript" src="../foreground/script/common.js"></script>
+  <style type="text/css">
+    .wrap{
+      float:right; width: 1180px;
+    }
+  </style>
+</head>
+<body class="bg">&lt;
+<header>
+  <div class="header-top min-width" >
+    <div class="container fn-clear"> <strong class="fn-left">咨询热线：400-668-6698<span class="s-time">服务时间：9:00 - 18:00</span></strong>
+      <ul class="header_contact">
+        <li class="c_1"> <a class="ico_head_weixin" id="wx"></a>
+          <div class="ceng" id="weixin_xlgz" style="display: none;">
+            <div class="cnr"> <img src="../foreground/images/code.png"> </div>
+            <b class="ar_up ar_top"></b> <b class="ar_up_in ar_top_in"></b> </div>
+        </li>
+        <li class="c_2"><a href="#" target="_blank" title="官方QQ" alt="官方QQ"><b class="ico_head_QQ"></b></a></li>
+        <li class="c_4"><a href="#" target="_blank" title="新浪微博" alt="新浪微博"><b class="ico_head_sina"></b></a></li>
+      </ul>
+      <ul class="fn-right header-top-ul">
+        <!--用户名为空-->
+        <li th:if="${session.userName} eq null">
+          <div class="" >
+            <a href="register.html" class="" title="免费注册" >免费注册</a>
+          </div>
+        </li>
+        <li th:if="${session.userName} eq null">
+          <div class="" >
+            <a href="/user/toLogin" class="js-login" title="登录" >登录</a>
+          </div>
+        </li>
+        <!--用户名不为空-->
+        <li th:if="${session.userName} ne null">
+          <div class="">
+            <span th:text="欢迎您 "></span>
+            <span th:text="${session.userName}"></span>
+          </div>
+        </li>
+        <li th:if="${session.userName} ne null">
+          <div class="" >
+            <a href="/user/toLogin" class="js-login" title="退出">退出</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="header min-width">
+    <div class="container">
+      <div class="fn-left logo"> <a class="" href="/goto/index"> <img src="../foreground/images/logo.png" title=""> </a> </div>
+      <ul class="top-nav fn-clear">
+        <li > <a href="/goto/index">首页</a> </li>
+        <li class="on"> <a href="/goto/list" class="">我要投资</a> </li>
+        <li> <a href="/goto/rent">我要融资</a> </li>
+        <li> <a href="/goto/helpInfo">安全保障</a> </li>
+        <li class="top-nav-safe"> <a href="/user/toOwn">我的账户</a> </li>
+        <li> <a href="/goto/comInfo">关于我们</a> </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!--列表-->
+<div class="page-filter wrap" >
+
+        <div class="common_box">
+          <h2>
+            <span class="icontit icontit13 png"></span>上传资料
+          </h2>
+          <div class="innerbox">
+              <div id="tableView">
+                <el-table
+                        :header-cell-style="{background:'#3A9FFC'}"
+                        :data="tableData"
+                        v-loading.body="loading"
+                        border
+                        style="width:100%"
+               >
+                  <el-table-column
+                            v-if="false"
+                          align="center"
+                          prop="id"
+                          label="资料类型"
+                          width="180">
+                  </el-table-column>
+                  <el-table-column
+                          align="center"
+                          prop="contentType"
+                          label="资料类型"
+                          width="180">
+                  </el-table-column>
+                  <el-table-column
+                          align="center"
+                          prop="content"
+                          label="说明"
+                          width="450">
+                  </el-table-column>
+                  <el-table-column
+                          align="center"
+                          prop="picpath"
+                          label="图片"
+                          width="100">
+                    <template scope="scope">
+                      <a :href="'/rent/downloadPic?fileName='+scope.row.picpath"><img slot="reference" :src="path+scope.row.picpath" height="80" min-width="70"></a>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                          align="center"
+                          label="操作"
+                          width="269"
+                  >
+                    <template scope="scope">
+
+                      <el-upload
+                              class="upload-demo"
+                              :ref="'upload'+scope.row.id"
+                              action="/rent/upLoadPic"
+                              :on-preview="handlePreview"
+                              :on-remove="handleRemove"
+                              :file-list="fileList"
+                              limit="1"
+                              :on-success="uploadSuc"
+                              :auto-upload="false">
+                        <el-button slot="trigger" size="small" type="primary">选取图片</el-button>
+                        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload(scope.row)">上传图片</el-button>
+                        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                      </el-upload>
+                    </template>
+                  </el-table-column>
+                </el-table>
+                <center>
+                <el-button :plain="true" type="primary" size="small"  @click="toback">上一步</el-button>
+                <el-button :plain="true" type="primary" size="small"  @click="commitInfo">下一步，填写详细信息</el-button>
+                </center>
+              </div>
+            <p class="loanApplicationNote">
+              <span>宜人贷平台会严格保障您的隐私安全，请放心填写</span>
+            </p>
+        </div>
+        </div>
+</div>
+    <!-- 借款人 左侧小菜单  -->
+    <div class="lend-left-menu">
+      <a href="/goto/rentInfo">
+        <span class="lend-menuIcon menuIcon-lendInfo png"></span>借款信息
+        <span></span>
+      </a>
+      <a href="/goto/rentInfo1"><span class="lend-menuIcon menuIcon-detialInfo png"></span>详细信息
+        <span></span>
+      </a>
+      <a href="/goto/rentInfo2" class="selected"><span class="lend-menuIcon menuIcon-uploadInfo png"></span>上传资料
+        <span></span>
+      </a>
+      <div class="loanApplicationMenuTxt">
+        <div class="company_qq">
+          <a href="javascript:;" id="onlineService"><img src="../foreground/images/123.png" width="164">
+          </a>
+        </div>
+        为了尽快成功借款，请确保信息的真实性，我们将会对您填写的信息进行核实，一旦发现虚假信息将取消您的借款资格。
+      </div>
+    </div>
+
+
+</div>
+<script type="text/javascript">
+    var tableView = new Vue({
+        el: '#tableView',
+        data: {
+            item:0,
+            path:'/rent/show?fileName=',
+            loading:false,
+            fileList:[],
+            tableData:[
+                {
+                    id:0,
+                    contentType:"身份证正面",
+                    content:"正面一张",
+                    picpath:""
+
+                },{
+                id:1,
+                contentType:"身份证反面",
+                content:"反面一张",
+                picpath:""
+
+            },{
+                id:2,
+                contentType:"最近连续三个月工资流水",
+                content:"1、近3个月工资存折流水状态。2、或工资发放银行开具的近3个月账户明细对账单。3、或近3个月工资卡网银截图。",
+                picpath:""
+
+            },{
+                id:3,
+                contentType:"个人信用报告",
+                content:"1、当地人民银行开具的纸质信用报告。\n" +
+                "\n" +
+                "可参考 全国各地人民银行地址和电话\n" +
+                "\n" +
+                "2、 或登录https://ipcrs.pbccrc.org.cn人民银行征信中心个人\n" +
+                "信用信息服务平台，获取电子版信用报告。",
+                picpath:""
+            }]
+        },
+        methods:{
+            submitUpload:function(row) {
+                var self = this;
+                //alert(row.id)
+                this.item=row.id;
+                self.$refs['upload'+row.id].submit();
+                //alert(2222)
+            },
+            handleRemove:function(file, fileList) {
+               // alert(111)
+                console.log(file, fileList);
+            },
+            handlePreview:function(file) {
+               // alert(111);
+            },
+            loadingData:function() {
+                var _self = this;
+                _self.loading = true;
+                var self = this;
+                setTimeout(function(){
+                    console.info("加载数据成功");
+                    _self.loading = false;
+                },300);
+            },
+            downLoad:function(row){
+                location.href="/rent/downloadPic?fileName="+row.picpath
+            },
+            uploadSuc:function (response,file,fileList) {
+               // alert(response)
+                this.tableData[this.item].picpath=response;
+                //alert(this.tableData[this.item].picpath)
+            },
+            commitInfo:function(){
+                var _self = this;
+                _self.loading = true;
+                var formData = this.tableData;
+                var  pic1=formData[0].picpath;
+                var pic2=formData[1].picpath;
+                var pic3=formData[2].picpath;
+                var pic4=formData[3].picpath;
+                // alert(JSON.stringify(formData));
+                var goUrl = '/rent/rentInfo3';
+                //alert(goUrl);
+                //alert(JSON.stringify(formData));
+                axios.post(goUrl,{pic1:pic1,pic2:pic2,pic3:pic3,pic4:pic4}).then(function (response) {
+                    // console.log(response.data);
+                    // alert(222);
+                    // self.total=response.data.total;
+                    if (response.data > 0) {
+                        location.href="/user/toOwn"
+                    } else {
+                        _self.$message({
+                            message: '图片都需要上传,请确认图片是否都已上传',
+                            type: 'error'
+                        });
+                        _self.loadingData();
+                    }
+                })
+            },
+            toback:function(){
+                location.href="/goto/rentInfo2"
+            }
+        }
+    })
+</script>
+  <div id="footer" class="ft">
+    <div class="ft-inner clearfix">
+      <div class="ft-helper clearfix">
+        <dl>
+          <dt>关于我们</dt>
+          <dd><a href="/goto/comInfo">公司简介</a><a href="/goto/ipmt">管理团队</a><a href="/goto/netNotice">网站公告</a></dd>
+        </dl>
+        <dl>
+          <dt>相关业务</dt>
+          <dd><a href="/goto/list">我要投资</a><a href="/goto/rent">我要借款</a></dd>
+        </dl>
+        <dl>
+          <dt>帮助中心</dt>
+          <dd><a href="/goto/helpInfo">新手入门</a><a href="/user/toOwn">我的账户</a><a href="/goto/list">债权转让</a></dd>
+        </dl>
+        <dl>
+          <dt>联系我们</dt>
+          <dd><a href="/goto/contactUs">联系我们</a></dd>
+        </dl>
+      </div>
+      <div class="ft-service">
+        <dl>
+          <dd>
+            <p><strong>400-660-1268</strong><br>
+              工作日 9:00-22:00<br>
+              官方交流群:<em>12345678</em><br>
+              工作日 9:00-22:00 / 周六 9:00-18:00<br>
+            </p>
+            <div class="ft-serv-handle clearfix"><a class="icon-hdSprite icon-ft-sina a-move a-moveHover" title="亿人宝新浪微博" target="_blank" href="#"></a><a class="icon-hdSprite icon-ft-qqweibo a-move a-moveHover" title="亿人宝腾讯微博" target="_blank" href="#"></a><a class="icon-ft-qun a-move a-moveHover" title="亿人宝QQ群" target="_blank" href="#"></a><a class="icon-hdSprite icon-ft-email a-move a-moveHover mrn" title="阳光易贷email" target="_blank" href="mailto:xz@yirenbao.com"></a></div>
+          </dd>
+        </dl>
+      </div>
+      <div class="ft-wap clearfix">
+        <dl>
+          <dt>官方二维码</dt>
+          <dd><span class="icon-ft-erweima"><img src="../foreground/images/code.png" style="display: inline;"></span></dd>
+        </dl>
+      </div>
+    </div>
+    <div class="ft-record">
+      <div class="ft-approve clearfix"><a class="icon-approve approve-0 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-1 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-2 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-3 fadeIn-2s" target="_blank" href="#"></a></div>
+      <div class="ft-identity">©2015 亿人宝 All rights reserved&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;安徽省亿人宝投资管理有限公司&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.miitbeian.gov.cn/">皖ICP备12345678号-1</a></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,804 @@
+/*==== 借款申请 ====*/
+.loanApplication{width:1000px;margin:0 auto 16px;background-color:#E4E4E4;}
+.loanApplication .lend-left-menu{float:left;}
+.loanApplication .m-drop,.loanApplication .m-input-mini,.loanApplication .m-textFocus{width:180px;}
+.loadApplicationCon{width:790px;float:right;background-color:#fff;padding-top: 16px;}
+.loadApplicationCon .common_box{margin-left:16px;margin-right:16px;width:754px;}
+.loadApplicationCon .common_box .innerbox{width:100%;padding:22px 0;}
+.loadApplicationCon .common_box .innerbox .m-row{margin-left: 16px;margin-right: 16px;}
+.loadApplicationCon .m-rowTextarea{width:530px;height:100px;padding-top:5px;}
+.loadApplicationCon .m-rowLabel{width:120px;_width:96px;}
+.loadApplicationCon .loadApplicationAgreement{ margin-bottom: 0;}
+.loadApplicationCon .m-row-error{text-indent:140px;color:#f00;}
+.loadApplicationCon .m-row-errorPos{height:30px;line-height:30px;text-indent:290px;}
+.loadApplicationCon h3{margin-left: 44px;margin-bottom: 20px;color:#414141;}
+.loadApplicationCon h3,.loadApplicationCon h3 small{font-size:12px;}
+.loadApplicationCon h3 small{color:#aaa;font-weight:normal;}
+.loadApplicationCon .row-txt{float:left;margin-right: 5px;line-height:22px;color:#414141;}
+.loadApplicationCon .dropSpace .m-drop{margin-right: 6px;}
+.loadApplicationCon .innerbox .rowHid{width:755px;_width:750px;}
+.icon_change_product{background:transparent url("${pageContext.request.contextPath}/images/icon_change_product.jpg") no-repeat; width:121px; height:96px;}
+
+/*myCode*/
+.loadApplicationCon .myCode{margin-left: 140px;color:#414141;}
+.myCodeA{cursor:pointer;width:100px;}
+.myCodeA i{background:url("${pageContext.request.contextPath}/images/icon/iconShowHid.gif") no-repeat 0 0px;width:11px;height:11px;display:block;float:left;margin-right: 8px;margin-top:4px;}
+.myCodeA i.myCodeShow{background-position:0 -11px;}
+.loanApplication .common_box .innerbox .myCode .m-row{margin-left: 0;}
+.loanApplication .myCode .m-rowLabel{width:84px;}
+.loanApplication .myCode .m-row-error{height:28px;line-height:28px;text-indent:90px;}
+.myCode .m-input-mini{margin-right: 15px;width:175px;}
+.myCode .input_btn{font-size:12px;padding:0 16px;height:24px;line-height:24px;float:left;margin-top: 1px;}
+.myCodeCon{width:374px;background-color:#fafafa;border:1px solid #ccc;margin-top: 15px;padding-top: 16px;padding-left: 20px;display:none;}
+.myCodeCon p{margin-bottom: 8px;}
+.loanApplicationNote{text-align:right;color:#aaa;margin:12px 15px 32px;}
+.loanApplicationNote span{background:url("${pageContext.request.contextPath}/images/iconSafe.png") no-repeat left 50%;padding-left:20px;}
+.loanApplicationBtn{text-align:center;margin-bottom: 40px;}
+.loanApplicationBtn .mr{margin-right: 36px;}
+
+/*counterNote*/
+.counterNote{position:absolute;border:1px solid #fcaf41;background-color:#fff7db;color:#909090;padding:6px 10px;line-height:24px;}
+.counterNote-top{top:0;right:70px;}
+.counterNote-bottom{bottom:0;right:0;}
+.counterNote strong{font-weight:normal;color:#c10000;}
+.counterNote strong.counterNoteOrange{color:#ff5a00;margin:0 5px;}
+
+/*loanApplicationMenuTxt*/
+.loanApplicationMenuTxt{width:170px; color:#909090;padding:12px 6px;margin:280px auto 0;}
+.loanApplicationMenuTxt .company_qq{border-bottom:1px solid #ccc; margin-bottom:10px; padding-bottom:10px;}
+.lend-left-menu .loanApplicationMenuTxt a{background:transparent; padding:0px; margin:0px; border:none;}
+
+/*loadApplicationInfo*/
+.loadApplicationInfo{padding:0 24px;background:url("${pageContext.request.contextPath}/images/dotline.gif") repeat-x bottom left;margin:0 18px 24px;_padding-bottom:18px;}
+.loadApplicationInfo p{margin-bottom: 24px;}
+.loadApplicationInfo ul{width:550px;}
+.loadApplicationInfo ul li{float:left;width:270px;margin-bottom: 24px;}
+.loadApplicationInfo ul li strong{color:#c10001;font-size:12px;margin-right: 1px;}
+
+/*loadApplicationDotBox*/
+.loadApplicationDotline{height:1px; background:url("${pageContext.request.contextPath}/images/dotline.gif") repeat-x bottom left;padding-bottom: 10px;margin:0 14px 24px;}
+
+/*loadApplicationAgreement*/
+.loadApplicationAgreement{margin-top: 24px;margin-bottom: 30px;}
+.loadApplicationAgreement .m-checkbox{margin-bottom: -4px;}
+.loadApplicationAgreement-center{text-align:center;}
+
+/*uploadFileNote*/
+.uploadFileNote{margin:-10px 10px 10px;background-color:#fff7db;border:1px solid #fcb247;color:#aaa;padding:18px 0 18px 18px;}
+.uploadFileBox{margin:0 10px 10px;}
+.uploadFileBox .table_blue{color:#666;}
+.uploadFileBox .table_blue thead{border:1px solid #0098e0;}
+.uploadFileBox .table_blue tbody td{padding:14px 5px 14px 20px; text-align:left;}
+.uploadFileBox .table_blue tbody td.tdNum{text-align:center; padding-left: 0;cursor:pointer;}
+.uploadFileBox .table_blue tbody td .mr{margin-right: 15px;}
+.uploadFileBox .table_blue tbody td a.uploadBtnDel,.uploadFileBox .table_blue tbody td a:visited.uploadBtnDel{color:#999;margin-bottom: 20px;line-height:24px;}
+.uploadFileBox .table_blue td p{line-height:24px;}
+.uploadFileBox .table_blue td .uploadBtnTwo{line-height:24px;margin-top: 20px;margin-bottom: -5px;}
+.uploadFileBox .table_blue .uploadFileNoteTd{background-color:#e8e8e8;color:#c10000;padding-top: 0;padding-left:8px;height:22px;line-height:22px;text-align:left;border:1px solid #ddd;}
+.uploadFile_tableTbodyTit{background-color:#f9f9f9;font-weight:bold;padding-left: 20px;}
+.uploadFile_tableTbodyTit i,.uploadFileNoteTd i{font-style:normal;color:#c10000;margin-right: 5px;display:inline-block;vertical-align: middle;*zoom:1;*display:inline;}
+.uploadFile_tableTbodyTit i.l{margin-top: -8px;}
+.uploadFileBox .uploadimg_example{margin-left:10px; font-weight: bold;}
+
+.uploadFileBox td.pb{padding-bottom: 20px;}
+
+.uploadFileBoxShow{background-color:#e8e8e8;border:1px solid #ddd;height:26px;margin:0 auto;padding-left: 7px;padding-top: 5px;}
+.uploadFileBoxShow span.l{*margin-top: 2px;_margin-top: 0;}
+.uploadFileBtn{border:1px solid #ddd;background-color:#fff;color:#666;height:19px;width:100px;padding-left: 5px;margin-right: 15px;}
+.uploadFileBtn a,.uploadFileBtn a:visited{background-image:url("../images/btnUploadShowHid.jpg");background-repeat:no-repeat;width:47px;height:19px;display:block;float:right;}
+.uploadFileBtn a.active,.uploadFileBtn a:visited.active{background-position:0 -19px;}
+.table_blueP{padding-bottom: 14px;padding-right: 10px;}
+.table_blueHid{display:none;}
+.creditReport_box{border:1px solid #E9E9E9; margin: 0 10px; }
+.creditReport_box .widebar{width:479px; float:left; border-right:1px solid #E9E9E9; background: #f9f9f9; padding:25px 0 25px 25px;}
+.creditReport_box .widebar h4{margin-bottom:20px;}
+.creditReport_box .sidebar{float:left; width:205px; padding-left:20px;}
+.creditReport_status {height:217px; padding:100px 0 0;}
+.creditReport_status p{ margin-bottom:10px; line-height: 24px;}
+.creditReport_status p span{font-size:16px; font-weight:bold;}
+.creditReport_loading p{text-align: center;}
+.creditReport_success p{background: transparent url("${pageContext.request.contextPath}/images/success.png") no-repeat; padding:0 0 10px 60px;}
+.creditReport_error p{background: transparent url("${pageContext.request.contextPath}/images/fail.png") no-repeat; padding:0 0 10px 60px;}
+.creditReport_error{padding-left:50px;}
+.creditReport_ul{margin-top:65px;}
+.creditReport_ul li{background: transparent url("../images/cr_arrow.png") no-repeat 0 -45px; padding-left:12px; margin-bottom: 20px;}
+.creditReport_notice{position:relative;}
+.creditReport_down{display:block; background: transparent url("../images/cr_arrow.png?v=1") no-repeat 0 7px; width:10px; height:14px; cursor: pointer;}
+.creditReport_up{display:block; background: transparent url("../images/cr_arrow.png?v=1") no-repeat 0 -13px; width:10px; height:12px; top:94px; left:112px; position:absolute; cursor: pointer;}
+/*holderBox-long*/
+/*.holderBox-long{margin-top: 10px;margin-left: 125px;}*/
+
+.loadApplicationCon .common_box_mb{margin-bottom: 10px;}
+a.copyAdd,a:visited.copyAdd{height:22px;line-height:22px;margin-left: 10px;}
+
+/*icon-date*/
+.icon-date{background:url("${pageContext.request.contextPath}/images/icon-r-date.png") no-repeat right 50%;}
+
+/*==== 借款账户 ====*/
+.loadAccount{background-color:#fff;padding-bottom:20px;}
+.loadAccount .common_box_icondiv .iconpic{ left:50px;}
+.loadAccount .loadApplicationDotline{margin-left:27px;margin-right: 27px;}
+.common_box_loadAccount{margin:0 38px;}
+.loanStep{margin:40px auto;background:url("../images/loanStep.png") no-repeat;width:740px;height:60px;}
+.loadAccount .inner_box{padding:26px 0;}
+.jybLoadBox{width:46%;float:left;padding-left: 30px;}
+.jybLoadBox table{width:320px;margin-left: 20px;}
+.jybLoadBox h3{margin-bottom: 16px;font-size:12px;}
+.jybLoadBox ul li{background:url("${pageContext.request.contextPath}/images/iconliRed.gif") no-repeat left 50%;padding-left: 10px;color:#666;margin-bottom:16px;}
+
+.loadAccount .pro_right .tc{text-align:center;}
+.loadAccount .jybLoadBox ul.ulMb{ margin-bottom: 50px;}
+.loadAccount .jybLoadBox .table_mini th,.loadAccount .jybLoadBox .table_mini th div,.loadAccount .jybLoadBox .table_mini td{height:32px;line-height:32px;}
+.loadAccount .jybLoadBox .table_mini th div i{height:32px;background:url("../images/table_bg.gif") no-repeat scroll right -7px #0098E1;}
+.loadAccount .jybLoadBox .input_btn{width:120px;margin-left:70px;}
+.loadAccount .m-inputW{width:180px;}
+.loadAccount .validateId .rowMt,.loadAccount .validateId .rowPt .input_btn{ margin-top: 20px;}
+.loadAccount .validateId .rowMtBig{ margin-top: 50px;}
+.loadAccount .loadAccountBtn{ margin-top: 35px; margin-bottom: 15px;text-align:center;}
+
+/*个人详细信息*/
+.personDetail{width:1000px;margin:10px auto;}
+.loanStepB2{background:url("../images/loanStepB2.png") no-repeat;width:865px;height:70px;margin:36px auto 27px;}
+.dotlineTop{background:url("${pageContext.request.contextPath}/images/dotline.gif") top repeat-x;}
+.personDetail .dotlineTop{margin-left:60px;margin-right:60px;}
+.inner_box .dotlineTopBox{margin:0 60px;}
+.uploadSuccess{margin-left: 184px;padding-top: 28px;padding-bottom: 28px;}
+.uploadSuccess .iconpic{margin-right: 30px;}
+.uploadSuccess strong{font-size:14px;font-weight:normal;color:#414141;margin-bottom:4px;display:block;}
+.uploadSuccess p{color:#909090;margin-bottom: 14px;}
+.dotlineTopBtmTit{padding-top: 20px;margin-bottom:20px;margin-left: 16px;}
+.dotlineTopBtmOl{margin-left: 16px;}
+.dotlineTopBtmOl li{float:left;width:270px;margin-bottom:12px;}
+
+/*借款账户*/
+.right-containerWhite{border:1px solid #e4e4e4;background-color:#fff;}
+
+.right-container-topPic{height:120px;margin-bottom: 10px;padding-left: 60px;}
+.right-container-topPic .iconpic{margin-top: 20px;margin-right: 26px;}
+.right-container-topPic .iconpic03{margin-left: 200px;_margin-left: 100px;}
+.right-container-topPic .iconpic04{margin-left: 126px;_margin-left: 63px;}
+.right-container-topPic strong{margin-top: 56px;font-size:14px;color:#414141;}
+.right-container-topPic p{color:#909090;margin-top: 12px;}
+.right-container-topPic p .money{color:#c10000;}
+
+.right-containerWhite .dotlineTop{padding:30px 10px;margin:0 36px;}
+.loanAccount .table_blue_repaymentPlay thead{text-align:left;}
+.loanAccount .table_blue_repaymentPlay thead th{padding-left: 20px;padding-right: 20px;}
+.loanAccount .table_blue_repaymentPlay thead th strong{margin-right: 35px;}
+.loanAccount .table_blue_repaymentPlay thead span{font-weight:normal;}
+.loanAccount .table_blue_repaymentPlay thead a,.loanAccount .table_blue_repaymentPlay a:visited{color:#fff;font-weight:normal;}
+.loanAccount .table_blue_repaymentPlay thead td{background-color:#eee;color:#666;border:1px solid #ddd;text-align:center;}
+.loanAccount .table_blue_repaymentPlay tbody td{background-color:#fff;}
+
+.right-container-topPicC{margin-top:30px;}
+.contitA{padding-right:16px;font-size:12px;color:#aaa;}
+.contitA i{margin-left:10px;margin-right: 10px;font-style:normal;}
+.contitA a,.contitA a:visited{color:#aaa;}
+.inner_boxTxt{width:235px;margin-right: 80px;line-height:170%;}
+.inner_box_tab .m-holderBox{margin-right: 70px;margin-top: 10px;}
+.inner_box_tab .input_btn{margin-top: 14px;}
+.inner_box_tab ul{width:530px;margin-top: 10px;}
+.inner_box_tab ul li{float:left;width:260px;margin-bottom: 15px;}
+.inner_box_tab ul li .m-checkbox{margin-right: 10px;margin-top:2px;}
+.inner_boxL{width:230px;margin-top: 18px;margin-bottom: 20px;}
+.inner_boxL .m-checkbox{margin-right: 10px;margin-top: 2px;}
+.inner_box .inner_boxTxtG{color:#aaa;width:290px;margin-top: 18px;margin-right: 0;}
+.inner_box .inner_boxTxtB{width:290px;margin-top: 18px;margin-right: 0;}
+.inner_box .inner_boxTxtB.mt{margin-top: 5px;}
+.inner_box .inner_boxTxtO{width:330px;margin-top: 18px;margin-right: 0;color:#ff7200;}
+.inner_box .inner_boxTxtO.mt{margin-top: 5px;}
+
+/*出借 购物车*/
+.common_box_shopping{width:1000px;margin:20px auto;}
+.common_box_shopping .table_blue thead th{text-align:left;padding-left: 20px;}
+.common_box_shopping .table_blue thead td .m-checkbox{margin-bottom: -4px;}
+.common_box_shopping .table_blue thead td{background-color:#ececec;color:#666;font-weight:bold;}
+.common_box_shopping .table_blue thead td.checkAll{text-align:left;padding-left: 17px;}
+.common_box_shopping .table_blue thead td .m-checkbox{margin-right: 8px;}
+.common_box_shopping .table_blue tbody td{line-height:20px;padding-top: 10px;padding-bottom: 10px;}
+.common_box_shopping .table_blue tbody td .m-checkbox{margin-bottom: 34px;margin-right: 26px;}
+.common_box_shopping .table_blue{overflow:hidden;}
+.common_box_shopping .table_blue table{margin:0 auto;width:920px;margin-bottom: -11px;}
+.common_box_shopping .table_blue table,.common_box_shopping .table_blue table tr,.common_box_shopping .table_blue table td{border:0;border-collapse:collapse;}
+.common_box_shopping .table_blue table td{border-bottom:1px solid #e3e4e8;}
+.table_blue_tit{text-align:left;padding-left: 14px;}
+.m-holderBox-shopping{margin:0 auto;}
+.shoppingBtn{margin-top: 10px;margin-bottom: 10px;}
+.shoppingBtn .money{font-size:24px;font-weight:normal;}
+.shoppingAgree{text-align:right;}
+.shoppingAgree .m-checkbox{margin-bottom: -4px;margin-right: 8px;}
+.shoppingBtnR{margin-top: 15px;margin-bottom: 30px;}
+.tableblueNote{border:1px solid #fcaf41;background-color:#fff7db;color:#ff5a00;padding:18px 20px;text-align:left;}
+
+/*借款-账户首页-我的借款*/
+.account_profile {height:150px;margin:20px 38px;border:none;}
+.account_profile .pro_left{width:240px; float:left ; padding:25px 10px 20px 140px; height:105px; border-right:1px dashed #dfdfdf; position:relative;}
+.account_profile .pro_right{width:360px; float:left; padding-top:20px;}
+.pro_right h3{font-size:14px; line-height:30px; padding-left:28px; font-weight:bold; margin-bottom:10px;}
+.pro_right p .money{font-size:24px; font-weight:normal;  line-height:30px; padding-left:28px;  display:inline-block; padding-right:10px;}
+.pro_right p .money i{font-size:16px; font-style:normal;}
+.pro_right .r{padding-top:43px; padding-right:28px;}
+.account_profile .pro_left img{position:absolute; left:25px;  top:25px; border:3px solid #f1f2f2;}
+.account_profile .pro_left h3{font-size:14px; margin-bottom:10px;}
+.account_profile .pro_left p{padding-left:25px; background:transparent url("../images/account_ico.gif") -2px 2px no-repeat; height:24px; line-height:24px; width:160px; overflow: hidden;
+text-overflow: ellipsis; white-space: nowrap;}
+.account_profile .pro_left p.tel{background-position:-2px -22px;}
+.account_profile .pro_left p.id_state{background-position:-2px -150px;}
+.account_profile  .pro_left p.id_state_active{background-position:-2px -45px;}
+.account_profile  .pro_left p.email_active{background-position:-2px -102px;}
+.account_profile  .pro_left p.tel_active{background-position:-2px -127px;}
+.account_profile a.input_btn{height:26px; width:54px; padding:0; line-height:26px; margin-left:25px;}
+.account_profile .apply_btn_large{margin-top:10px; text-align: center;}
+.account_profile .apply_btn_large a.input_btn{text-align: center; width:200px; background: #ff6600; height:35px; line-height:35px;}
+.account_profile a.input_btn.btn_orange{height:28px; width:84px; padding:0; line-height:28px; border:none; background:#ff6f36; color:#fff; font-size:14px;}
+.profile_quick_list li{float:left; width:200px; margin-right:10px;}
+.profile_quick_list li.last{margin-right:0px;}
+.common_box_icondiv .l {
+    padding-left: 176px;
+    position: relative;
+    width: 294px;
+}
+.accountFooter{margin:30px 38px;}
+.accountFooterL{width:530px;padding-left:30px;}
+.accountFooterL h3{margin-bottom: 16px;font-size: 12px;}
+.accountFooterL ul li{width:160px;float:left;padding:7px 0;}
+
+.common_box_icondiv{margin:0 38px;}
+.common_box_icondiv .l{width:310px;padding-left:176px;position:relative;}
+.common_box_icondiv .l h3{margin:0px 0 15px;font-size:14px;}
+.common_box_icondiv .l h3.money{color:#ff2500; margin-top:15px;}
+.common_box_icondiv .l span{line-height:24px}
+.common_box_icondiv .iconpic{position:absolute;top:0;left:50px;}
+.common_box_icondiv .completed{margin-right:20px;margin-left:0;}
+.common_box_icondiv .r{width:250px;text-align:center;padding-top:20px;}
+.loadAccount .common_box_icondiv .common_box_icondivL{padding-left:176px;float:none;width:auto;}
+.loadAccount .common_box_icondiv .icondivPl{padding-left:196px;}
+.icontips{padding:60px 0;text-align:center;position:relative;font-weight:bold;font-size:14px;}
+.icontips .iconpic{position:absolute;top:40px;left:100px; text-align:left;}
+.loadAccount .loadAccountBtmP{margin:0 38px 20px;}
+.loadAccount .input_blueMr{ margin-right: 10px;}
+.icondivLh{line-height:60px;}
+
+/*还款及逾期*/
+.loadAccountRepay .common_box_icondiv .l{width:360px;}
+.loadAccountRepay .common_box_icondiv .r{width:190px;}
+.loadAccountRepay .common_box_icondiv .l ul.clearfix li{float:left;display:block;width:180px; margin-bottom: 5px;}
+
+
+.loanStep0,.loanStep2,.loanStep3,.loanStep4,.loanStep5{margin: 40px auto;width:740px;height:60px;}
+.loanStep0{background:url("../images/loanStep0.png") no-repeat;}
+.loanStep2{background:url("../images/loanStep2.png") 0 -15px no-repeat;}
+.loanStep3{background:url("../images/loanStep3.png") no-repeat;}
+.loanStep4{background:url("../images/loanStep4.png") 0 -15px no-repeat;}
+.loanStep5{background:url("../images/loanStep5.png") no-repeat;}
+.loanInfor{margin:40px 38px}
+.loanInfor h3{height:35px; line-height:35px; padding-left:20px; background:#fafcfb;  border-bottom:1px solid #dfdfdf; font-size:12px; font-weight:normal; color:#666;}
+.loanInfor h3 a{float:right;padding-right:10px;}
+.loanInfor h3 a.lookfor_borrowdetail{display:inline-block; width:32px; height:32px; padding-top:3px;}
+.loanInfor h3 span{font-weight:bold;}
+.loanInfor ul{padding-left:60px;}
+.loanInfor li{float:left;width:230px;padding:10px 0;}
+
+
+.progressbar{width:180px;border:1px solid #eaeaea;height:18px;float:left;margin-right:10px}
+.progressbarTxt,.common_box_icondiv .l span.progressbarTxt{float:left;line-height:18px;width:90px;}
+.innerbar{background-color:#0079d2;height:100%;}
+
+/*我的借款 借款信息*/
+.loan_info_box{padding: 20px;}
+.loan_info_box h3.title_h3{height: 42px; line-height: 42px; border-bottom: 1px solid #dfdfdf;}
+.loan_info_box h3 .icontit{float:left; margin-top:13px;}
+.loan_info_box table{width:870px; margin:20px auto; border-collapse: collapse;}
+.loan_info_box td{border:1px solid #dfdfdf; padding:8px; text-align: center;}
+.loan_info_box td.gray_td{background: #f6f6f6; width: 100px;}
+.loan_info_box td.address{height:52px; line-height:52px;}
+.loan_info_box td p.cont{text-align: left; padding:10px; text-indent: 2em; line-height: 20px;}
+.loan_info_box .uploadFileBox table{width:750px;}
+.loan_info_box .uploadFileBox table td.uploadFileNoteTd{padding:0 0 0 8px;}
+
+/*我要借款 未登录*/
+.elite_description_left{border:1px solid #dbdbdb;background:#fff;width:638px;margin:0 8px 0 0;padding:20px 30px;}
+.elite_description_right{width:290px;}
+.elite_description_tit{border-bottom:1px solid #e9e9e9;padding-bottom:14px;margin-bottom:20px;}
+.elite_description_tit h3{font-size:18px; font-family: "microsoft yahei"; font-weight:normal;}
+.elite_description_tit h3 a{font-size:12px;padding-left:20px;font-weight:normal;}
+.loan_con{width:180px;}
+.loan_con p{padding-bottom:15px; padding-top:10px;}
+.interest_rate{width:380px;margin-left:40px;}
+.loan_box h4{padding-bottom:20px; font-size:12px;}
+.interest_rate_bg{background:url(../images/interest_rate_bg.gif) no-repeat 0 0;width:358px;height:125px;}
+.interest_rate_div p,.interest_rate_div p{font-size:16px;font-family:\5FAE\8F6F\96C5\9ED1,'Microsoft YaHei',SimHei,SimSun;color:#808080;}
+.interest_rate_div p{padding-right:16px;width:70px;text-align:center;}
+.interest_rate_div_r p{padding:0 0 0 20px;}
+.interest_rate_div p span,.interest_rate_div p strong{font-size:28px;font-weight:normal;}
+.interest_rate_div p strong span{font-size:16px;}
+.interest_rate_div p i{ font-style:normal;font-weight:normal;font-size:12px;color:#999; font-family:"宋体";position:relative;top:-10px;}
+.borrowing_calculator{border:1px solid #e4e4e4;background:#fcfcfc;margin:5px 0 25px 0; padding-bottom:15px;}
+.now_calculate{text-align:center;}
+.conditions_apply{overflow:hidden;}
+.calculators_result{padding-left:45px;}
+.calculators_box .m-row .m-rowLabel {width:100px;margin:0; background: #eee; border:1px solid #ddd; color:#8e8e8e; border-right:none;}
+.calculators_result table td strong{padding:0 5px 0 10px;}
+.now_calculate .btn_normal{width:142px;height:35px;line-height:35px; background: #ff6f36; color:#fff; border:none;}
+.borrowing_calculator h3{font-size:18px; background:#ff6f36 url("../images/cal_ico.gif") no-repeat 24px 17px; margin-bottom:22px; padding-left:50px;  color:#fff; height:50px; line-height: 50px;}
+.calculators_result table th{text-align:left;font-size:14px;border-bottom:1px solid #f0f0f0;padding:0 0 10px 0;}
+.calculators_result table td{padding:4px 0;}
+.condi_app_tit{background:url(../images/tile_line.gif) repeat-x 0 6px;height:30px;margin-bottom:17px; font-size:14px;}
+.condi_app_tit span{display:block;background:#fff;padding:0 5px;}
+.required_informa strong{font-size:14px;}
+.required_informa td{padding-bottom:8px;}
+.required_informa span{color:#0088cc;}
+.conditions_apply .table_gray{width:300px;}
+.under_margins, .conditions_apply p, .conditions_apply{margin-bottom: 15px;}
+.platform_j{width:328px;padding-left:10px;}
+.platform_j p{line-height:24px;}
+.condi_app_but,.rapid_applica_but{text-align:center;margin:5px 0 10px;}
+.condi_app_but a,.rapid_applica_but input{width:200px;height:35px;line-height:35px;}
+.rapid_applica_but input{width:240px;}
+.rapid_application{border:1px solid #0079d2;background:#fff;}
+.rapid_applica_tit{background:#0079d2;color:#fff;height:45px;line-height:45px;font-size:18px; font-family: "microsoft yahei"; font-weight:normal;}
+.rapid_applica_tit em{margin:10px 10px 0 15px;}
+.rapid_application .m-row .m-rowLabel{width:75px;}
+.rapid_applica_con{padding:15px 0;}
+.rapid_applica_con .m-row-error{text-indent:80px}
+.borrowing_guide{border:1px solid #dbdbdb;padding:15px 0;background:#fff;margin:5px 0;}
+.borrowing_guide h3{padding:0 13px 20px;}
+.borrowing_guide p{padding:5px 0;}
+.borrowing_guide p a{color:#666;}
+.flow_chart{background:url(../images/process.gif) no-repeat 0 0;width:263px;height:81px;margin:0 0 0 12px;}
+.flow_chart span{display:block;float:right;width:80px;text-align:center;padding:36px 5px 0 0;}
+.flow_chart .pad_r{padding:36px 10px 0 0;}
+.ad_figure a{display:block;margin-top:10px;}
+.repay-detail-dlg{overflow: auto; width:665px; height: 315px;}
+.repay-detail-dlg .info{margin-bottom: 15px;}
+.repay-detail-dlg .info span{font-size:12px;margin:0 20px 0 5px;}
+.repay-detail-dlg table{width:623px; }
+.repay-detail-dlg td,.repay-detail-dlg th{height:32px; line-height:32px; font-size:12px;}
+
+span.verifica_bg{background:url(../images/verifica_bg.gif) no-repeat 0 2px;padding:0 0 0 22px;margin-left:10px;height:24px;display:block;float:left;}
+.new_download_enter{ background: url("../images/new_yrd_quick.jpg?v=1") no-repeat; width: 736px; height: 81px; position: relative; margin:  0 auto 12px;}
+.new_download_android,.new_download_iphone{ position: absolute; background: url("../images/new_download_btn.png") no-repeat;  width: 129px; height: 35px; background-position: 0 -8px; display: block; right: 8px; top: 4px;}
+.new_download_apply_success{background: url("../images/success_apply_img.jpg?v=2") no-repeat; width: 848px; height: 82px; position: relative; margin:  0 auto 12px;}
+.new_download_android{ background-position: 0px -88px;right: 8px; top: 43px;}
+.new_download_android:hover{background-position:0px -128px;}
+.new_download_iphone:hover{ background-position:0px -48px; }
+#borrowInfoForm .m-row .m-rowLabel{width:125px;}
+#borrowDetailForm .m-row .holderInputLongMt{}
+
+.leadBoxMain{width:1020px;height:550px;margin:125px auto 0;background:url("../images/invite/leadImg.png") no-repeat left 100px;}
+/*我要借款 更新样式*/
+.interest_rate{width:408px; margin-bottom: 16px;}
+.interest_rate_gai ul li{border-left:1px solid #e3e4e8;height:94px;width:60px;float:left; padding-left: 10px; padding-right: 10px;color:#9d9d9d;}
+.interest_rate_gai ul li.interest_rate_last{border-right:1px solid #e3e4e8;}
+.interest_rate_gai ul li .interest_rate_ul_div{border-bottom:1px solid #e3e4e8; padding-bottom: 6px; margin-bottom: 4px;}
+.interest_rate_gai ul li .interest_rate_ul_div strong{ font-family:\5FAE\8F6F\96C5\9ED1,'Microsoft YaHei',STHeiti,sans-serif;font-weight:normal;font-size:12px;color:#768082;height:20px;display:block;}
+.interest_rate_gai ul li .interest_rate_ul_div strong i{font-size:16px;font-style:normal;}
+.interest_rate_gai ul li .interest_rate_ul_div span{display:block;}
+.interest_rate_ul_span{display:block;text-align:center;}
+.interest_rate_ul_strong{color:#0098e0;font-size:14px;font-family:Arial, Helvetica, sans-serif;font-weight:normal;display:block;text-align:center;}
+.interest_rate_ul_strong i{font-size:18px;}
+
+.platform_j{ padding-left: 20px;}
+.conditions_applyMb{ margin-bottom: 30px;}
+.conditions_apply .conditions_applyMb .table_gray{width:290px;}
+.condi_app_butInfo{font-size:14px;color:#a0a0a0;text-align:center;}
+.conditions_apply h4, .conditions_required h4{padding-left:40px; font-family: "microsoft yahei"; font-size:14px; margin:20px 0;}
+.conditions_apply .icoborrowguide{background:transparent url("${pageContext.request.contextPath}/images/ico_borrowguide.png?v=1") no-repeat -3px -9px; height:20px; line-height: 20px; margin:15px 0 15px 40px; padding-left:30px;}
+.conditions_apply .icoborrowguide2{background-position: -3px -47px;}
+.conditions_apply .icoborrowguide3{background-position: -3px -118px;}
+.conditions_apply .icoborrowguide4{background-position: -3px -157px;}
+.conditions_apply .icoborrowguide8{background-position: -3px -86px;}
+.icoborrow_cont{padding-left:70px;}
+.common_box_loadAccount .inner{padding:20px;}
+.conditions_required{border-top:1px solid #f3f3f3;}
+.notice_required{background:transparent url("${pageContext.request.contextPath}/images/ico_borrowguide.png") no-repeat -3px -207px; color:#ff6600; padding-left:25px; margin:20px 0 30px 40px;}
+.condition_sales p{padding-left:40px; }
+.condition_sales p.condi_app_but{margin-top:30px; margin-bottom:20px;}
+.required_informa_a{width:71px; height:57px; background:transparent url("../images/borrowguide_1.png") no-repeat; display: block;  cursor: alias;}
+.required_informa_a1:hover{background-position: 0 -57px;}
+.required_informa_a2{background-position:-206px 0;}
+.required_informa_a2:hover{background-position:-206px -57px;}
+.required_informa_a3{background-position:-446px 0;}
+.required_informa_a3:hover{background-position:-446px -57px;}
+.borrowaccount_required{float:left; width:340px; padding-left:40px;}
+.notice_required_box{float:left; width:300px;}
+.notice_required_box p{text-align: right;}
+.borrowaccount_required li{background: transparent url("../images/ico_borrowaccount.png") no-repeat; padding-left:30px; margin-bottom:20px;}
+.borrowaccount_required li.bank{background-position: 0 -37px;}
+.borrowaccount_required li.note{background-position: 0 -77px;}
+.conditions_apply_sales{padding:5px;}
+.conditions_apply_sales h4, .conditions_apply_sales p{margin-top:10px;}
+
+
+.fysm_dialog_cont h4{font-size:12px;}
+.fysm_dialog_cont p{margin:10px 0; line-height:24px;}
+/* 48期样式优化 */
+.calculators_box{padding-left: 20px;}
+.calculators_box .m-row .m-rowLabel{width:75px; text-align: center; display: inline-block;}
+.calculators_box .m-row .m-drop, .calculators_box .m-row .m-textFocus{border-left:none;}
+.calculators_result{padding:15px 0; margin:20px 5px; border-top:1px solid #e8e8e8; border-bottom:1px solid #e8e8e8;}
+.calculators_result table{margin:0 20px;}
+.calculators_result table label{display: inline-block; width:80px; text-align: right; font-weight: bold;}
+.calculators_result table strong{width:134px; overflow: hidden; display: inline-block;}
+.calculators_result table td strong{font-size:10px;}
+.calculator_box_ul{padding-left:20px; color:#a7a7a7;}
+.calculator_box_ul p{margin-bottom:5px;}
+
+.counterNote-top{top:-48px;right:60px;}
+.calculators_box_pInfo{padding-top:10px;line-height:180%;clear:both;color:#969696;}
+.calculators_box_pInfo i{color:#c10000;font-style:normal;}
+.calculators_box_pInfo strong{color:#969696;font-weight:bold;}
+
+.loadApplicationInfo{margin-right:0;padding-bottom:12px;}
+.loadApplicationInfo .loadApplicationInfoBox{color:#969696;}
+.loadApplicationInfoBox{line-height:180%;}
+.loadApplicationInfoBox i{color:#f00;font-style:normal;}
+.loadApplicationInfoBox_{margin-left:59px;margin-right:36px;}
+.loadApplicationInfoBox_ i{color:#f00;font-style:normal;}
+.loadApplicationInfo p{margin-bottom:16px;}
+.loadApplicationInfo ul{width:100%;}
+.loadApplicationInfo ul li{width:220px;margin-right:12px;margin-bottom:16px;}
+.loadApplicationInfo ul li.loadApplicationInfoLiLast{margin-right:0;}
+
+/* tableOnce */
+.tableOnceP{width:100%;margin-bottom:10px;}
+.tableOnce{border-collapse:collapse;width:100%;}
+.tableOnce td{border:1px solid #ccc;padding:10px 20px;}
+.tableOnce td .r{color:#ccc;}
+.tableOnce .alignmode{text-align:right;}
+.tableOnce_number{display: inline-block; width:270px;}
+.tableOnce td.alignmode div{float:left; width:140px; text-align:right;}
+
+/* 129 */
+.icondivPr{float:right;width:560px;text-align:left;font-size:14px;}
+.icondivPr p{margin-bottom:10px;}
+.icondivPrInfo{color:#aaa;}
+.icondivPrInfo2{color:#999;font-weight:bold;}
+.icondivPrBtm{margin-bottom:20px;}
+.counterNote2{clear:both;border:1px solid #fcaf41;background-color:#fff7db;color:#909090;padding:6px 10px;line-height:24px;}
+.loanInforP{color:#999;margin:0 60px 20px;line-height:200%;}
+.loanInforP_detail{margin:0 60px 0px; color:#999;line-height:200%;}
+.change_total_box {height:180px; width:500px; font-size:14px;}
+.change_total_box p{ margin-bottom: 10px;}
+.loadAccount .counterNote2{margin:0 20px;}
+#msg{height:24px; line-height: 24px; color:#FF0000;}
+.uploadimg_p{height:400px; overflow: auto; text-align: center;}
+.uploadimg_p p{margin-bottom:20px;}
+.uploadimg_p.creditReport_div p{text-align:left; margin-top:10px;}
+
+
+
+/* borrowguide add start*/
+.borrowguide{ font-family: "微软雅黑"; margin: 20px auto 0; width: 1000px; }
+.borrowguide .l,.borrowguide .r,.borrowguide .c{float: left; display: inline;}
+.borrowguide .left,.borrowguide .right,.borrowguide .center{float: left; display: inline;}
+.borrowguide .r,.borrowguide .right{float: right;}
+.borrowcontainer a{ color:#696969; }
+.borrowcontainer a:hover{ color:#696969; }
+
+.borrowguide .left{ width: 700px; background: #fff;}
+.borrowguide .right{ width: 290px;}
+
+.borrowguide .borrowCount{ background: #fff; border: 1px solid #dfdfdf; padding-top:30px;}
+.borrowguide .calculators_box{ height: 70px;}
+.borrowguide .calculators_box .bor_tt0{ width: 195px; font-size: 18px; margin-top: 6px;}
+
+
+
+.borrowguide a.m-dropIcon,.borrowguide a:visited.m-dropIcon{background:url("../images/borrowguide/borrow_bg04.gif") no-repeat center 50% #ff6f36;}
+.borrowguide a:hover.m-dropIcon,.borrowguide .m-drop a.on,.borrowguide .m-drop a:visited.on{background:url("../images/borrowguide/borrow_bg04.gif") no-repeat center 50% #ff6f36;}
+
+.borrowguide .calculators_box .m-row .m-rowLabel{background:none; border:1px solid #ff6f36; border-right:none; font-size: 14px; padding-right: 10px; text-align: left;padding-left: 10px;}
+
+.borrowguide .m-drop{border:1px solid #ff6f36; }
+.borrowguide input{outline: none;}
+.borrowguide .m-textFocusActive{ box-shadow: none;}
+.borrowguide .m-textFocus{border:1px solid #ff6f36; font-size: 24px; color: #696969; }
+.borrowguide .m-holderBox{ position: relative; font-size: 14px; color: #9e9e9e;}
+.borrowguide .icon-yuan-change{ position: absolute; right: 8px; top: 8px; }
+.borrowguide .timeLimit{ margin-left: 15px;}
+.borrowguide .btn_normal{ height: 36px; line-height: 36px;}
+.borrowguide .btn_normal:hover{ background: #ff8c59;}
+.borrowguide .m-dropInput{ font-size: 24px; color: #696969 !important;}
+
+.borrowguide .now_calculate{ margin-left: 30px;}
+
+.borrowguide .bor_calculators_result{ border-top: 1px solid #dfdfdf; background: url(../images/borrowguide/borrow_bg01.gif) 0 0 repeat-x; }
+.borrowguide .bor_calculators_result .table-warp{padding: 22px; height: 160px; background: url("../images/ico_login.gif") center center no-repeat;}
+.borrowguide .bor_calculators_result table{width: 100%; background: #fff;}
+.borrowguide .bor_calculators_result thead td{ height: 50px; line-height: 50px; background: #f4f4f4;}
+.borrowguide .bor_calculators_result td{ text-align: center;}
+.borrowguide .bor_calculators_result .row{ text-align: center;}
+.borrowguide .bor_calculators_result .row td{ border-bottom: 1px solid #e7e7e7; height: 50px; line-height: 50px; font-size: 16px;}
+.borrowguide .bor_calculators_result .row .unit{ font-size: 12px; font-family: arial; vertical-align: middle;}
+.borrowguide .bor_calculators_result .row .num{ vertical-align: middle;}
+.borrowguide .bor_calculators_result .row .money_total{ color: #0079d2;}
+.borrowguide .bor_calculators_result .row .border-none{ border: none;}
+.borrowguide .bor_calculators_result .well{ display: inline-block; width: 34px; height: 18px; line-height: 18px; background: #a9cf55; color: #fff; font-weight: bold; font-size: 12px;}
+.borrowguide .bor_calculators_result .general{ display: inline-block; width: 34px; height: 18px; line-height: 18px; background: #0098e0; color: #fff; font-weight: bold; font-size: 12px;}
+
+.borrowguide .btn_blue{ font-size: 22px; height: 40px; line-height: 40px; width: 240px; padding: 0;	}
+.borrowguide .condi_app_but{ margin: 0; margin-bottom: 24px; }
+
+.borrowguide .br_ico01{ display: inline-block; width: 14px; height: 14px; background: url(../images/borrowguide/borrow_bg02.gif) 0 0 no-repeat; vertical-align: middle;}
+.borrowguide .bor_calculators_result thead label { vertical-align: middle; padding-right: 5px; font-size: 14px; font-weight: bold; color: #7a7a7a;font-family: "微软雅黑";}
+.borrowguide .borrowcontainer{ margin-top: 10px;}
+.borrowguide .borrowdetail{ border: 1px solid #dfdfdf; padding: 0 20px 20px 20px;}
+
+.borrowguide .bor_tt{ height: 56px; line-height: 56px; border-bottom: 1px solid #dfdfdf; font-size: 18px; color: #414141; }
+.borrowguide .bor_con{ padding-bottom: 5px;}
+
+.borrowCondition .bor_con{ padding-top: 25px; font-size: 14px;}
+.borrowCondition .circle{ display: inline-block; width: 14px; height: 17px; background: url(../images/borrowguide/borrow_bg03.gif) 0 0 no-repeat; vertical-align: middle; line-height: 16px; color: #fff; font-style: italic; font-size: 13px; padding-left: 3px; margin-right: 14px;}
+.borrowCondition .zi{ vertical-align: middle;}
+.borrowCondition .list{ padding-bottom: 15px;}
+
+
+.borrowguide .bor_tt1{ height: 52px; line-height: 52px; border-bottom: 1px solid #dfdfdf; font-size: 18px; color: #414141; }
+.borrowguide .FAQ{ border: 1px solid #dfdfdf; padding: 0 15px; background: #fff}
+.borrowguide .FAQ .list12{ font-family: '宋体'; padding: 10px 0 20px;}
+.borrowguide .FAQ .list12 li{ line-height: 30px;}
+
+.borrowguide .knowBorrow{ border: 1px solid #dfdfdf; padding: 0 15px; margin-top: 10px; background: #fff}
+.borrowguide .know_con{ text-align: center; font-size: 14px; font-weight: bold; line-height: 28px; padding: 15px 0 10px;}
+.borrowguide .know_con strong{color: #0079d2; font-size: 18px; font-family: Arial; font-weight: normal;}
+
+.borrowguide .know_list1 { font-size: 0px; padding: 15px 0}
+.borrowguide .know_list1 .img,.borrowguide .know_list1 .zi{ vertical-align: middle;}
+.borrowguide .know_list1 .img{ width: 60px;}
+.borrowguide .know_list1 .zi{ font-family: '宋体'; font-size: 12px; padding-left: 10px; display:inline-block;}
+.borrowguide .know_list1 li{ padding: 5px 0px;}
+
+
+.tooltip-box{ border: 1px solid #ff6f36; padding: 10px; width: 250px; position: absolute; top: 100px; left: 200px; background: #fff; z-index: 100000; display: none;}
+.tooltip-box .tooltip-ico{ display: inline-block; width: 11px; height: 8px; background: url(../images/borrowguide/tooltip.gif) 0 0 no-repeat; position: absolute; left: 40px; top: -8px;}
+
+/* borrowguide add end*/
+
+
+/*zhengxin start*/
+.zhengxin_box .inner_box{padding:9px;}
+.zhengxin_status_box{margin:0px 10px 30px;}
+.zhengxin_status_box h4{margin-top:100px; border-bottom:1px solid #ccc; height:24px; line-height:24px;}
+.zhengxin_status_box h4 .right{float:right;}
+.zhengxin_status{margin-left:150px;margin-top:50px; padding-bottom:50px;}
+.zhengxin_status h3{font-size:18px; margin-bottom:10px;}
+.zhengxin_status p.cont{font-size:14px; line-height:30px;}
+.zhengxinSuccess{padding-left:100px; background:transparent url("../images/ico_zx.gif?v=1") left top no-repeat; }
+.zhengxinFail{padding-left:100px; background:transparent url("../images/ico_zx1.gif?v=1") left top no-repeat; }
+.zhengxinProcess{padding-left:100px; padding-top:30px; background:transparent url("../images/ico_filewait.gif?v=1") left top no-repeat; }
+.zhengxin_status_box .tips{margin:0 85px;}
+.zhengxin_btn{margin:50px 200px 50px 150px;}
+.zhengxin_btn .input_btn{margin-left:50px;}
+.zhengxin_status .m-holderInput{width:180px;}
+.zhengxinProcess_box .input_btn{margin-left:180px;}
+.upload_zx_dialogcont{font-size:16px; padding-left:80px; background:transparent url("${pageContext.request.contextPath}/images/warning.png") no-repeat; height:52px; line-height:52px; margin:30px 30px 30px 70px;}
+.upload_zx_dialogcont .tips{font-size:12px;}
+.zx_result_box .fail_box{padding:10px 0 80px 120px; background:transparent url('${pageContext.request.contextPath}/images/ico_file_none.gif?v=1') no-repeat; margin:80px 240px 0;}
+.zx_result_box .fail_box h3{font-size:16px; line-height:30px; margin-bottom:10px;}
+.zx_result_box .show_box{margin:20px 35px;}
+.zx_result_box .show_box h3{font-size:14px; line-height:40px; border-bottom:1px solid #ccc; margin-bottom:20px;}
+.zx_result_box ul.postProduct_list li{width:272px; float:left; margin-right:36px; background:#f4f4f4; height:270px; overflow:hidden; position:relative;}
+.zx_result_box ul.postProduct_list li.last{margin-right:0px;}
+.zx_result_box ul.postProduct_list .pro_link{position:absolute; right:10px; bottom:10px;}
+.zx_result_box ul.postProduct_list p{line-height:30px; padding:10px 10px 10px 18px; background:transparent url('${pageContext.request.contextPath}/images/ico_leftline.gif') no-repeat 10px 21px;}
+.zx_result_box .new_download_apply_success{background: url("../images/zx_over_ad5.gif?v=1") no-repeat; width: 888px; height: 92px; position: relative; margin:  0 auto 12px;}
+.zx_result_box .download_android{display:block; width:130px; height:36px; position:absolute; top:0px; right:0px;}
+.zx_result_box .download_iphone{display:block; width:130px; height:36px; position:absolute; bottom:0px; right:0px;}
+.zx_result_box .download_ad{display:block; width:643px; height:91px; position:absolute; top:0px; left:0px;}
+.container_other{background:none;}
+/*zhengxin end*/
+
+/* 借款流程优化 */
+.borrowBox{background:#fff;border:1px solid #e9e9e9;padding-top: 16px; margin-bottom: 10px;}
+.borrowBox h3{color:#414141;font-size:18px;border-bottom:1px solid #ececec; padding-bottom: 10px; margin-left: 20px; margin-right: 20px;font-weight:normal;font-family: \5FAE\8F6F\96C5\9ED1,'Microsoft YaHei',STHeiti,sans-serif;}
+.networkStep{ margin-top: 55px; margin-left: 30px; margin-bottom: 60px;}
+.networkStep li{float:left;width:115px;background:url("${pageContext.request.contextPath}/images/nlpIcon.png") no-repeat right 24px; margin-right: 30px;color:#696969;}
+.networkStep li.nlpLast{background:none;width:72px; margin-right: 0;}
+.networkPic{background-image:url("${pageContext.request.contextPath}/images/networkLoanProcess.png");width:66px;height:60px;background-repeat:no-repeat; margin-bottom: 14px;}
+.networkPic1{background-position:6px 0;}
+.networkPic2{background-position:6px -70px;}
+.networkPic3{background-position:6px -140px;}
+.networkPic4{background-position:0 -210px;}
+.networkPic5{background-position:6px -280px;}
+.networkPic6{background-position:6px -350px;}
+.networkPic7{background-position:0 -420px;}
+.loanAdvantage{background:url("${pageContext.request.contextPath}/images/loanAdvantage.png") no-repeat 0 0;width:793px;height:192px;margin:35px auto 60px;}
+
+.htmlMobile .tips{font-size:12px;width:484px;margin-left:auto;margin-right:auto;}
+.htmlMobile .btn_two{width:275px;margin:0 auto 10px;}
+.htmlMobile .htmlMobileP{color:#454545; margin-bottom: 26px;text-indent:1em;}
+.input_code{width:114px;height:26px;display:block;border:1px solid #dfdfdf;text-align:center;line-height:26px;font-size:12px;color:#666; margin-top: 5px;}
+.htmlMobile .mr{ margin-right: 8px;}
+.htmlMobile a.smsBtnNone,.htmlMobile a:hover.smsBtnNone{background-color:#eee;text-decoration:none;cursor:default;color:#bbb;}
+
+.right-containerAmountPeriod{background:#fff;border:1px solid #dfdfdf; padding-top: 16px;}
+.common_boxAmountPeriod{margin:0 14px 15px;}
+.common_boxLoanInfo{margin:0 14px;}
+
+
+.listBoxLoanInfo{margin:0 20px;background-color:#f8f8f8;}
+.listBoxLoanInfo h3{background-color:#ebebeb;color:#696969;font-size:12px;padding:8px;border-bottom:1px solid #fff; margin-bottom: 20px;}
+.listBoxLoanInfo h4{color:#696969;border-bottom:1px solid #d9d9d9; padding-bottom: 8px; margin-bottom: 18px; margin-left: 15px; margin-right: 15px;}
+.listBoxLoanInfoUlUl{ margin-left: 30px;}
+.listBoxLoanInfoUlUl li{float:left;width:25%;color:#0079d2; margin-bottom: 35px;}
+.listBoxLoanInfoUlUl li input{ margin-right: 5px;}
+.br_ico01{ display: inline-block; width: 14px; height: 14px; background: url("${pageContext.request.contextPath}/images/borrow_bg02.gif") 0 0 no-repeat; vertical-align: middle;}
+
+.noPassCreditBanner{background:url("${pageContext.request.contextPath}/images/nopasscreditBanner.jpg") no-repeat center top;width:100%;height:495px;}
+.noPassCreditApp{width:100%;height:115px;border-bottom:1px solid #d9dbdf;background-color:#f9f9f9;}
+.noPassCreditApp a{display:block;width:50%;;float:left;}
+.noPassCreditApp span{width:300px;color:#88909a;font-size:20px;line-height:115px; padding-left: 100px; padding-right: 80px;font-family:\5FAE\8F6F\96C5\9ED1,'Microsoft YaHei',STHeiti,sans-serif;}
+.noPassCreditApp i{background-image:url("${pageContext.request.contextPath}/images/noPassCreditApp.png");background-repeat:no-repeat;width:88px;height:88px;display:block;float:left; margin-right: 24px; margin-top: 14px;}
+.noPassCreditAppAndroid{background:url("${pageContext.request.contextPath}/images/noPassCreditLine.png") no-repeat right 50%;}
+.noPassCreditApp .noPassCreditAppAndroid i{background-position:0 0;}
+.noPassCreditApp .noPassCreditAppIOS i{background-position:0 -108px;}
+.noPassCreditAppAndroid span{float:right;}
+.noPassCreditAppIOS span{float:left;}
+.noPassCreditMain{width:100%;background-color:#fff;}
+.noPassCreditUl{width:996px;margin:0 auto;}
+.noPassCreditUl li{width:100%;border-bottom:1px solid #e1e1e1;*padding-bottom:80px;}
+.noPassCreditUl li.noPassCreditli4{border-bottom:0;}
+.noPassCreditli i,.noPassCreditli span{display:block;float:left;}
+.noPassCreditli i{background-image:url("${pageContext.request.contextPath}/images/noPassCreditPic.png");background-repeat:no-repeat;}
+.noPassCreditli span{background-image:url("${pageContext.request.contextPath}/images/borrowguide/noPassCreditTxt.png");background-repeat:no-repeat;}
+.noPassCreditli1 span{background-position:0 0;width:409px;height:112px; margin-top: 238px; margin-right: 30px;}
+.noPassCreditli1 i{background-position:0 0;width:530px;height:368px; margin-top: 105px; margin-bottom: 80px;}
+.noPassCreditli2 span{background-position:0 -147px;width:196px;height:113px; margin-top: 253px;}
+.noPassCreditli2 i{background-position:0 -435px;width:590px;height:430px; margin-top: 80px; margin-right: 90px; margin-bottom: 80px;}
+.noPassCreditli3 span{background-position:0 -293px;width:206px;height:79px; margin-top: 226px; margin-right: 110px;}
+.noPassCreditli3 i{background-position:0 -910px;width:620px;height:412px; margin-top: 100px; margin-bottom: 54px;}
+.noPassCreditli4 span{background-position:0 -420px;width:206px;height:113px; margin-top: 265px;}
+.noPassCreditli4 i{background-position:0 -1380px;width:580px;height:430px; margin-top: 100px; margin-right: 110px; margin-bottom: 85px;}
+.noPassCreditVIP{width:100%;height:427px;background:url("../images/borrowguide/noPassCreditStep.png") no-repeat center 258px #f0f0f0; padding-top: 80px;border-bottom:40px solid #0096e3;}
+.noPassCreditVIP p{background:url("../images/borrowguide/noPassCreditTxtCenter.png") no-repeat 0 0;width:809px;height:82px; margin:0 auto;}
+
+.uploadFileBox table,.uploadFileBox table tr,.uploadFileBox table td{border:0;}
+.uploadFileBox table{border-collapse:collapse;width:100%;border-bottom:1px solid #e5e5e5;}
+.uploadFileBox table td{background-color:#f6f6f6;border-top:1px solid #e5e5e5;height:100px; padding-bottom: 15px; padding-top: 15px;}
+.uploadFileBox table td strong{ margin-bottom: 15px;display:inline-block;}
+.uploadFileBox table td ol{ margin-bottom: 10px;}
+.uploadFileBox table td ol li{line-height:24px;color:#666;}
+.uploadFileBox td p,.uploadFileBox td ol li{font-weight:normal;}
+.uploadFileIcon{float:right;background-image:url("../images/borrowguide/borrowUploadInfoIcon.png");background-repeat:no-repeat;display:block; margin-left: 6px;}
+.uploadFileIcon1{background-position:0 0;width:17px;height:13px; margin-top:4px;}
+.uploadFileIcon2{background-position:0 -35px;width:15px;height:20px;}
+.uploadFileIcon3{background-position:0 -70px;width:17px;height:17px; margin-top: 4px;}
+.uploadFile_tableTbodyTit p a{ margin-right: 12px;}
+.uploadFileBox .uploadimg_example{font-weight:normal; margin-left: 0;display:block;}
+a.artDialog,a:hover.artDialog{background-color:#0079d2;color:#fff;text-decoration:none;width:60px;text-align:center;height:20px;line-height:20px;display:block; margin-bottom: 3px;}
+a.uploadBtnDel,a:hover.uploadBtnDel{display:block;width:60px;text-align:center;}
+.uploadFileBox table td.tdNum{width:100px;}
+.uploadimg_exampleTd{width:80px;text-align:center;}
+
+.lend-left-menu{background-color:#e4e4e4;width:210px;padding-top:15px;overflow:hidden;}
+.loanApplication .lend-left-menu a{width:200px;border:1px solid #dadada;background-color:#fff;margin:0 auto 7px;color:#666;font-size:14px;font-weight:bold;display:block;padding:10px 0;font-family:"microsoft yahei";}
+.loanApplication .lend-left-menu a.selected{width:100%;border-left:4px solid #2c94f3;border-right:1px solid #fff;box-sizing:border-box;box-shadow:0 3px 3px #cacaca;}
+.lend-left-menu a.integrityView{width:auto;border:0;background-color:transparent;margin:0;color:#666;font-size:14px;font-weight:normal;display:inline;padding:0;font-family:"microsoft yahei";}
+#onlineService{background-color:transparent;border:0;}
+.integrity{margin:0 15px 40px;border-bottom:1px solid #fff; padding-top: 20px; padding-bottom: 28px;background:#e4e4e4;}
+.integrityInfo{ margin-bottom: 14px;}
+.integrityInfo span{color:#666;font-family:\5FAE\8F6F\96C5\9ED1,'Microsoft YaHei',STHeiti,sans-serif;float:left;margin-right: 10px;}
+.integrityInfo strong{font-size:16px;color:#0098e0;font-family:Arial, Helvetica, sans-serif;float:left; margin-top: -2px;}
+.integrityInfo strong small{font-size:12px;}
+.integrityInfo a{float:right;color:#0098e0;font-size:12px;}
+.integrityProgressBar{border-radius:8px;width:100%;height:14px;background-color:#fff; }
+.integrityProgress{border-radius:8px;background-color:#0098e0;height:14px;width:0;}
+
+.borrowStepList{width:140px;margin:0 auto 100px;}
+.borrowStepList ul.l li{ margin-bottom: 40px;color:#666;font-size:14px;font-weight:bold;}
+.borrowStepListIcon{display:block;width:16px;height:16px;line-height:9px;border:2px solid #fff;background-color:#b7b7b7;border-radius:50%;color:#fff;font-family:\5FAE\8F6F\96C5\9ED1,'Microsoft YaHei',STHeiti,sans-serif;font-weight:bold;font-style:normal;text-align:center; margin-bottom: 42px; margin-right: -12px;box-shadow:0 0 0 3px #e4e4e4;}
+.borrowStepListIconBox i.last{ margin-bottom: 0;}
+.borrowStepListIconBox{border-right:3px solid #fff;}
+.borrowStepListIconBox i.active{background-color:#1b8cf2;line-height:16px;}
+.borrowStepList .input_btn{clear:both;}
+.qqOnline{;position:relative;bottom:0;margin:0 20px;}
+.qqOnline a{background:url("../images/borrowguide/qqOnline.png") no-repeat 0 0;display:block;width:164px;height:60px;margin:0 auto 16px;}
+.qqOnline p{border-top:1px solid #ccc;color:#909090;padding:12px 6px;line-height:18px;}
+.positionBox{width:210px;padding-top:15px;z-index:100;}
+a.listBoxLoanInfoSmallA{font-weight:normal; margin-left: 5px;text-decoration:underline;}
+
+.common_boxAmountPeriod .m-rowLabel{background-color:#ff6f36;color:#fff;text-align:center;font-weight:bold;font-size:14px; margin-right: 0;border:1px solid #ff6f36;}
+.common_boxAmountPeriod .m-drop{border:1px solid #ff6f36; }
+.common_boxAmountPeriod input{outline: none;}
+.common_boxAmountPeriod .m-textFocusActive{ box-shadow: none;}
+.common_boxAmountPeriod .m-textFocus{border:1px solid #ff6f36; font-size: 24px; color: #696969; font-family:Arial, Helvetica, sans-serif; }
+.common_boxAmountPeriod .m-dropInput span{font-size: 18px; color: #696969; font-family:\5FAE\8F6F\96C5\9ED1,'Microsoft YaHei',STHeiti,sans-serif;}
+.common_boxAmountPeriod .m-dropInput strong{font-size: 24px; font-family:Arial, Helvetica, sans-serif;font-weight:normal; color: #696969;}
+.common_boxAmountPeriod .m-holderBox{ position: relative; font-size: 14px; color: #9e9e9e;}
+.common_boxAmountPeriod .icon-yuan-change{ position: absolute; right: 8px; top: 8px; }
+.common_boxAmountPeriod .timeLimit{ margin-left: 15px;}
+.listBoxLoanInfo{ margin-bottom: 12px;}
+.listBoxLoanInfoUl li h4 a.r{color:#979797;font-weight:normal;width:44px;height:16px;line-height:14px;text-indent:4px;border:1px solid #d8d8d8;text-decoration:none;color:#979797;}
+.listBoxLoanInfoUl li h4 a.listBoxLoanInfoUlShow{background:url("/yiren/images/showHidIcon.png") no-repeat right 5px;}
+.listBoxLoanInfoUl li h4 a.listBoxLoanInfoUlHid{background:url("/yiren/images/showHidIcon.png") no-repeat right -13px;}
+.ifScanning{ padding-left: 28px;line-height:2;}
+.m-labelRadio{line-height:2; margin-right: 40px;}
+.common_boxLoanInfo .m-row .m-rowLabel{ margin-right: 38px;font-weight:bold;}
+.common_boxLoanInfo .m-row-error{text-indent:150px;}
+.discountCode{ margin-left: 149px;}
+.discountCodeLink{border:1px solid #ccc;background-color:#fff;height:25px;line-height:25px;color:#414141;width:100px; margin-bottom: 14px;cursor:pointer;}
+.discountCodeLink span{background-color:#dadada;color:#b8b8b8;display:block;float:left;width:25px; margin-right: 6px;text-align:center;font-size:28px;line-height:22px;height:25px;}
+.discountCodeBox{border:1px solid #ccc;color:#414141;padding:15px 22px;width:400px;display:none;}
+.discountCodeBox p{ margin-bottom: 8px;}
+.discountCodeBox label,.discountCodeText,.discountCodeBtn{float:left;}
+.discountCodeBox label{text-align:right; margin-right: 8px;line-height:26px;}
+.discountCodeText{border:1px solid #ccc;width:172px;height:26px;line-height:26px; margin-right: 14px;text-indent:1em;}
+.discountCodeBtn{width:60px;height:24px;line-height:24px;text-align:center;display:block;background-color:#0079d2;color:#fff;border-radius:4px; margin-top: 2px;border:0;}
+
+.myBorrowingProcess .common_box h2{font-size:16px;font-weight:bold;text-align:center;font-family:\5FAE\8F6F\96C5\9ED1,'Microsoft YaHei',STHeiti,sans-serif;}
+.myBorrowingProcess .innerbox h3 .icontit,.myBorrowingProcess .innerbox h3 strong{float:left;}
+.myBorrowingProcess .innerbox h3{border-bottom:1px solid #ccc;font-weight:normal;font-size:14px; padding-bottom: 14px;}
+.myBorrowingProcess .innerbox h3 strong{font-weight:normal;margin-top:-3px;color:#666;}
+
+#amountError{margin-top:-20px;clear:both;text-indent:20px;}
+#worker li{width:50%;}
+#worker li i.br_ico01{ margin-left: 4px;}
+
+/*borrow_process.js plugin css*/
+.tooltip-box{ border: 1px solid #ff6f36; padding: 10px;  position: absolute; top: 100px; left: 200px; background: #fff; z-index: 100000; display: none;}
+.tooltip-box .tooltip-ico{ display: inline-block; width: 11px; height: 8px; background: url("/images/borrowguide/tooltip.gif") 0 0 no-repeat; position: absolute; left: 40px; top: -8px;}
+.tooltip-plugin,.tooltip0-plugin{cursor:default;}
+
+.wzw_status_c{ line-height:26px; color:#909090;}
+.wzw_tt{ font-size:14px; color:#414141; font-weight:bold;}
+.wzw_two_dimension .downIOS{ display:inline-block; text-align:center; color:#fff; background:#f9a12c; width:130px; height:34px; line-height:34px; font-size:12px; font-family:"微软雅黑"; border-radius:3px;}
+.wzw_two_dimension .downAndriod{ display:inline-block; text-align:center;  color:#fff; background:#0078d1; width:130px; height:34px; line-height:34px; font-size:12px; font-family:"微软雅黑"; border-radius:3px;}
+.wzw_two_dimension .wleft,.wzw_two_dimension .wright{ float:left;}
+.wzw_two_dimension .wleft{ width:78px;}
+.wzw_two_dimension .wright{ width:130px; margin-left:13px; display:inline;}
+.wzw_two_dimension .downAndriod{ margin-top:10px;}
+.wzw_status .back{ margin-top:15px;}
+.wzw_two_dimension{ margin-top:35px;}
+.wzw_two_dimension .clearfix{ margin-top:6px;}
+.wzw_two_dimension .dim_tt{ font-size:12px; font-family:"微软雅黑"; color:#696969; font-weight:bold;}
+
+.wzw_status .common_box_icondiv .l{ width:500px; float:none;}
+.wzw_status .common_box_icondiv .r{  float:none;}
+
+.wzw_status .wzw_replay{ margin-top:40px;}
+.wzw_Hid_box .left{ padding-right:80px; float:left}
+.wzw_Hid_box .right{ padding-left:40px; float:left; border-left:1px dashed #ccc;}
+.wzw_Hid_box { margin-top:15px;}
+.wzw_Hid_box .wzw_two_dimension { margin-top:0;}
+
+.showInfo{width:170px;cursor:default;}
+.showInfo span{background:url("/yiren/images/showHidIcon.png") no-repeat right 5px;width:150px;display:block;}
+
+.citydis {background-color: #eee;color: #bbb;cursor: default;}
+
+.borrowguide .bor_calculators_result thead td,.borrowguide .bor_calculators_result .row .money_total{font-size:16px;}
+.borrowguide .bor_calculators_result .row td{font-size:14px;}
+.borrowguide .bor_calculators_result .row td label{font-family:"microsoft yahei";}
+.borrowguide .bor_calculators_result .row td:first-child label{font-size:12px;font-weight:bold;}
+.borrowguide .bor_calculators_result thead td{background:#fff;border-top:1px solid #e7e7e7;border-bottom:1px solid #e7e7e7;color:#414141;}
+.borrowguide .bor_calculators_result thead td:nth-child(2n),.borrowguide .bor_calculators_result .row td:nth-child(2n){background:#f7f7f7;}
+
+.box-fix-down-app{ background:#2578e7; position:fixed; bottom:0; left:0px; width:100%;}
+.box-fix-down-app .down-app-guide{ width:1000px; margin:0 auto; position:relative;}
+.box-fix-down-app .left{ width:610px; float:left; }
+.box-fix-down-app .da-tt{ padding-top:20px;padding-left:35px;}
+.box-fix-down-app .da-con{ padding-top:25px;padding-left:42px;}
+.box-fix-down-app .right{ float:right; background:#1c6fe1;  width:290px; height:150px; color:#fff;}
+
+.box-fix-down-app .down-app-ios{ display:inline-block; width:122px; height:36px; border:1px solid #fff; border-radius:3px; font-family:"微软雅黑"; color:#fff; text-align:center; line-height:36px; font-weight:bold; margin-top:3px; font-size:14px;}
+.box-fix-down-app .down-app-ios:hover{ background:#fff; color:#1c6fe1; text-decoration:none;}
+.box-fix-down-app .down-app-android{ display:inline-block; width:122px; height:36px; border:1px solid #fff; border-radius:3px; font-family:"微软雅黑"; color:#fff; text-align:center; line-height:36px; font-weight:bold;margin-top:15px; font-size:14px;}
+.box-fix-down-app .down-app-android:hover{ background:#fff; color:#1c6fe1;text-decoration:none;}
+.box-fix-down-app .da-r-con { margin-top:12px;}
+.box-fix-down-app .da-r-con .l{ width:98px; padding-left:25px;}
+.box-fix-down-app .da-r-con .r{ width:125px; padding-right:25px;}
+.box-fix-down-app .da-r-tt{ margin-top:10px; padding-left:8px; font-family:"微软雅黑"; font-weight:bold;}
+.box-fix-down-app .da-r-tt img{ vertical-align:middle; padding-right:3px;}
+
+.box-fix-down-app .btn-zk{ position:absolute; display:inline-block; width:40px; height:16px; line-height:16px; background:url(../images/borrowguide/down-app05.png) right -38px no-repeat; right:-60px; top:10px; color:#fff; cursor:pointer;}
+.box-fix-down-app .btn-sq{ position:absolute; display:inline-block; width:40px; height:16px; line-height:16px; background:url(../images/borrowguide/down-app05.png) right 6px no-repeat; right:-60px; top:10px; color:#fff; cursor:pointer;}
+
+.box-fix-down-app .hide-default,.box-fix-down-app .show-default{ display:none;}
+.borrowBox_process .inner{margin:20px 0 20px 80px;}
+
+.taoQuestionnaireBox{ width: 1300px; margin: 0 auto; position:relative;}
+.taoQuestionnaire{ position:absolute; top: 37px; left: -5px; width: 150px;}
+.taoCha{ float: right; width: 22px; height: 22px; background: url(../images/taoCha.png) no-repeat;}
+.taoImg{clear: both; background: url(../images/taoimg.png) no-repeat; }
+.taoImg a{ width: 150px; height:240px; display: block;}

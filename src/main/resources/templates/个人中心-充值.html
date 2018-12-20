@@ -1,17 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>p2p网贷平台</title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<link href="/foreground/css/common.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="/foreground/css/user.css" />
-<link rel="stylesheet" type="text/css" href="/foreground/css/jquery.datetimepicker.css"/>
-<script type="text/javascript" src="/foreground/script/jquery.min.js"></script>
-<script type="text/javascript" src="/foreground/script/common.js"></script>
-<script src="/foreground/script/user.js" type="text/javascript"></script>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>p2p网贷平台</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="../foreground/css/common.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../foreground/css/user.css" />
+    <link rel="stylesheet" type="text/css" href="../foreground/css/jquery.datetimepicker.css"/>
+    <script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
+    <script type="text/javascript" src="../foreground/script/common.js"></script>
+    <script src="../foreground/script/user.js" type="text/javascript"></script>
 </head>
 <body>
 <header>
@@ -63,7 +63,7 @@
                 <li> <a href="/goto/list" class="">我要投资</a> </li>
                 <li> <a href="/goto/rent">我要融资</a> </li>
                 <li> <a href="/goto/helpInfo">安全保障</a> </li>
-                <li class="top-nav-safe"> <a href="个人中心首页.html">我的账户</a> </li>
+                <li class="top-nav-safe"> <a href="/user/toOwn">我的账户</a> </li>
                 <li> <a href="/goto/comInfo">关于我们</a> </li>
             </ul>
         </div>
@@ -75,16 +75,13 @@
 		    	<div class="credit-ad"><img src="/foreground/images/clist1.jpg" width="1000" height="80"></div>
                 <div id="personal-left" class="personal-left">
                     <ul>
-                        <li class="pleft-cur"><span><a href="toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
+                        <li class="pleft-cur"><span><a href="/skip/toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
                         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Record">资金记录</a></span></li>
                         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Investment">投资记录</a></span></li>
                         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Plan">回款计划</a></span></li>
-                        <li class=""><span><a href="Thirdparty1"><i class="dot dot02"></i>开通第三方</a> </span> </li>
+                        <li > <span> <a href="Packet"> <i class="dot dot02"></i> 还款 </a> </span> </li>
                         <li><span><a href="Recharge1"><i class="dot dot03"></i>充值</a></span></li>
                         <li class=""><span><a href="Withdraw"><i class="dot dot04"></i>提现</a></span></li>
-                        <li style="position:relative;" class=""> <span> <a href="Packet"> <i class="dot dot06"></i> 我的红包 </a> </span> </li>
-                        <li class=""><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Conversion">兑换历史</a></span></li>
-                        <li style="position:relative;"> <span> <a href="Messages"><i class="dot dot08"></i>系统信息 </a> </span> </li>
                         <li><span><a href="Setting"><i class="dot dot09"></i>账户设置</a></span></li>
                     </ul>
                 </div>

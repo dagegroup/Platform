@@ -37,7 +37,7 @@ public class UserController {
     public String toOwn(HttpSession session){
         Object userName = session.getAttribute("userName");
         if(userName!=null&&userName!=""){
-            return "个人中心首页";
+            return "redirect:/skip/toPersonIndex";
         }
         return "redirect:/user/toLogin";
 
@@ -101,13 +101,17 @@ public class UserController {
     //@ResponseBody
     @RequestMapping("login")
     public String userLogin(@RequestParam Map map, Model model, HttpSession session) {
-        System.out.println(map);
+        //System.out.println(map);
 
-        System.out.println(map.get("telephone").toString());
+        //System.out.println(map.get("telephone").toString());
         Map user = userService.getByuserName(map.get("telephone").toString(),map.get("password").toString());
         if (user != null && user.size() > 0) {
               session.setAttribute("userName",user.get("USERNAME"));
-              session.setAttribute("userid",user.get("USERID"));
+            session.setAttribute("userid",user.get("USERID"));
+            String userid = userService.getUserid(user.get("USERID") + "");
+            if(userid==null){
+                        userService.addUserid(user.get("USERID")+"");
+            }
             return "forward:/user/toOwn";
 
         }else{

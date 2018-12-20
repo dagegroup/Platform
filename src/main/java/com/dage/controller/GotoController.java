@@ -38,7 +38,7 @@ public class GotoController {
     }
     @RequestMapping("rentInfo")
     public String toRentInfo(){
-        return "/reception/借款信息填写";
+        return "/reception/借款信息填写1";
     }
     @RequestMapping("comDetial")
     public String toComDetial(){
@@ -91,6 +91,18 @@ public class GotoController {
     @RequestMapping("alertpay")
     public String toAlertpay(){
         return "/reception/资费说明";
+    }
+    @RequestMapping("borrow")
+    public String toBorrow(){
+        return "/reception/borrow";
+    }
+    @RequestMapping("rentInfo1")
+    public String toRentInfo2(){
+        return "/reception/借款信息填写2";
+    }
+    @RequestMapping("rentInfo2")
+    public String toRentInfo3(){
+        return "/reception/借款信息填写3";
     }
 
 }
