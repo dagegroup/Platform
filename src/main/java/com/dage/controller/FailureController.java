@@ -47,27 +47,17 @@ public class FailureController {
 
     @ResponseBody
     @RequestMapping("one")
-    public Object submitOne(String bidid, HttpSession session){
-        session.setAttribute("bidid",bidid);
+    public Object submitOne(String bidid){
         return failureService.getMapByBidid(bidid);
     }
 
     @ResponseBody
     @RequestMapping("update")
-    public Object toUpdate(HttpSession session){
-        String bidid = (session.getAttribute("bidid") + "");
-        int i = failureService.updateBidSubmit(bidid);
-        System.out.println(i);
-        if (i>0){
-              i = failureService.updateUserAccount(bidid);
-            if (i>0){
-                 i = failureService.updateUserInfo(bidid);
-                 if (i>0){
-                    i= failureService.insertUserFlow(bidid);
-                 }
-            }
-        }
-        session.removeAttribute("bidid");
-        return i;
+    public Object toUpdate(@RequestBody Map map) {
+        String bidid = (map.get("bidid") + "");
+        System.out.println("+++++++++++++++++++++++++++++++");
+        System.out.println(failureService.repayFailure(bidid));
+        return   failureService.repayFailure(bidid);
     }
+
 }
