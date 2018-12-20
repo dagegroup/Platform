@@ -53,15 +53,19 @@
         };
         //验证用户名
         function checkuser(){
+            var sqq = /^1[34578]\d{9}$/;
             var user=document.getElementById("telephone");
-            if(user.value.length>0){
+
+            if(!user.value.length==11||!sqq.test(user.value)){
+                $("#tele").html("请输入正确手机号").css("color","red");
+                user.focus();
+                return false;
+            }else{
                 $("#tele").html("");
                 return true;
             }
             //alert("用户名不能为空");
-            $("#tele").html("用户名不能为空").css("color","red");
-            user.focus();
-            return false;
+
         }
         //验证密码
         function checkpass(){
@@ -85,49 +89,8 @@
         }
 
 
-<<<<<<< HEAD
         function  userNameJy() {
         }
-        /*function submitBtn() {
-            //window.location.href = "/foreground//goto/index";
-        var password= $("#password").val();
-            $.ajax({
-                url: "/user/login ",
-                type: "post",
-                data: {telephone: $("#telephone").val(), password: $("#password").val()},
-                dataType: "json",
-                async: false,
-                success: function (data) {
-                    var psw=data.PASSWORD
-                    if (data != null) {
-                        if(psw!=password){
-                            $("#prrintInfo").html("密码错误");
-                        }else{
-                            window.location.href = "/foreground//goto/index";
-                        }
-=======
-                </ul>
-            </div>
-        </div>
-        <div class="header_main">
-            <a class="logo" href="/"></a>
-            <ul class="header_nav">
-                <li><a class="live" href="power/index.html">首页</a>
-                </li>
-                <li><a href=${pageContext.request.contextPath}/bid-findShowList?page=1>我要理财</a>
-                </li>
->>>>>>> origin/master
-
-                    }
-                },
-                error: function (data) {
-                    $("#prrintInfo").html("用户名不存在")
-                    //window.location.href="login1.html"
-                }
-
-
-            })
-        }*/
 
 
     </script>

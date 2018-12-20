@@ -16,6 +16,18 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
+
+    @Override
+    public int addUserid(String userid) {
+        return userDao.adduserid(userid);
+    }
+
+    @Override
+    public String getUserid(String userid) {
+
+        return userDao.getUserbyUserid(userid);
+    }
+
     @Override
     public Map getByuserName(String telephone,String password) {
         System.out.println(telephone + password);

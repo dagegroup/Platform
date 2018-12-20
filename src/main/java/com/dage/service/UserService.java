@@ -11,4 +11,6 @@ import java.util.Map;
 public interface UserService {
 
     Map  getByuserName(String telephone,String password);
+    String getUserid(String userid);
+    int addUserid(String userid);
 }
