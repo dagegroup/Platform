@@ -79,6 +79,13 @@
                     width="70">
             </el-table-column>
             <el-table-column
+                    prop="SUBMITSTATE"
+                    label="年利率"
+                    v-if="false"
+                    align="center"
+                    width="70">
+            </el-table-column>
+            <el-table-column
                     prop="BIDREPAYMENTMETHOD"
                     label="还款方式"
                     align="center"
@@ -101,7 +108,8 @@
                     label="操作"
                     align="center">
                 <template scope="scope">
-                    <el-button :plain="true" type="success" size="small" icon="edit" @click="editClick(scope.row)">流标详情</el-button>
+                    <el-button :plain="true" type="success" v-if="scope.row.SUBMITSTATE=='已投标'" size="small" icon="edit" @click="editClick(scope.row)">已投标详情</el-button>
+                    <el-button :plain="true" type="danger" v-if="scope.row.SUBMITSTATE=='已回款'" size="small" icon="edit" @click="editClick(scope.row)">已回款详情</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -234,86 +242,92 @@
                 // self.multipleSelection=response.data.data;
             })
         },
-        methods:{
+        methods: {
             //表格重新加载数据
-            loadingData:function() {
+            loadingData: function () {
                 var _self = this;
                 _self.loading = true;
-                var start =this.currentPage;
-                var end =this.pageSize;
-                axios.post('/failure/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
+                var start = this.currentPage;
+                var end = this.pageSize;
+                axios.post('/failure/page', {
+                    'start': start,
+                    'end': end,
+                    'USERID': this.searchForm.USERID,
+                    'BIDID': this.searchForm.BIDID,
+                    'REALNAME': this.searchForm.REALNAME
+                }).then(function (response) {
                     // console.log(response.data);
                     //alert(response.data.total);
-                    _self.total=response.data.page.total;
+                    _self.total = response.data.page.total;
                     _self.tableData = response.data.page.list;
                     // self.multipleSelection=response.data.data;
                 })
                 console.log(_self.currentPage);
-                setTimeout(function(){
+                setTimeout(function () {
                     console.info("加载数据成功");
                     _self.loading = false;
-                },300);
+                }, 300);
             },
             //表格编辑事件
-            editClick:function(row) {
+            editClick: function (row) {
                 var _self = this;
                 //_self.loading = true;
-                axios.post('/failure/one?bidid='+row.BIDID).then(function(response){
+                axios.post('/failure/one?bidid=' + row.BIDID).then(function (response) {
                     // alert(JSON.stringify(response.data.data))
                     _self.submitData = response.data.data;
-                    for (var i=0;i<_self.submitData.length;i++){
-                        _self.show=_self.submitData[0].BIDSTATE;
+                    for (var i = 0; i < _self.submitData.length; i++) {
+                        _self.show = _self.submitData[0].BIDSTATE;
 
                     }
                 })
-                _self.editFormVisible=true;
+                _self.editFormVisible = true;
             },
 
             //表格查询事件
-            searchClick:function() {
+            searchClick: function () {
                 var self = this;
                 self.loadingData();//重新加载数据
             },
             //分页大小修改事件
-            pageSizeChange:function(val) {
-                console.log('每页 ' + val +' 条');
+            pageSizeChange: function (val) {
+                console.log('每页 ' + val + ' 条');
                 this.pageSize = val;
                 var _self = this;
                 _self.loadingData();//重新加载数据
             },
             //当前页修改事件
-            currentPageChange:function(val) {
+            currentPageChange: function (val) {
                 this.currentPage = val;
                 console.log('当前页: ' + val);
                 var _self = this;
                 _self.loadingData();//重新加载数据
             },
 
-        //保存点击事件
-        editSubmit:function(){
-            var _self = this;
-            _self.loading = true;
-            var goUrl='/failure/update';
+            //保存点击事件
+            editSubmit: function () {
+                var _self = this;
+                _self.loading = true;
+                var goUrl = '/failure/update';
 
-            axios.post(goUrl).then(function(response){
-                 
+                axios.post(goUrl).then(function (response) {
 
-                // self.total=response.data.total;
-                if(response.data>0){
-                    alert(response.data);
-                    _self.editFormVisible = false;
-                    _self.loadingData();//重新加载数据
-                }else{
-                    _self.$message({
-                        message:  '操作失败',
-                        type: 'error'
-                    });
-                    _self.loadingData();//重新加载数据
-                }
-            })
-            console.info(this.editForm);
+
+                    // self.total=response.data.total;
+                    if (response.data > 0) {
+                        alert(response.data);
+                        _self.editFormVisible = false;
+                        _self.loadingData();//重新加载数据
+                    } else {
+                        _self.$message({
+                            message: '操作失败',
+                            type: 'error'
+                        });
+                        _self.loadingData();//重新加载数据
+                    }
+                })
+                console.info(this.editForm);
+            },
         }
-        },
     })
 </script>
 

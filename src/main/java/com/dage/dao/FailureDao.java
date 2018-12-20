@@ -20,11 +20,11 @@ public interface FailureDao {
      * @param map
      * @return
      */
-    @Select("<script>select b.bidid,b.userid,b.bidamount,b.bidrepaymentmethod,b.bidrate||'%' as bidrate,b.biddeadline,b.bidproject,r.realname,b.bidcurrentamount from bid_info b left join  TB_REALNAME_CERTIFICATION r on b.userid=r.userid where b.bidstate = '流标' " +
+    @Select("<script>select distinct a.*,s.bidstate as SUBMITSTATE from(select b.bidid,b.userid,b.bidamount,b.bidrepaymentmethod,b.bidrate||'%' as bidrate,b.biddeadline,b.bidproject,r.realname,b.bidcurrentamount from bid_info b left join  TB_REALNAME_CERTIFICATION r on b.userid=r.userid where b.bidstate = '流标' " +
             "<if test=\" BIDID!=null and BIDID!=''\"> and b.bidid = #{BIDID}</if>" +
             "<if test=\" USERID!=null and USERID!=''\"> and b.userid = #{USERID}</if>" +
             "<if test=\" REALNAME!=null and REALNAME!=''\"> and r.realname like  '%'||#{REALNAME}||'%'</if>" +
-            "</script>")
+            ") a left join bid_submit s on a.bidid=s.bidid </script>")
     List<Map> getlist(Map map);
 
     /**
