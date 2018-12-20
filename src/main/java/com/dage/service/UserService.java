@@ -13,31 +13,31 @@ public interface UserService {
 
     /**
      *
-     * @param userId
+     * @param map
      * @return
      */
-    List<Map> getList(String userId);
+    List<Map> getList(Map map);
 
     /**
      * 根据用户编号查询用户流水
      * @param userId
      * @return
      */
-    List<Map> getFlow(String userId);
+    List<Map> getFlow(Map map);
 
     /**
      * 根据用户编号查询用户投资记录
      * @param userId
      * @return
      */
-    List<Map> getSubmit(String userId);
+    List<Map> getSubmit(Map map);
 
     /**
      * 根据用户编号查询用户还款计划
      * @param userId
      * @return
      */
-    List<Map> getRepay(String userId);
+    List<Map> getRepay(Map map);
 
     /**
      * 用户充值

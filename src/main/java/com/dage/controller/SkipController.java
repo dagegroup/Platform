@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * className:SkipController
- * discription:
+ * discription: 用于个人中心内各页面的跳转
  * author:CZP
  * createTime:2018-12-12 19:51
  */
@@ -166,5 +166,15 @@ public class SkipController {
     @RequestMapping("/Record")
     public String toRecord(){
         return "个人中心-资金记录";
+    }
+
+    /**
+     * 跳转到个人中心还款
+     *
+     * @return
+     */
+    @RequestMapping("/repayment")
+    public String toRepayment(){
+        return "个人中心-还款";
     }
 }

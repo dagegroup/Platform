@@ -251,6 +251,7 @@
                         document.getElementById("procedure").value=(2);
                     }else if(str < 10000){
                         $('#commission').html(str*0.01);
+                        num = num.toFixed(2);
                         $('#practical').html(str-str*0.01);
                         document.getElementById("procedure").value=(str*0.01);
                     }else{
