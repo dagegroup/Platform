@@ -77,9 +77,39 @@ public class BidInforServiceImpl implements BidInforService {
     public int bidSubmit(Map map,HttpSession session) {
         String userid = (String)session.getAttribute("userid");//从session得到投资人id
         map.put("USERID",userid);//将投资人id加到map里传到dao层
-        Integer availablebalance = bidInforDao.balance(map);//从数据库里得到账户余额
-        Integer bidamount = Integer.valueOf(map.get("BIDAMOUNT").toString());//从前台得到输入投标金额
-        if (availablebalance>=bidamount){
+
+        double oldavailablebalance = bidInforDao.balance(map);//从数据库里得到账户余额
+
+        double bidamount = Double.valueOf(map.get("BIDAMOUNT").toString());//从前台得到输入投标金额
+        double bidrate = Double.valueOf(map.get("BIDRATE").toString()) ;//从前台得到招标利率
+
+        /*插入账户流水表开始*/
+        Map mp = bidInforDao.userAccountid(map);//根据userid从数据库账户表里获取账户id
+        String accountid = mp.get("ACCOUNTID")+"";
+        map.put("ACCOUNTID",accountid);//将ACCOUNTID加到map中
+
+        double amount=bidamount;//资金变动金额=前台输的投标金额bidamount
+        map.put("AMOUNT",amount);//将资金变动金额加到map里
+
+        double availablebalance=oldavailablebalance-bidamount;//投标后更新可用金额
+        map.put("AVAILABLEBALANCE",availablebalance);//投标后可用金额传到map里
+        /*插入账户流水表结束*/
+
+        /*更新账户表数据开始*/
+        double principal = bidInforDao.principal(map);//从数据库获取历史代收本金
+        double receiveprincipal = principal + bidamount;//代收本金 = 历史代收本金 + 投资金额
+        map.put("RECEIVEPRINCIPAL",receiveprincipal); //投标后的代收本金传到map里
+
+        double interest = bidInforDao.interest(map);//从数据库获取历史代收利息
+        double receivenumbererest =interest + bidamount*(bidrate/12)*0.01;//代收利息=历史利息+投标金额*招标利率
+        map.put("RECEIVENUMBEREREST",receivenumbererest);//投标后代收利息传到map里
+
+        //变动后可用余额调用上面的AVAILABLEBALANCE即可
+        /*更新账户表数据结束*/
+
+        if (oldavailablebalance>=bidamount){
+            bidInforDao.userAccount(map);//更新账户表
+            bidInforDao.accountRun(map);//向账户流水表里插入数据
             return bidInforDao.bidSubmit(map);//返回值为成功的行数
         }
         return 0;
@@ -91,8 +121,8 @@ public class BidInforServiceImpl implements BidInforService {
      * @return
      */
     public int canMoney(Map map){
-        Integer canmoney = bidInforDao.canMoney(map);//从数据库获取可投金额
-        Integer bidamount = Integer.valueOf(map.get("BIDAMOUNT").toString());//从前台得到输入投标金额
+        double canmoney = bidInforDao.canMoney(map);//从数据库获取可投金额
+        double bidamount = Double.valueOf(map.get("BIDAMOUNT").toString());//从前台得到输入投标金额
         if (canmoney>=bidamount){
             return 1;
         }
