@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,13 +34,17 @@ public class PersonController {
      */
     @ResponseBody
     @RequestMapping("index")
-    public List<Map> getPerson(@RequestParam Map map){
+    public List<Map> getPerson(@RequestParam Map map,HttpSession session){
        /* System.out.println(userId);
         System.out.println(userService.getList(userId));*/
         //System.out.println(map.get("time"));
+
         // 为每一个 时间选项 添加 map的键  便于 在dao层 判断查询
         Map map1 = putTime(map);
-        return userService.getList(map1);
+        // 根据session的userid 查询 为map 加入session里的 userid
+        String userid=(String)session.getAttribute("userid");
+        map1.put("userId",userid);
+        return userService.getUser(map1);
     }
 
     /**
@@ -49,7 +54,7 @@ public class PersonController {
      */
     @ResponseBody
     @RequestMapping("/flow")
-    public List<Map> getFlow(@RequestParam Map map){
+    public List<Map> getFlow(@RequestParam Map map,HttpSession session){
         //当 选择全部时 将类型重置为空 自动查询全部
         if (map.get("type")!=null&&map.get("type")!=" "){
             String type = (String) map.get("type");
@@ -58,6 +63,9 @@ public class PersonController {
             }
         }
         Map map1 = putTime(map);
+        // 根据session的userid 查询 为map 加入session里的 userid
+        String userid=(String)session.getAttribute("userid");
+        map1.put("userId",userid);
         return userService.getFlow(map1);
     }
 
@@ -89,22 +97,26 @@ public class PersonController {
      */
     @ResponseBody
     @RequestMapping("/submit")
-    public List<Map> getSubmit(@RequestParam Map map){
+    public List<Map> getSubmit(@RequestParam Map map,HttpSession session){
         //System.out.println(map.get("userId"));
         //System.out.println(map.get("type"));
         if (map.get("type")!=null&&map.get("type")!=""){
             if (map.get("type").equals("全部")){
                 map.put("type",null);
             }
-
         }
          Map map1= putTime(map);
+        // 根据session的userid 查询 为map 加入session里的 userid
+        String userid=(String)session.getAttribute("userid");
+        map1.put("userId",userid);
+        /*String userid="U201812071032";
+        map1.put("userId",userid);*/
         return userService.getSubmit(map1);
     }
 
     /**
      * 根据用户id查询用户还款计划
-     * @param userId
+     * @param map
      * @return
      */
     @ResponseBody

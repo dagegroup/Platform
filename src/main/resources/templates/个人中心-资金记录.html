@@ -17,10 +17,9 @@
   <script type="text/javascript" src="/js/vue.js"></script>
   <script type="text/javascript" src="/js/axios.min.js"></script>
   <!-- 引入样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="/elementui/elementui.css">
   <!-- 引入组件库 -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-
+  <script src="/elementui/elementui.js"></script>
 
 </head>
 <body>
@@ -167,7 +166,7 @@
                 function ajax(typei,timei) {
                     $.ajax({
                         url: "/person/flow",
-                        data:{userId:'U201812071032',type:typei,time:timei},
+                        data:{userId:'',type:typei,time:timei},
                         async:false,//同步
                         type:"post",
                         dataType:"json",

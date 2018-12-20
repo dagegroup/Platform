@@ -22,11 +22,28 @@ public interface UserDao {
     @Select("select  telephone,userName,password from TB_USER_INFO where telephone=#{param1} and password=#{param2} ")
     Map getByuserName(String telephone, String password);
 
+
+    /**
+     * 根据session里 获取的用户姓名 查询用户的信息
+     * @param userName
+     * @return
+     */
+    @Select("select * from tb_user_info where username=#{userName}")
+    Map getUserByUserName(String userName);
+
+    /**
+     * 根据用户id查询用户的个人信息
+     * @param map
+     * @return
+     */
+    @Select("select * from tb_user_info where userid=#{userId}")
+    List<Map> getUser(Map map);
+
     /**
      * 根据用户编号查询用户回款计划
      *
      * 还款计划表
-     * @param userId
+     * @param
      * @return
      */
     @Select("<script>select userid,bidrepayuserid,BIDREPAYMETHOD,to_char(biderpaydeaddate,'yyyy-mm-dd') as bidrepaydate,bidrepaynumber,bidrepayamount" +
@@ -64,10 +81,10 @@ public interface UserDao {
             "biddate,submitid,bidid,userid,bidamount,bidrate,bidstate " +
             "from bid_submit where userid=#{userId} " +
             "<if test=\" type!=null and type!=''\"> and bidstate=#{type}</if>" +
-            "<if test=\" time1!=null and time1!='' \"> and to_char(flowdate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
-            "<if test=\" time2!=null and time2!='' \"> and flowdate &gt;= trunc(next_day(sysdate-8,1)+1) and flowdate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
-            "<if test=\" time3!=null and time3!='' \"> and to_char(flowdate,'yyyy-mm')=to_char(sysdate,'yyyy-mm')</if>"+
-            "<if test=\" time4!=null and time4!='' \"> and to_char(flowdate,'yyyy')=to_char(sysdate,'yyyy')</if>"+
+            "<if test=\" time1!=null and time1!='' \"> and to_char(biddate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
+            "<if test=\" time2!=null and time2!='' \"> and biddate &gt;= trunc(next_day(sysdate-8,1)+1) and biddate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
+            "<if test=\" time3!=null and time3!='' \"> and to_char(biddate,'yyyy-mm')=to_char(sysdate,'yyyy-mm')</if>"+
+            "<if test=\" time4!=null and time4!='' \"> and to_char(biddate,'yyyy')=to_char(sysdate,'yyyy')</if>"+
             "</script>")
     List<Map> getSubmit(Map map);
 

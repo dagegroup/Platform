@@ -1,5 +1,7 @@
 package com.dage.service;
 
+import org.apache.ibatis.annotations.Select;
+
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +61,19 @@ public interface UserService {
      * @return
      */
     int withdraw(Map map);
+
+    /**
+     * 根据session里 获取的用户姓名 查询用户的信息
+     * @param userName
+     * @return
+     */
+    Map getUserByUserName(String userName);
+    /**
+     * 根据用户id查询用户的个人信息
+     * @param map
+     * @return
+     */
+    List<Map> getUser(Map map);
 
 
     /**

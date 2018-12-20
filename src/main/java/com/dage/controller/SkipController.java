@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import java.util.Map;
 
 /**
@@ -21,13 +23,22 @@ public class SkipController {
     @Autowired
     private UserService userService;
 
+
     /**
      * 跳转到个人中心首页
      * 用户充值之后添加用户流水表和更新用户账户表
      * @return
      */
     @RequestMapping("/toPersonIndex")
-    public String toPersonIndex(@RequestParam Map map){
+    public String toPersonIndex(@RequestParam Map map,HttpSession session){
+        //获取session的userName
+        String userName=(String)session.getAttribute("userName");
+        //根据userName 查找用户id
+        Map user=userService.getUserByUserName(userName);
+        String userid=(String) user.get("USERID");
+        //将userid放入session 便于使用
+        session.setAttribute("userid",userid);
+
         if (map.size()>0){
             /*Object o = map.get("bankCardNo");
             System.out.println(o);
@@ -49,10 +60,11 @@ public class SkipController {
      * @return
      */
     @RequestMapping("/Recharge")
-    public String toRecharge(@RequestParam Map map){
+    public String toRecharge(@RequestParam Map map,HttpSession session){
         if (map.size()>0){
             //System.out.println(map.get("money"));
-            String userid= "U201812071032";
+            String userid=(String)session.getAttribute("session");
+
             map.put("userId",userid);
             System.out.println("手续费"+map.get("procedure"));
 
