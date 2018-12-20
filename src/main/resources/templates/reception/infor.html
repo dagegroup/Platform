@@ -385,14 +385,13 @@
                           "       <span class='f30 c-333'>"+data[0].BIDDEADLINE+"</span>个月</li>\n" +
                           "   <li><span class='c-888'>借款编号：</span>"+data[0].BIDID+"</li>\n" +
                           "   <li><span class='c-888'>发标日期： </span>"+data[0].BIDISSUEDATE+"</li>\n" +
-                          "   <li><span class='c-888'>保障方式：</span>100%本息垫付</li>\n" +
+                          /*"   <li><span class='c-888'>保障方式：</span>100%本息垫付</li>\n" +*/
                           "   <li><span class='c-888'>还款方式：</span>"+data[0].BIDREPAYMENTMETHOD+"</li>\n" +
-                          "   <li><span class='c-888'>需还本息：</span>"+data[0].BIDMONEY+" </li>\n" +
                           "   <li><span class='c-888'>借款用途：</span>"+data[0].BIDDESC+"</li>" +
                           "   <li class='colspan'> <span class='c-888 fl'>投标进度:</span>\n" +
                           " <div class='progress-bar fl'> <span style='width:"+data[0].BIDSCHEDULE+"  '></span> </div>\n" +
                           "       <span class='c-green'>"+data[0].BIDSCHEDULE+"</span> </li>\n" +
-                          "   <li> <span class='c-888'>投资范围：</span> <span id='account_range'> 50元~不限 </span> </li>" +
+                          /*"   <li> <span class='c-888'>投资范围：</span> <span id='account_range'> 50元~不限 </span> </li>" +*/
                           "</ul></div>" +
                           "<div class='mod-right mod-status'>\n" +
                           "   <div class='inner'>\n" +
@@ -422,7 +421,7 @@
                 type:"post",
                 dataType:"json",
                 success: function(data){
-                    /*alert(JSON.stringify(data));*/
+                    //alert(JSON.stringify(data));
                     $('#borrowermessage').empty();
                     var str="";
                     if(data!=null){
@@ -439,10 +438,10 @@
                               "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> "+data[0].REALNAME+","+data[0].ACADEMIC+"学历，"+data[0].MARRIAGE+"，现居住于"+data[0].ADDRESS+"。</p>\n" +
                               "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 借款人工作情况：</p>\n" +
                               "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 赵女士为成都某服装店老板，月收入"+data[0].INCOME+"元，收入居住稳定。</p>\n" +
-                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 借款人资产介绍：</p>\n" +
+                              /*"                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 借款人资产介绍：</p>\n" +
                               "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 赵女士有<span>1</span>辆全款长安福特福克斯汽车。</p>\n" +
                               "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 详细资金用途：</p>\n" +
-                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 借款人申请汽车质押贷款，贷款用于资金周转。</p>" +
+                              "                 <p class='MsoNormal' style='margin-left:0cm;text-indent:0cm;'> 借款人申请汽车质押贷款，贷款用于资金周转。</p>" +*/
                               "             </div>" +
                               "         </dd>" +
                               "     </dl>" +
@@ -461,12 +460,12 @@
                               "                     <li><i class='icon icon-9'></i><br>收入证明</li>" +
                               "                     <li><i class='icon icon-10'></i><br>征信报告</li>" +
                               "                     <li><i class='icon icon-11'></i><br>亲属调查</li>" +
-                              "                     <li><i class='icon icon-19'></i><br>行驶证</li>" +
+                              /*"                     <li><i class='icon icon-19'></i><br>行驶证</li>" +
                               "                     <li><i class='icon icon-20'></i><br>车辆登记证</li>" +
                               "                     <li><i class='icon icon-21'></i><br>车辆登记发票</li>" +
                               "                     <li><i class='icon icon-22'></i><br>车辆交强险</li>" +
                               "                     <li><i class='icon icon-23'></i><br>车辆商业保险</li>" +
-                              "                     <li><i class='icon icon-24'></i><br>车辆评估认证</li>" +
+                              "                     <li><i class='icon icon-24'></i><br>车辆评估认证</li>" +*/
                               "                 </ul>" +
                               "             </div>" +
                               "         </dd>" +
@@ -493,7 +492,7 @@
                               "                 </ul>" +
                               "             </div>" +
                               "             <div class='conclusion f16'> 结论：经风控部综合评估， " +
-                              "                   <span class='c-orange'>同意放款40,000.00元；</span> " +
+                              "                   <span class='c-orange'>同意放款！</span> " +
                               "                   <i class='icon icon-status icon-status1'></i> " +
                               "             </div>" +
                               "         </dd>" +
@@ -623,7 +622,6 @@
                 var _self = this;
                 _self.loading = true;
                 var formData =this.editForm;
-                //alert(formData);
                 //alert(JSON.stringify(formData));
                 axios.post("/infor/bidSubmit",formData).then(function(response){
                     // console.log(response.data);
@@ -631,6 +629,10 @@
                     // self.total=response.data.total;
                     if(response.data>0){
                         _self.editFormVisible = false;
+                        _self.$message({
+                            message:  '恭喜您，投资成功！',
+                            type: 'success'
+                        });
                     }else {
                         _self.$message({
                             message:  '账户余额不足',
@@ -649,13 +651,13 @@
                     if (response.data==1){
                         _self.isDisabled=false;
                         _self.$message({
-                            message:  '可以投资',
+                            message:  '亲，点击提交按钮就可以投资啦^_^',
                             type: 'success'
                         });
                     }else{
                         _self.isDisabled=true;
                         _self.$message({
-                            message:  '可投金额不足',
+                            message:  '输入金额不在投资范围内，请重新输入',
                             type: 'error'
                         });
                     }
