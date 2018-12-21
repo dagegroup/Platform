@@ -68,8 +68,8 @@
       <div class="fn-left logo"> <a class="" href="/goto/index"> <img src="../foreground/images/logo.png" title=""> </a> </div>
       <ul class="top-nav fn-clear">
         <li > <a href="/goto/index">首页</a> </li>
-        <li class="on"> <a href="/goto/list" class="">我要投资</a> </li>
-        <li> <a href="/goto/rent">我要融资</a> </li>
+        <li > <a href="/goto/list" class="">我要投资</a> </li>
+        <li class="on"> <a href="/goto/rent">我要融资</a> </li>
         <li> <a href="/goto/helpInfo">安全保障</a> </li>
         <li class="top-nav-safe"> <a href="/user/toOwn">我的账户</a> </li>
         <li> <a href="/goto/comInfo">关于我们</a> </li>
@@ -165,7 +165,9 @@
                 </center>
           </el-form>
               <el-dialog title="查看费用详情" :visible.sync="dataFormVisible" :close-on-click-modal="false">
-
+                <div>
+                      <span></span>
+                </div>
                   <div slot="footer" class="dialog-footer">
                        <el-button @click.native="dataFormVisible = false">取消</el-button>
                   </div>
