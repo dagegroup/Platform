@@ -63,8 +63,7 @@ public class RegisterController {
         if (list!=null&&list.size()>0){
             map.put("msg",1);
         }else{
-            //int execute = IndustrySMS.execute(phone);
-            int execute=111111;
+            int execute = IndustrySMS.execute(phone);
             if(execute<=0){
                 map.put("msg",3);
             }else {
