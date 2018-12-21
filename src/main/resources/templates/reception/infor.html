@@ -639,9 +639,12 @@
                             type: 'error'
                         });
                     }
-                    _self.loadingData();//重新加载数据
+                    setTimeout(function () { //间隔刷新
+                    window.location.href=window.location.href;//保存后刷新页面
+                    },100)
                 })
                 console.info(this.editForm);
+
             },
             //判断可投金额事件
             canMoney:function () {
