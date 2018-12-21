@@ -87,7 +87,7 @@ public class RepayServiceImpl implements RepayService {
         }finally {
             sqlSession.close();
         }
-        return 1;
+        return 0;
     }
 
     @Override

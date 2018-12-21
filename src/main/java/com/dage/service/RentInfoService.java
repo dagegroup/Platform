@@ -12,4 +12,5 @@ public interface RentInfoService {
     int add(Map map);
     int addRentDetialInfo(Map map);
     int addRentInfo2(Map map);
+    Map getInfo(String userid);
 }

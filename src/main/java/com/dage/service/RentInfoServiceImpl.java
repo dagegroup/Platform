@@ -14,8 +14,14 @@ import java.util.Map;
  */
 @Service
 public class RentInfoServiceImpl implements RentInfoService {
+
+
     @Autowired
     private RentInfoDao rentInfoDao;
+    @Override
+    public Map getInfo(String userid) {
+        return rentInfoDao.getInfo(userid);
+    }
 
     @Override
     public int addRentInfo2(Map map) {

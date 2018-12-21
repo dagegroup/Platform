@@ -3,6 +3,7 @@ package com.dage.service;
 import com.dage.dao.BidInforDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.Map;
  * createTime:2018-12-14 11:07
  */
 @Service
+@Transactional//事务
 public class BidInforServiceImpl implements BidInforService {
 
     @Autowired
@@ -107,7 +109,11 @@ public class BidInforServiceImpl implements BidInforService {
         //变动后可用余额调用上面的AVAILABLEBALANCE即可
         /*更新账户表数据结束*/
 
+        /*更新标信息表开始*/
+        map.put("BIDCURRENTAMOUNT",bidamount);//将前台的投标金额赋给BIDCURRENTAMOUNT加入到map
+        /*更新标信息表结束*/
         if (oldavailablebalance>=bidamount){
+            bidInforDao.changeBidInfo(map);//更新标信息表可投金额
             bidInforDao.userAccount(map);//更新账户表
             bidInforDao.accountRun(map);//向账户流水表里插入数据
             return bidInforDao.bidSubmit(map);//返回值为成功的行数
@@ -124,7 +130,9 @@ public class BidInforServiceImpl implements BidInforService {
         double canmoney = bidInforDao.canMoney(map);//从数据库获取可投金额
         double bidamount = Double.valueOf(map.get("BIDAMOUNT").toString());//从前台得到输入投标金额
         if (canmoney>=bidamount){
-            return 1;
+            if (bidamount>0){
+                return 1;
+            }
         }
         return 0;
     }

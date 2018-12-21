@@ -1,7 +1,6 @@
 package com.dage.dao;
 
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
@@ -23,11 +22,16 @@ public interface BidInforDao {
      *
      * @return
      */
-    @Select(value = "select bidid,userid,auditid,bidproject,to_char(bidamount, '9999990.00') as bidamount,to_char(bidcurrentamount, '9999990.00') as bidcurrentamount," +
-            "bidrepaymentmethod,bidrate,100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline," +
-            "to_char(bidissuedate,'yyyy-MM-dd') as bidissuedate,biddeadday,to_char(bidapplydate,'yyyy-MM-dd') as bidapplydate," +
-            "to_char(biddeaddate,'yyyy-MM-dd') as biddeaddate,biddesc,bidtype,bidstate,bidmoney," +
-            "round(to_number(biddeaddate - sysdate)) as bidendday,to_char((bidamount - bidcurrentamount), '9999990.00') as bidendmoney" +
+    @Select(value = "select bidid,userid,auditid,bidproject," +
+            "to_char(bidamount, '9999990.00') as bidamount,to_char(bidcurrentamount, '9999990.00') as bidcurrentamount," +
+            "bidrepaymentmethod,bidrate," +
+            "100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline," +
+            "to_char(bidissuedate,'yyyy-MM-dd') as bidissuedate,biddeadday," +
+            "to_char(bidapplydate,'yyyy-MM-dd') as bidapplydate," +
+            "to_char(biddeaddate,'yyyy-MM-dd') as biddeaddate," +
+            "biddesc,bidtype,bidstate," +
+            "round(to_number(biddeaddate - sysdate)) as bidendday," +
+            "to_char((bidamount - bidcurrentamount), '9999990.00') as bidendmoney" +
             " from bid_info where bidid=#{bidid}")
     List<Map> getList(Map map);
 
@@ -38,9 +42,9 @@ public interface BidInforDao {
      */
     @Select("<script> " +
             "select r.realname,r.academic,r.marriage,r.address,r.income " +
-            "from tb_user_info u  " +
-            "left join tb_realname_certification r on u.realnameid=r.realnameid  " +
-            "where u.bidid=#{bidid} " +
+            " from tb_user_info u  " +
+            " left join tb_realname_certification r on u.realnameid=r.realnameid  " +
+            " where u.bidid=#{bidid} " +
             "</script>")
     List<Map> getUserList(Map map);
 
@@ -153,5 +157,13 @@ public interface BidInforDao {
      */
     @Select("select accountid from user_account where userid=#{USERID} ")
     Map userAccountid(Map map);
+
+    /**
+     * 根据bidid更新标信息表中的已投标金额bidcurrentamount
+     * @param map
+     * @return
+     */
+    @Update("update bid_info set bidcurrentamount=bidcurrentamount+#{BIDCURRENTAMOUNT} where bidid=#{BIDID} ")
+    int changeBidInfo(Map map);
 
 }

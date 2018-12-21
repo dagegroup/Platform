@@ -6,6 +6,7 @@
 <title>p2p网贷平台</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
+  <script type="text/javascript" src="/easyui/jquery.min.js"></script>
 <link href="../foreground/css/common.css" rel="stylesheet" />
 <link href="../foreground/css/index.css" rel="stylesheet" type="text/css">
 <link href="../foreground/css/detail.css" rel="stylesheet" type="text/css">
@@ -36,10 +37,10 @@
   <script type="text/javascript" src="../js/vue.js"></script>
   <script type="text/javascript" src="../js/axios.min.js"></script>
   <!-- 引入样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="/elementui/elementui.css">
   <!-- 引入组件库 -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
+  <script src="/elementui/elementui.js"></script>
+
   <script type="text/javascript" src="../foreground/script/common.js"></script>
   <style type="text/css">
     .wrap{
@@ -92,8 +93,8 @@
       <div class="fn-left logo"> <a class="" href="/goto/index"> <img src="../foreground/images/logo.png" title=""> </a> </div>
       <ul class="top-nav fn-clear">
         <li > <a href="/goto/index">首页</a> </li>
-        <li class="on"> <a href="/goto/list" class="">我要投资</a> </li>
-        <li> <a href="/goto/rent">我要融资</a> </li>
+        <li > <a href="/goto/list" class="">我要投资</a> </li>
+        <li class="on"> <a href="/goto/rent">我要融资</a> </li>
         <li> <a href="/goto/helpInfo">安全保障</a> </li>
         <li class="top-nav-safe"> <a href="/user/toOwn">我的账户</a> </li>
         <li> <a href="/goto/comInfo">关于我们</a> </li>
@@ -109,17 +110,14 @@
             <span class="icontit icontit13 png"></span>上传资料
           </h2>
           <div class="innerbox">
-            <div class="uploadFileNote">
-              温馨提示：1、图片文件要求大小1M内，JPG、JPEG、PNG格式； 2、您可以将资料拍照或扫描后上传，要求图片清晰。<a href="javascript:;">查看上传帮助</a>
-            </div>
               <div id="tableView">
                 <el-table
                         :header-cell-style="{background:'#3A9FFC'}"
                         :data="tableData"
                         v-loading.body="loading"
                         border
-                        style="width:100%">
-
+                        style="width:100%"
+               >
                   <el-table-column
                             v-if="false"
                           align="center"
@@ -128,7 +126,6 @@
                           width="180">
                   </el-table-column>
                   <el-table-column
-
                           align="center"
                           prop="contentType"
                           label="资料类型"
@@ -138,34 +135,32 @@
                           align="center"
                           prop="content"
                           label="说明"
-                          width="200">
+                          width="450">
                   </el-table-column>
                   <el-table-column
                           align="center"
                           prop="picpath"
                           label="图片"
-                          width="400">
+                          width="100">
                     <template scope="scope">
-                       <el-popover placement="right" title="身份证正面" trigger="hover">
-
-                       <img :src="path+scope.row.PICPATH" width="270" height="170"/>
-
-                       <a :href="'/rent/downloadPic?fileName='+scope.row.picpath"><img slot="reference" :src="path+scope.row.picpath" height="100" min-width="70"></a>
-                       </el-popover>
-                      <a :href="'/rent/downloadPic?fileName='+scope.row.picpath"><img slot="reference" :src="path+scope.row.picpath" height="100" min-width="70"></a>
+                      <a :href="'/rent/downloadPic?fileName='+scope.row.picpath"><img slot="reference" :src="path+scope.row.picpath" height="80" min-width="70"></a>
                     </template>
                   </el-table-column>
                   <el-table-column
-                          label="操作">
+                          align="center"
+                          label="操作"
+                          width="269"
+                  >
                     <template scope="scope">
 
                       <el-upload
                               class="upload-demo"
-                              ref="upload"
+                              :ref="'upload'+scope.row.id"
                               action="/rent/upLoadPic"
                               :on-preview="handlePreview"
                               :on-remove="handleRemove"
                               :file-list="fileList"
+                              limit="1"
                               :on-success="uploadSuc"
                               :auto-upload="false">
                         <el-button slot="trigger" size="small" type="primary">选取图片</el-button>
@@ -175,15 +170,15 @@
                     </template>
                   </el-table-column>
                 </el-table>
+                <center>
+                <el-button :plain="true" type="primary" size="small"  @click="toback">上一步</el-button>
+                <el-button :plain="true" type="primary" size="small"  @click="commitInfo">下一步，填写详细信息</el-button>
+                </center>
               </div>
-
+            <p class="loanApplicationNote">
+              <span>宜人贷平台会严格保障您的隐私安全，请放心填写</span>
+            </p>
         </div>
-        </div>
-        <p class="loanApplicationNote">
-          <span>宜人贷平台会严格保障您的隐私安全，请放心填写</span>
-        </p>
-        <div class="loanApplicationBtn">
-          <input id="errorInfo" type="hidden" value=""> <a href="/goto/rentInfo" class="input_btn btn_normal mr">上一步</a> <input class="input_btn btn_blue mr" value="下一步，确认借款信息">
         </div>
 </div>
     <!-- 借款人 左侧小菜单  -->
@@ -213,30 +208,31 @@
     var tableView = new Vue({
         el: '#tableView',
         data: {
+            item:0,
             path:'/rent/show?fileName=',
             loading:false,
             fileList:[],
             tableData:[
                 {
-                    id:1,
+                    id:0,
                     contentType:"身份证正面",
                     content:"正面一张",
                     picpath:""
 
                 },{
-                id:2,
+                id:1,
                 contentType:"身份证反面",
                 content:"反面一张",
                 picpath:""
 
             },{
-                id:3,
+                id:2,
                 contentType:"最近连续三个月工资流水",
                 content:"1、近3个月工资存折流水状态。2、或工资发放银行开具的近3个月账户明细对账单。3、或近3个月工资卡网银截图。",
                 picpath:""
 
             },{
-                id:4,
+                id:3,
                 contentType:"个人信用报告",
                 content:"1、当地人民银行开具的纸质信用报告。\n" +
                 "\n" +
@@ -249,22 +245,65 @@
         },
         methods:{
             submitUpload:function(row) {
-                alert(row.id)
-                this.$refs.upload.submit();
-                alert(2222)
+                var self = this;
+                //alert(row.id)
+                this.item=row.id;
+                self.$refs['upload'+row.id].submit();
+                //alert(2222)
             },
             handleRemove:function(file, fileList) {
-                alert(111)
+               // alert(111)
                 console.log(file, fileList);
             },
             handlePreview:function(file) {
-                alert(111);
+               // alert(111);
+            },
+            loadingData:function() {
+                var _self = this;
+                _self.loading = true;
+                var self = this;
+                setTimeout(function(){
+                    console.info("加载数据成功");
+                    _self.loading = false;
+                },300);
             },
             downLoad:function(row){
                 location.href="/rent/downloadPic?fileName="+row.picpath
-            },uploadSuc:function (response,file,fileList) {
-                alert(response.data)
-                this.tableData[1].picpath=response.data;
+            },
+            uploadSuc:function (response,file,fileList) {
+               // alert(response)
+                this.tableData[this.item].picpath=response;
+                //alert(this.tableData[this.item].picpath)
+            },
+            commitInfo:function(){
+                var _self = this;
+                _self.loading = true;
+                var formData = this.tableData;
+                var  pic1=formData[0].picpath;
+                var pic2=formData[1].picpath;
+                var pic3=formData[2].picpath;
+                var pic4=formData[3].picpath;
+                // alert(JSON.stringify(formData));
+                var goUrl = '/rent/rentInfo3';
+                //alert(goUrl);
+                //alert(JSON.stringify(formData));
+                axios.post(goUrl,{pic1:pic1,pic2:pic2,pic3:pic3,pic4:pic4}).then(function (response) {
+                    // console.log(response.data);
+                    // alert(222);
+                    // self.total=response.data.total;
+                    if (response.data > 0) {
+                        location.href="/user/toOwn"
+                    } else {
+                        _self.$message({
+                            message: '图片都需要上传,请确认图片是否都已上传',
+                            type: 'error'
+                        });
+                        _self.loadingData();
+                    }
+                })
+            },
+            toback:function(){
+                location.href="/goto/rentInfo2"
             }
         }
     })

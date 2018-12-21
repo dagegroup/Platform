@@ -146,9 +146,35 @@ public interface UserDao {
             " where rownum =1)+#{money} from dual),sysdate,'手续费',null,123);")
     int system(Map map);
 
+    /**
+     * 查询账户id
+     * @param userid
+     * @return
+     */
     @Select("select userid from user_account where userid=#{userid}")
     String getUserbyUserid(String userid);
 
+    /**
+     * 查询用户详情userid
+     * @param userid
+     * @return
+     */
+    @Select("select userid from tb_realname_certification where userid=#{userid}")
+    String getuesrid(String userid);
+
+    /**
+     * 向账户表中插入userid
+     * @param userid
+     * @return
+     */
     @Insert("insert into user_account(accountid,userid) values('A'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid})")
     int adduserid(String userid);
+
+    /**
+     * 向用户详情中插入userid
+     * @param userid
+     * @return
+     */
+    @Select("insert into tb_realname_certification(userid) values(#{userid}) ")
+    int adduserid1(String userid);
 }
