@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>流标详情</title>
+    <title>借款审核</title>
     <!-- 引入样式 -->
     <script type="text/javascript" src="/js/vue.js"></script>
     <script type="text/javascript" src="/js/axios.min.js"></script>
@@ -79,17 +79,10 @@
                     width="70">
             </el-table-column>
             <el-table-column
-                    prop="SUBMITSTATE"
-                    label="年利率"
-                    v-if="false"
-                    align="center"
-                    width="70">
-            </el-table-column>
-            <el-table-column
                     prop="BIDREPAYMENTMETHOD"
                     label="还款方式"
                     align="center"
-                    width="180">
+                    width="160">
             </el-table-column>
             <el-table-column
                     prop="BIDPROJECT"
@@ -102,14 +95,20 @@
                     prop="BIDCURRENTAMOUNT"
                     align="center"
                     label="已投标金额"
-                    width="120">
+                    width="110">
+            </el-table-column>
+            <el-table-column
+                    prop="BIDSTATE"
+                    align="center"
+                    label="审核状态"
+                    width="100">
             </el-table-column>
             <el-table-column
                     label="操作"
-                    align="center">
+                    align="center"
+                    width="120">
                 <template scope="scope">
-                    <el-button :plain="true" type="danger" v-if="scope.row.SUBMITSTATE=='已投标'" size="small" icon="edit" @click="editClick(scope.row)">未回款详情</el-button>
-                    <el-button :plain="true" type="success" v-if="scope.row.SUBMITSTATE=='已回款'" size="small" icon="edit" @click="editClick(scope.row)">已回款详情</el-button>
+                    <el-button :plain="true" type="success" size="small" icon="edit" @click="editClick(scope.row)">满标详情</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -132,9 +131,9 @@
     </el-row>
 
     <!--借款详情界面-->
-    <el-dialog title="流标详情" :visible.sync="editFormVisible" :close-on-click-modal="false">
-        <el-form-item label="借款人" v-if="false">
-            <el-input v-model="show" placeholder="借款人"></el-input>
+    <el-dialog title="借款详情" :visible.sync="editFormVisible" :close-on-click-modal="false">
+        <el-form-item label="借款标号" prop="BIDID">
+            <el-input v-model="BIDID" auto-complete="off" :readonly="true"></el-input>
         </el-form-item>
         <el-table
                 :data="submitData"
@@ -163,25 +162,18 @@
                     prop="BIDAMOUNT"
                     label="投标金额(元)"
                     align="center"
-                    width="80">
+                    width="110">
             </el-table-column>
             <el-table-column
                     prop="BIDDATE"
                     align="center"
                     label="投资日期"
-                    width="110">
-            </el-table-column>
-            <el-table-column
-                    prop="BIDSTATE"
-                    align="center"
-                    label="状态"
-                    width="80">
+                    width="150">
             </el-table-column>
         </el-table>
 
         <div slot="footer" class="dialog-footer">
             <el-button @click.native="editFormVisible = false">取消</el-button>
-            <el-button type="primary" v-if="show =='已投标'" @click.native="editSubmit" :loading="editLoading">操作</el-button>
         </div>
     </el-dialog>
 
@@ -213,9 +205,9 @@
             currentPage:1,
             //分页大小
             pageSize:10,
-            show:'',
             //总记录数
             total:800,
+            BIDID:'',
             //编辑界面是否显示
             editFormVisible: false,
             editLoading: false,
@@ -234,7 +226,7 @@
             var self = this;
             var start =this.currentPage;
             var end =this.pageSize;
-            axios.post('/failure/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
+            axios.post('/full/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
                 // console.log(response.data);
                 //alert(response.data.total);
                 self.total=response.data.page.total;
@@ -242,91 +234,58 @@
                 // self.multipleSelection=response.data.data;
             })
         },
-        methods: {
+        methods:{
             //表格重新加载数据
-            loadingData: function () {
+            loadingData:function() {
                 var _self = this;
                 _self.loading = true;
-                var start = this.currentPage;
-                var end = this.pageSize;
-                axios.post('/failure/page', {
-                    'start': start,
-                    'end': end,
-                    'USERID': this.searchForm.USERID,
-                    'BIDID': this.searchForm.BIDID,
-                    'REALNAME': this.searchForm.REALNAME
-                }).then(function (response) {
+                var start =this.currentPage;
+                var end =this.pageSize;
+                axios.post('/full/page',{'start':start,'end':end,'USERID':this.searchForm.USERID,'BIDID':this.searchForm.BIDID,'REALNAME':this.searchForm.REALNAME}).then(function(response){
                     // console.log(response.data);
                     //alert(response.data.total);
-                    _self.total = response.data.page.total;
+                    _self.total=response.data.page.total;
                     _self.tableData = response.data.page.list;
                     // self.multipleSelection=response.data.data;
                 })
                 console.log(_self.currentPage);
-                setTimeout(function () {
+                setTimeout(function(){
                     console.info("加载数据成功");
                     _self.loading = false;
-                }, 300);
+                },300);
             },
             //表格编辑事件
-            editClick: function (row) {
+            editClick:function(row) {
                 var _self = this;
                 //_self.loading = true;
-                axios.post('/failure/one?bidid=' + row.BIDID).then(function (response) {
-                    // alert(JSON.stringify(response.data.data))
+                this.BIDID=row.BIDID;
+                axios.post('/submit/one?bidid='+row.BIDID).then(function(response){
+                   // alert(JSON.stringify(response.data.data))
                     _self.submitData = response.data.data;
-                    for (var i = 0; i < _self.submitData.length; i++) {
-                        _self.show = _self.submitData[0].BIDSTATE;
-
-                    }
                 })
-                _self.editFormVisible = true;
+                _self.editFormVisible=true;
             },
-
             //表格查询事件
-            searchClick: function () {
+            searchClick:function() {
                 var self = this;
                 self.loadingData();//重新加载数据
             },
             //分页大小修改事件
-            pageSizeChange: function (val) {
-                console.log('每页 ' + val + ' 条');
+            pageSizeChange:function(val) {
+                console.log('每页 ' + val +' 条');
                 this.pageSize = val;
                 var _self = this;
                 _self.loadingData();//重新加载数据
             },
             //当前页修改事件
-            currentPageChange: function (val) {
+            currentPageChange:function(val) {
                 this.currentPage = val;
                 console.log('当前页: ' + val);
                 var _self = this;
                 _self.loadingData();//重新加载数据
-            },
-
-            //保存点击事件
-            editSubmit: function () {
-                var _self = this;
-                _self.loading = true;
-                var goUrl = '/failure/update';
-                var bidid=_self.submitData[0].BIDID
-                alert(bidid);
-                axios.post(goUrl,{bidid:bidid}).then(function (response) {
-                    // self.total=response.data.total;
-                    if (response.data > 0) {
-                        alert(response.data);
-                        _self.editFormVisible = false;
-                        _self.loadingData();//重新加载数据
-                    } else {
-                        _self.$message({
-                            message: '操作失败',
-                            type: 'error'
-                        });
-                        _self.loadingData();//重新加载数据
-                    }
-                })
-                console.info(this.editForm);
-            },
+            }
         }
+
     })
 </script>
 

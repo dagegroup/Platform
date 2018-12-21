@@ -93,7 +93,15 @@ public interface UserDao {
      * @param userId
      * @return
      */
-    @Select("select * from bid_repay_info where userid=#{userId} ")
+    @Select("<script>select repayid,userid,bidrepayamount,to_char(biderpaydate,'yyyy-mm-dd') biderpaydate," +
+            " to_char(biderpaydeaddate,'yyyy-mm-dd') biderpaydeaddate,bidrepayState,bidrepaynumber" +
+            " from bid_repay_info where userid=#{userId}" +
+            " <if test=\" type!=null and type!=''\"> and bidrepayState=#{type}</if>" +
+            " <if test=\" time1!=null and time1!='' \"> and to_char(bidrepaydate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
+            " <if test=\" time2!=null and time2!='' \"> and bidrepaydate &gt;= trunc(next_day(sysdate-8,1)+1) and bidrepaydate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
+            " <if test=\" time3!=null and time3!='' \"> and to_char(bidrepaydate,'yyyy-mm')=to_char(sysdate,'yyyy-mm')</if>"+
+            " <if test=\" time4!=null and time4!='' \"> and to_char(bidrepaydate,'yyyy')=to_char(sysdate,'yyyy')</if>"+
+            " </script>")
     List<Map> getRepay(Map userId);
 
 
@@ -138,9 +146,35 @@ public interface UserDao {
             " where rownum =1)+#{money} from dual),sysdate,'手续费',null,123);")
     int system(Map map);
 
+    /**
+     * 查询账户id
+     * @param userid
+     * @return
+     */
     @Select("select userid from user_account where userid=#{userid}")
     String getUserbyUserid(String userid);
 
+    /**
+     * 查询用户详情userid
+     * @param userid
+     * @return
+     */
+    @Select("select userid from tb_realname_certification where userid=#{userid}")
+    String getuesrid(String userid);
+
+    /**
+     * 向账户表中插入userid
+     * @param userid
+     * @return
+     */
     @Insert("insert into user_account(accountid,userid) values('A'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid})")
     int adduserid(String userid);
+
+    /**
+     * 向用户详情中插入userid
+     * @param userid
+     * @return
+     */
+    @Select("insert into tb_realname_certification(userid) values(#{userid}) ")
+    int adduserid1(String userid);
 }

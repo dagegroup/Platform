@@ -36,7 +36,7 @@ public interface UserService {
 
     /**
      * 根据用户编号查询用户还款计划
-     * @param userId
+     * @param map
      * @return
      */
     List<Map> getRepay(Map map);
@@ -82,7 +82,33 @@ public interface UserService {
      */
     Map getByuserName(String telephone, String password);
 
+    /**
+     * 查询账户中是否有userid
+     * @param userid
+     * @return
+     */
+
     String getUserid(String userid);
 
+    /**
+     * 添加账户的userid
+     * @param userid
+     * @return
+     */
+
     int addUserid(String userid);
+
+    /**
+     * 查询用户信息详情表是否有userid
+     * @param userid
+     * @return
+     */
+    String getuesrid(String userid);
+
+    /**
+     * 向用户详细信息中插入userid
+     * @param userid
+     * @return
+     */
+    int adduserid1(String userid);
 }

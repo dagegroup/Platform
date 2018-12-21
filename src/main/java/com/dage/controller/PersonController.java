@@ -121,8 +121,17 @@ public class PersonController {
      */
     @ResponseBody
     @RequestMapping("/repay")
-    public List<Map> getRepay(Map map){
-        return userService.getRepay(map);
+    public List<Map> getRepay(@RequestParam Map map,HttpSession session){
+        if (map.get("type")!=null&&map.get("type")!=""){
+            if (map.get("type").equals("全部")){
+                map.put("type",null);
+            }
+        }
+        Map map1= putTime(map);
+        // 根据session的userid 查询 为map 加入session里的 userid
+        //String userid=(String)session.getAttribute("userid");
+        //map1.put("userId",userid);
+        return userService.getRepay(map1);
     }
 
     /**

@@ -74,8 +74,8 @@
       <div class="fn-left logo"> <a class="" href="/goto/index"> <img src="../foreground/images/logo.png" title=""> </a> </div>
       <ul class="top-nav fn-clear">
         <li > <a href="/goto/index">首页</a> </li>
-        <li class="on"> <a href="/goto/list" class="">我要投资</a> </li>
-        <li> <a href="/goto/rent">我要融资</a> </li>
+        <li > <a href="/goto/list" class="">我要投资</a> </li>
+        <li class="on"> <a href="/goto/rent">我要融资</a> </li>
         <li> <a href="/goto/helpInfo">安全保障</a> </li>
         <li class="top-nav-safe"> <a href="/user/toOwn">我的账户</a> </li>
         <li> <a href="/goto/comInfo">关于我们</a> </li>
@@ -94,12 +94,12 @@
             <el-row>
             <el-col :span="6" >
             <el-form-item label="真实姓名:">
-              <el-input v-model="dataForm.realName"   placeholder="请输入你的真实姓名" style="width:150px"></el-input>
+              <el-input v-model="dataForm.REALNAME"   placeholder="请输入你的真实姓名" style="width:150px"></el-input>
             </el-form-item>
             </el-col>
             <el-col :span="6">
                 <el-form-item label="性别:">
-                    <el-select v-model="dataForm.gender" placeholder="性别" style="width:150px">
+                    <el-select v-model="dataForm.GENDER" placeholder="性别" style="width:150px">
                         <el-option label="请选择" value=""></el-option>
                         <el-option label="男" value="男"></el-option>
                         <el-option label="女" value="女"></el-option>
@@ -111,7 +111,7 @@
                 <div class="block">
                     <el-cascader style="width:150px"
                             :options="options"
-                            v-model="dataForm.address"
+                            v-model="dataForm.ADDRESS"
                             @change="handleChange">
                     </el-cascader>
                 </div>
@@ -121,17 +121,17 @@
               <el-row>
             <el-col :span="6">
             <el-form-item label="邮箱:">
-              <el-input v-model="dataForm.email"   placeholder="请输入你的邮箱" style="width:150px"></el-input>
+              <el-input v-model="dataForm.EMAIL"   placeholder="请输入你的邮箱" style="width:150px"></el-input>
             </el-form-item>
             </el-col>
             <el-col :span="6">
             <el-form-item label="身份证号:">
-              <el-input v-model="dataForm.idcard"   placeholder="请输入你的身份证号" style="width:150px"></el-input>
+              <el-input v-model="dataForm.IDCARD"   placeholder="请输入你的身份证号" style="width:150px"></el-input>
             </el-form-item>
             </el-col>
             <el-col :span="6">
             <el-form-item label="最高学历:">
-              <el-select v-model="dataForm.maxdeucation" placeholder="学历" style="width:150px">
+              <el-select v-model="dataForm.MAXEDUCATION" placeholder="学历" style="width:150px">
                 <el-option label="全部" value="0"></el-option>
                 <el-option label="初中" value="初中"></el-option>
                 <el-option label="高中" value="高中"></el-option>
@@ -148,7 +148,7 @@
               <el-row>
             <el-col :span="6">
             <el-form-item label="住房:" >
-              <el-select v-model="dataForm.house" placeholder="房产" style="width:150px">
+              <el-select v-model="dataForm.HOUSE" placeholder="房产" style="width:150px">
               <el-option label="请选择" value=""></el-option>
               <el-option label="有房有房贷" value="有房有房贷"></el-option>
               <el-option label="有房无房贷" value="有房无房贷"></el-option>
@@ -158,7 +158,7 @@
             </el-col>
             <el-col :span="6">
             <el-form-item   label="婚姻状况:">
-              <el-select v-model="dataForm.marriage" placeholder="婚姻" style="width:150px">
+              <el-select v-model="dataForm.MARRIAGE" placeholder="婚姻" style="width:150px">
               <el-option label="请选择" value=""></el-option>
               <el-option label="未婚" value="未婚"></el-option>
               <el-option label="离异" value="离异"></el-option>
@@ -170,14 +170,14 @@
             </el-col>
             <el-col :span="6">
             <el-form-item label="年收入:">
-              <el-input v-model="dataForm.income"    style="width:150px"></el-input>
+              <el-input v-model="dataForm.INCOME"    style="width:150px"></el-input>
             </el-form-item>
             </el-col>
               </el-row>
               <el-row>
             <el-col :span="6">
             <el-form-item label="工作单位性质:" >
-              <el-select v-model="dataForm.jobtype" placeholder="工作单位性质" style="width:150px">
+              <el-select v-model="dataForm.JOBTYPE" placeholder="工作单位性质" style="width:150px">
               <el-option label="请选择" value=""></el-option>
               <el-option label="机关及事业单位" value="机关及事业单位"></el-option>
               <el-option label="国营" value="国营"></el-option>
@@ -189,29 +189,29 @@
             </el-col>
             <el-col :span="6">
             <el-form-item label="工作单位:">
-              <el-input v-model="dataForm.comname"    style="width:150px"></el-input>
+              <el-input v-model="dataForm.COMNAME"    style="width:150px"></el-input>
             </el-form-item>
             </el-col>
             <el-col :span="6" >
             <el-form-item label="本单位入职时间:">
-              <el-date-picker type="date" value-format="yyyy-MM-dd"  style="width:150px" placeholder="选择日期" v-model="dataForm.jointime"></el-date-picker>
+              <el-date-picker type="datetime" value-format="yyyy-MM-dd HH:mm:ss"  style="width:150px" placeholder="选择日期" v-model="dataForm.JOINTIME"></el-date-picker>
             </el-form-item>
             </el-col>
               </el-row>
               <el-row>
               <el-col :span="6"   class="ss">
               <el-form-item label="家庭联系人:">
-                  <el-input v-model="dataForm.familyname"    style="width:150px"></el-input>
+                  <el-input v-model="dataForm.FAMILYNAME"    style="width:150px"></el-input>
               </el-form-item>
               </el-col>
               <el-col :span="6"  class="ss">
               <el-form-item label="关系:">
-                  <el-input v-model="dataForm.familyrelationship"    style="width:150px"></el-input>
+                  <el-input v-model="dataForm.FAMILYRELATIONSHIP"    style="width:150px"></el-input>
               </el-form-item>
               </el-col>
               <el-col :span="6"  class="ss">
               <el-form-item label="电话:">
-                  <el-input v-model="dataForm.familytel"    style="width:150px"></el-input>
+                  <el-input v-model="dataForm.FAMILYTEL"    style="width:150px"></el-input>
               </el-form-item>
               </el-col>
                 <el-col :span="6"  class="ss">
@@ -219,7 +219,7 @@
                     <div class="block">
                       <el-cascader style="width:150px"
                                    :options="options"
-                                   v-model="dataForm.address"
+                                   v-model="dataForm.ADDRESS"
                                    @change="handleChange">
                       </el-cascader>
                     </div>
@@ -229,17 +229,17 @@
               <el-row>
               <el-col :span="6" class="ss">
                   <el-form-item label="工作联系人:">
-                      <el-input v-model="dataForm.jobcontactname"    style="width:150px"></el-input>
+                      <el-input v-model="dataForm.JOBCONTACTNAME"    style="width:150px"></el-input>
                   </el-form-item>
               </el-col>
               <el-col :span="6" class="ss">
                   <el-form-item label="关系:">
-                      <el-input v-model="dataForm.jobrelationship"    style="width:150px"></el-input>
+                      <el-input v-model="dataForm.JOBRELATIONSHIP"    style="width:150px"></el-input>
                   </el-form-item>
               </el-col>
               <el-col :span="6" class="ss">
                   <el-form-item label="电话:">
-                      <el-input v-model="dataForm.jobtel"    style="width:150px"></el-input>
+                      <el-input v-model="dataForm.JOBTEL"    style="width:150px"></el-input>
                   </el-form-item>
               </el-col>
                 <el-col :span="6" class="ss">
@@ -247,7 +247,7 @@
                     <div class="block">
                       <el-cascader style="width:150px"
                                    :options="options"
-                                   v-model="dataForm.address"
+                                   v-model="dataForm.ADDRESS"
                                    @change="handleChange">
                       </el-cascader>
                     </div>
@@ -257,17 +257,17 @@
               <el-row>
               <el-col :span="6" class="ss">
                   <el-form-item label="其他联系人:" >
-                      <el-input v-model="dataForm.othername"    style="width:150px"></el-input>
+                      <el-input v-model="dataForm.OTHERNAME"    style="width:150px"></el-input>
                   </el-form-item>
               </el-col>
               <el-col :span="6" class="ss">
                   <el-form-item label="关系:" >
-                      <el-input v-model="dataForm.otherrelationship"    style="width:150px"></el-input>
+                      <el-input v-model="dataForm.OTHERRELATIONSHIP"    style="width:150px"></el-input>
                   </el-form-item>
               </el-col>
               <el-col :span="6" class="ss">
                   <el-form-item label="电话:" >
-                      <el-input v-model="dataForm.othertel"    style="width: 150px"></el-input>
+                      <el-input v-model="dataForm.OTHERTEL"    style="width: 150px"></el-input>
                   </el-form-item>
               </el-col>
                 <el-col :span="6" class="ss">
@@ -275,7 +275,7 @@
                     <div class="block">
                       <el-cascader style="width:150px"
                                    :options="options"
-                                   v-model="dataForm.address"
+                                   v-model="dataForm.ADDRESS"
                                    @change="handleChange">
                       </el-cascader>
                     </div>
@@ -316,37 +316,44 @@
             loading: true,
             options: [],
             dataForm: {
-                realName:"",
-                gender:"",
-                address:[],
-                email:"",
-                idcard:"",
-                maxdeucation:"",
-                house:"",
-                marriage:"",
-                income:"",
-                jobtype:"",
-                comname:"",
-                jointime:"",
-                familyname:"",
-                familyrelationship:"",
-                familytel:"",
-                jobcontactname:"",
-                jobrelationship:"",
-                jobtel:"",
-                othername:"",
-                otherrelationship:"",
-                othertel:""
+                REALNAME:"",
+                GENDER:"",
+                ADDRESS:[],
+                EMAIL:"",
+                IDCARD:"",
+                MAXEDUCATION:"",
+                HOUSE:"",
+                MARRIAGE:"",
+                INCOME:"",
+                JOBTYPE:"",
+                COMNAME:"",
+                JOINTIME:"",
+                FAMILYNAME:"",
+                FAMILYRELATIONSHIP:"",
+                FAMILYTEL:"",
+                JOBCONTACTNAME:"",
+                JOBRELATIONSHIP:"",
+                JOBTEL:"",
+                OTHERNAME:"",
+                OTHERRELATIONSHIP:"",
+                OTHERTEL:""
             },
 
 
         },
         created:function(){
+            var _self=this;
             axios.post('/rent/cascade').then(function(response){
 
                 self.options=response.data;
 
+            });
+            axios.post('/rent/getInfo').then(function(response){
+                alert(response)
+                _self.dataForm=response.data;
+
             })
+
         },
         methods: {
             nextin: function () {
@@ -362,7 +369,7 @@
                     // alert(222);
                     // self.total=response.data.total;
                     if (response.data > 0) {
-                        location.href="/goto/rentInfo3"
+                        location.href="/goto/rentInfo2"
                     } else {
                         _self.$message({
                             message: '操作失败',
