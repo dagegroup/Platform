@@ -36,7 +36,7 @@ public interface UserService {
 
     /**
      * 根据用户编号查询用户还款计划
-     * @param userId
+     * @param map
      * @return
      */
     List<Map> getRepay(Map map);

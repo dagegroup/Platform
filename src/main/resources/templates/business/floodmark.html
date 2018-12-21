@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>借款审核</title>
+    <title>满标审核</title>
     <!-- 引入样式 -->
     <script type="text/javascript" src="/js/vue.js"></script>
     <script type="text/javascript" src="/js/axios.min.js"></script>
@@ -124,7 +124,7 @@
     </el-row>
 
     <!--借款详情界面-->
-    <el-dialog title="借款详情" :visible.sync="editFormVisible" :close-on-click-modal="false">
+    <el-dialog title="投标详情" :visible.sync="editFormVisible" :close-on-click-modal="false">
         <el-form-item label="借款标号" prop="BIDID">
             <el-input v-model="BIDID" auto-complete="off" :readonly="true"></el-input>
         </el-form-item>

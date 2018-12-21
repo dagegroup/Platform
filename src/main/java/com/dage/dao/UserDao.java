@@ -93,7 +93,15 @@ public interface UserDao {
      * @param userId
      * @return
      */
-    @Select("select * from bid_repay_info where userid=#{userId} ")
+    @Select("<script>select repayid,userid,bidrepayamount,to_char(biderpaydate,'yyyy-mm-dd') biderpaydate," +
+            " to_char(biderpaydeaddate,'yyyy-mm-dd') biderpaydeaddate,bidrepayState,bidrepaynumber" +
+            " from bid_repay_info where userid=#{userId}" +
+            " <if test=\" type!=null and type!=''\"> and bidrepayState=#{type}</if>" +
+            " <if test=\" time1!=null and time1!='' \"> and to_char(biderpaydeaddate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
+            " <if test=\" time2!=null and time2!='' \"> and biderpaydeaddate &gt;= trunc(next_day(sysdate-8,1)+1) and biderpaydeaddate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
+            " <if test=\" time3!=null and time3!='' \"> and to_char(biderpaydeaddate,'yyyy-mm')=to_char(sysdate,'yyyy-mm')</if>"+
+            " <if test=\" time4!=null and time4!='' \"> and to_char(biderpaydeaddate,'yyyy')=to_char(sysdate,'yyyy')</if>"+
+            " </script>")
     List<Map> getRepay(Map userId);
 
 
