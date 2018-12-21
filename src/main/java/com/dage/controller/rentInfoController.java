@@ -41,9 +41,13 @@ public class rentInfoController {
     @RequestMapping("rentInfo1")
     public Object rentInfo(@RequestBody Map map, HttpSession session){
 
-        System.out.println(map);
+        //System.out.println(map);
         Object userid = session.getAttribute("userid");
-        System.out.println(userid);
+        Map getrent = rentInfoService.getrent(userid + "");
+        if(getrent!=null&&getrent.size()>0){
+            return 0;
+        }
+        // System.out.println(userid);
         map.put("userid",userid.toString());
         return rentInfoService.add(map);
     }
@@ -58,7 +62,8 @@ public class rentInfoController {
     @ResponseBody
     @RequestMapping("rentInfo3")
     public Object rentInfo2(@RequestBody Map map, HttpSession session){
-        if(map.get("pic1")==null||map.get("pic2")==null||map.get("pic3")==null|| map.get("pic4")==null){
+        System.out.println(map);
+        if(map.get("pic1")==""||map.get("pic2")==""||map.get("pic3")==""|| map.get("pic4")==""){
             return 0;
         }
         //System.out.println(map);
