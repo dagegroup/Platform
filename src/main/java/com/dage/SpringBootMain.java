@@ -3,6 +3,7 @@ package com.dage;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @className:SpringBootMain
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @creatTime:2018-11-21 09:31
  */
 @SpringBootApplication
+@EnableTransactionManagement//事务
 @MapperScan("com.dage.dao") //扫描dao层接口
 public class SpringBootMain {
     /**

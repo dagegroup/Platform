@@ -126,7 +126,7 @@
 .item-detail-head .mod-right .inner{padding:0 20px;}
 .item-detail-head .mod-right .text{font-size:16px;line-height:250%;}
 .item-detail-head .mod-right .ui-btn{height:36px;line-height:36px;float:left;width:100%;font-size:16px;}
-.item-detail-head .mod-status{height:200px;}
+.item-detail-head .mod-status{height:170px;}
 .item-detail-head .mod-status .icon-status{position:absolute;top:105px;right:0;}
 .item-detail-head .mod-right .item{margin:20px 0 0;vertical-align:middle;position:relative;zoom:1;}
 .item-detail-head .mod-right .item:after{content:'';display:block;clear:both;height:0;font-size:0;visibility:hidden;}
