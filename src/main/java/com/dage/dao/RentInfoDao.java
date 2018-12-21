@@ -12,6 +12,8 @@ import java.util.Map;
  * creatTime:2018-12-17 11:40
  */
 public interface RentInfoDao {
+    @Select("select * from tb_user_info where state='借款' and userid=#{userid}")
+    Map getrent(String userid);
     /**
      *
      * @param map
@@ -25,7 +27,7 @@ public interface RentInfoDao {
      * @param map
      * @return
      */
-    @Insert("update   tb_realname_certification set realname=#{REALNAME},sex=#{GENDER},address='联动没写',email=#{EMAIL},idnumber=#{IDCARD},academic=#{MAXEDUCATION},housed=#{HOUSE},income=#{INCOME},marriage=#{MARRIAGE},jobtype=#{JOBTYPE},comname=#{COMNAME},jointime=to_date(#{JOINTIME},'yyyy-mm-dd hh24:mi:ss'),linkman1name=#{FAMILYNAME},linkman1rela=#{FAMILYRELATIONSHIP},linkman1phone=#{FAMILYTEL},linkman1sex='男',linkman1address=#{ADDRESS},linkman2name=#{JOBCONTACTNAME},linkman2rela=#{JOBRELATIONSHIP},linkman2phone=#{JOBTEL},linkman2sex='男',linkman2address=#{ADDRESS},linkman3name=#{OTHERNAME},linkman3rela=#{OTHERRELATIONSHIP},linkman3phone=#{OTHERTEL},linkman3sex='男',linkman3address=#{ADDRESS},applytime=sysdate  where userid=#{userid}")
+    @Insert("update   tb_realname_certification set auditremarks='未审核', realname=#{REALNAME},sex=#{GENDER},address='联动没写',email=#{EMAIL},idnumber=#{IDCARD},academic=#{MAXEDUCATION},housed=#{HOUSE},income=#{INCOME},marriage=#{MARRIAGE},jobtype=#{JOBTYPE},comname=#{COMNAME},jointime=to_date(#{JOINTIME},'yyyy-mm-dd hh24:mi:ss'),linkman1name=#{FAMILYNAME},linkman1rela=#{FAMILYRELATIONSHIP},linkman1phone=#{FAMILYTEL},linkman1sex='男',linkman1address=#{ADDRESS},linkman2name=#{JOBCONTACTNAME},linkman2rela=#{JOBRELATIONSHIP},linkman2phone=#{JOBTEL},linkman2sex='男',linkman2address=#{ADDRESS},linkman3name=#{OTHERNAME},linkman3rela=#{OTHERRELATIONSHIP},linkman3phone=#{OTHERTEL},linkman3sex='男',linkman3address=#{ADDRESS},applytime=sysdate  where userid=#{userid}")
     int addRentDetialInfo(Map map);
 
     /**
