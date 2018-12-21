@@ -40,32 +40,10 @@ public interface FailureService {
     Map getBidInfoByBidid(String bidid);
 
     /**
-     * 流标时汇款时更新投资列表状态
-     * @param bidid
+     * 流水还款操作
+     * @param
      * @return
      */
-    int updateBidSubmit(String bidid);
-
-    /**
-     * 流标时回款更新用户账户表可用余额
-     * @param bidid
-     * @return
-     */
-    int updateUserAccount(String bidid);
-
-
-    /**
-     * 流标时汇款更新用户表状态为正常
-     * @param bidid
-     * @return
-     */
-    int updateUserInfo(String bidid);
-
-    /**
-     * 流标时退钱生成流水账单
-     * @param bidid
-     * @return
-     */
-    int insertUserFlow(String bidid);
+    int repayFailure(String bidid);
 
 }

@@ -58,8 +58,12 @@ public class rentInfoController {
     @ResponseBody
     @RequestMapping("rentInfo3")
     public Object rentInfo2(@RequestBody Map map, HttpSession session){
+        if(map.get("pic1")==null||map.get("pic2")==null||map.get("pic3")==null|| map.get("pic4")==null){
+            return 0;
+        }
+        //System.out.println(map);
         Object userid = session.getAttribute("userid");
-        System.out.println(userid);
+       // System.out.println(userid);
         map.put("userid",userid.toString());
         return rentInfoService.addRentInfo2(map);
     }
@@ -71,7 +75,6 @@ public class rentInfoController {
     @ResponseBody
     @RequestMapping("/upLoadPic")
     public Object upLoadPic(@RequestParam MultipartFile file){
-        System.out.println(11111111);
         String s = ftpUtil.upLoad(file);//调用上传方法
         return s;
     }

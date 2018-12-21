@@ -123,7 +123,7 @@ public class SkipController {
      */
     @RequestMapping("/Packet")
     public String toPacket(){
-        return "个人中心-我的红包";
+        return "个人中心-我的还款";
     }
 
     /**
