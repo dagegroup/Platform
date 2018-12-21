@@ -73,16 +73,13 @@
     <div class="credit-ad"><img src="../foreground/images/clist1.jpg" width="1200" height="96"></div>
     <div id="personal-left" class="personal-left">
       <ul>
-        <li class="pleft-cur"><span><a href="toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
+        <li class="pleft-cur"><span><a href="/skip/toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Record">资金记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Investment">投资记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Plan">回款计划</a></span></li>
-        <li class=""><span><a href="Thirdparty1"><i class="dot dot02"></i>开通第三方</a> </span> </li>
+        <li > <span> <a href="Packet"> <i class="dot dot02"></i> 还款 </a> </span> </li>
         <li><span><a href="Recharge1"><i class="dot dot03"></i>充值</a></span></li>
         <li class=""><span><a href="Withdraw"><i class="dot dot04"></i>提现</a></span></li>
-        <li style="position:relative;" class=""> <span> <a href="Packet"> <i class="dot dot06"></i> 我的红包 </a> </span> </li>
-        <li class=""><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Conversion">兑换历史</a></span></li>
-        <li style="position:relative;"> <span> <a href="Messages"><i class="dot dot08"></i>系统信息 </a> </span> </li>
         <li><span><a href="Setting"><i class="dot dot09"></i>账户设置</a></span></li>
       </ul>
     </div>
@@ -106,31 +103,16 @@
           $(function(){
               $.ajax({
                   url: "/person/index",
-                  data:{userId:'U201812071032'},
+                  data:{},
                   async:false,//同步
                   type:"post",
                   dataType:"json",
                   success: function(data){
-                      //s=JSON.stringify(data[0]);
-                      //alert(s);
-                      //alert(data[0].ENAME);
-                      $('.ename').html(data[0].BIDREPAYUSERID);
-                      var dataObj = data, //返回的result为json格式的数据
-                      x = "";
-                      for(var i=0;i < data.length;i++){
-                          var trs = "";
-                          trs += "<span class='pmain-titledate'>"
-                              + data[i].BIDREPAYDATE +
-                              "</span> <span class='pmain-titleproject'>"
-                              + data[i].BIDREPAYNUMBER +
-                              "</span> <span class='pmain-titletype'>"
-                              +data[i].BIDREPAYMETHOD+
-                              "</span><span class='pmain-titlemoney'>"
-                              +data[i].BIDREPAYAMOUNT+
-                              "</span>";
-                          x += trs;
-                      };
-                      $("#tbody-result").append(x);
+                      /*s=JSON.stringify(data[0]);
+                      alert(s);
+                      alert(1111);
+                      alert(data[0].USERNAME);*/
+                      $('.ename').html(data[0].USERNAME);
                   },
                   error : function(data) {
                       alert(data);
@@ -139,13 +121,12 @@
           })
       </script>
       <div class="pmain-profile">
-        <div class="pmain-welcome"> <span class="fl"><span id="outLogin"></span> <span class="ename"></span>喝一杯下午茶，让心情放松一下~</span> <span class="fr">上次登录时间：
-          2015-09-11 14:05:07 </span> </div>
+        <div class="pmain-welcome"> <span class="fl"><span id="outLogin"></span> <span class="ename"></span>喝一杯下午茶，让心情放松一下~</span></div>
         <div class="pmain-user">
           <div class="user-head"> <span id="clickHeadImage" class="head-img" title="点击更换头像">
             <form  method="post" action="">
               <input type="hidden" name="userPhotoUploadForm" value="userPhotoUploadForm">
-              <span id="userPhotoUploadForm:photo"><img id="userPhotoUploadForm:photoImage" src="../static/foreground/images/touxiang.png" alt="" style="width:88px;height:88px;z-index:0;"> <i class="headframe" style="z-index:0;"></i>-
+              <span id="userPhotoUploadForm:photo"><img id="userPhotoUploadForm:photoImage" src="../foreground/images/touxiang.png" alt="" style="width:88px;height:88px;z-index:0;"> <i class="headframe" style="z-index:0;"></i>-
               <div id="userPhotoUploadForm:shangchuan-btn" class="ui-fileupload ui-widget" style="z-index:0;">
                 <div class="ui-fileupload-buttonbar ui-corner-top"><span class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-fileupload-choose" role="button"><span class="ui-button-icon-left ui-icon ui-c ui-icon-plusthick"></span><span class="ui-button-text ui-c"></span>
                   <input type="file" id="userPhotoUploadForm:shangchuan-btn_input" name="userPhotoUploadForm:shangchuan-btn_input" style="z-index:0;">
@@ -163,9 +144,8 @@
             </span> <span class="head-icon"> <a href="#"><i title="第三方资金账户未认证" class="headiconbg headicon01"></i></a> <a href="#"><i class="headiconbg headicon2"></i></a> <a href="#"><i class="headiconbg headicon03"></i></a> </span> </div>
           <div class="user-info user-info1">
             <ul>
-              <li>用户名<span>tg_gpdt0139</span></li>
+              <li>用户名<span class="ename"></span></li>
               <li>安全级别<span><i class="safe-level"><i class="onlevel" style="width:40%;"></i></i></span> <a href="#">[低]</a></li>
-              <li>您还未开通第三方支付账户，请 <a class="pmain-log" href="#">立即开通</a>以确保您的正常使用和资金安全。 </li>
             </ul>
           </div>
         </div>
@@ -205,52 +185,6 @@
 			       });
 			//]]>           
 		</script>
-      <div class="pmain-connent">
-        <div id="pmain-contab" class="pmain-contab">
-          <ul>
-            <li id="pmain-contab1" class="on">回款计划</li>
-            <li id="pmain-contab2">资金记录</li>
-            <li id="pmain-contab3">投资记录</li>
-            <li class="li-other"></li>
-          </ul>
-        </div>
-        <div class="pmain-conmain" id="pmain-conmain">
-          <div class="pmain-conmain1">
-            <div class="pmain-contitle"> <span class="pmain-titledate">计划回款时间</span><span class="pmain-titleproject">项目</span><span class="pmain-titletype">类型</span><span class="pmain-titlemoney">回款金额</span> </div>
-            <ul style="float:left;">
-              <li><span class="pmain-titledate">2015-10-20</span><span class="pmain-titleproject">宝马汽车借贷业务</span><span class="pmain-titletype">债权转让</span><span class="pmain-titlemoney">10.00</span></li>
-              <li><span class="pmain-titledate">2015-10-20</span><span class="pmain-titleproject">宝马汽车借贷业务</span><span class="pmain-titletype">债权转让</span><span class="pmain-titlemoney">10.00</span></li>
-              <li><span class="pmain-titledate">2015-10-20</span><span class="pmain-titleproject">宝马汽车借贷业务</span><span class="pmain-titletype">债权转让</span><span class="pmain-titlemoney">10.00</span></li>
-              <li><span class="pmain-titledate">2015-10-20</span><span class="pmain-titleproject">宝马汽车借贷业务</span><span class="pmain-titletype">债权转让</span><span class="pmain-titlemoney">10.00</span></li>
-              <li><span class="pmain-titledate">2015-10-20</span><span class="pmain-titleproject">宝马汽车借贷业务</span><span class="pmain-titletype">债权转让</span><span class="pmain-titlemoney">10.00</span></li>
-              <li><span class="pmain-titledate">2015-10-20</span><span class="pmain-titleproject">宝马汽车借贷业务</span><span class="pmain-titletype">债权转让</span><span class="pmain-titlemoney">10.00</span></li>
-              <!--<div style=" width:
-										760px;height:200px;padding-top:100px; text-align:center;color:#d4d4d4; font-size:16px;">
-										 <img src="images/nondata.png" width="60" height="60"><br><br>
-										   暂无回款计划</div>-->
-            </ul>
-            <div class="pmain-morebtn" style="border-top:0;margin-top:0"></div>
-          </div>
-          <div class="pmain-conmain2" style=" display:none;">
-            <div class="pmain-contitle"> <span class="pmain-titledate">交易时间</span><span class="pmain-w100">交易类型</span><span class="pmain-w120">交易金额</span><span class="pmain-w120">余额</span><span class="pmain-w200">备注</span> </div>
-            <ul style="float:left;">
-              <li><span class="pmain-titledate">2015-10-20</span><span class="pmain-w100">债权转让</span><span class="pmain-w120 pmain-money">10.00</span><span class="pmain-w120 pmain-money">10.00</span><span class="pmain-w200">备注</span></li>
-              <!--<div style=" width:760px;height:200px;padding-top:100px; text-align:center;color:#d4d4d4; font-size:16px;">
-										 <img src="images/nondata.png" width="60" height="60"><br><br>
-										   暂无资金记录</div>-->
-            </ul>
-            <div class="pmain-morebtn" style="border-top:0;margin-top:0"></div>
-          </div>
-          <div class="pmain-conmain3" style=" display:none;">
-            <div class="pmain-contitle"> <span class="pmain-titledate">交易时间</span><span class="pmain-w210">项目</span><span class="pmain-w80">状态</span><span class="pmain-whb200">我的投资</span><span class="pmain-whb110">我的收益</span> </div>
-            <ul style="float:left;">
-              <li><span class="pmain-titledate">2015-10-20</span><span class="pmain-w210">债权转让</span><span class="pmain-w80 pmain-money">10.00</span><span class="pmain-whb200 pmain-money">10.00</span><span class="pmain-whb110">备注</span></li>
-              <!--	<div style=" width:760px;height:200px;padding-top:100px; text-align:center;color:#d4d4d4; font-size:16px;">
-										    <img src="images/nondata.png" width="60" height="60"><br><br>
-										   暂无投资记录</div>-->
-            </ul>
-            <div class="pmain-morebtn" style="border-top:0;margin-top:0"></div>
-          </div>
         </div>
       </div>
     </div>

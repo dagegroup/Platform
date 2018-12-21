@@ -1,8 +1,8 @@
 package com.dage.dao;
 
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,11 +22,16 @@ public interface BidInforDao {
      *
      * @return
      */
-    @Select(value = "select bidid,userid,auditid,bidproject,to_char(bidamount, '9999990.00') as bidamount,to_char(bidcurrentamount, '9999990.00') as bidcurrentamount," +
-            "bidrepaymentmethod,bidrate,100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline," +
-            "to_char(bidissuedate,'yyyy-MM-dd') as bidissuedate,biddeadday,to_char(bidapplydate,'yyyy-MM-dd') as bidapplydate," +
-            "to_char(biddeaddate,'yyyy-MM-dd') as biddeaddate,biddesc,bidtype,bidstate,bidmoney," +
-            "round(to_number(biddeaddate - sysdate)) as bidendday,to_char((bidamount - bidcurrentamount), '9999990.00') as bidendmoney" +
+    @Select(value = "select bidid,userid,auditid,bidproject," +
+            "to_char(bidamount, '9999990.00') as bidamount,to_char(bidcurrentamount, '9999990.00') as bidcurrentamount," +
+            "bidrepaymentmethod,bidrate," +
+            "100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline," +
+            "to_char(bidissuedate,'yyyy-MM-dd') as bidissuedate,biddeadday," +
+            "to_char(bidapplydate,'yyyy-MM-dd') as bidapplydate," +
+            "to_char(biddeaddate,'yyyy-MM-dd') as biddeaddate," +
+            "biddesc,bidtype,bidstate," +
+            "round(to_number(biddeaddate - sysdate)) as bidendday," +
+            "to_char((bidamount - bidcurrentamount), '9999990.00') as bidendmoney" +
             " from bid_info where bidid=#{bidid}")
     List<Map> getList(Map map);
 
@@ -37,9 +42,9 @@ public interface BidInforDao {
      */
     @Select("<script> " +
             "select r.realname,r.academic,r.marriage,r.address,r.income " +
-            "from tb_user_info u  " +
-            "left join tb_realname_certification r on u.realnameid=r.realnameid  " +
-            "where u.bidid=#{bidid} " +
+            " from tb_user_info u  " +
+            " left join tb_realname_certification r on u.realnameid=r.realnameid  " +
+            " where u.bidid=#{bidid} " +
             "</script>")
     List<Map> getUserList(Map map);
 
@@ -86,10 +91,32 @@ public interface BidInforDao {
      * @param map
      * @return
      */
-    @Insert("insert into bid_submit(submitid,bidid,userid,bidamount,bidrate,biddate) " +
+    @Insert("insert into bid_submit(submitid,bidid,userid,bidamount,bidrate,biddate,bidstate) " +
             " values('BSUB'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0), " +
-            " #{BIDID},#{USERID},#{BIDAMOUNT},#{BIDRATE},sysdate )")
+            " #{BIDID},#{USERID},#{BIDAMOUNT},#{BIDRATE},sysdate,'已投标' )")
     int bidSubmit(Map map);
+
+    /**
+     * 账户流水表记录
+     * @param map
+     * @return
+     */
+    @Insert("insert into user_account_flow(flowid,userid,accountid,amount,availablebalance,flowdate,flowtype) " +
+            "  values('UFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0)," +
+            "  #{USERID},#{ACCOUNTID},#{AMOUNT},#{AVAILABLEBALANCE},sysdate,'投资')")
+    int accountRun(Map map);
+
+    /**
+     * 用户账户表变动
+     * @param map
+     * @return
+     */
+    @Update("update user_account set" +
+            " availablebalance=#{AVAILABLEBALANCE}," +
+            " receivenumbererest=#{RECEIVENUMBEREREST}," +
+            " receiveprincipal=#{RECEIVEPRINCIPAL} " +
+            " where userid=#{USERID} ")
+    int userAccount(Map map);
 
     /**
      * 根据标编号查询该标可投金额
@@ -97,14 +124,46 @@ public interface BidInforDao {
      * @return
      */
     @Select("select bidamount-bidcurrentamount as canmoney from bid_info where bidid=#{BIDID} ")
-    Integer canMoney(Map map);
+    double canMoney(Map map);
 
     /**
      * 从用户账户表获取账户余额
      * @param map
      * @return
      */
-    @Select("select availablebalance,receiveprincipal,receivenumbererest from user_account where userid=#{USERID} ")
-    Integer balance(Map map);
+    @Select("select availablebalance from user_account where userid=#{USERID} ")
+    double balance(Map map);
+
+    /**
+     * 从用户账户表获取代收本金
+     * @param map
+     * @return
+     */
+    @Select("select receiveprincipal from user_account where userid=#{USERID} ")
+    double principal(Map map);
+
+    /**
+     * 从用户账户表获取代收利息
+     * @param map
+     * @return
+     */
+    @Select("select receivenumbererest from user_account where userid=#{USERID} ")
+    double interest(Map map);
+
+    /**
+     * 根据userid从用户账户表user_account中查询账户id(accountid)
+     * @param map
+     * @return
+     */
+    @Select("select accountid from user_account where userid=#{USERID} ")
+    Map userAccountid(Map map);
+
+    /**
+     * 根据bidid更新标信息表中的已投标金额bidcurrentamount
+     * @param map
+     * @return
+     */
+    @Update("update bid_info set bidcurrentamount=bidcurrentamount+#{BIDCURRENTAMOUNT} where bidid=#{BIDID} ")
+    int changeBidInfo(Map map);
 
 }

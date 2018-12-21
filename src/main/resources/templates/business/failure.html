@@ -308,10 +308,9 @@
                 var _self = this;
                 _self.loading = true;
                 var goUrl = '/failure/update';
-
-                axios.post(goUrl).then(function (response) {
-
-
+                var bidid=_self.submitData[0].BIDID
+                alert(bidid);
+                axios.post(goUrl,{bidid:bidid}).then(function (response) {
                     // self.total=response.data.total;
                     if (response.data > 0) {
                         alert(response.data);

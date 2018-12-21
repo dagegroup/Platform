@@ -25,6 +25,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Map getUserByUserName(String userName) {
+        return userDao.getUserByUserName(userName);
+    }
+
+    @Override
     public String getUserid(String userid) {
 
         return userDao.getUserbyUserid(userid);
@@ -47,23 +52,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Map> getRepay(String userId) {
-        return userDao.getRepay(userId);
+    public List<Map> getRepay(Map map) {
+        return userDao.getRepay(map);
     }
 
     @Override
-    public List<Map> getSubmit(String userId) {
-        return userDao.getSubmit(userId);
+    public List<Map> getSubmit(Map map) {
+        return userDao.getSubmit(map);
     }
 
     @Override
-    public List<Map> getFlow(String userId) {
-        return userDao.getFlow(userId);
+    public List<Map> getFlow(Map map) {
+        return userDao.getFlow(map);
     }
 
     @Override
-    public List<Map> getList(String userId) {
-        return userDao.getList(userId);
+    public List<Map> getUser(Map map) {
+        return userDao.getUser(map);
+    }
+
+    @Override
+    public List<Map> getList(Map map) {
+        return userDao.getList(map);
     }
 
 
