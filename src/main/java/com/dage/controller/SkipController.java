@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 import java.util.Map;
 
 /**
@@ -82,12 +81,12 @@ public class SkipController {
     }
 
     /**
-     * 跳转到个人中心兑换历史
+     * 跳转到个人中心还款记录
      * @return
      */
-    @RequestMapping("//Conversion")
+    @RequestMapping("/Conversion")
     public String toConversion(){
-        return "个人中心-兑换历史";
+        return "个人中心-还款记录";
     }
 
     /**

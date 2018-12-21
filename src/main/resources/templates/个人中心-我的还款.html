@@ -359,7 +359,12 @@
             },
             //确认还款
             repayment: function () {
-                alert(111);
+                var self_ = this;
+                //alert(self_.repayid);
+                //alert(111);
+                axios.post('/Repayment/huankuan',{'userId':this.userId,'repayid' : self_.repayid}).then(function (response) {
+                    self_.returnData = response.data.pageData;
+                })
             },
             //表格重新加载数据
             loadingData: function () {
@@ -384,8 +389,8 @@
             },
             // 点击我要还款  还款页面重新加载
             loadingDataA: function () {
-                var _self = this;
-                _self.loading = true;
+                var _self = this
+                //_self.loading = true;
                 axios.post(this.goUrl, {
                     'userId': this.userId,
                     'type': this.type,
