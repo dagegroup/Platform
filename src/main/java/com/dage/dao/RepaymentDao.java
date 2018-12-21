@@ -22,11 +22,11 @@ public interface RepaymentDao {
      * @param map
      * @return
      */
-    @Select("<script>select to_char(biderpaydate,'yyyy-mm-dd') as biderpaydate,repayid,userid,bidrepayamount," +
+    @Select("<script>select bidid, to_char(biderpaydate,'yyyy-mm-dd') as biderpaydate,repayid,userid,bidrepayamount," +
             " to_char(biderpaydeaddate,'yyyy-mm-dd') as biderpaydeaddate," +
             " to_char(bidnextrepaydate,'yyyy-mm-dd') as bidnextrepaydate," +
             " bidrepayState, bidrepaynumber,bidrepaytotpmts,bidrepaymethod,bidrepayuserid" +
-            " from bid_repay_info where userid=#{userId}" +
+            " from bid_repay_info where userid=#{userId} and bidrepaystate like '%待还款'"  +
             "<if test=\" repayid!=null and repayid!=''\"> and repayid=#{repayid}</if>" +
             "<if test=\" type!=null and type!=''\"> and bidrepaystate=#{type}</if>" +
             "</script>")

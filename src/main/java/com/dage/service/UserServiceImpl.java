@@ -72,6 +72,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<Map> getMSBs(Map map) {
+        return userDao.getMSBs(map);
+    }
+
+    @Override
     public List<Map> getFlow(Map map) {
         return userDao.getFlow(map);
     }

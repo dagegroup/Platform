@@ -47,8 +47,10 @@ public class RepaymentController {
      */
     @ResponseBody
     @RequestMapping("/page")
-    public Object page(@RequestBody Map map){
-        System.out.println(map);
+    public Object page(@RequestBody Map map,HttpSession session){
+        String userid=(String) session.getAttribute("userid");
+        map.put("userId", userid);
+        //System.out.println(map);
         //设置当前第几页和每页显示数量
         PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
         System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));

@@ -85,13 +85,13 @@
     <div id="personal-left" class="personal-left">
       <ul>
         <li ><span><a href="/skip/toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
-        <li class="pleft-cur"><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Record">资金记录</a></span></li>
+        <li class="pleft-cur" ><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Record">资金记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Investment">投资记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Plan">回款计划</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Conversion">还款记录</a></span></li>
         <li > <span> <a href="Packet"> <i class="dot dot02"></i> 还款 </a> </span> </li>
         <li><span><a href="Recharge1"><i class="dot dot03"></i>充值</a></span></li>
-        <li class=""><span><a href="Withdraw"><i class="dot dot04"></i>提现</a></span></li>
+        <li ><span><a href="Withdraw"><i class="dot dot04"></i>提现</a></span></li>
         <li><span><a href="Setting"><i class="dot dot09"></i>账户设置</a></span></li>
       </ul>
     </div>
@@ -168,10 +168,11 @@
                         type:"post",
                         dataType:"json",
                         success: function(data){
+                            //alert(JSON.stringify(data));
                                 x = "";
                             for(var i=0;i < data.length;i++){
                                 var trs = "";
-                                trs += "<span class='pmain-title1 pmain-height'>"
+                                trs += "<li><span class='pmain-title1 pmain-height'>"
                                     + data[i].FLOWDATE +
                                     "</span> <span class='pmain-title2 pmain-height'>"
                                     + data[i].FLOWTYPE +
@@ -179,9 +180,7 @@
                                     +data[i].AMOUNT+
                                     "</span><span class='pmain-title4 pmain-height'>"
                                     +data[i].AVAILABLEBALANCE+
-                                    "</span><span class='pmain-title5 pmain-height'>"
-                                    +data[i].FLOWTYPE+
-                                    "</span>";
+                                    "</span></li>";
                                 x += trs;
                             };
                             $("#tbody-result").append(x);
@@ -198,9 +197,9 @@
           </div>
           <span id="form:dataTable">
           <div class="personal-moneylist">
-            <div class="pmain-contitle"> <span class="pmain-title1 fb">交易时间</span> <span class="pmain-title2 fb">交易类型</span> <span class="pmain-title3 fb">交易金额</span> <span class="pmain-title4 fb">余额</span> <span class="pmain-title5 fb">备注</span> </div>
+            <div class="pmain-contitle"> <span class="pmain-title1 fb">交易时间</span> <span class="pmain-title2 fb">交易类型</span> <span class="pmain-title3 fb">交易金额</span> <span class="pmain-title4 fb">余额</span>  </div>
             <ul>
-            <li><span id="tbody-result"></span></li>
+            <span id="tbody-result"></span>
               <!-- <div style=" width:760px;height:200px;padding-top:100px; text-align:center;color:#d4d4d4; font-size:16px;"> <img src="/foreground/images/nondata.png" width="60" height="60"><br>
                 <br>
                 暂无资金记录</div>-->
@@ -263,7 +262,7 @@
                           x = "";
                           for(var i=0;i < data.length;i++){
                               var trs = "";
-                              trs += "<span class='pmain-title1 pmain-height'>"
+                              trs += "<li><span class='pmain-title1 pmain-height'>"
                                   + data[i].FLOWDATE +
                                   "</span> <span class='pmain-title2 pmain-height'>"
                                   + data[i].FLOWTYPE +
@@ -271,9 +270,7 @@
                                   +data[i].AMOUNT+
                                   "</span><span class='pmain-title4 pmain-height'>"
                                   +data[i].AVAILABLEBALANCE+
-                                  "</span><span class='pmain-title5 pmain-height'>"
-                                  +data[i].FLOWTYPE+
-                                  "</span>";
+                                  "</span></li>";
                               x += trs;
                           };
                           $("#tbody-result").append(x);

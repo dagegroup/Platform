@@ -107,7 +107,7 @@
                   <h3><i>我的还款</i></h3>
                   <div id="diva" class="money-choose">
                     <!--列表顶部搜索和工具条-->
-                    <el-row>
+                    <!--<el-row>
                       <el-form :inline="true" :model="searchForm" class="demo-form-inline">
                         <el-form-item label="订单编号">
                           <el-input v-model="searchForm.borrownum" placeholder="订单编号"></el-input>
@@ -120,7 +120,7 @@
                           <el-button type="success" icon="plus" @click="flushClick">刷新</el-button>
                         </el-form-item>
                       </el-form>
-                    </el-row>
+                    </el-row>-->
                     <!--列表-->
                     <el-row>
                       <el-table
@@ -139,14 +139,9 @@
                                 width="100">
                         </el-table-column>
                         <el-table-column
-                                prop="PURPOSE"
-                                label="标题"
-                                width="100">
-                        </el-table-column>
-                        <el-table-column
-                                prop="BIDREPAYUSERID"
-                                label="还款人"
-                                width="100">
+                                prop="BIDID"
+                                label="标ID"
+                                width="200">
                         </el-table-column>
                         <el-table-column
                                 prop="BIDREPAYAMOUNT"
@@ -290,8 +285,8 @@
             returnData:[],
             //获取session中的值，需要两个中括号
             //userName:'[[${session.userName}]]',
-            userId:'U201812076613',
-            type:'待还款',
+            userId:'',
+            type:'',
             //还款数据长度
             datalen:'',
             //数据最高长度

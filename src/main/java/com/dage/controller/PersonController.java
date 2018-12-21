@@ -128,9 +128,9 @@ public class PersonController {
             }
         }
         Map map1= putTime(map);
-        // 根据session的userid 查询 为map 加入session里的 userid
-        //String userid=(String)session.getAttribute("userid");
-        //map1.put("userId",userid);
+        //根据session的userid 查询 为map 加入session里的 userid
+        String userid=(String)session.getAttribute("userid");
+        map1.put("userId",userid);
         return userService.getRepay(map1);
     }
 
@@ -145,6 +145,24 @@ public class PersonController {
         //System.out.println(userId);
         return userService.getAccount(userId);
     }
+
+    /**
+     * 更具用户id查询 用户正在回款的投资记录
+     * @param map
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/MSBs")
+    public List<Map> getMSBs(@RequestParam Map map,HttpSession session){
+        String userid=(String)session.getAttribute("userid");
+        map.put("userId","U201812076613");
+
+    //[{"BIDPROJECT":"我啊啊啊啊啊啊","BIDAPPLYDATE":"2018-12-19T16:00:00.000+0000",
+        // "BIDREPAYMENTMETHOD":"等额本息","BIDDESC":"结婚","BIDDEADDAY":2,"USERID":"log201812140592",
+        // "BIDAMOUNT":666666,"BIDDEADLINE":12,"BIDID":"BID201812203953","BIDRATE":6}
+        return userService.getMSBs(map);
+    }
+
 
 
     /**
