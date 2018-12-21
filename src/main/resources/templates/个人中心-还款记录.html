@@ -101,7 +101,7 @@
             <!--<li value="unfreeze">投资</li>-->
           </ul>
         </div>
-        <span class="money-date2">还款时间</span>
+        <span class="money-date2">还款结束日期</span>
         <div id="select-date" class="select-date"> <span class="select-title" style="display:inline-block;height:25px;line-height:20px;">全部</span>
           <ul id="time">
             <li value="0d">今天</li>
@@ -158,7 +158,7 @@
                     type:"post",
                     dataType:"json",
                     success: function(data){
-                        alert(JSON.stringify(data));
+                        //alert(JSON.stringify(data));
                         x = "";
                         //{"REPAYID":"BREP201812186945","BIDERPAYDATE":"2019-01-08T16:00:00.000+0000",
                         // "USERID":"U201812076613","BIDREPAYTOTPMTS":2,"BIDREPAYSTATE":"已还款",
@@ -167,19 +167,19 @@
                         //biderpaydate   biderpaydeaddate
                         for(var i=0;i < data.length;i++){
                             var trs = "";
-                            trs += "<span class='wdhb-name'>"
+                            trs += "<li><span class='wdhb-name'>"
                                 + data[i].REPAYID +
-                                "</span> <span class='wdhb-name'>"
+                                "</span> <span class='wdhb-status'>"
                                 + data[i].BIDERPAYDATE +
-                                "</span> <span class='wdhb-name'>"
-                                +data[i].BIDERPAYEADDATE+
-                                "</span><span class='wdhb-name'>"
+                                "</span> <span class='wdhb-status'>"
+                                +data[i].BIDERPAYDEADDATE+
+                                "</span><span class='wdhb-status'>"
                                 +data[i].BIDREPAYAMOUNT+
-                                "</span><span class='wdhb-name'>"
+                                "</span><span class='wdhb-status'>"
                                 +data[i].BIDREPAYNUMBER+
-                                "</span><span class='wdhb-name'>"
+                                "</span><span class='wdhb-status'>"
                                 +data[i].BIDREPAYSTATE+
-                                "</span>";
+                                "</span></li>";
                             x += trs;
                         };
                         $("#tbody-result").append(x);
@@ -197,10 +197,17 @@
         <form id="form" name="form" method="post" action="">
           <script type="text/javascript">clearPage = function() {PrimeFaces.ab({source:'form:j_idt76',formId:'form',process:'form:j_idt76',params:arguments[0]});}</script>
           <span id="form:dataTable">
-          <div class="wdhb-title"><span class="wdhb-name">标编号</span><span class="wdhb-name">还款日期</span><span class="wdhb-name">截止日期</span><span class="wdhb-name">还款金额</span> <span class="wdhb-name">还款期数</span><span class="wdhb-name">状态</span> </div>
+
+          <div class="wdhb-title">
+            <span class="wdhb-name">标编号</span>
+            <span class="wdhb-status">还款日期</span>
+            <span class="wdhb-status">截止日期</span>
+            <span class="wdhb-status">还款金额</span>
+            <span class="wdhb-status">还款期数</span>
+            <span class="wdhb-status">状态</span> </div>
           <div class="zqzr-list">
             <ul>
-              <li><span id="tbody-result"></span></li>
+              <span id="tbody-result"></span>
                </ul>
           </div>
           <!--<div style="float:left; width:760px;height:200px;padding-top:100px; text-align:center;color:#d4d4d4; font-size:16px;">
