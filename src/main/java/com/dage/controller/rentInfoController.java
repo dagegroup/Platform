@@ -97,4 +97,10 @@ public class rentInfoController {
             return ResponseEntity.notFound().build();
         }
     }
+    @ResponseBody
+    @RequestMapping("getInfo")
+    public Object getInfo(HttpSession session){
+        Object userid = session.getAttribute("userid");
+        return rentInfoService.getInfo(userid+"");
+    }
 }

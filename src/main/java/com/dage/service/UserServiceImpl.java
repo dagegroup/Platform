@@ -20,6 +20,16 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
+    public int adduserid1(String userid) {
+        return userDao.adduserid1(userid);
+    }
+
+    @Override
+    public String getuesrid(String userid) {
+        return userDao.getuesrid(userid);
+    }
+
+    @Override
     public int addUserid(String userid) {
         return userDao.adduserid(userid);
     }
