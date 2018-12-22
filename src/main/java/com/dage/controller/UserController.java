@@ -1,7 +1,12 @@
 package com.dage.controller;
 
+import com.dage.entity.Emp;
+import com.dage.service.EmpService;
 import com.dage.service.UserService;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +28,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("user")
 public class UserController {
+    @Autowired
+    private EmpService empService;
     @Autowired
     private UserService userService;
     @RequestMapping("toLogin")
@@ -131,5 +138,21 @@ public class UserController {
             return "forward:/goto/rentInfo";
         }
         return "redirect:/user/toLogin";
+    }
+    @ResponseBody
+    @RequestMapping("backLogin")
+    public Map userLogin(@RequestParam Map<String, String> map, HttpSession session) {
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(map.get("phone") + "", map.get("password") + "");
+        try {
+            subject.login(token);
+            Emp emp = (Emp) subject.getPrincipal();
+            int i = empService.updateTime(emp.getId());
+            session.setAttribute("admin", emp);
+            map.put("result", "success");
+        } catch (Exception e) {
+            map.put("result", "usererror");
+        }
+        return map;
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,68 +32,78 @@ public class BkLoginController {
     private EmpService empService;
     @Autowired
     private PermissionService permissionService;
+
     /**
      * 登陆操作
+     *
      * @param map
      * @return
      */
     @RequestMapping("tobklogin")
-    public Object bklogin(@RequestParam Map map, Model model, HttpSession session){
+    public Object bklogin(@RequestParam Map map, Model model, HttpSession session) {
         //System.out.println(map);
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(map.get("phone")+"",map.get("password")+"");
+        UsernamePasswordToken token = new UsernamePasswordToken(map.get("phone") + "", map.get("password") + "");
         try {
             subject.login(token);
-            Emp emp = (Emp)subject.getPrincipal();
-            session.setAttribute("admin",emp);
+            Emp emp = (Emp) subject.getPrincipal();
+            session.setAttribute("admin", emp);
             int i = empService.updateTime(emp.getId());
 
             return "redirect:/index";
-        }catch(Exception e){
-            model.addAttribute("msg","用户名或密码错误");
+        } catch (Exception e) {
+            model.addAttribute("msg", "用户名或密码错误");
             return "forward:/bklogin";
         }
     }
+
     @RequestMapping("bklogout")
-    public Object bklogout(){
+    public Object bklogout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return "forward:/bklogin";
     }
+
     /**
      * 跳转未授权页面
+     *
      * @return
      */
     @RequestMapping("noAuth")
-    public Object noAuth(){
+    public Object noAuth() {
         return "noAuth";
     }
+
     /**
      * 跳转后台页面(index elementui)
+     *
      * @return
      */
     @RequestMapping("index")
-    public Object index(){
+    public Object index() {
         return "index";
     }
 
     /**
      * 跳转后台登陆页面
+     *
      * @return
      */
     @RequestMapping("bklogin")
-    public Object blogin(){
+    public Object blogin() {
         return "bklogin";
     }
 
     /**
      * 根据登陆角色不同，获取不同的权限
+     *
      * @return
      */
     @ResponseBody //返回json格式数据
     @RequestMapping("tree")
-    public Object getTree(){
+    public Object getTree() {
         return permissionService.getListByRole();
     }
+
 
 }
