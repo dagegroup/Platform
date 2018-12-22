@@ -84,11 +84,12 @@
     <div class="credit-ad"><img src="../foreground/images/clist1.jpg" width="1200" height="96"></div>
     <div id="personal-left" class="personal-left">
       <ul>
-        <li class="pleft-cur"><span><a href="/skip/toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
+        <li ><span><a href="/skip/toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Record">资金记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Investment">投资记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Plan">回款计划</a></span></li>
-        <li > <span> <a href="Packet"> <i class="dot dot02"></i> 还款 </a> </span> </li>
+        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Conversion">还款记录</a></span></li>
+        <li class="pleft-cur" > <span> <a href="Packet"> <i class="dot dot02"></i> 还款 </a> </span> </li>
         <li><span><a href="Recharge1"><i class="dot dot03"></i>充值</a></span></li>
         <li class=""><span><a href="Withdraw"><i class="dot dot04"></i>提现</a></span></li>
         <li><span><a href="Setting"><i class="dot dot09"></i>账户设置</a></span></li>
@@ -106,7 +107,7 @@
                   <h3><i>我的还款</i></h3>
                   <div id="diva" class="money-choose">
                     <!--列表顶部搜索和工具条-->
-                    <el-row>
+                    <!--<el-row>
                       <el-form :inline="true" :model="searchForm" class="demo-form-inline">
                         <el-form-item label="订单编号">
                           <el-input v-model="searchForm.borrownum" placeholder="订单编号"></el-input>
@@ -119,7 +120,7 @@
                           <el-button type="success" icon="plus" @click="flushClick">刷新</el-button>
                         </el-form-item>
                       </el-form>
-                    </el-row>
+                    </el-row>-->
                     <!--列表-->
                     <el-row>
                       <el-table
@@ -138,14 +139,9 @@
                                 width="100">
                         </el-table-column>
                         <el-table-column
-                                prop="PURPOSE"
-                                label="标题"
-                                width="100">
-                        </el-table-column>
-                        <el-table-column
-                                prop="BIDREPAYUSERID"
-                                label="还款人"
-                                width="100">
+                                prop="BIDID"
+                                label="标ID"
+                                width="200">
                         </el-table-column>
                         <el-table-column
                                 prop="BIDREPAYAMOUNT"
@@ -289,8 +285,8 @@
             returnData:[],
             //获取session中的值，需要两个中括号
             //userName:'[[${session.userName}]]',
-            userId:'U201812076613',
-            type:'待还款',
+            userId:'',
+            type:'',
             //还款数据长度
             datalen:'',
             //数据最高长度
