@@ -1,6 +1,5 @@
 package com.dage.service;
 
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +27,20 @@ public interface UserService {
     List<Map> getFlow(Map map);
 
     /**
+     *  添加系统账户流水记录
+     * @param map
+     * @return
+     */
+    int system(Map map);
+
+    /**
+     * 添加用户流水表
+     * @param map
+     * @return
+     */
+    int recharge(Map map);
+
+    /**
      *根据用户id查询可以回款标信息标
      * @param map
      * @return
@@ -48,12 +61,6 @@ public interface UserService {
      */
     List<Map> getRepay(Map map);
 
-    /**
-     * 用户充值
-     * @param map
-     * @return
-     */
-    int recharge(Map map);
 
     /**
      * 根据用户id 查询用户账户信息

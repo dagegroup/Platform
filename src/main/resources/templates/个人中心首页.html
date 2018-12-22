@@ -109,17 +109,17 @@
                   type:"post",
                   dataType:"json",
                   success: function(data){
-                      /*s=JSON.stringify(data[0]);
-                      alert(s);
-                      alert(1111);
-                      alert(data[0].USERNAME);*/
+                      //alert(JSON.stringify(data[1]));
                       $('.ename').html(data[0].USERNAME);
+                      $('#amount').html(data[1].AVAILABLEBALANCE);
+                      $('#sum').html(data[1].RECEIVENUMBEREREST+data[1].RECEIVEPRINCIPAL);
+                      $('#debt').html(data[1].RETURNAMOUNT);
                   },
                   error : function(data) {
                       alert(data);
                     }
               })
-          })
+          });
       </script>
       <div class="pmain-profile">
         <div class="pmain-welcome"> <span class="fl"><span id="outLogin"></span> <span class="ename"></span>喝一杯下午茶，让心情放松一下~</span></div>
@@ -152,9 +152,9 @@
         </div>
         <div class="pmain-money">
           <ul>
-            <li class="none"><span><em>账户总额</em><i id="zhze" class="markicon"></i><span class="arrow-show1" style="display:none;">可用余额+待收本息</span><span class="icon-show1" style="display:none;"></span></span> <span class="truemoney"><i class="f26 fb">0.00 </i> 元</span> </li>
-            <li><span><em>待收本息</em><i id="dsbx" class="markicon"></i><span class="arrow-show2" style="display:none;">未到账的投资项目的本金、利息总额</span><span class="icon-show2" style="display:none;"></span></span> <span class="truemoney"><i class="f26 fb">0.00 </i>元</span> </li>
-            <li><span><em>累计收益</em><i id="ljsy" class="markicon"></i><span class="arrow-show3" style="display: none;">已到账的投资收益+未到账的投资收益</span><span class="icon-show3" style="display: none;"></span></span> <span class="truemoney"><i class="f26 fb c-pink">0.00 </i> 元</span> </li>
+            <li class="none"><span><em>账户余额</em><i id="zhze" class="markicon"></i><span class="arrow-show1" style="display:none;">可用余额+待收本息</span><span class="icon-show1" style="display:none;"></span></span> <span class="truemoney"><i class="f26 fb"><span id="amount"></span> </i> </span><span style="font-size: 24px">元</span> </li>
+            <li><span><em>待收本息</em><i id="dsbx" class="markicon"></i><span class="arrow-show2" style="display:none;">未到账的投资项目的本金、利息总额</span><span class="icon-show2" style="display:none;"></span></span> <span class="truemoney"><i class="f26 fb"><span id="sum"></span> </i> </span><span style="font-size: 24px">元</span> </li>
+            <li><span><em>待还金额</em><i id="ljsy" class="markicon"></i><span class="arrow-show3" style="display: none;">已到账的投资收益+未到账的投资收益</span><span class="icon-show3" style="display: none;"></span></span> <span class="truemoney"><i class="f26 fb c-pink"><span id="debt"></span></i> </span><span style="font-size: 24px">元</span> </li>
           </ul>
         </div>
       </div>

@@ -86,6 +86,16 @@ public class UserServiceImpl implements UserService {
         return userDao.getUser(map);
     }
 
+    /**
+     *  添加系统账户流水记录
+     * @param map
+     * @return
+     */
+    @Override
+    public int system(Map map) {
+        return userDao.system(map);
+    }
+
     @Override
     public List<Map> getList(Map map) {
         return userDao.getList(map);

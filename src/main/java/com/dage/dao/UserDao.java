@@ -126,15 +126,15 @@ public interface UserDao {
     List<Map> getMSBs(Map map);
 
     /**
-     * 用户充值添加用户流水表
+     * 添加用户流水表
      * @param map
      * @return
      */
     @Insert("insert into user_account_flow" +
             " values((select 'UFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
-            " 'U201812071032',123456788999,#{actualMoney1},(select (select availablebalance from " +
-            "(select flowdate,availablebalance from user_account_flow where userid='U201812071032' order by flowdate  desc)" +
-            " where rownum =1) + #{actualMoney1} from dual),sysdate,'充值')")
+            " #{userId},123456788999,#{actualMoney1},(select (select availablebalance from " +
+            " (select flowdate,availablebalance from user_account_flow where userid=#{userId} order by flowdate  desc)" +
+            " where rownum =1) + #{actualMoney1} from dual),sysdate,#{type})")
     int recharge(Map map);
 
     /**
@@ -150,19 +150,21 @@ public interface UserDao {
      * @param map
      * @return
      */
-    @Update("update user_account  set availablebalance=#{money}  where userid=#{userId}")
+    @Update("update user_account  set availablebalance=" +
+            "((select availablebalance from user_account where userid=#{userId})+#{actualMoney1}) " +
+            " where userid=#{userId}")
     int withdraw(Map map);
 
     /**
-     * 添加系统账户流水记录
+     *  添加系统账户流水记录
      * @param map
      * @return
      */
     @Insert("insert into tb_system_account_flow" +
-            "values((select 'SFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
-            " '#{userId}','A111111111',#{money},(select (select availablebalance from" +
-            " (select flowdate,availablebalance from tb_system_account_flow where userid='U201812071032' order by flowdate  desc)" +
-            " where rownum =1)+#{money} from dual),sysdate,'手续费',null,123);")
+            " values((select 'SFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
+            " #{userId},'A111111111',#{actualMoney1},(select (select availablebalance from" +
+            " (select flowdate,availablebalance from tb_system_account_flow where userid=#{userId} order by flowdate  desc)" +
+            " where rownum =1)+#{actualMoney1} from dual),sysdate,#{type},null,123)")
     int system(Map map);
 
     /**

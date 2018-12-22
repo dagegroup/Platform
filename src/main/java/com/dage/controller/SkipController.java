@@ -36,9 +36,9 @@ public class SkipController {
         Map user=userService.getUserByUserName(userName);
         String userid=(String) user.get("USERID");
         //将userid放入session 便于使用
-        //session.setAttribute("userid",userid);
-        String userid1= "U201812076613";
-        session.setAttribute("userid",userid1);
+        session.setAttribute("userid",userid);
+        //String userid1= "U201812076613";
+        //session.setAttribute("userid",userid1);
         if (map.size()>0){
             /*Object o = map.get("bankCardNo");
             System.out.println(o);
@@ -56,19 +56,26 @@ public class SkipController {
     /**
      * 跳转到个人中心充值
      *
-     * 用户提现之后更新用户账户  添加用用户账户流水 添加系统账户流水
+     * 用户充值之后更新用户账户  添加用用户账户流水 添加系统账户流水
      * @return
      */
     @RequestMapping("/Recharge")
     public String toRecharge(@RequestParam Map map,HttpSession session){
         if (map.size()>0){
-            //System.out.println(map.get("money"));
-            String userid=(String)session.getAttribute("session");
 
+            System.out.println(map.get("actualMoney1"));
+            System.out.println(map.get("bankCardNo"));
+            String userid=(String)session.getAttribute("userid");
+            System.out.println(userid);
             map.put("userId",userid);
-            //System.out.println("手续费"+map.get("procedure"));
+            map.put("type","充值");
+            //改变用户账户可用余额
+            System.out.println(userService.withdraw(map));
+            //添加系统账户流水
+            userService.system(map);
+            //添加用户账户流水
+            userService.recharge(map);
 
-            //System.out.println(map.get("userId"));
         }
         return "个人中心-充值";
     }
