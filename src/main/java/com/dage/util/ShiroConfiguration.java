@@ -56,6 +56,7 @@ public class ShiroConfiguration {
         map.put("/rent/*","anon");
         map.put("/skip/*","anon");
         map.put("/Repayment/*","anon");
+        map.put("/changePassword/*","anon");
         map.put("/person/*","anon");
         map.put("/**","authc");
         //anon 不拦截
