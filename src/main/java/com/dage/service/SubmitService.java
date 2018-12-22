@@ -1,5 +1,6 @@
 package com.dage.service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public interface SubmitService {
      * @param map
      * @return
      */
-    int updateBidState(Map map);
+    int updateBidState(Map map, HttpSession session);
 
 
     /**

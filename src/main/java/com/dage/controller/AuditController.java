@@ -45,6 +45,26 @@ public class AuditController {
     }
 
     /**
+     * 跳转后台审核页面
+     * @return
+     */
+    @RequestMapping("audit")
+    public Object toAudit(){
+        return "business/audit";
+    }
+
+    /**
+     * 展示标审核记录的详细信息
+     * @param map
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("auditpage")
+    public Object auditPage(@RequestBody Map map){
+        return auditService.getAuditList(map);
+    }
+
+    /**
      * 展示待审核标的详细信息
      * @param map
      * @return
