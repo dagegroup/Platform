@@ -47,6 +47,8 @@ public class ShiroConfiguration {
         map.put("/js/**","anon");
         map.put("/easyui/**","anon");
         map.put("/foreground/**","anon");
+        map.put("/elementui/**","anon");
+        map.put("/login/**","anon");
         map.put("/goto/*","anon");
         map.put("/user/*","anon");
         map.put("/infor/*","anon");
