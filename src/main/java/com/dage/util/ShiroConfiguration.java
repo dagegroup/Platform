@@ -39,23 +39,28 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         Map<String,String> map = new LinkedHashMap();
         List<Permission> list = permissionService.getList();
-//        for (Permission permission : list) {
-//            if (permission.getPrefix()!=null&&permission.getPrefix()!=""&&permission.getPrefix()!="null"){
-//                map.put(permission.getPrefix(),"perms["+permission.getToken()+"]");
-//            }
-//        }
+        for (Permission permission : list) {
+            if (permission.getPrefix()!=null&&permission.getPrefix()!=""&&permission.getPrefix()!="null"){
+                map.put(permission.getPrefix(),"perms["+permission.getToken()+"]");
+            }
+        }
         map.put("/js/**","anon");
         map.put("/easyui/**","anon");
         map.put("/foreground/**","anon");
-        map.put("/*.html","anon");
-        map.put("/bklogin","anon");
-        //map.put("/user/login","anon");
-        map.put("/**","anon");
+        map.put("/goto/*","anon");
+        map.put("/user/*","anon");
+        map.put("/infor/*","anon");
+        map.put("/bid/*","anon");
+        map.put("/rent/*","anon");
+        map.put("/skip/*","anon");
+        map.put("/Repayment/*","anon");
+        map.put("/person/*","anon");
+        map.put("/**","authc");
         //anon 不拦截
         //authc 登陆访问
         //perms[]  权限访问
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
-        shiroFilterFactoryBean.setLoginUrl("/bklogin");
+        shiroFilterFactoryBean.setLoginUrl("/goto/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/noAuth");
         return shiroFilterFactoryBean;
     }
