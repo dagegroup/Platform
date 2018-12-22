@@ -49,13 +49,14 @@ public class ShiroConfiguration {
         map.put("/foreground/**","anon");
         map.put("/*.html","anon");
         map.put("/bklogin","anon");
+        map.put("/goto/backLogin","anon");
         //map.put("/user/login","anon");
         map.put("/**","anon");
         //anon 不拦截
         //authc 登陆访问
         //perms[]  权限访问
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
-        shiroFilterFactoryBean.setLoginUrl("/bklogin");
+        shiroFilterFactoryBean.setLoginUrl("/goto/backLogin");
         shiroFilterFactoryBean.setUnauthorizedUrl("/noAuth");
         return shiroFilterFactoryBean;
     }
