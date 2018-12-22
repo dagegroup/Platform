@@ -187,12 +187,11 @@
 			    	th.value = th.value.substr(0,th.value.length-1);
 			    }
 			}
-			//]]>
 		</script>
     <div class="personal-main">
       <div class="personal-deposit">
         <h3><i>提现</i></h3>
-        <form id="form" name="form" method="post" action=""  target="_blank">
+        <form id="form" name="form" method="post" action="/skip/Withdraw2"  target="_blank">
           <div class="deposit-form" style="margin-top:0px;border-top:0px none;">
             <h6>填写提现金额</h6>
             <ul>
@@ -218,7 +217,7 @@
             $(function(){
                 $.ajax({
                     url: "/person/account",
-                    data:{userId:'U201812071032'},
+                    data:{userId:''},
                     async:false,//同步
                     type:"post",
                     dataType:"json",
