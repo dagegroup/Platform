@@ -97,13 +97,33 @@ public interface UserDao {
             " to_char(biderpaydeaddate,'yyyy-mm-dd') biderpaydeaddate,bidrepayState,bidrepaynumber" +
             " from bid_repay_info where userid=#{userId}" +
             " <if test=\" type!=null and type!=''\"> and bidrepayState=#{type}</if>" +
-            " <if test=\" time1!=null and time1!='' \"> and to_char(bidrepaydate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
-            " <if test=\" time2!=null and time2!='' \"> and bidrepaydate &gt;= trunc(next_day(sysdate-8,1)+1) and bidrepaydate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
-            " <if test=\" time3!=null and time3!='' \"> and to_char(bidrepaydate,'yyyy-mm')=to_char(sysdate,'yyyy-mm')</if>"+
-            " <if test=\" time4!=null and time4!='' \"> and to_char(bidrepaydate,'yyyy')=to_char(sysdate,'yyyy')</if>"+
+            " <if test=\" time1!=null and time1!='' \"> and to_char(biderpaydeaddate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
+            " <if test=\" time2!=null and time2!='' \"> and biderpaydeaddate &gt;= trunc(next_day(sysdate-8,1)+1) and biderpaydeaddate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
+            " <if test=\" time3!=null and time3!='' \"> and to_char(biderpaydeaddate,'yyyy-mm')=to_char(sysdate,'yyyy-mm')</if>"+
+            " <if test=\" time4!=null and time4!='' \"> and to_char(biderpaydeaddate,'yyyy')=to_char(sysdate,'yyyy')</if>"+
             " </script>")
-    List<Map> getRepay(Map userId);
+    List<Map> getRepay(Map map);
 
+    /**
+     * 更具
+     * @param map
+     * @return
+     */
+    int  getSum1(Map map);
+
+    /**
+     *根据用户id查询可以回款标信息标
+     * @param map
+     * @return
+     */
+    @Select("<script>select * from bid_info where bidid in (select bidid from bid_submit where userid=#{userId}) "+
+            " <if test=\" type!=null and type!=''\"> and bidrepaymentmethod=#{type}</if>" +
+            " <if test=\" time1!=null and time1!='' \"> and to_char(biderpaydeaddate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
+            " <if test=\" time2!=null and time2!='' \"> and biderpaydeaddate &gt;= trunc(next_day(sysdate-8,1)+1) and biderpaydeaddate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
+            " <if test=\" time3!=null and time3!='' \"> and to_char(biderpaydeaddate,'yyyy-mm')=to_char(sysdate,'yyyy-mm')</if>"+
+            " <if test=\" time4!=null and time4!='' \"> and to_char(biderpaydeaddate,'yyyy')=to_char(sysdate,'yyyy')</if>"+
+            " </script>")
+    List<Map> getMSBs(Map map);
 
     /**
      * 用户充值添加用户流水表
@@ -116,7 +136,6 @@ public interface UserDao {
             "(select flowdate,availablebalance from user_account_flow where userid='U201812071032' order by flowdate  desc)" +
             " where rownum =1) + #{actualMoney1} from dual),sysdate,'充值')")
     int recharge(Map map);
-
 
     /**
      * 根据用户id 查询用户账户信息

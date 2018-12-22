@@ -1,7 +1,7 @@
 package com.dage.service;
 
-import org.apache.ibatis.annotations.Select;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -79,4 +79,18 @@ public interface RepaymentService {
      * @return
      */
     int insertInvestorFlow(Map map);
+
+    /**
+     * 根据bidid查询标的总额
+     * @param bidid
+     * @return
+     */
+    double getBidamount(String bidid);
+
+    /**
+     * 查询每一个投资人投资了该标多少钱
+     * @param map
+     * @return
+     */
+    double getSum(Map map);
 }

@@ -4,6 +4,7 @@ import com.dage.dao.RepaymentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,16 @@ public class RepaymentServiceImpl implements RepaymentService {
 
     @Autowired
     private RepaymentDao repaymentDao;
+
+    /**
+     * 根据bidid查询标的总额
+     * @param bidid
+     * @return
+     */
+    @Override
+    public double getBidamount(String bidid) {
+        return repaymentDao.getBidamount(bidid);
+    }
 
     /**
      * 用户余额够时 用户还款 更新投资者的 账户余额
@@ -40,6 +51,16 @@ public class RepaymentServiceImpl implements RepaymentService {
     @Override
     public List<Map> getInvestor(String bidid) {
         return repaymentDao.getInvestor(bidid);
+    }
+
+    /**
+     *查询每一个投资人投资了该标多少钱
+     * @param map
+     * @return
+     */
+    @Override
+    public double getSum(Map map) {
+        return repaymentDao.getSum(map);
     }
 
     /**

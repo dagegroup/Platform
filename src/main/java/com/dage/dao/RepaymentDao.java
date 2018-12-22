@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +22,11 @@ public interface RepaymentDao {
      * @param map
      * @return
      */
-    @Select("<script>select to_char(biderpaydate,'yyyy-mm-dd') as biderpaydate,repayid,userid,bidrepayamount," +
+    @Select("<script>select bidid, to_char(biderpaydate,'yyyy-mm-dd') as biderpaydate,repayid,userid,bidrepayamount," +
             " to_char(biderpaydeaddate,'yyyy-mm-dd') as biderpaydeaddate," +
             " to_char(bidnextrepaydate,'yyyy-mm-dd') as bidnextrepaydate," +
             " bidrepayState, bidrepaynumber,bidrepaytotpmts,bidrepaymethod,bidrepayuserid" +
-            " from bid_repay_info where userid=#{userId}" +
+            " from bid_repay_info where userid=#{userId} and bidrepaystate like '%待还款'"  +
             "<if test=\" repayid!=null and repayid!=''\"> and repayid=#{repayid}</if>" +
             "<if test=\" type!=null and type!=''\"> and bidrepaystate=#{type}</if>" +
             "</script>")
@@ -39,6 +40,15 @@ public interface RepaymentDao {
     @Select("select * from user_account where userid=#{userId}")
     Map getBalance(Map map);
 
+
+    /**
+     * 根据bidid查询标的总额
+     * @param bidid
+     * @return
+     */
+    @Select("select bidamount from bid_info where bidid=#{bidid}")
+    double getBidamount(String bidid);
+
     /**
      * 根据还款计划Id查询需要还的钱
      *
@@ -47,6 +57,14 @@ public interface RepaymentDao {
      */
     @Select("select * from bid_repay_info where repayid=#{repayid}")
     Map getAmount(Map map);
+
+    /**
+     * 查询每一个投资人投资了该标多少钱
+     * @param map
+     * @return
+     */
+    @Select("select sum(bidamount) from bid_submit where userid=#{userId} and bidid=#{bidid}")
+    double getSum(Map map);
 
     /**
      * 用户余额够时 用户还款 更新用户可用余额
