@@ -104,5 +104,10 @@ public class GotoController {
     public String toRentInfo3(){
         return "/reception/借款信息填写3";
     }
+    @RequestMapping("backLogin")
+    public String tobackLoign(){
+        return "/reception/BackLogin";
+    }
+
 
 }

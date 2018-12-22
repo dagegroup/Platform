@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -48,7 +49,7 @@ public class FloodmarkController {
      */
     @ResponseBody
     @RequestMapping("check")
-    public Object submitCheck(@RequestBody Map map){
-        return submitService.updateBidState(map);
+    public Object submitCheck(@RequestBody Map map, HttpSession session){
+        return submitService.updateBidState(map,session);
     }
 }

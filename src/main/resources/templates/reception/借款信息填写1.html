@@ -16,9 +16,9 @@
   <script type="text/javascript" src="../js/vue.js"></script>
   <script type="text/javascript" src="../js/axios.min.js"></script>
   <!-- 引入样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="/elementui/elementui.css">
   <!-- 引入组件库 -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="/elementui/elementui.js"></script>
 <script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
 <script type="text/javascript" src="../foreground/script/common.js"></script>
 </head>
@@ -86,10 +86,10 @@
             <h2><span class="icontit icontit12 png"></span>借款信息</h2>
             <div>
               <div id="diva">
-                <el-form  :model="dataForm"    ref="dataForm" label-width="200px">
+                <el-form  :model="dataForm"  status-icon :rules="rules"  ref="dataForm" label-width="200px">
                   <el-input v-model="dataForm.id"  type="hidden"></el-input>
                   <el-col :span="12">
-                    <el-form-item label="借款用途">
+                    <el-form-item label="借款用途" prop="useInfo">
                       <el-select v-model="dataForm.useInfo" placeholder="请选择">
                         <el-option label="买房" value="买房"></el-option>
                         <el-option label="买车" value="买车"></el-option>
@@ -106,12 +106,12 @@
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
-                    <el-form-item label="申请金额">
-                      <el-input v-model="dataForm.money" @blur="countAllMoney"  placeholder="借款额度为10000-50000" style="width: 180px"></el-input>
+                    <el-form-item label="申请金额" prop="money">
+                      <el-input v-model="dataForm.money" @blur="countAllMoney"  placeholder="借款额度为10000-500000" style="width: 180px"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
-                    <el-form-item label="借款期限">
+                    <el-form-item label="借款期限" prop="month">
               <el-select v-model="dataForm.month" @change="countAllMoney" placeholder="月份">
               <el-option label="全部" value="0"></el-option>
                 <el-option label="1个月" value="1"></el-option>
@@ -130,17 +130,17 @@
             </el-form-item>
                   </el-col>
                   <el-col :span="12">
-              <el-form-item label="年利率">
+              <el-form-item label="年利率" prop="apr">
                 <el-input v-model="dataForm.apr"  @blur="countAllMoney"   placeholder=" 请保持在6-20个百分点 " style="width: 180px"></el-input>
             </el-form-item>
                   </el-col>
                   <el-col :span="12">
-                    <el-form-item label="招标天数">
+                    <el-form-item label="招标天数" prop="biddeadday">
                       <el-input v-model="dataForm.biddeadday"   placeholder="请输入你想招标的天数" style="width: 200px"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
-                    <el-form-item label="申请时间">
+                    <el-form-item label="申请时间" prop="bidapplydate">
                       <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="dataForm.bidapplydate"></el-date-picker>
                     </el-form-item>
                   </el-col>
@@ -152,18 +152,18 @@
               </el-form-item>
                   </el-col>
                   <el-col :span="12">
-            <el-form-item label="借款描述">
+            <el-form-item label="借款描述" prop="desc">
               <el-input v-model="dataForm.desc" placeholder="请输入你的借款描述" type="textarea" style="width: 180px"></el-input>
             </el-form-item>
                   </el-col>
                   <el-col :span="12">
-            <el-form-item label="可接受月最高还款额度">
-                <el-input-number v-model="dataForm.perMonth"  :min="1"   ></el-input-number>
+            <el-form-item label="可接受月最高还款额度" prop="perMonth" >
+              <el-input v-model="dataForm.perMonth"   placeholder="请输入月最高还款额度" style="width: 200px"></el-input>
             </el-form-item>
                   </el-col>
                 <center>
                 <template >
-                    <el-button :plain="true" type="primary" size="small"  @click="nextin">下一步，填写详细信息</el-button>
+                    <el-button :plain="true" type="primary" size="small" v_if="show"  @click="nextin('dataForm')">下一步，填写详细信息</el-button>
                 </template>
                 </center>
           </el-form>
@@ -209,48 +209,155 @@
   <script type="text/javascript">
     var vm=new Vue({
         el: "#diva",
-        data: {
-            show: false,
-            loading: true,
-            dataFormVisible: false,
-            options: [],
-            dataForm: {
-                id: 0,
-                useInfo: "",
-                money: "",
-                month: "",
-                desc: "",
-                perMonth: "",
-                allMoney: 0,
-                monthMoney: 0,
-                backtype: "等额本息",
-                apr:6,
-                biddeadday:"",
-                bidapplydate:""
 
-            }
+        data(){
+            var checkMoney= (rule, value, callback) => {
+                var reg=/^[1-9]\d*$/;
+                if (!value) {
+                    return callback(new Error('申请金额不能为空'));
+                }
+                setTimeout(() => {
+                    if (!reg.test(value)) {
+                        callback(new Error('请输入正整数'));
+                    } else {
+                        if(value<10000){
+                            callback(new Error('金额不能小于10000'))
+                        }
+                        if(value>50000){
+                            callback(new Error('金额不能大于50000'))
+                        } else {
+                            callback();
+                        }
+                    }
+                }, 1000);
+            };
+
+            var checkApr = (rule, value, callback) => {
+                var reg=/^[1-9]\d*$/;
+                if (!value) {
+                    callback(new Error('利率不能为空'));
+                } else {
+                    if (!reg.test(value)) {
+                        callback(new Error('请输入正整数'));
+                    }else{
+                        if (value<6){
+                            callback(new Error('利率不能小于%6'))
+                        }
+                        if (value>20){
+                            callback(new Error('利率不能大于%20'))
+                        }
+                    }
+                    callback();
+                }
+            };
+
+            var checkDays = (rule, value, callback) => {
+                var reg=/^[1-9]\d*$/;
+                if (!value) {
+                    callback(new Error('天数不能为空'));
+                } else {
+                    if (!reg.test(value)) {
+                        callback(new Error('请输入正整数'));
+                    }else{
+                        if (value<5){
+                            callback(new Error('天数不能小于5天'))
+                        }
+                        if (value>30){
+                            callback(new Error('天数不能大于30天'))
+                        }
+                    }
+                    callback();
+                }
+            };
+            var checkPer = (rule, value, callback) => {
+                var reg=/^[1-9]\d*$/;
+                if (!value) {
+                    callback(new Error('额度不能为空'));
+                } else {
+                    if (!reg.test(value)) {
+                        callback(new Error('请输入正整数'));
+                    }
+                    callback();
+                }
+            };
+
+            return {
+
+                show: false,
+                loading: true,
+                dataFormVisible: false,
+                options: [],
+                dataForm: {
+                    id: 0,
+                    useInfo: "",
+                    money: "",
+                    month: "",
+                    desc: "",
+                    perMonth: "",
+                    allMoney: 0,
+                    monthMoney: 0,
+                    backtype: "等额本息",
+                    apr:6,
+                    biddeadday:"",
+                    bidapplydate:""
+                },
+                rules: {
+                    useInfo: [
+                        { required: true, message: '请选择借款用途', trigger: 'change' }
+                    ],
+                    money: [
+                        { validator: checkMoney, trigger: 'blur' }
+                    ],
+                    month: [
+                        { required: true, message: '请选择借款期限', trigger: 'change' }
+                    ],
+                    apr: [
+                        { validator: checkApr, trigger: 'blur' }
+                    ],
+                    perMonth: [
+                        { validator: checkPer, trigger: 'blur' }
+                    ],
+                    bidapplydate: [
+                        { required: true, message: '请选择申请时间', trigger: 'change' }
+                    ],
+                    biddeadday: [
+                        { validator: checkDays, trigger: 'blur' }
+                    ],
+                    desc: [
+                        { required: true, message: '请填写借款描述', trigger: 'blue' }
+                    ]
+                }
+            };
         },
         methods: {
-            nextin: function () {
-                var _self = this;
-                _self.loading = true;
-                var formData = this.dataForm;
-                // alert(JSON.stringify(formData));
-                var goUrl = '/rent/rentInfo1';
-                //alert(goUrl);
-                //alert(JSON.stringify(formData));
-                axios.post(goUrl, formData).then(function (response) {
-                    // console.log(response.data);
-                    // alert(222);
-                    // self.total=response.data.total;
-                    if (response.data > 0) {
-                        location.href = "/goto/rentInfo1"
-                    } else {
-                        _self.$message({
-                            message: '请确认是否正在借款,还款后再进行借款操作',
-                            type: 'error'
-                        });
+            nextin(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        var _self = this;
+                        _self.loading = true;
+                        var formData = this.dataForm;
+                        // alert(JSON.stringify(formData));
+                        var goUrl = '/rent/rentInfo1';
+                        //alert(goUrl);
+                        //alert(JSON.stringify(formData));
+                        axios.post(goUrl, formData).then(function (response) {
+                            // console.log(response.data);
+                            // alert(222);
+                            // self.total=response.data.total;
+                            if (response.data > 0) {
+                                location.href = "/goto/rentInfo1"
+                            } else {
+                                _self.$message({
+                                    message: '请确认是否正在借款,还款后再进行借款操作',
+                                    type: 'error'
+                                });
+                            }
+                        })
+                    }else {
+                        console.log('error submit!!');
+                        return false;
                     }
+
                 })
             },
             countAllMoney: function () {
@@ -266,8 +373,7 @@
         editClick: function () {
             this.dataFormVisible = true;
         }}
-
-            })
+    })
   </script>
 </div>
 <!--网站底部-->

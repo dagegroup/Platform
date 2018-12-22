@@ -51,9 +51,22 @@ public interface AuditDao {
      * @param map
      * @return
      */
-    @Insert("insert into bid_audit (auditid,userid,bidid,empid,audittime,auditstate,auditremarks,applytime) values(seq_auditid.nextval,#{USERID},#{BIDID},#{EMPID},sysdate," +
-            "#{BIDSTATE},#{INFOS},#{BIDAPPLYDATE}); ")
+    @Insert("insert into bid_audit (auditid,bidid,empid,audittime,auditstate) values(seq_auditid.nextval,#{BIDID},#{EMPID},sysdate," +
+            "#{BIDSTATE}) ")
     int AddAudit(Map map);
+
+
+    /**
+     * 获取所有审核信息
+     * @param map
+     * @return
+     */
+    @Select("<script> select a.bidid,a.empid,e.name,to_char(audittime,'yyyy-mm-dd hh24:mi:ss') as audittime,a.auditstate from bid_audit a left join tb_emp e on a.empid=e.id  where 1=1 " +
+            "<if test=\" BIDID!=null and BIDID!=''\"> and b.bidid = #{BIDID}</if> " +
+            " <if test=\" start!=null and start!=''\"> and audittime &gt; to_date(start,'yyyy-mm-dd')</if> " +
+            " <if test=\" end!=null and end!=''\"> and audittime &lt; to_date(end,'yyyy-mm-dd')</if> " +
+            " order by audittime desc</script>")
+    List<Map> getAuditList(Map map);
     /**
      * 更改认证信息的状态  auditorid,audittime,auditorname,auditresult,auditremarks,
      * @param map
