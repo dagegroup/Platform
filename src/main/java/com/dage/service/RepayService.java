@@ -4,6 +4,7 @@ import com.dage.dao.RepayDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public interface RepayService {
      * @param map
      * @return
      */
-    int repayPlanHandle(Map map);
+    int repayPlanHandle(Map map, HttpSession session);
     /**
      * 获取待还款的投标信息
      * @param map

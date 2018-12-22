@@ -28,6 +28,13 @@ public interface UserService {
     List<Map> getFlow(Map map);
 
     /**
+     *根据用户id查询可以回款标信息标
+     * @param map
+     * @return
+     */
+    List<Map> getMSBs(Map map);
+
+    /**
      * 根据用户编号查询用户投资记录
      * @param userId
      * @return
@@ -36,7 +43,7 @@ public interface UserService {
 
     /**
      * 根据用户编号查询用户还款计划
-     * @param userId
+     * @param map
      * @return
      */
     List<Map> getRepay(Map map);

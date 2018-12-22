@@ -18,6 +18,12 @@ public class RentInfoServiceImpl implements RentInfoService {
 
     @Autowired
     private RentInfoDao rentInfoDao;
+
+    @Override
+    public Map getrent(String userid) {
+        return rentInfoDao.getrent(userid);
+    }
+
     @Override
     public Map getInfo(String userid) {
         return rentInfoDao.getInfo(userid);

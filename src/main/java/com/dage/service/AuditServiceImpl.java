@@ -7,6 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import java.util.Map;
  * @creatTime:2018-12-15 09:02
  */
 @Service
+@Transactional
 public class AuditServiceImpl implements AuditService {
     @Autowired
     private AuditDao auditDao;
@@ -47,7 +49,17 @@ public class AuditServiceImpl implements AuditService {
         return auditDao.updateBidState(map);
     }
 
-//    auditorid,audittime,auditorname,auditresult,auditremarks,
+    @Override
+    public Map getAuditList(Map map) {
+        Map mp = new HashMap();
+        PageHelper.startPage(Integer.valueOf(map.get("page")+""),Integer.valueOf(map.get("rows")+""));
+        List<Map> listAudit = auditDao.getAuditList(map);
+        PageInfo<Map> info = new PageInfo<>(listAudit);
+        mp.put("page",info);
+        return mp;
+    }
+
+    //    auditorid,audittime,auditorname,auditresult,auditremarks,
     @Override
     public int updateRealState(Map map, HttpSession session) {
         Emp admin = (Emp)session.getAttribute("admin");

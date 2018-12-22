@@ -44,4 +44,11 @@ public interface AuditService {
      * @return
      */
     Map getRealByUserId(String id);
+
+    /**
+     * 获取所有审核信息
+     * @param map
+     * @return
+     */
+    Map getAuditList(Map map);
 }

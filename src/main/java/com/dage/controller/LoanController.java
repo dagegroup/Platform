@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -46,8 +47,8 @@ public class LoanController {
 
     @ResponseBody
     @RequestMapping("check")
-    public Object loanRepay(@RequestBody Map map){
-        return repayService.repayPlanHandle(map);
+    public Object loanRepay(@RequestBody Map map, HttpSession session){
+        return repayService.repayPlanHandle(map,session);
     }
 
 }

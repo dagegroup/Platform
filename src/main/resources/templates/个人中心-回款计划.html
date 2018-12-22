@@ -75,10 +75,11 @@
     <div class="credit-ad"><img src="../foreground/images/clist1.jpg" width="1200" height="96"></div>
     <div id="personal-left" class="personal-left">
       <ul>
-        <li class="pleft-cur"><span><a href="/skip/toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
+        <li ><span><a href="/skip/toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Record">资金记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Investment">投资记录</a></span></li>
-        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Plan">回款计划</a></span></li>
+        <li class="pleft-cur"><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Plan">回款计划</a></span></li>
+        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Conversion">还款记录</a></span></li>
         <li > <span> <a href="Packet"> <i class="dot dot02"></i> 还款 </a> </span> </li>
         <li><span><a href="Recharge1"><i class="dot dot03"></i>充值</a></span></li>
         <li class=""><span><a href="Withdraw"><i class="dot dot04"></i>提现</a></span></li>
@@ -93,20 +94,35 @@
           <div class="back-money"> <span class="back-own"><b class="fb">待收本金</b><br>
             <i>0.00</i> 元</span> <span class="back-profit"><b class="fb">待收收益</b><br>
             <i>0.00</i> 元</span> </div>
-          <div class="back-choosedate"> <span class="choosedate">筛选时间</span>
-            <div id="datebox" class="select-date"> <span class="select-title" style="display:inline-block;height:25px;line-height:20px;"></span>
-              <ul id="time">
-                <li>全部</li>
-                <li>今天</li>
-                <li>本周</li>
-                <li>本月</li>
-                <li>本年</li>
-              </ul>
+
+          <div class="personal-money">
+            <div class="money-choose"> <span class="money-date1">操作类型</span>
+              <div id="typeboxstyle" class="select-date">
+                <span class="select-title" style="display:inline-block;height:25px;line-height:20px;">全部</span>
+                <ul id="type">
+                  <li value="ti_balance1">全部</li>
+                  <li value="ti_balance">已放款</li>
+                  <li value="to_balance">已投标</li>
+                  <li value="unfreeze">已终止</li>
+                  <li value="to_frozen">已回款</li>
+                  <!--<li value="unfreeze">投资</li>-->
+                </ul>
+              </div>
+              <span class="money-date2">查询时间</span>
+              <div id="select-date" class="select-date"> <span class="select-title" style="display:inline-block;height:25px;line-height:20px;">全部</span>
+                <ul id="time">
+                  <li value="0d">今天</li>
+                  <li value="1w">本周</li>
+                  <li value="1m">本月</li>
+                  <li value="6m">本年</li>
+                  <li>全部</li>
+                </ul>
+              </div>
             </div>
-            </div>
+          </div>
           <span id="form:dataTable">
           <div class="personal-backlist">
-            <div class="pmain-contitle"> <span class="pmain-titledate fb">计划回款时间</span> <span class="pmain-titleproject fb">项目期数</span> <span class="pmain-titletype fb">类型</span> <span class="pmain-titlemoney fb">回款金额</span> </div>
+            <div class="pmain-contitle"> <span class="pmain-titledate fb">还款期限/月</span> <span class="pmain-titleproject fb">回款项目</span> <span class="pmain-titletype fb">回款利率</span> <span class="pmain-titlemoney fb">还款方式</span> </div>
             <ul style="float:left;">
             <li><span id="tbody-result"></span></li>
               <!--<div style=" width:760px;height:200px;padding-top:100px; text-align:center;color:#d4d4d4; font-size:16px;">
@@ -123,7 +139,7 @@
 </div>
 <script>
   $(function () {
-      var typei="全部"
+      var typei="";
       ajax(null,typei);
   });
     window.onload = function(){
@@ -140,23 +156,25 @@
     }
     function ajax(timei,typei){
         $.ajax({
-            url: "/person/submit",
+            url: "/person/MSBs",
             data:{userId:'U201812071032',time:timei,type:typei},
             async:false,//同步
             type:"post",
             dataType:"json",
             success: function(data){
+                alert(JSON.stringify(data));
                 x = "";
                 for(var i=0;i < data.length;i++){
                     var trs = "";
+
                     trs += "<li><span class='pmain-titledate'>"
-                        + data[i].BIDREPAYDATE +
+                        + data[i].BIDDEADLINE +
                         "</span> <span class='pmain-titleproject'>"
-                        + data[i].BIDREPAYNUMBER +
+                        + data[i].BIDPROJECT +
                         "</span> <span class='pmain-titletype'>"
-                        +data[i].BIDREPAYMETHOD+
+                        +data[i].BIDRATE+
                         "</span><span class='pmain-titlemoney'>"
-                        +data[i].BIDREPAYAMOUNT+
+                        +data[i].BIDREPAYMENTMETHOD+
                         "</span></li>";
                     x += trs;
                 };
