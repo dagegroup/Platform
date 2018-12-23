@@ -207,12 +207,21 @@ public class SkipController {
     }
 
     /**
-     * 跳转到个人中心账户设置
+     * 跳转到个人中心账户密码修改
      * @return
      */
     @RequestMapping("/Setting")
     public String toSetting(){
         return "个人中心-账户设置";
+    }
+
+    /**
+     * 跳转到个人中心账户支付密码修改
+     * @return
+     */
+    @RequestMapping("/Change")
+    public String toChange(){
+        return "个人中心-支付密码";
     }
 
     /**

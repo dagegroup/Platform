@@ -99,21 +99,21 @@
         <li><span><a href="Recharge1"><i class="dot dot03"></i>充值</a></span></li>
         <li><span><a href="Withdraw"><i class="dot dot04"></i>提现</a></span></li>
         <!--新增-->
-        <li><span><a href="Change"><i class="dot dot09"></i>修改支付密码</a></span></li>
-        <li class="pleft-cur"><span><a href="Setting"><i class="dot dot09"></i>修改密码</a></span></li>
+        <li class="pleft-cur"><span><a href="Change"><i class="dot dot09"></i>修改支付密码</a></span></li>
+        <li><span><a href="Setting"><i class="dot dot09"></i>修改密码</a></span></li>
       </ul>
     </div>
 
     <!--修改手机号和修改密码-->
     <div class="personal-main">
       <div class="personal-zhsz">
-        <h3><i>修改密码</i></h3>
+        <h3><i>修改支付密码</i></h3>
         <div class="registerCont" id="updateDate">
           <ul>
-            <li><span class="dis">密码:</span>
+            <li><span class="dis">新支付密码:</span>
               <input @blur="passwordone" type="password" name="user.password" id="password" class="input " maxlength="24" tabindex="1">
-              <span id="passwordAlt" data-info="6-24个字符，英文、数字组成，区分大小写">6-24个字符，英文、数字组成，区分大小写</span></li>
-            <li><span class="dis">确认密码:</span>
+              <span id="passwordAlt" data-info="6-24个字符，英文、数字组成，区分大小写">6位数字组成</span></li>
+            <li><span class="dis">确认支付密码:</span>
               <input @blur="passwordtwo" type="password" name="repeatPassword" id="repeatPassword" class="input " maxlength="24" tabindex="1">
               <span id="repeatPasswordAlt" data-info="请再次输入密码">请再次输入密码</span></li>
             <li class="telNumber"> <span class="dis">手机号码:</span>
@@ -199,10 +199,10 @@
             //提交验证
             trueSubmit:function () {
                 var _self=this;
-                    axios.post("/changePassword/verify",{'PASSWORD':$('#password').val()}).then(function (response) {
+                    axios.post("/changePassword/payment",{'TRANSACTIONPASSWORD':$('#password').val()}).then(function (response) {
                             if (response.data==1){
                                 _self.$message({
-                                    message:  '修改密码成功',
+                                    message:  '支付密码修改成功',
                                     type: 'success'
                                 });
                                 setTimeout(function () { //间隔刷新
@@ -212,7 +212,7 @@
                                 alert("修改失败");
                                 _self.isDisabled=true;
                                 _self.$message({
-                                    message:  '修改密码失败',
+                                    message:  '支付密码修改失败',
                                     type: 'error'
                                 });
                             }
@@ -246,13 +246,13 @@
                         $("#passwordAlt").text("");
                         $("#passwordAlt").append("<span style=color:#ff7800>密码不能为空</span>");
                     }
-                    if (i.length < 6 || i.length > 24) {
+                    if (i.length != 6) {
                         $("#passwordAlt").text("");
-                        $("#passwordAlt").append("<span style=color:#ff7800>密码小于6位或者大于24位</span>");
+                        $("#passwordAlt").append("<span style=color:#ff7800>支付密码必须为6位数字</span>");
                     }
-                    if (!/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/.test(i)) {
+                    if (!/^[0-9]{6}$/.test(i)) {
                         $("#passwordAlt").text("");
-                        $("#passwordAlt").append("<span style=color:#ff7800>密码必须是由6-21字母和数字组合</span>");
+                        $("#passwordAlt").append("<span style=color:#ff7800>支付密码必须为6位数字</span>");
                     } else {
                         $("#passwordAlt").text("");
                         $("#passwordAlt").append("<span style=color:green>填入信息可用</span>");
