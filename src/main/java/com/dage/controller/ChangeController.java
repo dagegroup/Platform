@@ -51,7 +51,8 @@ public class ChangeController {
      */
     @ResponseBody
     @RequestMapping("/verifyCode")
-    public Object verifyCode(String phone,HttpSession session){
+    public Object verifyCode(@RequestBody Map map,HttpSession session){
+        String phone = (String)map.get("phone");
         //发送手机验证码
         int execute = IndustrySMS.execute(phone);
         //将验证码放入session中

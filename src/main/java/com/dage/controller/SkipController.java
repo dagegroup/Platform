@@ -212,7 +212,7 @@ public class SkipController {
      */
     @RequestMapping("/Setting")
     public String toSetting(){
-        return "个人中心-账户设置";
+        return "个人中心-登陆密码";
     }
 
     /**
