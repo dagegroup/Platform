@@ -12,10 +12,15 @@ import java.util.Map;
  * creatTime:2018-12-17 11:40
  */
 public interface RentInfoDao {
+    /**
+     * 查询用户是否真正处于借款状态
+     * @param userid
+     * @return
+     */
     @Select("select * from tb_user_info where state='借款' and userid=#{userid}")
     Map getrent(String userid);
     /**
-     *
+     *添加借款信息
      * @param map
      * @return
      */
@@ -23,7 +28,7 @@ public interface RentInfoDao {
     int addRentInfo(Map map);
 
     /**
-     *
+     *更新详细信息
      * @param map
      * @return
      */
@@ -31,7 +36,7 @@ public interface RentInfoDao {
     int addRentDetialInfo(Map map);
 
     /**
-     *
+     *添加认证图片
      * @param map
      * @return
      */
@@ -39,7 +44,7 @@ public interface RentInfoDao {
     int addRentInfo2(Map map);
 
     /**
-     *
+     *查询已经借款用户的详细信息 直接加载到用户详情页面
      * @param userid
      * @return
      */

@@ -70,6 +70,7 @@ public class RegisterController {
                 map.put("msg",2);
             }
             session.setAttribute("checkcode",execute);
+            session.setMaxInactiveInterval(3*60);
         }
         return map;
     }
@@ -84,16 +85,19 @@ public class RegisterController {
     @RequestMapping("/verifyCode")
     public Object verifyCode(String verifyCode,HttpSession session){
         Map map = new HashMap();
-        if (verifyCode!=null&&!"".equals(verifyCode)){
-             int c = Integer.valueOf(verifyCode);
-            int s =Integer.valueOf(session.getAttribute("checkcode")+"");
-            if (c==s){
-                map.put("msg",1);
-            }else{
-                map.put("msg",2);
+        if (verifyCode!=null&&!"".equals(verifyCode)) {
+            int c = Integer.valueOf(verifyCode);
+            Object checkcode = session.getAttribute("checkcode");
+            if (checkcode != null && !"".equals(checkcode)) {
+                int s = Integer.valueOf(checkcode + "");
+                if (c == s) {
+                    map.put("msg", 1);
+                } else {
+                    map.put("msg", 2);
+                }
+            } else {
+                map.put("msg", 2);
             }
-        }else{
-            map.put("msg",2);
         }
         return  map;
     }
@@ -132,7 +136,7 @@ public class RegisterController {
         }else{
             int i = userInfoService.insertInfo(map);
             if (i>0) {
-                session.setAttribute("userName",map.get("userName"));
+               // session.setAttribute("userName",map.get("userName"));
                 map1.put("msg", 1);
             }else{
                 map1.put("msg",3);
@@ -141,10 +145,10 @@ public class RegisterController {
         return map1;
     }
 
-    @ResponseBody
+   /* @ResponseBody
     @RequestMapping("/getName")
     public Object getName(HttpSession session){
         Object userName = session.getAttribute("userName");
         return userName;
-    }
+    }*/
 }

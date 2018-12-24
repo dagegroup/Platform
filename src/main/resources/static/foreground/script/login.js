@@ -211,7 +211,7 @@
                         }
                     },
                     error: function(data, textStatus) {
-                        alert(1111);
+
                     }
                 });
             },

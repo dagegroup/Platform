@@ -61,7 +61,8 @@ public class PersonController {
      */
     @ResponseBody
     @RequestMapping("/flow")
-    public List<Map> getFlow(@RequestParam Map map,HttpSession session){
+    public Object getFlow(@RequestBody Map map,HttpSession session){
+
         //当 选择全部时 将类型重置为空 自动查询全部
         if (map.get("type")!=null&&map.get("type")!=" "){
             String type = (String) map.get("type");
@@ -73,7 +74,17 @@ public class PersonController {
         // 根据session的userid 查询 为map 加入session里的 userid
         String userid=(String)session.getAttribute("userid");
         map1.put("userId",userid);
-        return userService.getFlow(map1);
+        //设置当前第几页和每页显示数量
+        PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
+        System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
+        //用PageInfo对结果进行包装
+        PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getFlow(map1));
+        Map resultMap=new HashMap();
+        //获取当前页数据
+        resultMap.put("pageData",pageInfo.getList());
+        //获取分页总数量
+        resultMap.put("total",pageInfo.getTotal());
+        return resultMap;
     }
 
     /**
@@ -104,7 +115,7 @@ public class PersonController {
      */
     @ResponseBody
     @RequestMapping("/submit")
-    public List<Map> getSubmit(@RequestParam Map map,HttpSession session){
+    public Object getSubmit(@RequestBody Map map,HttpSession session){
         //System.out.println(map.get("userId"));
         //System.out.println(map.get("type"));
         if (map.get("type")!=null&&map.get("type")!=""){
@@ -118,7 +129,17 @@ public class PersonController {
         map1.put("userId",userid);
         /*String userid="U201812071032";
         map1.put("userId",userid);*/
-        return userService.getSubmit(map1);
+        //设置当前第几页和每页显示数量
+        PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
+        System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
+        //用PageInfo对结果进行包装
+        PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getSubmit(map1));
+        Map resultMap=new HashMap();
+        //获取当前页数据
+        resultMap.put("pageData",pageInfo.getList());
+        //获取分页总数量
+        resultMap.put("total",pageInfo.getTotal());
+        return resultMap;
     }
 
     /**
@@ -128,7 +149,7 @@ public class PersonController {
      */
     @ResponseBody
     @RequestMapping("/repay")
-    public List<Map> getRepay(@RequestParam Map map,HttpSession session){
+    public Object getRepay(@RequestBody Map map,HttpSession session){
         if (map.get("type")!=null&&map.get("type")!=""){
             if (map.get("type").equals("全部")){
                 map.put("type",null);
@@ -138,7 +159,17 @@ public class PersonController {
         //根据session的userid 查询 为map 加入session里的 userid
         String userid=(String)session.getAttribute("userid");
         map1.put("userId",userid);
-        return userService.getRepay(map1);
+        //设置当前第几页和每页显示数量
+        PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
+        System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
+        //用PageInfo对结果进行包装
+        PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getRepay(map1));
+        Map resultMap=new HashMap();
+        //获取当前页数据
+        resultMap.put("pageData",pageInfo.getList());
+        //获取分页总数量
+        resultMap.put("total",pageInfo.getTotal());
+        return resultMap;
     }
 
     /**
@@ -150,7 +181,6 @@ public class PersonController {
     @RequestMapping("/account")
     public List<Map> getAccount(HttpSession session){
         String  userId = (String)session.getAttribute("userid");
-
         return userService.getAccount(userId);
     }
 
@@ -161,10 +191,20 @@ public class PersonController {
      */
     @ResponseBody
     @RequestMapping("/MSBs")
-    public List<Map> getMSBs(@RequestParam Map map,HttpSession session){
+    public Object getMSBs(@RequestBody Map map,HttpSession session){
         String userid=(String)session.getAttribute("userid");
         map.put("userId",userid);
-        return userService.getMSBs(map);
+        //设置当前第几页和每页显示数量
+        PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
+        System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
+        //用PageInfo对结果进行包装
+        PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getSubmit(map));
+        Map resultMap=new HashMap();
+        //获取当前页数据
+        resultMap.put("pageData",pageInfo.getList());
+        //获取分页总数量
+        resultMap.put("total",pageInfo.getTotal());
+        return resultMap;
     }
 
 

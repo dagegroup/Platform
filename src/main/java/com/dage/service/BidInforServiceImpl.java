@@ -16,7 +16,6 @@ import java.util.Map;
  * createTime:2018-12-14 11:07
  */
 @Service
-@Transactional//事务
 public class BidInforServiceImpl implements BidInforService {
 
     @Autowired
@@ -76,6 +75,7 @@ public class BidInforServiceImpl implements BidInforService {
      * @return
      */
     @Override
+    @Transactional//事务
     public int bidSubmit(Map map,HttpSession session) {
         String userid = (String)session.getAttribute("userid");//从session得到投资人id
         map.put("USERID",userid);//将投资人id加到map里传到dao层
@@ -112,10 +112,20 @@ public class BidInforServiceImpl implements BidInforService {
         /*更新标信息表开始*/
         map.put("BIDCURRENTAMOUNT",bidamount);//将前台的投标金额赋给BIDCURRENTAMOUNT加入到map
         /*更新标信息表结束*/
+
+        /*判断是否满标开始*/
+        double canmoney = bidInforDao.canMoney(map);//从数据库获取可投金额
+        /*判断是否满标结束*/
+
         if (oldavailablebalance>=bidamount){
-            bidInforDao.changeBidInfo(map);//更新标信息表可投金额
             bidInforDao.userAccount(map);//更新账户表
             bidInforDao.accountRun(map);//向账户流水表里插入数据
+            //判断当可投金额=前台投资金额时，变更标状态
+            if (canmoney ==bidamount){
+                bidInforDao.changeBidState(map);//更新标信息表可投金额,且变更标状态为“满标待审核”
+            }else{
+                bidInforDao.changeBidInfo(map);//更新标信息表可投金额
+            }
             return bidInforDao.bidSubmit(map);//返回值为成功的行数
         }
         return 0;
