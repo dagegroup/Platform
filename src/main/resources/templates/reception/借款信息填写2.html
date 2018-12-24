@@ -84,7 +84,7 @@
   </div>
 </header>
 <!--列表-->
-  <div class="" style="float:right;width:1150px;background-color:#fff;padding-top:20px;height:auto">
+  <div class="" style="float:right;width:1300px;background-color:#fff;padding-top:20px;height:auto">
       <input type="hidden" name="yrd_token" value="KK37ZUJZY3B62WTI3BTIGE7XZEXCY6XG">
 
       <div>
@@ -108,13 +108,41 @@
             </el-col>
             <el-col :span="6">
             <el-form-item label="现住地址:" >
-                <div class="block">
-                    <el-cascader style="width:150px"
-                            :options="options"
-                            v-model="dataForm.ADDRESS"
-                            @change="handleChange">
-                    </el-cascader>
-                </div>
+              <el-row style="width:360px">
+                <el-col :span="6">
+                  <el-select v-model="dataForm.sheng1" @change="choseProvince" placeholder="省级地区" style="width:90px" >
+                    <el-option
+                            v-for="item in province"
+                            :key="item.id"
+                            :label="item.value"
+                            :value="item.id">
+                    </el-option>
+                  </el-select>
+                </el-col>
+                <el-col :span="6">
+                  <el-select v-model="dataForm.shi1" @change="choseCity" placeholder="市级地区" style="width:90px">
+                    <el-option
+                            v-for="item in shi1"
+                            :key="item.id"
+                            :label="item.value"
+                            :value="item.id">
+                    </el-option>
+                  </el-select>
+                </el-col>
+                <el-col :span="6">
+                  <el-select v-model="dataForm.qu1" @change="choseBlock" placeholder="区级地区" style="width:90px">
+                    <el-option
+                            v-for="item in qu1"
+                            :key="item.id"
+                            :label="item.value"
+                            :value="item.id">
+                    </el-option>
+                  </el-select>
+                </el-col>
+                <el-col :span="6">
+                  <el-input v-model="dataForm.address"  placeholder="门牌号"  style="width:120px"></el-input>
+                </el-col>
+              </el-row>
             </el-form-item>
             </el-col>
             </el-row>
@@ -216,13 +244,38 @@
               </el-col>
                 <el-col :span="6"  class="ss">
                   <el-form-item label="现住地址:" >
-                    <div class="block">
-                      <el-cascader style="width:150px"
-                                   :options="options"
-                                   v-model="dataForm.ADDRESS"
-                                   @change="handleChange">
-                      </el-cascader>
-                    </div>
+                    <el-row style="width:400px">
+                      <el-col :span="6">
+                        <el-select v-model="dataForm.sheng2" @change="choseProvince" placeholder="省级地区" style="width:100px" >
+                          <el-option
+                                  v-for="item in province"
+                                  :key="item.id"
+                                  :label="item.value"
+                                  :value="item.id">
+                          </el-option>
+                        </el-select>
+                      </el-col>
+                      <el-col :span="6">
+                        <el-select v-model="dataForm.shi2" @change="choseCity" placeholder="市级地区" style="width:100px">
+                          <el-option
+                                  v-for="item in shi1"
+                                  :key="item.id"
+                                  :label="item.value"
+                                  :value="item.id">
+                          </el-option>
+                        </el-select>
+                      </el-col>
+                      <el-col :span="6">
+                        <el-select v-model="dataForm.qu2" @change="choseBlock" placeholder="区级地区" style="width:100px">
+                          <el-option
+                                  v-for="item in qu1"
+                                  :key="item.id"
+                                  :label="item.value"
+                                  :value="item.id">
+                          </el-option>
+                        </el-select>
+                      </el-col>
+                    </el-row>
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -244,13 +297,38 @@
               </el-col>
                 <el-col :span="6" class="ss">
                   <el-form-item label="现住地址:" >
-                    <div class="block">
-                      <el-cascader style="width:150px"
-                                   :options="options"
-                                   v-model="dataForm.ADDRESS"
-                                   @change="handleChange">
-                      </el-cascader>
-                    </div>
+                    <el-row style="width:400px">
+                      <el-col :span="6">
+                        <el-select v-model="dataForm.sheng3" @change="choseProvince" placeholder="省级地区" style="width:100px">
+                          <el-option
+                                  v-for="item in province"
+                                  :key="item.id"
+                                  :label="item.value"
+                                  :value="item.id">
+                          </el-option>
+                        </el-select>
+                      </el-col>
+                      <el-col :span="6">
+                        <el-select v-model="dataForm.shi3" @change="choseCity" placeholder="市级地区" style="width:100px">
+                          <el-option
+                                  v-for="item in shi1"
+                                  :key="item.id"
+                                  :label="item.value"
+                                  :value="item.id">
+                          </el-option>
+                        </el-select>
+                      </el-col>
+                      <el-col :span="6">
+                        <el-select v-model="dataForm.qu3" @change="choseBlock" placeholder="区级地区" style="width:100px">
+                          <el-option
+                                  v-for="item in qu1"
+                                  :key="item.id"
+                                  :label="item.value"
+                                  :value="item.id">
+                          </el-option>
+                        </el-select>
+                      </el-col>
+                    </el-row>
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -270,15 +348,40 @@
                       <el-input v-model="dataForm.OTHERTEL"    style="width: 150px"></el-input>
                   </el-form-item>
               </el-col>
-                <el-col :span="6" class="ss">
+                <el-col :span="6" >
                   <el-form-item label="现住地址:" >
-                    <div class="block">
-                      <el-cascader style="width:150px"
-                                   :options="options"
-                                   v-model="dataForm.ADDRESS"
-                                   @change="handleChange">
-                      </el-cascader>
-                    </div>
+                    <el-row style="width:400px">
+                      <el-col :span="6">
+                    <el-select v-model="dataForm.sheng4" @change="choseProvince" placeholder="省级地区" style="width:100px" >
+                                <el-option
+                                        v-for="item in province"
+                                        :key="item.id"
+                                        :label="item.value"
+                                        :value="item.id">
+                                </el-option>
+                    </el-select>
+                      </el-col>
+                      <el-col :span="6">
+                    <el-select v-model="dataForm.shi4" @change="choseCity" placeholder="市级地区" style="width:100px">
+                              <el-option
+                                      v-for="item in shi1"
+                                      :key="item.id"
+                                      :label="item.value"
+                                      :value="item.id">
+                              </el-option>
+                    </el-select>
+                      </el-col>
+                      <el-col :span="6">
+                    <el-select v-model="dataForm.qu4" @change="choseBlock" placeholder="区级地区" style="width:100px">
+                      <el-option
+                              v-for="item in qu1"
+                              :key="item.id"
+                              :label="item.value"
+                              :value="item.id">
+                      </el-option>
+                    </el-select>
+                      </el-col>
+                    </el-row>
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -313,6 +416,15 @@
     var vm=new Vue({
         el: "#diva",
         data: {
+            mapJson:'../login/map.json',
+            province:[],
+            sheng: '',
+            shi: '',
+            shi1: [],
+            qu: '',
+            qu1: [],
+            city:'',
+            block:'',
             loading: true,
             options: [],
             dataForm: {
@@ -336,18 +448,27 @@
                 JOBTEL:"",
                 OTHERNAME:"",
                 OTHERRELATIONSHIP:"",
-                OTHERTEL:""
+                OTHERTEL:"",
+                sheng1: '',
+                shi1: '',
+                qu1: '',
+                sheng2: '',
+                shi2: '',
+                qu2: '',
+                sheng3: '',
+                shi3: '',
+                qu3: '',
+                sheng4: '',
+                shi4: '',
+                qu4: '',
+                address:""
             },
 
 
         },
         created:function(){
+            this.getCityData();
             var _self=this;
-            axios.post('/rent/cascade').then(function(response){
-
-                self.options=response.data;
-
-            });
             axios.post('/rent/getInfo').then(function(response){
 
                 if(response.data.IDCARD!=null&&response.data.IDCARD!=''&&response.data.IDCARD!='null'){
@@ -406,8 +527,84 @@
             },
             handleChange:function() {
 
-            }
+            },
+            getCityData:function(){
+                var that = this;
+                axios.get(this.mapJson).then(function(response){
+                    if (response.status==200) {
+                        var data = response.data
+                        that.province = []
+                        that.city = []
+                        that.block = []
+                        // 省市区数据分类
+                        for (var item in data) {
+                            if (item.match(/0000$/)) {//省
+                                that.province.push({id: item, value: data[item], children: []})
+                            } else if (item.match(/00$/)) {//市
+                                that.city.push({id: item, value: data[item], children: []})
+                            } else {//区
+                                that.block.push({id: item, value: data[item]})
+                            }
+                        }
+                        // 分类市级
+                        for (var index in that.province) {
+                            for (var index1 in that.city) {
+                                if (that.province[index].id.slice(0, 2) === that.city[index1].id.slice(0, 2)) {
+                                    that.province[index].children.push(that.city[index1])
+                                }
+                            }
+                        }
+                        // 分类区级
+                        for(var item1 in that.city) {
+                            for(var item2 in that.block) {
+                                if (that.block[item2].id.slice(0, 4) === that.city[item1].id.slice(0, 4)) {
+                                    that.city[item1].children.push(that.block[item2])
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        console.log(response.status)
+                    }
+                }).catch(function(error){console.log(typeof+ error)})
+            },
+            // 选省
+            choseProvince:function(e) {
+
+
+                for (var index2 in this.province) {
+                    if (e === this.province[index2].id) {
+                        this.shi1 = this.province[index2].children
+                        this.shi = this.province[index2].children[0].value
+                        this.qu1 =this.province[index2].children[0].children
+                        this.qu = this.province[index2].children[0].children[0].value
+                        this.E = this.qu1[0].id
+                    }
+                }
+            },
+            // 选市
+            choseCity:function(e) {
+                for (var index3 in this.city) {
+                    if (e === this.city[index3].id) {
+                        this.qu1 = this.city[index3].children
+                        this.qu = this.city[index3].children[0].value
+                        this.E = this.qu1[0].id
+                        // console.log(this.E)
+                    }
+                }
+            },
+            // 选区
+            choseBlock:function(e) {
+                this.E=e;
+                // console.log(this.E)
+            },
         }
+
+
+
+
+
+
     } )
 </script>
 </div>

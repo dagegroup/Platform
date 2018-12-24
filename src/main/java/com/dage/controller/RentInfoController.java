@@ -68,6 +68,14 @@ public class RentInfoController {
     @ResponseBody
     @RequestMapping("rentInfo2")
     public Object rentInfo1(@RequestBody Map map, HttpSession session){
+        String address1 = map.get("sheng1").toString().concat(map.get("shi1").toString().concat(map.get("qu1").toString().concat(map.get("address") + "")));
+        String address2 = map.get("sheng2").toString().concat(map.get("shi2").toString().concat(map.get("qu2").toString()));
+        String address3 = map.get("sheng3").toString().concat(map.get("shi3").toString().concat(map.get("qu3").toString()));
+        String address4 = map.get("sheng4").toString().concat(map.get("shi4").toString().concat(map.get("qu4").toString()));
+        map.put("address1",address1);
+        map.put("address2",address2);
+        map.put("address3",address3);
+        map.put("address4",address4);
         Object userid = session.getAttribute("userid");
         System.out.println(userid);
         map.put("userid",userid.toString());
