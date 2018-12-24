@@ -12,6 +12,13 @@
 <script type="text/javascript" src="/foreground/script/jquery.min.js"></script>
 <script type="text/javascript" src="/foreground/script/common.js"></script>
 <script src="/foreground/script/user.js" type="text/javascript"></script>
+  <!-- 引入样式 -->
+  <script type="text/javascript" src="/js/vue.js"></script>
+  <script type="text/javascript" src="/js/axios.min.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="/elementui/elementui.css">
+  <!-- 引入组件库 -->
+  <script src="/elementui/elementui.js"></script>
 </head>
 <body>
 <header>
@@ -91,102 +98,292 @@
     <div class="personal-main">
       <div class="personal-back">
         <h3><i>回款计划</i></h3>
-        <form id="form" name="form" method="post" action="">
-          <input type="hidden" name="form" value="form">
           <div class="back-money"> <span class="back-own"><b class="fb">待收本金</b><br>
             <i>0.00</i> 元</span> <span class="back-profit"><b class="fb">待收收益</b><br>
             <i>0.00</i> 元</span> </div>
 
           <div class="personal-money">
-            <div class="money-choose"> <span class="money-date1">操作类型</span>
-              <div id="typeboxstyle" class="select-date">
-                <span class="select-title" style="display:inline-block;height:25px;line-height:20px;">全部</span>
-                <ul id="type">
-                  <li value="ti_balance1">全部</li>
-                  <li value="ti_balance">已放款</li>
-                  <li value="to_balance">已投标</li>
-                  <li value="unfreeze">已终止</li>
-                  <li value="to_frozen">已回款</li>
-                  <!--<li value="unfreeze">投资</li>-->
-                </ul>
-              </div>
-              <span class="money-date2">查询时间</span>
-              <div id="select-date" class="select-date"> <span class="select-title" style="display:inline-block;height:25px;line-height:20px;">全部</span>
-                <ul id="time">
-                  <li value="0d">今天</li>
-                  <li value="1w">本周</li>
-                  <li value="1m">本月</li>
-                  <li value="6m">本年</li>
-                  <li>全部</li>
-                </ul>
+
+            <div class="personal-huan">
+              <div class="personal-money" style="width: 1000px">
+                <div id="diva" class="money-choose">
+                  <!--列表顶部搜索和工具条-->
+                  <el-row>
+                    <el-form :inline="true" :model="searchForm" class="demo-form-inline">
+                      <el-form-item label="选择状态">
+                        <el-select v-model="value" placeholder="请选择">
+                          <el-option
+                                  v-for="item in options"
+                                  :key="item.value"
+                                  :label="item.label"
+                                  :value="item.value">
+                          </el-option>
+                        </el-select>
+                      </el-form-item>
+
+                      <el-form-item label="选择时间">
+                        <el-select v-model="value1" placeholder="请选择">
+                          <el-option
+                                  v-for="item in options1"
+                                  :key="item.value1"
+                                  :label="item.label1"
+                                  :value="item.value1">
+                          </el-option>
+                        </el-select>
+                      </el-form-item>
+                      <el-form-item>
+                        <el-button type="primary" icon="search" @click="searchClick">查询</el-button>
+                        <el-button type="success" icon="plus" @click="flushClick">刷新</el-button>
+                      </el-form-item>
+                    </el-form>
+                  </el-row>
+                  <!--列表-->
+                  <el-row>
+                    <el-table
+                            :data="tableData"
+                            v-loading.body="loading"
+                            border
+                            style="width: 100%;height: 300px;">
+
+                      <el-table-column
+                              prop="BIDDEADLINE"
+                              label="还款期限/月"
+                              width="200">
+                      </el-table-column>
+                      <el-table-column
+                              prop="BIDPROJECT"
+                              label="回款项目"
+                              width="200">
+                      </el-table-column>
+                      <el-table-column
+                              prop="BIDRATE"
+                              label="回款利率"
+                              width="200">
+                      </el-table-column>
+                      <el-table-column
+                              prop="BIDREPAYMENTMETHOD"
+                              label="还款方式"
+                              width="200">
+                      </el-table-column>
+                      <!--<el-table-column
+                              prop="BIDREPAYTOTPMTS"
+                              label="还款总期数"
+                              width="100">
+                      </el-table-column>-->
+                      <!--<el-table-column label="操作">
+                        <template scope="scope">
+                          <el-button :plain="true" type="success" size="small" icon="edit" @click="returnClick(scope.row)">我要还款</el-button>
+                          &lt;!&ndash;<el-button :plain="true" type="danger" size="small" icon="delete" @click="deleteClick(scope.row)">通过</el-button>
+                          <el-button :plain="true" type="success" size="small" icon="edit" @click="editClick(scope.row)">驳回</el-button>&ndash;&gt;
+                        </template>
+                      </el-table-column>-->
+                    </el-table>
+                  </el-row>
+
+                  <!--列表底部工具条和分页符-->
+                  <el-row style="margin-top: 20px" type="flex" justify="end">
+                    <el-col :span="6" >
+                    </el-col>
+                    <el-col :span="18" >
+                      <el-pagination
+                              style="float: left"
+                              @size-change="pageSizeChange"
+                              @current-change="currentPageChange"
+                              :current-page="currentPage"
+                              :page-sizes="[5, 10, 20]"
+                              :page-size="pageSize"
+                              layout="total, sizes, prev, pager, next, jumper"
+                              :total="total">
+                      </el-pagination>
+                    </el-col>
+                  </el-row>
+                </div>
               </div>
             </div>
+
+
           </div>
-          <span id="form:dataTable">
-          <div class="personal-backlist">
-            <div class="pmain-contitle"> <span class="pmain-titledate fb">还款期限/月</span> <span class="pmain-titleproject fb">回款项目</span> <span class="pmain-titletype fb">回款利率</span> <span class="pmain-titlemoney fb">还款方式</span> </div>
-            <ul style="float:left;">
-            <li><span id="tbody-result"></span></li>
-              <!--<div style=" width:760px;height:200px;padding-top:100px; text-align:center;color:#d4d4d4; font-size:16px;">
-										    <img src="images/nondata.png" width="60" height="60"><br><br>
-										   暂无回款计划</div>-->
-            </ul>
-          </div>
-          </span>
-        </form>
       </div>
     </div>
-    <div class="clear"></div>
   </div>
 </div>
-<script>
-  $(function () {
-      var typei="";
-      ajax(null,typei);
-  });
-    window.onload = function(){
-      var time = document.getElementById("time").getElementsByTagName("li");
-      for(j=0;j < time.length;j++){
-          time[j].onclick = function(){
-              //alert(this.innerHTML);
-              var timei=this.innerHTML;
-              //alert(timei);
-              $("#tbody-result").empty();
-             ajax(timei);
-          }
-      }
-    }
-    function ajax(timei,typei){
-        $.ajax({
-            url: "/person/MSBs",
-            data:{userId:'U201812071032',time:timei,type:typei},
-            async:false,//同步
-            type:"post",
-            dataType:"json",
-            success: function(data){
-                //alert(JSON.stringify(data));
-                x = "";
-                for(var i=0;i < data.length;i++){
-                    var trs = "";
-
-                    trs += "<li><span class='pmain-titledate'>"
-                        + data[i].BIDDEADLINE +
-                        "</span> <span class='pmain-titleproject'>"
-                        + data[i].BIDPROJECT +
-                        "</span> <span class='pmain-titletype'>"
-                        +data[i].BIDRATE+
-                        "</span><span class='pmain-titlemoney'>"
-                        +data[i].BIDREPAYMENTMETHOD+
-                        "</span></li>";
-                    x += trs;
-                };
-                $("#tbody-result").append(x);
+<script type="text/javascript">
+    var vm = new Vue({
+        el:"#diva",
+        data:{
+            isDisabled:false,
+            tableData:[],
+            returnData:[],
+            //获取session中的值，需要两个中括号
+            //userName:'[[${session.userName}]]',
+            userId:'',
+            //还款数据长度
+            datalen:'',
+            //数据最高长度
+            sumlen:'',
+            //显示加载中样式
+            loading:false,
+            //默认让还款界面的勾选框显示
+            show:true,
+            //搜索表单
+            searchForm: {
+                borrownum: '',
+                danbaostyle: ''
             },
-            error : function(data) {
-                alert(data);
-            }
-        })
-    }
+            //下拉选择框
+            options: [{
+                value: '全部',
+                label: '全部'
+            }, {
+                value: '已放款',
+                label: '已放款'
+            }, {
+                value: '已投标',
+                label: '已投标'
+            }, {
+                value: '已终止',
+                label: '已终止'
+            }, {
+                value: '已回款',
+                label: '已回款'
+            }],
+            value: '',
+            //下拉框2
+            options1: [{
+                value1: '全部',
+                label1: '全部'
+            }, {
+                value1: '今天',
+                label1: '今天'
+            }, {
+                value1: '本周',
+                label1: '本周'
+            }, {
+                value1: '本月',
+                label1: '本月'
+            }, {
+                value1: '本年',
+                label1: '本年'
+            }],
+            value1: '',
+
+
+            //多选值
+            multipleSelection: [],
+            huanmultipleSelection:[],
+            //当前页
+            currentPage:1,
+            //分页大小
+            pageSize:5,
+            //当前页A
+            currentPageA:1,
+            //分页大小A
+            pageSizeA:5,
+            //总记录数
+            total:800,
+            //查看详情页面是否显示
+            returnFormVisible:false,
+            goUrl:'',
+            borrowid:'',
+            //查看详情界面数据
+            returnForm: {
+                USERID: 0,
+                UNAME: '',
+                REALNAME: '',
+                AGE: 0,
+                PHONE:'',
+                ADDRESS: '',
+                IDCARD:'',
+                EMAIL:'',
+                ICPICA:'',
+                ICPICB:''
+            },
+        },
+        //页面加载时首次取值
+        created:function () {
+            var self = this;
+            axios.post('/person/MSBs',{'pageNo':this.currentPage,'type':this.value,'time':this.value1,'pageSize':this.pageSize,'userId':this.userId}).then(function (response) {
+                self.tableData = response.data.pageData;
+                //alert(JSON.stringify(response.data.pageData));
+                self.total=response.data.total;
+            })
+        },
+        methods: {
+            //确认还款
+            returnSelection: function () {
+                var self = this;
+                var huanmultipleSelection = this.huanmultipleSelection;
+                //alert(huanmultipleSelection);
+                if (huanmultipleSelection.length !=1 ) {
+                    self.$message({
+                        message: '请至少选择一条记录',
+                        type: 'error'
+                    });
+                    return;
+                }
+            },
+
+            //表格重新加载数据
+            loadingData: function () {
+                var _self = this;
+                _self.loading = true;
+                var searchForm = {
+                    'pageNo': this.currentPage,
+                    'pageSize': this.pageSize,
+                    'borrowNum': this.searchForm.borrownum,
+                    'danbaoStyle': this.searchForm.danbaostyle,
+                    'type':this.value,
+                    'time':this.value1,
+                    'userId': this.userId
+                };
+                axios.post('/person/MSBs', searchForm).then(function (response) {
+                    _self.total = response.data.total;
+                    _self.tableData = response.data.pageData;
+                })
+                console.log(_self.currentPage);
+                setTimeout(function () {
+                    console.info("加载数据成功");
+                    _self.loading = false;
+                }, 300);
+            },
+            //分页大小修改事件
+            pageSizeChange: function (val) {
+                console.log('每页 ' + val + ' 条');
+                this.pageSize = val;
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            },
+            //当前页修改事件
+            currentPageChange: function (val) {
+                this.currentPage = val;
+                console.log('当前页: ' + val);
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            },
+            //当前页修改事件A
+            currentPageChangeA: function (val) {
+                this.currentPageA = val;
+                console.log('当前页: ' + val);
+                var _self = this;
+                _self.loadingDataA();//重新加载数据
+            },
+            //表格查询事件
+            searchClick: function () {
+                var self = this;
+
+                self.loadingData();//重新加载数据
+            },
+            //刷新
+            flushClick: function () {
+                var self = this;
+                this.searchForm = {
+                    borrownum: '',
+                    danbaostyle: ''
+                }
+                this.loadingData();//重新加载数据
+            },
+        }
+    })
 </script>
 <!--网站底部-->
 <div id="footer" class="ft">

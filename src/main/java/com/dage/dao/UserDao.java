@@ -63,7 +63,7 @@ public interface UserDao {
      * @return
      */
     @Select("<script>"+
-            "select to_char(flowdate,'yyyy-mm-dd') flowdate,availablebalance,flowtype,amount,flowtype " +
+            "select to_char(flowdate,'yyyy-mm-dd') as flowdate,availablebalance,flowtype,amount  " +
             "from user_account_flow where userid=#{userId}" +
             "<if test=\" type!=null and type!=''\"> and flowtype=#{type}</if>" +
             "<if test=\" time1!=null and time1!='' \"> and to_char(flowdate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+

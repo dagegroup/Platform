@@ -1,6 +1,7 @@
 package com.dage.controller;
 
 import com.dage.service.UserInfoService;
+import com.dage.util.AESUtil;
 import com.dage.util.IndustrySMS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,6 +71,7 @@ public class RegisterController {
                 map.put("msg",2);
             }
             session.setAttribute("checkcode",execute);
+            session.setMaxInactiveInterval(3*60);
         }
         return map;
     }
@@ -84,16 +86,19 @@ public class RegisterController {
     @RequestMapping("/verifyCode")
     public Object verifyCode(String verifyCode,HttpSession session){
         Map map = new HashMap();
-        if (verifyCode!=null&&!"".equals(verifyCode)){
-             int c = Integer.valueOf(verifyCode);
-            int s =Integer.valueOf(session.getAttribute("checkcode")+"");
-            if (c==s){
-                map.put("msg",1);
-            }else{
-                map.put("msg",2);
+        if (verifyCode!=null&&!"".equals(verifyCode)) {
+            int c = Integer.valueOf(verifyCode);
+            Object checkcode = session.getAttribute("checkcode");
+            if (checkcode != null && !"".equals(checkcode)) {
+                int s = Integer.valueOf(checkcode + "");
+                if (c == s) {
+                    map.put("msg", 1);
+                } else {
+                    map.put("msg", 2);
+                }
+            } else {
+                map.put("msg", 2);
             }
-        }else{
-            map.put("msg",2);
         }
         return  map;
     }
@@ -130,9 +135,12 @@ public class RegisterController {
         if (list!=null&&list.size()>0){
             map1.put("msg",2);
         }else{
+            String password = map.get("password")+"";
+            String encrypt = AESUtil.getInstance().encrypt(password);
+            map.put("password",encrypt);
             int i = userInfoService.insertInfo(map);
             if (i>0) {
-                session.setAttribute("userName",map.get("userName"));
+               // session.setAttribute("userName",map.get("userName"));
                 map1.put("msg", 1);
             }else{
                 map1.put("msg",3);
@@ -141,10 +149,10 @@ public class RegisterController {
         return map1;
     }
 
-    @ResponseBody
+   /* @ResponseBody
     @RequestMapping("/getName")
     public Object getName(HttpSession session){
         Object userName = session.getAttribute("userName");
         return userName;
-    }
+    }*/
 }

@@ -90,15 +90,15 @@
       <div>
 
         <div id="diva">
-          <el-form  :model="dataForm"    ref="dataForm" label-width="200px">
+          <el-form  :model="dataForm"  status-icon :rules="rules"  ref="dataForm" label-width="200px">
             <el-row>
             <el-col :span="6" >
-            <el-form-item label="真实姓名:">
+            <el-form-item label="真实姓名:" prop="REALNAME">
               <el-input v-model="dataForm.REALNAME"   placeholder="请输入你的真实姓名" style="width:150px"></el-input>
             </el-form-item>
             </el-col>
             <el-col :span="6">
-                <el-form-item label="性别:">
+                <el-form-item label="性别:" prop="GENDER">
                     <el-select v-model="dataForm.GENDER" placeholder="性别" style="width:150px">
                         <el-option label="请选择" value=""></el-option>
                         <el-option label="男" value="男"></el-option>
@@ -148,17 +148,17 @@
             </el-row>
               <el-row>
             <el-col :span="6">
-            <el-form-item label="邮箱:">
+            <el-form-item label="邮箱:" prop="EMAIL">
               <el-input v-model="dataForm.EMAIL"   placeholder="请输入你的邮箱" style="width:150px"></el-input>
             </el-form-item>
             </el-col>
             <el-col :span="6">
-            <el-form-item label="身份证号:">
+            <el-form-item label="身份证号:" prop="IDCARD">
               <el-input v-model="dataForm.IDCARD"   placeholder="请输入你的身份证号" style="width:150px"></el-input>
             </el-form-item>
             </el-col>
             <el-col :span="6">
-            <el-form-item label="最高学历:">
+            <el-form-item label="最高学历:" prop="MAXEDUCATION">
               <el-select v-model="dataForm.MAXEDUCATION" placeholder="学历" style="width:150px">
                 <el-option label="全部" value="0"></el-option>
                 <el-option label="初中" value="初中"></el-option>
@@ -175,7 +175,7 @@
               </el-row>
               <el-row>
             <el-col :span="6">
-            <el-form-item label="住房:" >
+            <el-form-item label="住房:" prop="HOUSE" >
               <el-select v-model="dataForm.HOUSE" placeholder="房产" style="width:150px">
               <el-option label="请选择" value=""></el-option>
               <el-option label="有房有房贷" value="有房有房贷"></el-option>
@@ -185,7 +185,7 @@
             </el-form-item>
             </el-col>
             <el-col :span="6">
-            <el-form-item   label="婚姻状况:">
+            <el-form-item   label="婚姻状况:" prop="MARRIAGE">
               <el-select v-model="dataForm.MARRIAGE" placeholder="婚姻" style="width:150px">
               <el-option label="请选择" value=""></el-option>
               <el-option label="未婚" value="未婚"></el-option>
@@ -197,14 +197,14 @@
             </el-form-item>
             </el-col>
             <el-col :span="6">
-            <el-form-item label="年收入:">
+            <el-form-item label="年收入:" prop="INCOME">
               <el-input v-model="dataForm.INCOME"    style="width:150px"></el-input>
             </el-form-item>
             </el-col>
               </el-row>
               <el-row>
             <el-col :span="6">
-            <el-form-item label="工作单位性质:" >
+            <el-form-item label="工作单位性质:" prop="JOBTYPE" >
               <el-select v-model="dataForm.JOBTYPE" placeholder="工作单位性质" style="width:150px">
               <el-option label="请选择" value=""></el-option>
               <el-option label="机关及事业单位" value="机关及事业单位"></el-option>
@@ -216,29 +216,29 @@
             </el-form-item>
             </el-col>
             <el-col :span="6">
-            <el-form-item label="工作单位:">
+            <el-form-item label="工作单位:" prop="COMNAME">
               <el-input v-model="dataForm.COMNAME"    style="width:150px"></el-input>
             </el-form-item>
             </el-col>
             <el-col :span="6" >
-            <el-form-item label="本单位入职时间:">
+            <el-form-item label="本单位入职时间:" prop="JOINTIME">
               <el-date-picker type="datetime" value-format="yyyy-MM-dd HH:mm:ss"  style="width:150px" placeholder="选择日期" v-model="dataForm.JOINTIME"></el-date-picker>
             </el-form-item>
             </el-col>
               </el-row>
               <el-row>
-              <el-col :span="6"   class="ss">
-              <el-form-item label="家庭联系人:">
+              <el-col :span="6"   class="ss" >
+              <el-form-item label="家庭联系人:" prop="FAMILYNAME">
                   <el-input v-model="dataForm.FAMILYNAME"    style="width:150px"></el-input>
               </el-form-item>
               </el-col>
               <el-col :span="6"  class="ss">
-              <el-form-item label="关系:">
+              <el-form-item label="关系:" prop="FAMILYRELATIONSHIP">
                   <el-input v-model="dataForm.FAMILYRELATIONSHIP"    style="width:150px"></el-input>
               </el-form-item>
               </el-col>
-              <el-col :span="6"  class="ss">
-              <el-form-item label="电话:">
+              <el-col :span="6"  class="ss" >
+              <el-form-item label="电话:" prop="FAMILYTEL">
                   <el-input v-model="dataForm.FAMILYTEL"    style="width:150px"></el-input>
               </el-form-item>
               </el-col>
@@ -276,6 +276,14 @@
                         </el-select>
                       </el-col>
                     </el-row>
+                  <el-form-item label="现住地址:" prop="ADDRESS">
+                    <div class="block">
+                      <el-cascader style="width:150px"
+                                   :options="options"
+                                   v-model="dataForm.ADDRESS"
+                                   @change="handleChange">
+                      </el-cascader>
+                    </div>
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -387,7 +395,7 @@
               </el-row>
               <center>
                 <template >
-                  <el-button :plain="true" type="primary" size="small"  @click="nextin">下一步，填写详细信息</el-button>
+                  <el-button :plain="true" type="primary" size="small"  @click="nextin('dataForm')">下一步，填写详细信息</el-button>
                 </template>
               </center>
           </el-form>
@@ -463,8 +471,128 @@
                 qu4: '',
                 address:""
             },
+        data(){
 
+            var checkEmail = (rule, value, callback) => {
+                var reg=/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+                if (!value) {
+                    callback(new Error('邮箱不能为空'));
+                } else {
+                    if (!reg.test(value)) {
+                        callback(new Error('格式错误'));
+                    }
+                    callback();
+                }
+            };
+            var checkIdcard = (rule, value, callback) => {
+                var reg=/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                if (!value) {
+                    callback(new Error('身份证不能为空'));
+                } else {
+                    if (!reg.test(value)) {
+                        callback(new Error('格式错误'));
+                    }
+                    callback();
+                }
+            };
+            var checkIncome = (rule, value, callback) => {
+                var reg=/^[1-9]\d*$/;
+                if (!value) {
+                    callback(new Error('年收入不能为空'));
+                } else {
+                    if (!reg.test(value)) {
+                        callback(new Error('请输入正整数'));
+                    }
+                    callback();
+                }
+            };
+           var checkFamilytel= (rule, value, callback) => {
+               var reg=/^1(3|4|5|7|8)\d{9}$/;
+               if (!value) {
+                   callback(new Error('联系方式不能为空'));
+               } else {
+                   if (!reg.test(value)) {
+                       callback(new Error('格式错误'));
+                   }
+                   callback();
+               }
+           };
 
+            return {
+                loading: true,
+                options: [],
+                dataForm: {
+                    REALNAME:"",
+                    GENDER:"",
+                    ADDRESS:[],
+                    EMAIL:"",
+                    IDCARD:"",
+                    MAXEDUCATION:"",
+                    HOUSE:"",
+                    MARRIAGE:"",
+                    INCOME:"",
+                    JOBTYPE:"",
+                    COMNAME:"",
+                    JOINTIME:"",
+                    FAMILYNAME:"",
+                    FAMILYRELATIONSHIP:"",
+                    FAMILYTEL:"",
+                    JOBCONTACTNAME:"",
+                    JOBRELATIONSHIP:"",
+                    JOBTEL:"",
+                    OTHERNAME:"",
+                    OTHERRELATIONSHIP:"",
+                    OTHERTEL:""
+                },
+                rules: {
+                    REALNAME: [
+                        { required: true, message: '请填写真实姓名', trigger: 'blur' }
+                    ],
+                    GENDER: [
+                        { required: true, message: '请选择性别', trigger: 'blur' }
+                    ],
+                    ADDRESS: [
+                        { required: true, message: '请选择住址', trigger: 'blur' }
+                    ],
+                    EMAIL: [
+                        { validator: checkEmail, trigger: 'blur' }
+                    ],
+                    IDCARD: [
+                        { validator: checkIdcard, trigger: 'blur' }
+                    ],
+                    MAXEDUCATION : [
+                        { required: true, message: '请选择最高学历', trigger: 'blur' }
+                    ],
+                    HOUSE: [
+                        { required: true, message: '请选择住房', trigger: 'blur' }
+                    ],
+                    MARRIAGE : [
+                        { required: true, message: '请选择婚姻状况', trigger: 'blur' }
+                    ],
+                    INCOME: [
+                        { validator: checkIncome, trigger: 'blur' }
+                    ],
+                    JOBTYPE: [
+                        { required: true, message: '请选择工作单位性质', trigger: 'blur' }
+                    ],
+                    COMNAME: [
+                        { required: true, message: '请填写工作单位', trigger: 'blur' }
+                    ],
+                    JOINTIME: [
+                        { required: true, message: '请选择入职时间', trigger: 'blur' }
+                    ],
+                    FAMILYNAME: [
+                        { required: true, message: '请填写家庭联系人', trigger: 'blur' }
+                    ],
+                    FAMILYRELATIONSHIP: [
+                        { required: true, message: '请填写关系', trigger: 'blur' }
+                    ],
+                    FAMILYTEL: [
+                        { validator: checkFamilytel, trigger: 'blur' }
+                    ]
+
+                }
+            };
         },
         created:function(){
             this.getCityData();
@@ -503,25 +631,29 @@
 
         },
         methods: {
-            nextin: function () {
-                var _self = this;
-                _self.loading = true;
-                var formData = this.dataForm;
-                // alert(JSON.stringify(formData));
-                var goUrl = '/rent/rentInfo2';
-                //alert(goUrl);
-                //alert(JSON.stringify(formData));
-                axios.post(goUrl, formData).then(function (response) {
-                    // console.log(response.data);
-                    // alert(222);
-                    // self.total=response.data.total;
-                    if (response.data > 0) {
-                        location.href="/goto/rentInfo2"
-                    } else {
-                        _self.$message({
-                            message: '操作失败',
-                            type: 'error'
-                        });
+            nextin(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if(valid) {
+                        var _self = this;
+                        _self.loading = true;
+                        var formData = this.dataForm;
+                        // alert(JSON.stringify(formData));
+                        var goUrl = '/rent/rentInfo2';
+                        //alert(goUrl);
+                        //alert(JSON.stringify(formData));
+                        axios.post(goUrl, formData).then(function (response) {
+                            // console.log(response.data);
+                            // alert(222);
+                            // self.total=response.data.total;
+                            if (response.data > 0) {
+                                location.href = "/goto/rentInfo2"
+                            } else {
+                                _self.$message({
+                                    message: '操作失败',
+                                    type: 'error'
+                                });
+                            }
+                        })
                     }
                 })
             },
