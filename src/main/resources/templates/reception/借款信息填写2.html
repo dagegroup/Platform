@@ -349,7 +349,34 @@
 
             });
             axios.post('/rent/getInfo').then(function(response){
-                _self.dataForm=response.data;
+
+                if(response.data.IDCARD!=null&&response.data.IDCARD!=''&&response.data.IDCARD!='null'){
+                    _self.dataForm=response.data;
+                }else{
+                    dataForm={
+                        REALNAME:"",
+                            GENDER:"",
+                            ADDRESS:[],
+                            EMAIL:"",
+                            IDCARD:"",
+                            MAXEDUCATION:"",
+                            HOUSE:"",
+                            MARRIAGE:"",
+                            INCOME:"",
+                            JOBTYPE:"",
+                            COMNAME:"",
+                            JOINTIME:"",
+                            FAMILYNAME:"",
+                            FAMILYRELATIONSHIP:"",
+                            FAMILYTEL:"",
+                            JOBCONTACTNAME:"",
+                            JOBRELATIONSHIP:"",
+                            JOBTEL:"",
+                            OTHERNAME:"",
+                            OTHERRELATIONSHIP:"",
+                            OTHERTEL:""
+                    }
+                }
 
             })
 
