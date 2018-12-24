@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -82,6 +83,7 @@ public class RepaymentController {
      */
     @ResponseBody
     @RequestMapping("/huankuan")
+    @Transactional//事务
     public int repayment(@RequestBody Map map){
         BigDecimal balance1=null;
         BigDecimal balance2=null;

@@ -3,6 +3,7 @@ package com.dage.controller;
 import com.dage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -60,6 +61,7 @@ public class SkipController {
      * @return
      */
     @RequestMapping("/Recharge")
+    @Transactional//事务
     public String toRecharge(@RequestParam Map map,HttpSession session){
         if (map.size()>0){
             //System.out.println(map.get("actualMoney1"));
