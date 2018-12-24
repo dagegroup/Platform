@@ -4,20 +4,14 @@ import com.dage.service.BidInforService;
 import com.dage.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import javafx.scene.control.Alert;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
-import javax.xml.transform.Source;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +28,6 @@ public class BidInforController {
 
     @Autowired
     private BidInforService bidInforService;
-    @Autowired
-    private UserService userService;
 
     /**
      * 项目详情页：标信息模块

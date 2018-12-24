@@ -56,6 +56,26 @@ public class UserServiceImpl implements UserService {
         return userDao.getAccount(userid);
     }
 
+    /**
+     * 用户充值时添加到系统的总账户
+     * @param map
+     * @return
+     */
+    @Override
+    public int addSys(Map map) {
+        return userDao.addSys(map);
+    }
+
+    /**
+     * 用户充提现时更新系统的总账户
+     * @param map
+     * @return
+     */
+    @Override
+    public int subSys(Map map) {
+        return userDao.subSys(map);
+    }
+
     @Override
     public int recharge(Map map) {
         return userDao.recharge(map);

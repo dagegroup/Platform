@@ -148,8 +148,9 @@ public class PersonController {
      */
     @ResponseBody
     @RequestMapping("/account")
-    public List<Map> getAccount(String userId){
-        //System.out.println(userId);
+    public List<Map> getAccount(HttpSession session){
+        String  userId = (String)session.getAttribute("userid");
+
         return userService.getAccount(userId);
     }
 

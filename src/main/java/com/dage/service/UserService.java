@@ -41,6 +41,13 @@ public interface UserService {
     int recharge(Map map);
 
     /**
+     * 用户充提现时更新系统的总账户
+     * @param map
+     * @return
+     */
+    int subSys(Map map);
+
+    /**
      *根据用户id查询可以回款标信息标
      * @param map
      * @return
@@ -68,6 +75,13 @@ public interface UserService {
      * @return
      */
     List<Map> getAccount(String userid);
+
+    /**
+     * 用户充值时添加到系统的总账户
+     * @param money
+     * @return
+     */
+    int addSys(Map map);
 
     /**
      * 用户提现之后更新用户账户表

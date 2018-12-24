@@ -90,7 +90,7 @@ public interface UserDao {
 
     /**
      * 根据用户编号查询用户还款计划
-     * @param userId
+     * @param map
      * @return
      */
     @Select("<script>select repayid,userid,bidrepayamount,to_char(biderpaydate,'yyyy-mm-dd') biderpaydate," +
@@ -198,4 +198,22 @@ public interface UserDao {
      */
     @Select("insert into tb_realname_certification(userid) values(#{userid}) ")
     int adduserid1(String userid);
+
+    /**
+     * 用户充值时添加到系统的总账户
+     * @param map
+     * @return
+     */
+    @Update("update system_rental set money=((select money from system_rental " +
+            "where sysid='SYS201812221314')+ #{actualMoney1}) where sysid='SYS201812221314'")
+    int addSys(Map map);
+
+    /**
+     * 用户充提现时更新系统的总账户
+     * @param map
+     * @return
+     */
+    @Update("update system_rental set money=((select money from system_rental " +
+            "where sysid='SYS201812221314') - #{money1}) where sysid='SYS201812221314'")
+    int subSys(Map map);
 }
