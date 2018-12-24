@@ -117,7 +117,6 @@ public class UserController {
     @RequestMapping("login")
     public String userLogin(@RequestParam Map map, Model model, HttpSession session) {
         //System.out.println(map);
-
         //System.out.println(map.get("telephone").toString());
         Map user = userService.getByuserName(map.get("telephone").toString(),map.get("password").toString());
         if (user != null && user.size() > 0) {
