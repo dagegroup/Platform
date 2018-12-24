@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>流标详情</title>
+    <!-- 引入样式 -->
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <script type="text/javascript" src="/js/axios.min.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="/elementui/elementui.css">
+    <!-- 引入组件库 -->
+    <script src="/elementui/elementui.js"></script>
+</head>
+<body>
+<div id="tableView">
+    <!--列表顶部搜索和工具条-->
+
+    <el-row>
+        <el-form :inline="true" :model="searchForm" class="demo-form-inline" style="float:right">
+            <el-form-item label="用户Id">
+                <el-input v-model="searchForm.USERID" placeholder="用户Id"></el-input>
+            </el-form-item>
+            <el-form-item label="部门">
+
+            </el-form-item>
+            <el-form-item label="流水类型">
+                <el-select v-model="searchForm.FLOWTYPE" placeholder="请选择">
+                    <el-option
+                            v-for="item in options"
+                            :label="item.FLOWTYPE"
+                            :value="item.FLOWTYPE">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="流水时间">
+                <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="流水时间" v-model="searchForm.FLOWDATE"></el-date-picker>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" icon="search" @click="searchClick">查询</el-button>
+                <el-button type="success" icon="plus" @click="toFlush">刷新</el-button>
+            </el-form-item>
+        </el-form>
+    </el-row>
+    <!--列表-->
+    <el-row>
+
+        <el-table
+                :data="tableData"
+                v-loading.body="loading"
+                border
+                style="width: 100%">
+            <el-table-column
+                    prop="SYSTEMFLOWID"
+                    label="系统流水单号"
+                    align="center"
+                    width="120">
+            </el-table-column>
+            <el-table-column
+                    prop="USERID"
+                    label="用户ID"
+                    align="center"
+                    width="140">
+            </el-table-column>
+            <el-table-column
+                    prop="ACCOUNTID"
+                    label="用户账户ID"
+                    align="center"
+                    width="110">
+            </el-table-column>
+
+            <el-table-column
+                    prop="AMOUNT"
+                    label="金额(元)"
+                    align="center"
+                    width="80">
+            </el-table-column>
+            <el-table-column
+                    prop="AVAILABLEBALANCE"
+                    align="center"
+                    label="变动后可用余额(元)"
+                    width="120">
+            </el-table-column>
+            <el-table-column
+                    prop="FLOWDATE"
+                    label="流水时间"
+                    align="center"
+                    width="150">
+            </el-table-column>
+            <el-table-column
+                    prop="FLOWTYPE"
+                    label="流水类型"
+                    align="center"
+                    width="70">
+            </el-table-column>
+            <el-table-column
+                    prop="BANKNUMBER"
+                    label="银行卡号"
+                    align="center"
+                    width="180">
+            </el-table-column>
+            <!--bidcurrentamount-->
+            <el-table-column
+                    prop="ORDERID"
+                    align="center"
+                    label="操作员"
+                    width="120">
+            </el-table-column>
+        </el-table>
+    </el-row>
+
+    <!--列表底部工具条和分页符-->
+    <el-row style="margin-top: 20px" type="flex" justify="end">
+        <el-col :span="24" >
+            <el-pagination
+                    style="float: right"
+                    @size-change="pageSizeChange"
+                    @current-change="currentPageChange"
+                    :current-page="currentPage"
+                    :page-sizes="[10, 20, 30, 50]"
+                    :page-size="pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="total">
+            </el-pagination>
+        </el-col>
+    </el-row>
+
+
+</div>
+
+
+<script type="text/javascript">
+    var tableView = new Vue({
+        el: '#tableView',
+        data: {
+            tableData: [],
+            //显示加载中样式,
+            options:[],
+            loading:false,
+            //搜索表单
+            searchForm: {
+                USERID: '',
+                FLOWTYPE: '',
+                FLOWDATE: ''
+            },
+            //当前页
+            currentPage:1,
+            //分页大小
+            pageSize:5,
+            //总记录数
+            total:200,
+            goUrl:'',
+
+
+        },
+        created:function(){
+            //在 then的内部不能使用Vue的实例化的this, 因为在内部 this 没有被绑定。
+            var self = this;
+            var pageNo =this.currentPage;
+            var pageSize =this.pageSize;
+            axios.post('/acc/list',{'pageNo':pageNo,'pageSize':pageSize,'USERID':this.searchForm.USERID,'FLOWTYPE':this.searchForm.FLOWTYPE,'FLOWDATE':this.searchForm.FLOWDATE}).then(function(response){
+                // console.log(response.data);
+                //alert(response.data.total);
+                self.total=response.data.total;
+                self.tableData = response.data.list;
+                self.options=response.data.flowtype;
+                // self.multipleSelection=response.data.data;
+            })
+        },
+        methods:{
+            toFlush:function () {
+                this.searchForm={
+                    USERID: '',
+                    FLOWTYPE: '',
+                    FLOWDATE: ''
+                }
+                this.loadingData();//重新加载数据
+            },
+            //分页大小修改事件
+            pageSizeChange:function(val) {
+                console.log('每页 ' + val +' 条');
+                this.pageSize = val;
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            },
+            //当前页修改事件
+            currentPageChange:function(val) {
+                this.currentPage = val;
+                console.log('当前页: ' + val);
+                var _self = this;
+                _self.loadingData();//重新加载数据
+            },
+            loadingData:function() {
+                var _self = this;
+                _self.loading = true;
+                var searchForm={'pageNo':this.currentPage,'pageSize':this.pageSize,'USERID':this.searchForm.USERID,'FLOWTYPE':this.searchForm.FLOWTYPE,'FLOWDATE':this.searchForm.FLOWDATE};
+
+                axios.post('/acc/list',searchForm).then(function(response){
+
+                    _self.total=response.data.total;
+                    _self.tableData = response.data.list;
+
+                })
+                console.log(_self.currentPage);
+                setTimeout(function(){
+                    console.info("加载数据成功");
+                    _self.loading = false;
+                },300);
+            }, //表格查询事件
+            searchClick:function() {
+                var self = this;
+                self.loadingData();//重新加载数据
+            },
+        }
+
+    })
+</script>
+
+</body>
+</html>
