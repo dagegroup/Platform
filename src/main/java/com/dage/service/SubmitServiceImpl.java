@@ -1,11 +1,14 @@
 package com.dage.service;
 
+import com.dage.dao.AuditDao;
 import com.dage.dao.SubmitDao;
+import com.dage.entity.Emp;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +24,8 @@ public class SubmitServiceImpl implements SubmitService {
 
     @Autowired
     private SubmitDao submitDao;
+    @Autowired
+    private AuditDao auditDao;
 
     @Override
     public Map getListBid(Map map) {
@@ -50,7 +55,10 @@ public class SubmitServiceImpl implements SubmitService {
     }
 
     @Override
-    public int updateBidState(Map map) {
+    public int updateBidState(Map map, HttpSession session) {
+        Emp admin = (Emp)session.getAttribute("admin");
+        map.put("EMPID",admin.getId());
+        auditDao.AddAudit(map);
         return submitDao.updateBidState(map);
     }
 

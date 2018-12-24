@@ -36,9 +36,9 @@ public class SkipController {
         Map user=userService.getUserByUserName(userName);
         String userid=(String) user.get("USERID");
         //将userid放入session 便于使用
-        //session.setAttribute("userid",userid);
-        String userid1= "U201812076613";
-        session.setAttribute("userid",userid1);
+        session.setAttribute("userid",userid);
+        //String userid1= "U201812076613";
+        //session.setAttribute("userid",userid1);
         if (map.size()>0){
             /*Object o = map.get("bankCardNo");
             System.out.println(o);
@@ -56,19 +56,26 @@ public class SkipController {
     /**
      * 跳转到个人中心充值
      *
-     * 用户提现之后更新用户账户  添加用用户账户流水 添加系统账户流水
+     * 用户充值之后更新用户账户  添加用用户账户流水 添加系统账户流水
      * @return
      */
     @RequestMapping("/Recharge")
     public String toRecharge(@RequestParam Map map,HttpSession session){
         if (map.size()>0){
-            //System.out.println(map.get("money"));
-            String userid=(String)session.getAttribute("session");
-
+            //System.out.println(map.get("actualMoney1"));
+            //System.out.println(map.get("bankCardNo"));
+            String userid=(String)session.getAttribute("userid");
+            //System.out.println(userid);
             map.put("userId",userid);
-            //System.out.println("手续费"+map.get("procedure"));
-
-            //System.out.println(map.get("userId"));
+            map.put("type","充值");
+            //改变用户账户可用余额
+            userService.withdraw(map);
+            //添加系统账户流水
+            userService.system(map);
+            //添加用户账户流水
+            userService.recharge(map);
+            // 加入系统的账户
+            userService.addSys(map);
         }
         return "个人中心-充值";
     }
@@ -135,12 +142,49 @@ public class SkipController {
         return "个人中心-投资记录";
     }
 
+
+    /**
+     * 处理用户提现
+     * @return
+     */
+    @RequestMapping("/Withdraw2")
+    public String toWithdraw2(@RequestParam Map map,HttpSession session){
+        String userid = (String)session.getAttribute("userid");
+        // 提现金额 money=123   手续费 procedure=2, 类型  type= 提现
+        String type = (String) map.get("form:j_idt78");
+        //提现金额
+        String  moeny1 = (String)map.get("money");
+        Double money = Double.valueOf(moeny1);
+        //procedure
+        String procedure1 =(String) map.get("procedure");
+        Double procedure = Double.valueOf(procedure1);
+        //真实到账金额
+        double v = money - procedure;
+        //真实到账金额  系统账户里减少的金额
+        map.put("money1",v);
+        // 用户账户减少 和用户流水 提现的金额
+        map.put("actualMoney1",money);
+
+        map.put("userId",userid);
+        map.put("type", type);
+
+        //系统账户减去到账金额
+        userService.subSys(map);
+        //添加系统账户流水 按照用户提现的金额 添加
+        userService.system(map);
+        //添加用户账户流水 按照用户提现的金额 添加
+        userService.recharge(map);
+        //减少用户账户的金额 按照用户提现的金额 添加
+        userService.withdraw(map);
+        return "个人中心首页";
+    }
     /**
      * 跳转到个人中心提现
      * @return
      */
     @RequestMapping("/Withdraw")
     public String toWithdraw(){
+
         return "个人中心-提现";
     }
 
@@ -163,12 +207,21 @@ public class SkipController {
     }
 
     /**
-     * 跳转到个人中心账户设置
+     * 跳转到个人中心账户密码修改
      * @return
      */
     @RequestMapping("/Setting")
     public String toSetting(){
-        return "个人中心-账户设置";
+        return "个人中心-登陆密码";
+    }
+
+    /**
+     * 跳转到个人中心账户支付密码修改
+     * @return
+     */
+    @RequestMapping("/Change")
+    public String toChange(){
+        return "个人中心-支付密码";
     }
 
     /**

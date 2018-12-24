@@ -83,7 +83,9 @@
         <li > <span> <a href="Packet"> <i class="dot dot02"></i> 还款 </a> </span> </li>
         <li  class="pleft-cur"><span><a href="Recharge1"><i class="dot dot03"></i>充值</a></span></li>
         <li class=""><span><a href="Withdraw"><i class="dot dot04"></i>提现</a></span></li>
-        <li><span><a href="Setting"><i class="dot dot09"></i>账户设置</a></span></li>
+        <!--新增-->
+        <li><span><a href="Change"><i class="dot dot09"></i>修改支付密码</a></span></li>
+        <li><span><a href="Setting"><i class="dot dot09"></i>修改密码</a></span></li>
       </ul>
     </div>
     <label id="typeValue" style="display:none;"> </label>
@@ -423,7 +425,7 @@
         <h3><i>充值</i></h3>
         <div class="quick-pay-wrap">
           <h4> <span class="quick-tit pay-cur"><em>快捷支付</em></span> <span class="online-tit"><em>网银充值</em></span> </h4>
-          <form id="form" name="form" method="post" action="toPersonIndex" >
+          <form id="form" name="form" method="post" action="Recharge" >
             <div class="quick-main">
               <div class="fl quick-info">
                 <div class="info-1"> <span class="info-tit">充值金额</span> <span class="info1-input">
@@ -441,7 +443,7 @@
             </div>
           </form>
           <div class="online-main" style="display:none;">
-            <form id="recharge" name="recharge" method="post" action="skip/toPersonIndex" target="_blank">
+            <form id="recharge" name="recharge" method="post" action="/skip/Recharge" target="_blank">
               <div class="online-mar">
                 <div class="quick-info quick-info-width">
                   <div class="info-1"> <span class="info-tit">充值金额</span> <span class="info1-input">

@@ -83,7 +83,9 @@
         <li > <span> <a href="Packet"> <i class="dot dot02"></i> 还款 </a> </span> </li>
         <li><span><a href="Recharge1"><i class="dot dot03"></i>充值</a></span></li>
         <li class="pleft-cur"><span><a href="Withdraw"><i class="dot dot04"></i>提现</a></span></li>
-        <li><span><a href="Setting"><i class="dot dot09"></i>账户设置</a></span></li>
+        <!--新增-->
+        <li><span><a href="Change"><i class="dot dot09"></i>修改支付密码</a></span></li>
+        <li><span><a href="Setting"><i class="dot dot09"></i>修改密码</a></span></li>
       </ul>
     </div>
     <label id="typeValue" style="display:none;"> </label>
@@ -187,12 +189,11 @@
 			    	th.value = th.value.substr(0,th.value.length-1);
 			    }
 			}
-			//]]>
 		</script>
     <div class="personal-main">
       <div class="personal-deposit">
         <h3><i>提现</i></h3>
-        <form id="form" name="form" method="post" action=""  target="_blank">
+        <form id="form" name="form" method="post" action="/skip/Withdraw2"  target="_blank">
           <div class="deposit-form" style="margin-top:0px;border-top:0px none;">
             <h6>填写提现金额</h6>
             <ul>
@@ -218,7 +219,7 @@
             $(function(){
                 $.ajax({
                     url: "/person/account",
-                    data:{userId:'U201812071032'},
+                    data:{userId:''},
                     async:false,//同步
                     type:"post",
                     dataType:"json",

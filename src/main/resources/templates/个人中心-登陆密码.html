@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>p2p网贷平台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="../foreground/css/common.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../foreground/css/user.css" />
+<link rel="stylesheet" type="text/css" href="../foreground/css/jquery.datetimepicker.css"/>
+<script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
+<script type="text/javascript" src="../foreground/script/common.js"></script>
+<script src="../foreground/script/user.js" type="text/javascript"></script>
+
+  <link href="../foreground/css/register.css" rel="stylesheet" type="text/css">
+  <script src="../foreground/script/login.js" type="text/javascript"></script>
+  <link href="css/common.css" rel="stylesheet" />
+  <link href="css/register.css" rel="stylesheet" type="text/css">
+  <!-- 引入样式 -->
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript" src="../js/axios.min.js"></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="/elementui/elementui.css">
+  <!-- 引入组件库 -->
+  <script src="/elementui/elementui.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-top min-width">
+    <div class="container fn-clear"> <strong class="fn-left">咨询热线：400-668-6698<span class="s-time">服务时间：9:00 - 18:00</span></strong>
+      <ul class="header_contact">
+        <li class="c_1"> <a class="ico_head_weixin" id="wx"></a>
+          <div class="ceng" id="weixin_xlgz" style="display: none;">
+            <div class="cnr"> <img src="../foreground/images/code.png"> </div>
+            <b class="ar_up ar_top"></b> <b class="ar_up_in ar_top_in"></b> </div>
+        </li>
+        <li class="c_2"><a href="#" target="_blank" title="官方QQ" alt="官方QQ"><b class="ico_head_QQ"></b></a></li>
+        <li class="c_4"><a href="#" target="_blank" title="新浪微博" alt="新浪微博"><b class="ico_head_sina"></b></a></li>
+      </ul>
+      <ul class="fn-right header-top-ul">
+        <li> <a href="/goto/index" class="app">返回首页</a> </li>
+        <!--用户名为空-->
+        <li th:if="${session.userName} eq null">
+          <div class="" >
+            <a href="/goto/register" class="" title="免费注册" >免费注册</a>
+          </div>
+        </li>
+        <li th:if="${session.userName} eq null">
+          <div class="" >
+            <a href="/user/toLogin" class="js-login" title="登录" >登录</a>
+          </div>
+        </li>
+        <!--用户名不为空-->
+        <li th:if="${session.userName} ne null">
+          <div class="">
+            <span th:text="欢迎您 "></span>
+            <span th:text="${session.userName}"></span>
+          </div>
+        </li>
+        <li th:if="${session.userName} ne null">
+          <div class="" >
+            <a href="/user/toLogin" class="js-login" title="退出">退出</a>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+  <div class="header min-width">
+    <div class="container">
+      <div class="fn-left logo"> <a class="" href="/goto/index"> <img src="../foreground/images/logo.png" title=""> </a> </div>
+      <ul class="top-nav fn-clear">
+        <li> <a href="/goto/index">首页</a> </li>
+        <li> <a href="/goto/list" class="">我要投资</a> </li>
+        <li> <a href="/goto/rent">我要融资</a> </li>
+        <li> <a href="/goto/helpInfo">安全保障</a> </li>
+        <li class="on"> <a href="/user/toOwn">我的账户</a> </li><!--class="top-nav-safe"-->
+        <li> <a href="/goto/comInfo">关于我们</a> </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!--个人中心-->
+<div class="wrapper wbgcolor" >
+  <div class="w1200 personal">
+    <!--顶部送红包图片-->
+    <div class="credit-ad"><img src="../foreground/images/clist1.jpg" width="1200" height="96"></div>
+    <!--左侧树-->
+    <div id="personal-left" class="personal-left">
+      <ul>
+        <li ><span><a href="/skip/toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
+        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Record">资金记录</a></span></li>
+        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Investment">投资记录</a></span></li>
+        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Plan">回款计划</a></span></li>
+        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Conversion">还款记录</a></span></li>
+        <li> <span> <a href="Packet"> <i class="dot dot02"></i> 还款 </a> </span> </li>
+        <li><span><a href="Recharge1"><i class="dot dot03"></i>充值</a></span></li>
+        <li><span><a href="Withdraw"><i class="dot dot04"></i>提现</a></span></li>
+        <!--新增-->
+        <li><span><a href="Change"><i class="dot dot09"></i>修改支付密码</a></span></li>
+        <li class="pleft-cur"><span><a href="Setting"><i class="dot dot09"></i>修改密码</a></span></li>
+      </ul>
+    </div>
+
+    <!--修改手机号和修改密码-->
+    <div class="personal-main">
+      <div class="personal-zhsz">
+        <h3><i>修改密码</i></h3>
+        <div class="registerCont" id="updateDate">
+          <ul>
+            <li><span class="dis">密码:</span>
+              <input @blur="passwordone" type="password" name="user.password" id="password" class="input " maxlength="24" tabindex="1">
+              <span id="passwordAlt" data-info="6-24个字符，英文、数字组成，区分大小写">6-24个字符，英文、数字组成，区分大小写</span></li>
+            <li><span class="dis">确认密码:</span>
+              <input @blur="passwordtwo" type="password" name="repeatPassword" id="repeatPassword" class="input " maxlength="24" tabindex="1">
+              <span id="repeatPasswordAlt" data-info="请再次输入密码">请再次输入密码</span></li>
+            <li class="telNumber"> <span class="dis">手机号码:</span>
+              <input type="text" class="input" id="phone" name="phone" tabindex="1" maxlength="11" disabled="true">
+              <a href="javascript:void(0);" @click="getCode" class="button radius1 " id="sendPhone">获取验证码</a>
+            </li>
+            <li class="telNumber"><span class="dis" >短信验证码:</span>
+              <input @blur="canCode" id="phonVerify" name="phonVerify" type="text" class="input input1 "  tabindex="1" style="width: 250px">
+              <span class="infomation" id="phonVerifys" data-info="请输入手机验证码" >请输入手机验证码</span>
+            </li>
+            <li class="btn">
+              <a href="javascript:void(0);" @click="trueSubmit" id="zhuce" class="radius1" style="width: 250px" >确认更改</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--网站底部-->
+<div id="footer" class="ft">
+  <div class="ft-inner clearfix">
+    <div class="ft-helper clearfix">
+      <dl>
+        <dt>关于我们</dt>
+        <dd><a href="/goto/comInfo">公司简介</a><a href="/goto/ipmt">管理团队</a><a href="/goto/netNotice">网站公告</a></dd>
+      </dl>
+      <dl>
+        <dt>相关业务</dt>
+        <dd><a href="/goto/list">我要投资</a><a href="/goto/rent">我要借款</a></dd>
+      </dl>
+      <dl>
+        <dt>帮助中心</dt>
+        <dd><a href="/goto/helpInfo">新手入门</a><a href="个人中心首页.html">我的账户</a><a href="/goto/list">债权转让</a></dd>
+      </dl>
+      <dl>
+        <dt>联系我们</dt>
+        <dd><a href="/goto/contactUs">联系我们</a></dd>
+      </dl>
+    </div>
+    <div class="ft-service">
+      <dl>
+        <dd>
+          <p><strong>400-660-1268</strong><br>
+            工作日 9:00-22:00<br>
+            官方交流群:<em>12345678</em><br>
+            工作日 9:00-22:00 / 周六 9:00-18:00<br>
+          </p>
+          <div class="ft-serv-handle clearfix"><a class="icon-hdSprite icon-ft-sina a-move a-moveHover" title="亿人宝新浪微博" target="_blank" href="#"></a><a class="icon-hdSprite icon-ft-qqweibo a-move a-moveHover" title="亿人宝腾讯微博" target="_blank" href="#"></a><a class="icon-ft-qun a-move a-moveHover" title="亿人宝QQ群" target="_blank" href="#"></a><a class="icon-hdSprite icon-ft-email a-move a-moveHover mrn" title="阳光易贷email" target="_blank" href="mailto:xz@yirenbao.com"></a></div>
+        </dd>
+      </dl>
+    </div>
+    <div class="ft-wap clearfix">
+      <dl>
+        <dt>官方二维码</dt>
+        <dd><span class="icon-ft-erweima"><img src="../foreground/images/code.png" style="display: inline;"></span></dd>
+      </dl>
+    </div>
+  </div>
+  <div class="ft-record">
+    <div class="ft-approve clearfix"><a class="icon-approve approve-0 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-1 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-2 fadeIn-2s" target="_blank" href="#"></a><a class="icon-approve approve-3 fadeIn-2s" target="_blank" href="#"></a></div>
+    <div class="ft-identity">©2015 亿人宝 All rights reserved&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;安徽省亿人宝投资管理有限公司&nbsp;&nbsp;&nbsp;<span class="color-e6">|</span>&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.miitbeian.gov.cn/">皖ICP备12345678号-1</a></div>
+  </div>
+</div>
+
+<!--vue-->
+<script type="text/javascript">
+
+    var updateDate = new Vue({
+        el: '#updateDate',
+
+        //初始化页面加载方法
+        created:function(){
+            /*根据session获取手机号，并自动填入手机号输入框*/
+            axios.post('/changePassword/phone').then(function(response){
+                $("#phone").val(response.data.TELEPHONE);
+            })
+
+        },
+
+        methods:{
+            //提交验证
+            trueSubmit:function () {
+                var _self=this;
+                    axios.post("/changePassword/verify",{'PASSWORD':$('#password').val()}).then(function (response) {
+                            if (response.data==1){
+                                _self.$message({
+                                    message:  '修改密码成功',
+                                    type: 'success'
+                                });
+                                setTimeout(function () { //间隔刷新
+                                    window.location.href=window.location.href;//保存后刷新页面
+                                },500)
+                            }else{
+                                alert("修改失败");
+                                _self.isDisabled=true;
+                                _self.$message({
+                                    message:  '修改密码失败',
+                                    type: 'error'
+                                });
+                            }
+                        })
+
+                
+            },
+            //发送手机验证码
+            getCode:function () {
+                axios.post("/changePassword/verifyCode",{'phone':$("#phone").val()}).then(function (response) {
+                    alert("发送至手机的验证码为："+response.data);
+                })
+            },
+            //验证手机验证码是否输入正确
+            canCode:function () {
+                axios.post("/changePassword/canCode",{'inputCode':$("#phonVerify").val()}).then(function (response) {
+                    if (response.data==1){
+                        $(".infomation").css("color", "green");
+                        $(".infomation").html("验证成功");
+                    }else{
+                        $(".infomation").css("color", "red");
+                        $(".infomation").html("验证失败");
+                    }
+                })
+            },
+            //验证密码是否输入正确
+            passwordone:function () {
+                if (1 == 1) {
+                    var i=$("#password").val();//第一次输入的密码
+                    if (i == null || i == '') {
+                        $("#passwordAlt").text("");
+                        $("#passwordAlt").append("<span style=color:#ff7800>密码不能为空</span>");
+                    }
+                    if (i.length < 6 || i.length > 24) {
+                        $("#passwordAlt").text("");
+                        $("#passwordAlt").append("<span style=color:#ff7800>密码小于6位或者大于24位</span>");
+                    }
+                    if (!/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/.test(i)) {
+                        $("#passwordAlt").text("");
+                        $("#passwordAlt").append("<span style=color:#ff7800>密码必须是由6-21字母和数字组合</span>");
+                    } else {
+                        $("#passwordAlt").text("");
+                        $("#passwordAlt").append("<span style=color:green>填入信息可用</span>");
+                    }
+                }
+            },
+            //二次密码判定相同
+            passwordtwo:function () {
+                if (1==1) {
+                    if ($("#repeatPassword").val() != $("#password").val()) {
+                        $("#repeatPasswordAlt").text("");
+                        $("#repeatPasswordAlt").append("<span style=color:#ff7800>两次输入密码不一样</span>");
+                    } else {
+                        $("#repeatPasswordAlt").text("");
+                        $("#repeatPasswordAlt").append("<span style=color:green>密码输入一致</span>");
+                    }
+                }
+            },
+
+        }
+
+    })
+</script>
+
+</body>
+</html>

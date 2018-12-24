@@ -44,7 +44,14 @@ public class PersonController {
         // 根据session的userid 查询 为map 加入session里的 userid
         String userid=(String)session.getAttribute("userid");
         map1.put("userId",userid);
-        return userService.getUser(map1);
+        //获取账户信息
+        List<Map> account = userService.getAccount(userid);
+        Map map2 = account.get(0);
+        //获取用户信息
+        List<Map> user = userService.getUser(map1);
+        //二者合并
+        user.add(map2);
+        return user;
     }
 
     /**
@@ -141,8 +148,9 @@ public class PersonController {
      */
     @ResponseBody
     @RequestMapping("/account")
-    public List<Map> getAccount(String userId){
-        //System.out.println(userId);
+    public List<Map> getAccount(HttpSession session){
+        String  userId = (String)session.getAttribute("userid");
+
         return userService.getAccount(userId);
     }
 
@@ -155,11 +163,7 @@ public class PersonController {
     @RequestMapping("/MSBs")
     public List<Map> getMSBs(@RequestParam Map map,HttpSession session){
         String userid=(String)session.getAttribute("userid");
-        map.put("userId","U201812076613");
-
-    //[{"BIDPROJECT":"我啊啊啊啊啊啊","BIDAPPLYDATE":"2018-12-19T16:00:00.000+0000",
-        // "BIDREPAYMENTMETHOD":"等额本息","BIDDESC":"结婚","BIDDEADDAY":2,"USERID":"log201812140592",
-        // "BIDAMOUNT":666666,"BIDDEADLINE":12,"BIDID":"BID201812203953","BIDRATE":6}
+        map.put("userId",userid);
         return userService.getMSBs(map);
     }
 

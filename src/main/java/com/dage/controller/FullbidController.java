@@ -1,5 +1,6 @@
 package com.dage.controller;
 
+import com.dage.service.FullService;
 import com.dage.service.SubmitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ import java.util.Map;
 public class FullbidController {
 
     @Autowired
-    private SubmitService submitService;
+    private FullService fullService;
     /**
      * 跳转后台审核页面
      * @return
@@ -38,6 +39,6 @@ public class FullbidController {
     @ResponseBody
     @RequestMapping("page")
     public Object submitList(@RequestBody Map map){
-        return submitService.getListBidByLoan(map);
+        return fullService.getListBidByLoan(map);
     }
 }

@@ -1,7 +1,9 @@
 package com.dage.service;
 
+import com.dage.dao.AuditDao;
 import com.dage.dao.RepayDao;
 import com.dage.dao.SubmitDao;
+import com.dage.entity.Emp;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.ExecutorType;
@@ -10,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +32,10 @@ public class RepayServiceImpl implements RepayService {
     private SubmitDao submitDao;
     @Autowired
     private SqlSessionFactory sqlSessionFactory;
-
+    @Autowired
+    private AuditDao auditDao;
     @Override
-    public int repayPlanHandle(Map map) {
+    public int repayPlanHandle(Map map, HttpSession session) {
         SqlSession sqlSession = null;
         Map bidInfo = repayDao.getBidInfoByBid(map.get("BIDID") + "");
         double bidamount = Integer.valueOf(bidInfo.get("BIDAMOUNT")+"");
@@ -72,7 +76,10 @@ public class RepayServiceImpl implements RepayService {
             int c = repayDaos.updateUserAccFlow(mp);
             int d = repayDaos.updateSysAccFlow(mp);
             int j = submitDao.updateBidState(mp);
-            if(j<0||a<0||b<0||c<0||d<0){
+            Emp admin = (Emp)session.getAttribute("admin");
+            mp.put("EMPID",admin.getId());
+            int e = auditDao.AddAudit(mp);
+            if(j<0||a<0||b<0||c<0||d<0||e<0){
                 flag=false;
             }
             if (flag){

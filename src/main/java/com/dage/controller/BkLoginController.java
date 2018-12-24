@@ -29,39 +29,15 @@ import java.util.Map;
 public class BkLoginController {
 
     @Autowired
-    private EmpService empService;
-    @Autowired
     private PermissionService permissionService;
 
-    /**
-     * 登陆操作
-     *
-     * @param map
-     * @return
-     */
-    @RequestMapping("tobklogin")
-    public Object bklogin(@RequestParam Map map, Model model, HttpSession session) {
-        //System.out.println(map);
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(map.get("phone") + "", map.get("password") + "");
-        try {
-            subject.login(token);
-            Emp emp = (Emp) subject.getPrincipal();
-            session.setAttribute("admin", emp);
-            int i = empService.updateTime(emp.getId());
 
-            return "redirect:/index";
-        } catch (Exception e) {
-            model.addAttribute("msg", "用户名或密码错误");
-            return "forward:/bklogin";
-        }
-    }
 
     @RequestMapping("bklogout")
     public Object bklogout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return "forward:/bklogin";
+        return "forward:/goto/backLogin";
     }
 
     /**
@@ -84,15 +60,7 @@ public class BkLoginController {
         return "index";
     }
 
-    /**
-     * 跳转后台登陆页面
-     *
-     * @return
-     */
-    @RequestMapping("bklogin")
-    public Object blogin() {
-        return "bklogin";
-    }
+
 
     /**
      * 根据登陆角色不同，获取不同的权限
