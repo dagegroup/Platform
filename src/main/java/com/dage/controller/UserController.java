@@ -124,7 +124,7 @@ public class UserController {
               session.setAttribute("userName",user.get("USERNAME"));
             session.setAttribute("userid",user.get("USERID"));
             String userid = userService.getUserid(user.get("USERID") + "");
-            String userid1=userService.getUserid(user.get("USERID") + "");
+            String userid1=userService.getuesrid(user.get("USERID") + "");
             if(userid==null){
                         userService.addUserid(user.get("USERID")+"");
             }

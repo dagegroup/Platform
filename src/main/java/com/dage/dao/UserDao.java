@@ -198,7 +198,7 @@ public interface UserDao {
      * @param userid
      * @return
      */
-    @Select("insert into tb_realname_certification(userid) values(#{userid}) ")
+    @Insert("insert into tb_realname_certification(userid) values(#{userid}) ")
     int adduserid1(String userid);
 
     /**
