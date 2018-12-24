@@ -26,7 +26,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("rent")
-public class rentInfoController {
+public class RentInfoController {
     @Autowired
      private RentInfoService rentInfoService;
     //依赖注入ftp工具类
@@ -37,6 +37,13 @@ public class rentInfoController {
     private FtpUtil ftpUtil;
     @Autowired
     private ResourceLoader resourceLoader;
+
+    /**
+     * 借款信息添加并查询是否正在借款中
+     * @param map
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("rentInfo1")
     public Object rentInfo(@RequestBody Map map, HttpSession session){
@@ -51,6 +58,13 @@ public class rentInfoController {
         map.put("userid",userid.toString());
         return rentInfoService.add(map);
     }
+
+    /**
+     * 填写详细信息
+     * @param map
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("rentInfo2")
     public Object rentInfo1(@RequestBody Map map, HttpSession session){
@@ -59,6 +73,13 @@ public class rentInfoController {
         map.put("userid",userid.toString());
         return rentInfoService.addRentDetialInfo(map);
     }
+
+    /**
+     * 添加各种照片证明
+     * @param map
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("rentInfo3")
     public Object rentInfo2(@RequestBody Map map, HttpSession session){
@@ -102,6 +123,12 @@ public class rentInfoController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    /**
+     * 获取详细信息自动加载到详细信息页面
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("getInfo")
     public Object getInfo(HttpSession session){

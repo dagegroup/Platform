@@ -16,10 +16,12 @@ import java.util.Map;
 public interface UserDao {
 
     /**
-     * author:ChenMing
-     * creatTime:2018-12-10 16:39
+     * 查询员工账户和密码
+     * @param telephone
+     * @param password
+     * @return
      */
-    @Select("select  telephone,userName,password from TB_USER_INFO where telephone=#{param1} and password=#{param2} ")
+    @Select("select  userid,telephone,userName,password from TB_USER_INFO where telephone=#{param1} and password=#{param2} ")
     Map getByuserName(String telephone, String password);
 
 
@@ -196,7 +198,7 @@ public interface UserDao {
      * @param userid
      * @return
      */
-    @Select("insert into tb_realname_certification(userid) values(#{userid}) ")
+    @Insert("insert into tb_realname_certification(userid) values(#{userid}) ")
     int adduserid1(String userid);
 
     /**

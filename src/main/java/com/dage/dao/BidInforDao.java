@@ -166,4 +166,12 @@ public interface BidInforDao {
     @Update("update bid_info set bidcurrentamount=bidcurrentamount+#{BIDCURRENTAMOUNT} where bidid=#{BIDID} ")
     int changeBidInfo(Map map);
 
+    /**
+     * 更新已投标金额且当前台投标金额=可投余额时改变标状态
+     * @param map
+     * @return
+     */
+    @Update("update bid_info set bidstate='满标待审核',bidcurrentamount=bidcurrentamount+#{BIDCURRENTAMOUNT} where bidid=#{BIDID} ")
+    int changeBidState(Map map);
+
 }

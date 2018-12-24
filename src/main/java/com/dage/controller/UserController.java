@@ -105,6 +105,14 @@ public class UserController {
     public String toOwn10(){
         return "个人中心-账户设置";
     }
+
+    /**
+     * 前台用户登录 验证 并建立session  同时向账户和详细信息中添加userid
+     * @param map
+     * @param model
+     * @param session
+     * @return
+     */
     //@ResponseBody
     @RequestMapping("login")
     public String userLogin(@RequestParam Map map, Model model, HttpSession session) {
@@ -115,8 +123,9 @@ public class UserController {
         if (user != null && user.size() > 0) {
               session.setAttribute("userName",user.get("USERNAME"));
             session.setAttribute("userid",user.get("USERID"));
+            System.out.println(user.get("USERID")+"");
             String userid = userService.getUserid(user.get("USERID") + "");
-            String userid1=userService.getUserid(user.get("USERID") + "");
+            String userid1=userService.getuesrid(user.get("USERID") + "");
             if(userid==null){
                         userService.addUserid(user.get("USERID")+"");
             }
@@ -131,6 +140,12 @@ public class UserController {
         }
 
     }
+
+    /**
+     * 判断用户是否登录 才允许借款
+     * @param session
+     * @return
+     */
     @RequestMapping("tocheck")
     public String tocheck(HttpSession session){
         Object userName = session.getAttribute("userName");
@@ -139,6 +154,13 @@ public class UserController {
         }
         return "redirect:/user/toLogin";
     }
+
+    /**
+     * 后台登录验证
+     * @param map
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("backLogin")
     public Map userLogin(@RequestParam Map<String, String> map, HttpSession session) {

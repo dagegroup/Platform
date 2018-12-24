@@ -19,26 +19,51 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    /**
+     * 向详细信息表添加userid
+     * @param userid
+     * @return
+     */
     @Override
     public int adduserid1(String userid) {
         return userDao.adduserid1(userid);
     }
 
+    /**
+     * 获取详细信息中的userid
+     * @param userid
+     * @return
+     */
     @Override
     public String getuesrid(String userid) {
         return userDao.getuesrid(userid);
     }
 
+    /**
+     * 向 账户中添加userid
+     * @param userid
+     * @return
+     */
     @Override
     public int addUserid(String userid) {
         return userDao.adduserid(userid);
     }
 
+    /**
+     * 通过username获取用户信息
+     * @param userName
+     * @return
+     */
     @Override
     public Map getUserByUserName(String userName) {
         return userDao.getUserByUserName(userName);
     }
 
+    /**
+     * 获取账户中的userid
+     * @param userid
+     * @return
+     */
     @Override
     public String getUserid(String userid) {
 
@@ -121,9 +146,14 @@ public class UserServiceImpl implements UserService {
         return userDao.getList(map);
     }
 
-
+    /**
+     * 通过用户账号密码查询用户
+     * @param telephone
+     * @param password
+     * @return
+     */
     public Map getByuserName(String telephone, String password) {
-        System.out.println(telephone + password);
+       // System.out.println(telephone + password);
         return userDao.getByuserName(telephone, password);
     }
 
