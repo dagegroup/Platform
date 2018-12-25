@@ -32,7 +32,7 @@ public interface EmpDao {
      * @param phone
      * @return
      */
-    @Select("select id,name,sex,idcard,phone,e.roleid,state,password,rolename from tb_emp e left join tb_role r on e.roleid=r.roleid where phone=#{phone}")
+    @Select("select id,name,sex,idcard,phone,e.roleid,state,password,rolename from tb_emp e left join tb_role r on e.roleid=r.roleid where phone=#{phone} and state='正常'")
     Emp getEmpByPhone(String phone);
 
     /**
