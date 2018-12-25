@@ -27,10 +27,21 @@ import java.util.Map;
 public class AccController {
     @Autowired
     private AccService accService;
+
+    /**
+     * 跳转系统账户流水页面
+     * @return
+     */
     @RequestMapping("account")
     public String toAccount(){
         return "/reception/Account";
     }
+
+    /**
+     * 获取系统账户流水数据
+     * @param map
+     * @return
+     */
     @ResponseBody
     @RequestMapping("list")
     public Object  getList(@RequestBody Map map){
@@ -53,44 +64,33 @@ public class AccController {
     @ResponseBody
     @RequestMapping("/edata")
     public Object getEchartsData(@RequestParam Map map){
-
-        return "FinanceAllService.getEChartsData(map)";
+        System.out.println(accService.getAccountFlow(map));
+        return accService.getAccountFlow(map);
     }
+
     /**
-     * 导出Excel表
+     * 获取系统账户流水统计图数据
+     * @param map
      * @return
      */
-    @RequestMapping("/echartDataExp")
-    public String echartDataExp(Model model, @RequestParam Map map){
-        model.addAttribute("dataList",  "FinanceAllService.getEChartsData(map)");
-        return "finance/financeExl";
+    @ResponseBody
+    @RequestMapping("/edata1")
+    public Object getEchartsData1(@RequestParam Map map){
+        List<Map> balance = accService.getBalance(map);
+        List<Map> income = accService.getIncome(map);
+        Map map1=new HashMap();
+        map1.put("balance",balance);
+        map1.put("income",income);
+        System.out.println(map1);
+        return map1;
     }
     /**
-     * 跳转财务汇总界面
+     * 跳转账户流水界面
      */
     @RequestMapping("/showfinance")
     public String ShowFinance(){
-        return "finance/financeAll";
+        return "reception/FinanceAccount";
     }
-    /**
-     * 跳转到财务统计界面
-     */
-    @RequestMapping("/showfinanceAccount")
-    public String ShowFinanceAccount(){
-        return "finance/financeCount";
-    }
-    /**
-     * 财务汇总数据
-     */
-    @ResponseBody
-    @RequestMapping("/page")
-    public Map GetFinanceAll(@RequestParam Map paramsMap){
-        Map map= new HashMap();
-        //分页查询总数量
-        map.put("total"," FinanceAllService.getPageCount(paramsMap)");
-        //分页查询结果
-        map.put("rows"," FinanceAllService.getPage(paramsMap)");
 
-        return map;
-    }
+
 }

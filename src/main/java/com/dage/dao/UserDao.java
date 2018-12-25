@@ -1,8 +1,10 @@
 package com.dage.dao;
 
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.mybatis.caches.redis.RedisCache;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,7 @@ import java.util.Map;
  * author:CZP
  * creatTime:2018-12-19 14:39
  */
+@CacheNamespace(implementation = RedisCache.class)
 public interface UserDao {
 
     /**

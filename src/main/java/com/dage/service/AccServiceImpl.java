@@ -19,6 +19,21 @@ public class AccServiceImpl implements AccService {
     private AccDao accDao;
 
     @Override
+    public List<Map> getBalance(Map map) {
+        return accDao.getBalance(map);
+    }
+
+    @Override
+    public List<Map> getIncome(Map map) {
+        return accDao.getIncome(map);
+    }
+
+    @Override
+    public List<Map> getAccountFlow(Map map) {
+        return accDao.getAccountFlow(map);
+    }
+
+    @Override
     public List<Map> getFlowtype() {
         return accDao.getFlowtype();
     }
