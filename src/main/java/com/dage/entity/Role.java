@@ -1,13 +1,15 @@
 package com.dage.entity;
 
 
+import java.io.Serializable;
+
 /**
  * @className:Role
  * @discription:
  * @author:ProMonkey-K
  * @creatTime:2018-12-11 14:58
  */
-public class Role{
+public class Role implements Serializable {
     //roleid,rolename,roledesc,rolestate
     private Integer roleid;
     private String rolename;
