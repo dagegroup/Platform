@@ -1,6 +1,7 @@
 package com.dage.controller;
 
 import com.dage.service.ChangeService;
+import com.dage.util.AESUtil;
 import com.dage.util.IndustrySMS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,13 +40,13 @@ public class ChangeController {
         Map map = new HashMap();
         map.put("USERID",userid);
         //根据userid查询用户手机号
-        //System.out.println(changeService.getPhone(map));
+        //System.out.println(changeService.getPhone(map)+"00000000000000000000000000");
         return changeService.getPhone(map);
     }
 
     /**
      * 发送手机验证码
-     * @param phone
+     * @param map
      * @param session
      * @return
      */
@@ -104,6 +105,11 @@ public class ChangeController {
         //将userid放入map传入后台（根据userid修改密码）
         map.put("USERID",userid);
         if (userid!=null&&userid!=""){
+            //获取map中的密码
+            String password = (String)map.get("PASSWORD");
+            //给密码加密
+            String encrypt = AESUtil.getInstance().encrypt(password);
+            map.put("PASSWORD",encrypt);
             //将map传到后台调用修改密码方法
             changeService.updatePassword(map);
             return 1;
@@ -112,7 +118,7 @@ public class ChangeController {
     }
 
     /**
-     * 修改密码
+     * 修改支付密码
      * @param map
      * @param session
      * @return
