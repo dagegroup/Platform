@@ -10,6 +10,8 @@ import java.io.Serializable;
  */
 public class Emp implements Serializable{
 //    id,name,sex,idcard,phone,roleid,state
+
+    private static final long serialVersionUID=123456789;
     private Integer id;
     private String name;
     private String sex;
