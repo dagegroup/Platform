@@ -71,6 +71,16 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    /**
+     * 用户提现  之后更新用户账户表
+     * @param map
+     * @return
+     */
+    @Override
+    public int withdraw1(Map map) {
+        return userDao.withdraw1(map);
+    }
+
     @Override
     public int withdraw(Map map) {
         return userDao.withdraw(map);
@@ -99,6 +109,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public int subSys(Map map) {
         return userDao.subSys(map);
+    }
+
+    /**
+     * 用户 提现添加用户流水表
+     * @param map
+     * @return
+     */
+    @Override
+    public int recharge1(Map map) {
+        return userDao.recharge1(map);
+    }
+
+    /**
+     * 根据userId 统计用户累计投资和累计收益
+     * @param map
+     * @return
+     */
+    @Override
+    public Map statistics(Map map) {
+        return userDao.statistics(map);
     }
 
     @Override

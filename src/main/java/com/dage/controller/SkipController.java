@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -70,6 +72,20 @@ public class SkipController {
             //System.out.println(userid);
             map.put("userId",userid);
             map.put("type","充值");
+            //获取用户账户信息
+            List<Map> account = userService.getAccount(userid);
+            //查询用户账户 accountid
+            Object accountid = account.get(0).get("ACCOUNTID");
+            map.put("accountid",accountid);
+            //账户可用余额
+            BigDecimal availablebalance = (BigDecimal)account.get(0).get("AVAILABLEBALANCE");
+            //用户充值的金额
+            String actualMoney11 =(String) map.get("actualMoney1");
+            BigDecimal actualMoney1 =new BigDecimal(actualMoney11);
+            //用户账户流水表内的账户余额
+            BigDecimal v = availablebalance.add(actualMoney1);
+
+            map.put("moneyflow",v);
             //改变用户账户可用余额
             userService.withdraw(map);
             //添加系统账户流水
@@ -175,9 +191,9 @@ public class SkipController {
         //添加系统账户流水 按照用户提现的金额 添加
         userService.system(map);
         //添加用户账户流水 按照用户提现的金额 添加
-        userService.recharge(map);
-        //减少用户账户的金额 按照用户提现的金额 添加
-        userService.withdraw(map);
+        userService.recharge1(map);
+        //减少用户账户的金额 按照用户提现的金额 减少
+        userService.withdraw1(map);
         return "个人中心首页";
     }
     /**

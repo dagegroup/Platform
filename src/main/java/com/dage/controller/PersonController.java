@@ -208,6 +208,27 @@ public class PersonController {
     }
 
 
+    /**
+     * 投资记录内的统计
+     * @param map
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("sistics")
+    public List<Map> getSistics(@RequestParam Map map,HttpSession session){
+        // 根据session的userid 查询 为map 加入session里的 userid
+        String userid=(String)session.getAttribute("userid");
+        //map.put("userId",userid);
+        map.put("userId","U201812076613");
+        //获取账户信息
+        List<Map> account = userService.getAccount(userid);
+        Map map1 = account.get(0);
+        //根据userId 统计用户累计投资和累计收益
+        Map statistics = userService.statistics(map);
+        //二者合并
+        account.add(statistics);
+        return account;
+    }
 
     /**
      * 条件查询时为map 添加查询条件
