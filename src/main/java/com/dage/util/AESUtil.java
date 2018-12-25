@@ -58,7 +58,7 @@ public class AESUtil {
 		    IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes());// 使用CBC模式，需要一个向量iv，可增加加密算法的强度
 	        cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
 	        encrypted = cipher.doFinal(sSrc.getBytes("utf-8"));
-	       
+
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -145,7 +145,7 @@ public class AESUtil {
         // 需要加密的字串
         //String cSrc = "admin";
 
-        String enString = AESUtil.getInstance().encrypt("1234567");
+        String enString = AESUtil.getInstance().encrypt("123456");
         System.out.println("加密后的字串是：" + enString);
         
         String DeString = AESUtil.getInstance().decrypt("k7QFtKvgXBSY4ImlRB0aeA==");

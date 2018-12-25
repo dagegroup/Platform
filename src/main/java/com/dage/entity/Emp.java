@@ -1,12 +1,14 @@
 package com.dage.entity;
 
+import java.io.Serializable;
+
 /**
  * @className:Emp
  * @discription:
  * @author:ProMonkey-K
  * @creatTime:2018-12-13 14:55
  */
-public class Emp {
+public class Emp implements Serializable{
 //    id,name,sex,idcard,phone,roleid,state
     private Integer id;
     private String name;
