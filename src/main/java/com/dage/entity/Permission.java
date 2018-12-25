@@ -11,6 +11,8 @@ import java.util.List;
  * @creatTime:2018-12-07 14:44
  */
 public class Permission implements Serializable {
+
+    private static final long serialVersionUID = 1111111111;
     private Integer id;
     private String text;
     private String url;
@@ -20,6 +22,7 @@ public class Permission implements Serializable {
     private String state;
     private String iconCls;
     private Boolean checked;
+    private List<Permission> children;
 
     public Boolean getChecked() {
         return checked;
@@ -37,7 +40,7 @@ public class Permission implements Serializable {
         this.children = children;
     }
 
-    private List<Permission> children;
+
 
     public Integer getId() {
         return id;
