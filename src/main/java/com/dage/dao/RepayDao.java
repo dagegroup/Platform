@@ -90,8 +90,8 @@ public interface RepayDao {
      * @param map
      * @return systemflowid,orderid,userid,accountid,amount,availablebalance,flowdate,flowtype,banknumber
      */
-    @Insert("insert into tb_system_account_flow(systemflowid,userid,amount,flowdate,flowtype)" +
-            "values((select 'SFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
-            " '#{USERID}',#{money},sysdate,'借款收入');")
+    @Insert("insert into tb_system_account_flow(systemflowid,userid,amount,flowdate,flowtype) " +
+            " values ((select 'SFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual), " +
+            " #{USERID},#{money},sysdate,'借款收入')")
     int updateSysAccFlow(Map map);
 }

@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ import java.util.Map;
  * @creatTime:2018-12-18 14:07
  */
 @Service
+@Transactional
 public class RepayServiceImpl implements RepayService {
 
     @Autowired
@@ -31,12 +33,9 @@ public class RepayServiceImpl implements RepayService {
     @Autowired
     private SubmitDao submitDao;
     @Autowired
-    private SqlSessionFactory sqlSessionFactory;
-    @Autowired
     private AuditDao auditDao;
     @Override
     public int repayPlanHandle(Map map, HttpSession session) {
-        SqlSession sqlSession = null;
         Map bidInfo = repayDao.getBidInfoByBid(map.get("BIDID") + "");
         double bidamount = Integer.valueOf(bidInfo.get("BIDAMOUNT")+"");
         double bidrate = Integer.valueOf(bidInfo.get("BIDRATE")+"");
@@ -48,53 +47,42 @@ public class RepayServiceImpl implements RepayService {
         double bidamounts = bidamount * (bidrate / 100) / 12*biddeadline + bidamount;
         double x = bidamount * (bidrate / 100) / 12  + bidamount / biddeadline;
         Boolean flag = true;
-        try {
-            sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH);
-            RepayDao repayDaos = sqlSession.getMapper(RepayDao.class);
-            Map mp = new HashMap();
-            mp.put("BIDID",bidid);
-            mp.put("USERID",userid);
-            mp.put("BIDREPAYAMOUNT",x);
-            mp.put("nums",biddeadline);
-            mp.put("BIDSTATE","待还款");
-            mp.put("MONEY",money);
-            mp.put("money",smoney);
-            for(int y=1;y<=biddeadline;y++){
-                mp.put("num",y);
-                if(y==biddeadline){
-                    double z = bidamounts - x*(y-1);
-                    //System.out.println(z);
-                    mp.put("BIDREPAYAMOUNT",z);
-                }
-                int i = repayDaos.addRepayPlan(mp);
-                if (i==0){
-                    flag=false;
-                }
+        Map mp = new HashMap();
+        mp.put("BIDID",bidid);
+        mp.put("USERID",userid);
+        mp.put("BIDREPAYAMOUNT",x);
+        mp.put("nums",biddeadline);
+        mp.put("BIDSTATE","待还款");
+        mp.put("MONEY",money);
+        mp.put("money",smoney);
+        for(int y=1;y<=biddeadline;y++){
+            mp.put("num",y);
+            if(y==biddeadline){
+                double z = bidamounts - x*(y-1);
+                //System.out.println(z);
+                mp.put("BIDREPAYAMOUNT",z);
             }
-            int a = repayDaos.updateUserState(userid);
-            int b = repayDaos.updateUserAccount(mp);
-            int c = repayDaos.updateUserAccFlow(mp);
-            int d = repayDaos.updateSysAccFlow(mp);
-            int j = submitDao.updateBidState(mp);
-            Emp admin = (Emp)session.getAttribute("admin");
-            mp.put("EMPID",admin.getId());
-            int e = auditDao.AddAudit(mp);
-            if(j<0||a<0||b<0||c<0||d<0||e<0){
+            int i = repayDao.addRepayPlan(mp);
+            if (i==0){
                 flag=false;
             }
-            if (flag){
-                sqlSession.commit();
-                return 1;
-            }else {
-                sqlSession.rollback();
-                return 0;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-            sqlSession.close();
         }
-        return 0;
+        int a = repayDao.updateUserState(userid);
+        int b = repayDao.updateUserAccount(mp);
+        int c = repayDao.updateUserAccFlow(mp);
+        int d = repayDao.updateSysAccFlow(mp);
+        int j = submitDao.updateBidState(mp);
+        Emp admin = (Emp)session.getAttribute("admin");
+        mp.put("EMPID",admin.getId());
+        int e = auditDao.AddAudit(mp);
+        if(j<0||a<0||b<0||c<0||d<0||e<0){
+            flag=false;
+        }
+        if (flag){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     @Override

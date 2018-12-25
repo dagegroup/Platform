@@ -4,6 +4,7 @@ import com.dage.entity.Emp;
 import com.dage.service.EmpService;
 import com.dage.service.UserService;
 
+import com.dage.util.AESUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -119,6 +120,9 @@ public class UserController {
         //System.out.println(map);
 
         //System.out.println(map.get("telephone").toString());
+        String password = map.get("password") + "";
+        String encrypt = AESUtil.getInstance().encrypt(password);
+        map.put("password",encrypt);
         Map user = userService.getByuserName(map.get("telephone").toString(),map.get("password").toString());
         if (user != null && user.size() > 0) {
               session.setAttribute("userName",user.get("USERNAME"));
@@ -165,7 +169,8 @@ public class UserController {
     @RequestMapping("backLogin")
     public Map userLogin(@RequestParam Map<String, String> map, HttpSession session) {
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(map.get("phone") + "", map.get("password") + "");
+        String password = AESUtil.getInstance().encrypt(map.get("password"));
+        UsernamePasswordToken token = new UsernamePasswordToken(map.get("phone") + "", password);
         try {
             subject.login(token);
             Emp emp = (Emp) subject.getPrincipal();

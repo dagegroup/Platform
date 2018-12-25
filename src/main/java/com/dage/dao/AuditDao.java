@@ -1,8 +1,10 @@
 package com.dage.dao;
 
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.mybatis.caches.redis.RedisCache;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.Map;
  * @creatTime:2018-12-15 08:56
  */
 @Repository
+@CacheNamespace(implementation = RedisCache.class)
 public interface AuditDao {
 
     /**
