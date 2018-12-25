@@ -55,7 +55,7 @@ public interface UserInfoDao {
      * @param map
      * @return
      */
-    @Insert("insert into tb_user_info(userid,userName,password,telephone,refereeName) values(( select 'log'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*1000),4,0)from dual),#{userName},#{password},#{telephone},#{refereeName})")
+    @Insert("insert into tb_user_info(userid,userName,password,telephone,refereeName,state) values(( select 'log'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*1000),4,0)from dual),#{userName},#{password},#{telephone},#{refereeName},#{state})")
     int insetInfo(Map map);
 
 }
