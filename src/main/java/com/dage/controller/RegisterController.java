@@ -1,6 +1,7 @@
 package com.dage.controller;
 
 import com.dage.service.UserInfoService;
+import com.dage.util.AESUtil;
 import com.dage.util.IndustrySMS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -134,6 +135,9 @@ public class RegisterController {
         if (list!=null&&list.size()>0){
             map1.put("msg",2);
         }else{
+            String password = map.get("password")+"";
+            String encrypt = AESUtil.getInstance().encrypt(password);
+            map.put("password",encrypt);
             int i = userInfoService.insertInfo(map);
             if (i>0) {
                // session.setAttribute("userName",map.get("userName"));
