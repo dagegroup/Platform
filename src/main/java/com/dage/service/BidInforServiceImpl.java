@@ -117,18 +117,25 @@ public class BidInforServiceImpl implements BidInforService {
         double canmoney = bidInforDao.canMoney(map);//从数据库获取可投金额
         /*判断是否满标结束*/
 
-        if (oldavailablebalance>=bidamount){
-            bidInforDao.userAccount(map);//更新账户表
-            bidInforDao.accountRun(map);//向账户流水表里插入数据
-            //判断当可投金额=前台投资金额时，变更标状态
-            if (canmoney ==bidamount){
-                bidInforDao.changeBidState(map);//更新标信息表可投金额,且变更标状态为“满标待审核”
-            }else{
-                bidInforDao.changeBidInfo(map);//更新标信息表可投金额
+        /*查询账户密码开始*/
+        int password = Integer.valueOf(bidInforDao.payPassword(map).toString());//获取账户表支付密码
+        int inputPassword = Integer.valueOf(map.get("TRANSACTIONPASSWORD").toString());//获取前台输入的支付密码
+        /*查询账目密码结束*/
+        if (password==inputPassword) {
+            if (oldavailablebalance >= bidamount) {
+                bidInforDao.userAccount(map);//更新账户表
+                bidInforDao.accountRun(map);//向账户流水表里插入数据
+                //判断当可投金额=前台投资金额时，变更标状态
+                if (canmoney == bidamount) {
+                    bidInforDao.changeBidState(map);//更新标信息表可投金额,且变更标状态为“满标待审核”
+                } else {
+                    bidInforDao.changeBidInfo(map);//更新标信息表可投金额
+                }
+                return bidInforDao.bidSubmit(map);//返回值为成功的行数
             }
-            return bidInforDao.bidSubmit(map);//返回值为成功的行数
+            return 0;//0代表余额不足
         }
-        return 0;
+        return -1;//-1代表密码输入错误
     }
 
     /**
@@ -146,5 +153,4 @@ public class BidInforServiceImpl implements BidInforService {
         }
         return 0;
     }
-
 }
