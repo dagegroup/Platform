@@ -101,10 +101,30 @@
       <div class="personal-investnote" style="padding: 0px 30px 0px">
         <h3><i>投资记录</i></h3>
         <div class="investnote-money" style="margin: 0px 0"> <span><b class="fb">累计投资</b><br>
-          <i>0.00</i> 元 </span> <span><b class="fb">累计收益</b><br>
-          <i class="c-pink">0.00</i> 元 </span> <span><b class="fb">待收本金</b><br>
-          <i>0.00</i> 元 </span> <span class="none"><b class="fb">待收收益</b><br>
-          <i>0.00</i> 元 </span> </div>
+          <i><span id="amount" style="height:30px;margin:0px 0px;width:160px"></span>元</i> </span> <span><b class="fb">累计收益</b><br>
+          <i class="c-pink" ><span id="sum" style="height:30px;margin:0px 0px;width:160px"></span>元</i> </span> <span><b class="fb">待收本金</b><br>
+          <i><span id="sum1" style="height:30px;margin:0px 0px;width:160px"></span>元</i> </span> <span class="none"><b class="fb">待收收益</b><br>
+          <i><span id="sum2" style="height:30px;margin:0px 0px;width:160px"></span>元</i> </span> </div>
+        <script>
+            $(function(){
+                $.ajax({
+                    url: "/person/sistics",
+                    data:{},
+                    async:false,//同步
+                    type:"post",
+                    dataType:"json",
+                    success: function(data){
+                        $('#amount').html(data[1].SUM1);
+                        $('#sum').html(data[1].SUM2);
+                        $('#sum1').html(data[0].RECEIVEPRINCIPAL);
+                        $('#sum2').html(data[0].RECEIVENUMBEREREST);
+                    },
+                    error : function(data) {
+                        alert(data);
+                    }
+                })
+            });
+        </script>
         <form id="form" name="form" method="post" action="">
           <script type="text/javascript">clearPage = function() {PrimeFaces.ab({source:'form:j_idt82',formId:'form',process:'form:j_idt82',params:arguments[0]});}</script>
           <span id="form:dataTable"></span>

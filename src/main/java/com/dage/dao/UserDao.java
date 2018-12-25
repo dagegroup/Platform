@@ -128,7 +128,17 @@ public interface UserDao {
     List<Map> getMSBs(Map map);
 
     /**
-     * 添加用户流水表
+     * 用户 充值 添加用户流水表
+     * @param map
+     * @return
+     */
+    @Insert("insert into user_account_flow" +
+            " values((select 'UFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
+            " #{userId},#{accountid},#{actualMoney1},#{moneyflow},sysdate,#{type})")
+    int recharge(Map map);
+
+    /**
+     * 用户 提现添加用户流水表
      * @param map
      * @return
      */
@@ -136,8 +146,8 @@ public interface UserDao {
             " values((select 'UFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
             " #{userId},123456788999,#{actualMoney1},(select (select availablebalance from " +
             " (select flowdate,availablebalance from user_account_flow where userid=#{userId} order by flowdate  desc)" +
-            " where rownum =1) + #{actualMoney1} from dual),sysdate,#{type})")
-    int recharge(Map map);
+            " where rownum =1) - #{actualMoney1} from dual),sysdate,#{type})")
+    int recharge1(Map map);
 
     /**
      * 根据用户id 查询用户账户信息
@@ -148,7 +158,7 @@ public interface UserDao {
     List<Map> getAccount(String userid);
 
     /**
-     * 用户提现 或者充值  之后更新用户账户表
+     * 用户充值  之后更新用户账户表
      * @param map
      * @return
      */
@@ -156,6 +166,16 @@ public interface UserDao {
             "((select availablebalance from user_account where userid=#{userId})+#{actualMoney1}) " +
             " where userid=#{userId}")
     int withdraw(Map map);
+
+    /**
+     * 用户提现  之后更新用户账户表
+     * @param map
+     * @return
+     */
+    @Update("update user_account  set availablebalance=" +
+            "((select availablebalance from user_account where userid=#{userId})-#{actualMoney1}) " +
+            " where userid=#{userId}")
+    int withdraw1(Map map);
 
     /**
      *  添加系统账户流水记录
@@ -218,4 +238,12 @@ public interface UserDao {
     @Update("update system_rental set money=((select money from system_rental " +
             "where sysid='SYS201812221314') - #{money1}) where sysid='SYS201812221314'")
     int subSys(Map map);
+
+    /**
+     * 根据userId 统计用户累计投资和累计收益
+     * @param map
+     * @return
+     */
+    @Select("select sum(bidamount) as sum1,sum(bidrate) as sum2 from bid_submit where userid=#{userId}")
+    Map statistics(Map map);
 }

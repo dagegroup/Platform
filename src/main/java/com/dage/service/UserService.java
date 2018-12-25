@@ -34,11 +34,18 @@ public interface UserService {
     int system(Map map);
 
     /**
-     * 添加用户流水表
+     * 用户充值添加用户流水表
      * @param map
      * @return
      */
     int recharge(Map map);
+
+    /**
+     * 用户 提现添加用户流水表
+     * @param map
+     * @return
+     */
+    int recharge1(Map map);
 
     /**
      * 用户充提现时更新系统的总账户
@@ -46,6 +53,13 @@ public interface UserService {
      * @return
      */
     int subSys(Map map);
+
+    /**
+     * 根据userId 统计用户累计投资和累计收益
+     * @param map
+     * @return
+     */
+    Map statistics(Map map);
 
     /**
      *根据用户id查询可以回款标信息标
@@ -84,11 +98,19 @@ public interface UserService {
     int addSys(Map map);
 
     /**
-     * 用户提现之后更新用户账户表
+     * 用户充值之后更新用户账户表
      * @param map
      * @return
      */
     int withdraw(Map map);
+
+    /**
+     * 用户提现  之后更新用户账户表
+     * @param map
+     * @return
+     */
+    int withdraw1(Map map);
+
 
     /**
      * 根据session里 获取的用户姓名 查询用户的信息
