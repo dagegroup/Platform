@@ -2,6 +2,7 @@ package com.dage.service;
 
 import com.dage.dao.EmpDao;
 import com.dage.entity.Emp;
+import com.dage.util.AESUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,8 @@ public class EmpServiceImpl implements EmpService{
 
     @Override
     public int add(Emp emp) {
+        String encrypt = AESUtil.getInstance().encrypt(emp.getPassword());
+        emp.setPassword(encrypt);
         return empDao.add(emp);
     }
 

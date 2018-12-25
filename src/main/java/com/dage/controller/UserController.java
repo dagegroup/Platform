@@ -169,7 +169,8 @@ public class UserController {
     @RequestMapping("backLogin")
     public Map userLogin(@RequestParam Map<String, String> map, HttpSession session) {
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(map.get("phone") + "", map.get("password") + "");
+        String password = AESUtil.getInstance().encrypt(map.get("password"));
+        UsernamePasswordToken token = new UsernamePasswordToken(map.get("phone") + "", password);
         try {
             subject.login(token);
             Emp emp = (Emp) subject.getPrincipal();
