@@ -388,7 +388,7 @@
             // 点击我要还款  还款页面重新加载
             loadingDataA: function () {
                 var _self = this
-                //_self.loading = true;
+                _self.loading = true;
                 axios.post(this.goUrl, {
                     'userId': this.userId,
                     'type': this.type,

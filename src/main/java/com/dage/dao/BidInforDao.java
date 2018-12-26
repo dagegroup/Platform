@@ -1,8 +1,10 @@
 package com.dage.dao;
 
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.mybatis.caches.redis.RedisCache;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.Map;
  * createTime:2018-12-14 11:05
  */
 @Repository
+@CacheNamespace(implementation = RedisCache.class)
 public interface BidInforDao {
 
     /**
@@ -157,6 +160,14 @@ public interface BidInforDao {
      */
     @Select("select accountid from user_account where userid=#{USERID} ")
     Map userAccountid(Map map);
+
+    /**
+     * 根据用户id从账户表查询支付密码
+     * @param map
+     * @return
+     */
+    @Select("select transactionpassword from user_account where userid=#{USERID} ")
+    String payPassword(Map map);
 
     /**
      * 根据bidid更新标信息表中的已投标金额bidcurrentamount

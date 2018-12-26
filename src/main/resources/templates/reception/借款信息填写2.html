@@ -185,7 +185,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item   label="婚姻状况:" prop="MAEEIAGE">
+            <el-form-item   label="婚姻状况:" prop="MARRIAGE">
               <el-select v-model="dataForm.MARRIAGE" placeholder="婚姻" style="width:150px">
                 <el-option label="请选择" value=""></el-option>
                 <el-option label="未婚" value="未婚"></el-option>
@@ -281,22 +281,22 @@
         </el-row>
         <el-row>
           <el-col :span="6" class="ss">
-            <el-form-item label="工作联系人:" prop="FAMILYNAME">
+            <el-form-item label="工作联系人:" >
               <el-input v-model="dataForm.JOBCONTACTNAME"    style="width:150px"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6" class="ss">
-            <el-form-item label="关系:" prop="FAMILYRELATIONSHIP">
+            <el-form-item label="关系:" >
               <el-input v-model="dataForm.JOBRELATIONSHIP"    style="width:150px"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6" class="ss">
-            <el-form-item label="电话:" prop="FAMILYTEL">
+            <el-form-item label="电话:" >
               <el-input v-model="dataForm.JOBTEL"    style="width:150px"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6" class="ss">
-            <el-form-item label="现住地址:" prop="ADDRESS">
+            <el-form-item label="现住地址:" >
               <el-row style="width:400px">
                 <el-col :span="6">
                   <el-select v-model="dataForm.sheng3" @change="choseProvince($event,3)" placeholder="省级地区" style="width:100px">
@@ -334,22 +334,22 @@
         </el-row>
         <el-row>
           <el-col :span="6" class="ss">
-            <el-form-item label="其他联系人:"prop="FAMILYNAME" >
+            <el-form-item label="其他联系人:" >
               <el-input v-model="dataForm.OTHERNAME"    style="width:150px"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6" class="ss">
-            <el-form-item label="关系:" prop="FAMILYRELATIONSHIP">
+            <el-form-item label="关系:" >
               <el-input v-model="dataForm.OTHERRELATIONSHIP"    style="width:150px"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6" class="ss">
-            <el-form-item label="电话:" prop="FAMILYTEL" >
+            <el-form-item label="电话:" >
               <el-input v-model="dataForm.OTHERTEL"    style="width: 150px"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6" >
-            <el-form-item label="现住地址:" prop="ADDRESS" >
+            <el-form-item label="现住地址:"  >
               <el-row style="width:400px">
                 <el-col :span="6">
                   <el-select v-model="dataForm.sheng4" @change="choseProvince($event,4)" placeholder="省级地区" style="width:100px" >
@@ -387,7 +387,7 @@
         </el-row>
         <center>
           <template >
-            <el-button :plain="true" type="primary" size="small"  @click="nextin">下一步，填写详细信息</el-button>
+            <el-button :plain="true" type="primary" size="small"  @click="nextin('dataForm')">下一步，填写详细信息</el-button>
           </template>
         </center>
       </el-form>
@@ -568,7 +568,6 @@
             this.getCityData();
             var _self=this;
             axios.post('/rent/getInfo').then(function(response){
-
                 if(response.data.IDCARD!=null&&response.data.IDCARD!=''&&response.data.IDCARD!='null'){
                     _self.dataForm=response.data;
                 }else{
@@ -601,25 +600,29 @@
 
         },
         methods: {
-            nextin: function () {
-                var _self = this;
-                _self.loading = true;
-                var formData = this.dataForm;
-                // alert(JSON.stringify(formData));
-                var goUrl = '/rent/rentInfo2';
-                //alert(goUrl);
-                //alert(JSON.stringify(formData));
-                axios.post(goUrl, formData).then(function (response) {
-                    // console.log(response.data);
-                    // alert(222);
-                    // self.total=response.data.total;
-                    if (response.data > 0) {
-                        location.href = "/goto/rentInfo2"
-                    } else {
-                        _self.$message({
-                            message: '操作失败',
-                            type: 'error'
-                        });
+            nextin(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if(valid) {
+                        var _self = this;
+                        _self.loading = true;
+                        var formData = this.dataForm;
+                        // alert(JSON.stringify(formData));
+                        var goUrl = '/rent/rentInfo2';
+                        //alert(goUrl);
+                        //alert(JSON.stringify(formData));
+                        axios.post(goUrl, formData).then(function (response) {
+                            // console.log(response.data);
+                            // alert(222);
+                            // self.total=response.data.total;
+                            if (response.data > 0) {
+                                location.href = "/goto/rentInfo2"
+                            } else {
+                                _self.$message({
+                                    message: '操作失败',
+                                    type: 'error'
+                                });
+                            }
+                        })
                     }
                 })
             },

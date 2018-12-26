@@ -121,6 +121,27 @@ public class UserServiceImpl implements UserService {
         return userDao.recharge1(map);
     }
 
+
+    /**
+     *  添加 用户提现之后添加手续费记录 系统账户流水记录
+     * @param map
+     * @return
+     */
+    @Override
+    public int system2(Map map) {
+        return userDao.system2(map);
+    }
+
+    /**
+     *  添加 用户提现之后减少 系统账户流水记录
+     * @param map
+     * @return
+     */
+    @Override
+    public int system1(Map map) {
+        return userDao.system1(map);
+    }
+
     /**
      * 根据userId 统计用户累计投资和累计收益
      * @param map

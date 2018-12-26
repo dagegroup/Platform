@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.mybatis.caches.redis.RedisCache;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Map;
  * author:CZP
  * creatTime:2018-12-19 14:39
  */
+@Repository
 @CacheNamespace(implementation = RedisCache.class)
 public interface UserDao {
 
@@ -181,7 +183,7 @@ public interface UserDao {
     int withdraw1(Map map);
 
     /**
-     *  添加系统账户流水记录
+     *  添加 用户充值之后加入系统账户流水记录
      * @param map
      * @return
      */
@@ -191,6 +193,30 @@ public interface UserDao {
             " (select flowdate,availablebalance from tb_system_account_flow where userid=#{userId} order by flowdate  desc)" +
             " where rownum =1)+#{actualMoney1} from dual),sysdate,#{type},null,123)")
     int system(Map map);
+
+    /**
+     *  添加 用户提现之后减少 系统账户流水记录
+     * @param map
+     * @return
+     */
+    @Insert("insert into tb_system_account_flow" +
+            " values((select 'SFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
+            " #{userId},'A111111111',#{actualMoney1},(select (select availablebalance from" +
+            " (select flowdate,availablebalance from tb_system_account_flow where userid=#{userId} order by flowdate  desc)" +
+            " where rownum =1)-#{money1} from dual),sysdate,#{type},null,123)")
+    int system1(Map map);
+
+    /**
+     *  添加 用户提现之后的手续费  系统账户流水记录
+     * @param map
+     * @return
+     */
+    @Insert("insert into tb_system_account_flow" +
+            " values((select 'SFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
+            " #{userId},'A111111111',#{actualMoney1},(select (select availablebalance from" +
+            " (select flowdate,availablebalance from tb_system_account_flow where userid=#{userId} order by flowdate  desc)" +
+            " where rownum =1)+#{money1} from dual),sysdate,'提现手续费',null,123)")
+    int system2(Map map);
 
     /**
      * 查询账户id

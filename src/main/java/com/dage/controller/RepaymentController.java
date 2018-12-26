@@ -84,17 +84,23 @@ public class RepaymentController {
     @ResponseBody
     @RequestMapping("/huankuan")
     @Transactional//事务
-    public int repayment(@RequestBody Map map){
+    public int repayment(@RequestBody Map map,HttpSession session){
         BigDecimal balance1=null;
         BigDecimal balance2=null;
         BigDecimal balance3=null;
         String bidid=null;
+
         //还款人id
-        String userid=(String) map.get("userId");
+        String userid=(String) session.getAttribute("userid");
         //标id
         String repayid=(String) map.get("repayid");
         //根据还款人的id查询用户余额
+        System.out.println(userid+"---------------------------------");
+        map.put("userId",userid);
+        System.out.println(map);
         Map map1=repaymentService.getBalance(map);
+        System.out.println(repaymentService.getBalance(map));
+        System.out.println(map1);
         if (map1.size()>0){
             //System.out.println(map1);
             balance1 =(BigDecimal)map1.get("AVAILABLEBALANCE");
