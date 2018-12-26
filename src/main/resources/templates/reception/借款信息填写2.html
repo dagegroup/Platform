@@ -16,9 +16,9 @@
   <script type="text/javascript" src="../js/vue.js"></script>
   <script type="text/javascript" src="../js/axios.min.js"></script>
   <!-- 引入样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="/elementui/elementui.css">
   <!-- 引入组件库 -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="/elementui/elementui.js"></script>
   <script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
   <script type="text/javascript" src="../foreground/script/common.js"></script>
   <style type="text/css">
@@ -281,12 +281,12 @@
         </el-row>
         <el-row>
           <el-col :span="6" class="ss">
-            <el-form-item label="工作联系人:" >
+            <el-form-item label="工作联系人:" prop="FAMILYNAME">
               <el-input v-model="dataForm.JOBCONTACTNAME"    style="width:150px"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6" class="ss">
-            <el-form-item label="关系:" >
+            <el-form-item label="关系:" prop="FAMILYRELATIONSHIP">
               <el-input v-model="dataForm.JOBRELATIONSHIP"    style="width:150px"></el-input>
             </el-form-item>
           </el-col>
@@ -521,9 +521,7 @@
                     GENDER: [
                         { required: true, message: '请选择性别', trigger: 'blur' }
                     ],
-                    ADDRESS: [
-                        { required: true, message: '请选择住址', trigger: 'blur' }
-                    ],
+
                     EMAIL: [
                         { validator: checkEmail, trigger: 'blur' }
                     ],
