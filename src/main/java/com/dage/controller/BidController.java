@@ -26,16 +26,6 @@ public class BidController {
     @Autowired
     private BidService bidService;
 
-   /**
-     * 标列表方法(已弃，连数据库)
-     * @return
-    */
-    @RequestMapping("/list")
-    @ResponseBody
-    public Object list(Map map){
-        return bidService.getList(map);
-    }
-
     /**
      * 条件+分页查询标列表
      * @return
@@ -50,6 +40,23 @@ public class BidController {
         PageInfo<Map> info = new PageInfo<>(term);
         mp.put("page",info);
         return mp;
+    }
+
+    /**
+     * 投资总金额
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getGrossAssets")
+    public Map getGrossAssets(){
+        //获取总投资金额
+        double grossAssets=bidService.getGrossAssets();
+        //成功招标总金额
+        double getSuccse=bidService.getSuccse();
+        Map map = new HashMap();
+        map.put("invest",grossAssets);//投资总额
+        map.put("succse",getSuccse);//借款总额
+        return map;
     }
 
 }
