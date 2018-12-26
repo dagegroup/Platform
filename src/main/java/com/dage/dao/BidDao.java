@@ -15,7 +15,6 @@ import java.util.Map;
  * createTime:2018-12-10 17:29
  */
 @Repository
-@CacheNamespace(implementation = RedisCache.class)
 public interface BidDao {
     /**
      * 条件查询标列表

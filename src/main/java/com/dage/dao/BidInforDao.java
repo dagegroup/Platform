@@ -17,7 +17,6 @@ import java.util.Map;
  * createTime:2018-12-14 11:05
  */
 @Repository
-@CacheNamespace(implementation = RedisCache.class)
 public interface BidInforDao {
 
     /**
