@@ -2,6 +2,7 @@ package com.dage.controller;
 
 import com.dage.entity.Emp;
 import com.dage.service.EmpService;
+import com.dage.util.AESUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,11 @@ public class EmpController {
         Map mp = new HashMap<>();
         PageHelper.startPage(Integer.valueOf(map.get("start")+""),Integer.valueOf(map.get("end")+""));
         List<Emp> list = empService.getList();
+        for (Emp emp : list) {
+            String password = emp.getPassword();
+            String decrypt = AESUtil.getInstance().decrypt(password);
+            emp.setPassword(decrypt);
+        }
         PageInfo<Emp> info = new PageInfo<>(list);
         mp.put("page",info);
         return mp;

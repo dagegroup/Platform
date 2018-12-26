@@ -159,6 +159,14 @@ public interface BidInforDao {
     Map userAccountid(Map map);
 
     /**
+     * 根据用户id从账户表查询支付密码
+     * @param map
+     * @return
+     */
+    @Select("select transactionpassword from user_account where userid=#{USERID} ")
+    String payPassword(Map map);
+
+    /**
      * 根据bidid更新标信息表中的已投标金额bidcurrentamount
      * @param map
      * @return

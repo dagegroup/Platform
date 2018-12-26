@@ -190,6 +190,7 @@
         created:function(){
             /*根据session获取手机号，并自动填入手机号输入框*/
             axios.post('/changePassword/phone').then(function(response){
+                //alert(response.data.TELEPHONE);
                 $("#phone").val(response.data.TELEPHONE);
             })
 
@@ -223,7 +224,7 @@
             //发送手机验证码
             getCode:function () {
                 axios.post("/changePassword/verifyCode",{'phone':$("#phone").val()}).then(function (response) {
-                    alert("发送至手机的验证码为："+response.data);
+                    //alert("发送至手机的验证码为："+response.data);
                 })
             },
             //验证手机验证码是否输入正确
@@ -236,6 +237,7 @@
                         $(".infomation").css("color", "red");
                         $(".infomation").html("验证失败");
                     }
+
                 })
             },
             //验证密码是否输入正确

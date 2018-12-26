@@ -1,18 +1,18 @@
 <!DOCTYPE html  >
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>p2p网贷平台</title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<link href="../foreground/css/common.css" rel="stylesheet" />
-<link href="../foreground/css/index.css" rel="stylesheet" type="text/css">
-<link href="../foreground/css/detail.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
-<script type="text/javascript" src="../foreground/script/common.js"></script>
-<!-- 引入样式 -->
-<script type="text/javascript" src="/js/vue.js"></script>
-<script type="text/javascript" src="/js/axios.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>p2p网贷平台</title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <link href="../foreground/css/common.css" rel="stylesheet" />
+  <link href="../foreground/css/index.css" rel="stylesheet" type="text/css">
+  <link href="../foreground/css/detail.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
+  <script type="text/javascript" src="../foreground/script/common.js"></script>
+  <!-- 引入样式 -->
+  <script type="text/javascript" src="/js/vue.js"></script>
+  <script type="text/javascript" src="/js/axios.min.js"></script>
   <!-- 引入样式 -->
   <link rel="stylesheet" href="/elementui/elementui.css">
   <!-- 引入组件库 -->
@@ -74,7 +74,7 @@
 </header>
 <!--列表-->
 <div  class="page-filter wrap" id="bidbody">
-    <div class="breadcrumbs"><a href="/goto/index">首页</a>&gt;<span class="cur">散标投资列表</span></div>
+  <div class="breadcrumbs"><a href="/goto/index">首页</a>&gt;<span class="cur">散标投资列表</span></div>
   <div class="invest-filter" data-target="sideMenu">
     <div class="filter-inner clearfix">
       <div class="filter-item">
@@ -139,8 +139,8 @@
       <h3>投资列表</h3>
       <div class="count">
         <ul>
-          <li class="line">散标投资交易金额&nbsp;&nbsp;<span class="f20 bold">88.66亿元</span></li>
-          <li>累计赚取收益&nbsp;&nbsp;<span class="f20 bold">2.22亿元</span></li>
+          <li class="line">累计成交金额堆起来可超过：<span class="f20 bold">哈利法塔</span></li>
+          <li>使用用户手牵手可绕地球：<span class="f20 bold">2圈</span></li>
         </ul>
       </div>
     </div>
@@ -164,24 +164,24 @@
         </div>
 
       </div>
-        <!--分页-->
-        <div id="tableView">
-            <!--列表底部工具条和分页符-->
-            <el-row style="margin-top: 20px" type="flex" justify="end">
-                <el-col :span="18" >
-                    <el-pagination
-                            style="float: right"
-                            @size-change="pageSizeChange"
-                            @current-change="currentPageChange"
-                            :current-page="currentPage"
-                            :page-sizes="[10, 20, 30, 50]"
-                            :page-size="pageSize"
-                            layout="total, sizes, prev, pager, next, jumper"
-                            :total="total">
-                    </el-pagination>
-                </el-col>
-            </el-row>
-        </div>
+      <!--分页-->
+      <div id="tableView">
+        <!--列表底部工具条和分页符-->
+        <el-row style="margin-top: 20px" type="flex" justify="end">
+          <el-col :span="18" >
+            <el-pagination
+                    style="float: right"
+                    @size-change="pageSizeChange"
+                    @current-change="currentPageChange"
+                    :current-page="currentPage"
+                    :page-sizes="[10, 20, 30, 50]"
+                    :page-size="pageSize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="total">
+            </el-pagination>
+          </el-col>
+        </el-row>
+      </div>
     </div>
   </div>
 </div>
@@ -378,7 +378,7 @@
                         $('#bid').append(str);
                     },
                     error : function(data) {
-                       // alert(data);
+                        // alert(data);
                     }
                 })
             },

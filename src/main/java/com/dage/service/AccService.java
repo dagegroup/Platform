@@ -22,4 +22,25 @@ public interface AccService {
      * @return
      */
     List<Map> getFlowtype();
+
+    /**
+     * 账户流水
+     * @param map
+     * @return
+     */
+    List<Map> getAccountFlow(Map map);
+
+    /**
+     * 获得账户总余额
+     * @param map
+     * @return
+     */
+    List<Map> getBalance(Map map);
+
+    /**
+     * 获得收入
+     * @param map
+     * @return
+     */
+    List<Map> getIncome(Map map);
 }

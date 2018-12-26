@@ -68,8 +68,9 @@ public class RentInfoController {
     @ResponseBody
     @RequestMapping("rentInfo2")
     public Object rentInfo1(@RequestBody Map map, HttpSession session){
+        String addr = map.get("addrA").toString().concat(map.get("address") + "");
         Object userid = session.getAttribute("userid");
-        System.out.println(userid);
+       map.put("addrA",addr);
         map.put("userid",userid.toString());
         return rentInfoService.addRentDetialInfo(map);
     }

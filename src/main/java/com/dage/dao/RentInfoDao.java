@@ -32,7 +32,7 @@ public interface RentInfoDao {
      * @param map
      * @return
      */
-    @Insert("update   tb_realname_certification set auditremarks='未审核', realname=#{REALNAME},sex=#{GENDER},address='联动没写',email=#{EMAIL},idnumber=#{IDCARD},academic=#{MAXEDUCATION},housed=#{HOUSE},income=#{INCOME},marriage=#{MARRIAGE},jobtype=#{JOBTYPE},comname=#{COMNAME},jointime=to_date(#{JOINTIME},'yyyy-mm-dd hh24:mi:ss'),linkman1name=#{FAMILYNAME},linkman1rela=#{FAMILYRELATIONSHIP},linkman1phone=#{FAMILYTEL},linkman1sex='男',linkman1address=#{ADDRESS},linkman2name=#{JOBCONTACTNAME},linkman2rela=#{JOBRELATIONSHIP},linkman2phone=#{JOBTEL},linkman2sex='男',linkman2address=#{ADDRESS},linkman3name=#{OTHERNAME},linkman3rela=#{OTHERRELATIONSHIP},linkman3phone=#{OTHERTEL},linkman3sex='男',linkman3address=#{ADDRESS},applytime=sysdate  where userid=#{userid}")
+    @Insert("update   tb_realname_certification set auditremarks='未审核', realname=#{REALNAME},sex=#{GENDER},address=#{addrA},email=#{EMAIL},idnumber=#{IDCARD},academic=#{MAXEDUCATION},housed=#{HOUSE},income=#{INCOME},marriage=#{MARRIAGE},jobtype=#{JOBTYPE},comname=#{COMNAME},jointime=to_date(#{JOINTIME},'yyyy-mm-dd hh24:mi:ss'),linkman1name=#{FAMILYNAME},linkman1rela=#{FAMILYRELATIONSHIP},linkman1phone=#{FAMILYTEL},linkman1sex='男',linkman1address=#{addrB},linkman2name=#{JOBCONTACTNAME},linkman2rela=#{JOBRELATIONSHIP},linkman2phone=#{JOBTEL},linkman2sex='男',linkman2address=#{addrC},linkman3name=#{OTHERNAME},linkman3rela=#{OTHERRELATIONSHIP},linkman3phone=#{OTHERTEL},linkman3sex='男',linkman3address=#{addrD},applytime=sysdate  where userid=#{userid}")
     int addRentDetialInfo(Map map);
 
     /**

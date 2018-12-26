@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>流标详情</title>
+    <title>账户流水列表</title>
     <!-- 引入样式 -->
     <script type="text/javascript" src="/js/vue.js"></script>
     <script type="text/javascript" src="/js/axios.min.js"></script>
@@ -14,7 +14,6 @@
 <body>
 <div id="tableView">
     <!--列表顶部搜索和工具条-->
-
     <el-row>
         <el-form :inline="true" :model="searchForm" class="demo-form-inline" style="float:right">
             <el-form-item label="用户Id">
@@ -53,7 +52,7 @@
                     prop="SYSTEMFLOWID"
                     label="系统流水单号"
                     align="center"
-                    width="120">
+                    width="180">
             </el-table-column>
             <el-table-column
                     prop="USERID"
@@ -100,7 +99,7 @@
             </el-table-column>
             <!--bidcurrentamount-->
             <el-table-column
-                    prop="ORDERID"
+                    prop="NAME"
                     align="center"
                     label="操作员"
                     width="120">
