@@ -39,9 +39,9 @@ public class SkipController {
         Map user=userService.getUserByUserName(userName);
         String userid=(String) user.get("USERID");
         //将userid放入session 便于使用
-        //session.setAttribute("userid",userid);
-        String userid1= "U201812076613";
-        session.setAttribute("userid",userid1);
+        session.setAttribute("userid",userid);
+        //String userid1= "U201812076613";
+        //session.setAttribute("userid",userid1);
         if (map.size()>0){
             /*Object o = map.get("bankCardNo");
             System.out.println(o);
