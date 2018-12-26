@@ -159,6 +159,7 @@ public class PersonController {
         //根据session的userid 查询 为map 加入session里的 userid
         String userid=(String)session.getAttribute("userid");
         map1.put("userId",userid);
+        map1.put("type","已还款");
         //设置当前第几页和每页显示数量
         PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
         System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
@@ -218,8 +219,8 @@ public class PersonController {
     public List<Map> getSistics(@RequestParam Map map,HttpSession session){
         // 根据session的userid 查询 为map 加入session里的 userid
         String userid=(String)session.getAttribute("userid");
-        //map.put("userId",userid);
-        map.put("userId","U201812076613");
+        map.put("userId",userid);
+        //map.put("userId","U201812076613");
         //获取账户信息
         List<Map> account = userService.getAccount(userid);
         Map map1 = account.get(0);

@@ -39,19 +39,15 @@ public class SkipController {
         Map user=userService.getUserByUserName(userName);
         String userid=(String) user.get("USERID");
         //将userid放入session 便于使用
-        session.setAttribute("userid",userid);
-        //String userid1= "U201812076613";
-        //session.setAttribute("userid",userid1);
+        //session.setAttribute("userid",userid);
+        String userid1= "U201812076613";
+        session.setAttribute("userid",userid1);
         if (map.size()>0){
             /*Object o = map.get("bankCardNo");
             System.out.println(o);
             Object o1 = map.get("actualMoney1");
             System.out.println(o1);*/
-            try {
-                userService.recharge(map);
-            } catch (Exception e) {
-                System.out.println("出错了！！");
-            }
+            userService.recharge(map);
         }
         return "个人中心首页";
     }
@@ -75,7 +71,7 @@ public class SkipController {
             //获取用户账户信息
             List<Map> account = userService.getAccount(userid);
             //查询用户账户 accountid
-            Object accountid = account.get(0).get("ACCOUNTID");
+            String accountid =(String)account.get(0).get("ACCOUNTID");
             map.put("accountid",accountid);
             //账户可用余额
             BigDecimal availablebalance = (BigDecimal)account.get(0).get("AVAILABLEBALANCE");
@@ -173,11 +169,13 @@ public class SkipController {
         //提现金额
         String  moeny1 = (String)map.get("money");
         Double money = Double.valueOf(moeny1);
-        //procedure
+        //procedure 手续费
         String procedure1 =(String) map.get("procedure");
         Double procedure = Double.valueOf(procedure1);
         //真实到账金额
         double v = money - procedure;
+        //提现的手续费
+        map.put("procedure",procedure);
         //真实到账金额  系统账户里减少的金额
         map.put("money1",v);
         // 用户账户减少 和用户流水 提现的金额
@@ -189,7 +187,9 @@ public class SkipController {
         //系统账户减去到账金额
         userService.subSys(map);
         //添加系统账户流水 按照用户提现的金额 添加
-        userService.system(map);
+        userService.system1(map);
+        //添加系统账户流水 手续费
+        userService.system2(map);
         //添加用户账户流水 按照用户提现的金额 添加
         userService.recharge1(map);
         //减少用户账户的金额 按照用户提现的金额 减少

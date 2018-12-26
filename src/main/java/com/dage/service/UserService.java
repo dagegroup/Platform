@@ -125,6 +125,20 @@ public interface UserService {
      */
     List<Map> getUser(Map map);
 
+    /**
+     *  添加 用户提现之后减少 系统账户流水记录
+     * @param map
+     * @return
+     */
+    int system1(Map map);
+
+    /**
+     *  添加 用户提现之后添加手续费记录 系统账户流水记录
+     * @param map
+     * @return
+     */
+    int system2(Map map);
+
 
     /**
      * author:ChenMing

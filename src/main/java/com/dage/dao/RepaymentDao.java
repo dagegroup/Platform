@@ -1,8 +1,11 @@
 package com.dage.dao;
 
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.mybatis.caches.redis.RedisCache;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,6 +17,8 @@ import java.util.Map;
  * author:CZP
  * createTime:2018-12-19 10:28
  */
+@Repository
+@CacheNamespace(implementation = RedisCache.class)
 public interface RepaymentDao {
 
     /**
