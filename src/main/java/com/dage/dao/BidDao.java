@@ -35,13 +35,13 @@ public interface BidDao {
      * 投资总金额
      * @return
      */
-    @Select("select sum(amount) from user_account_flow where flowtype='投资' ")
+    @Select("select nvl(sum(amount),0) from user_account_flow where flowtype='投资' ")
     double getGrossAssets();
 
     /**
      *成功招标总金额
      * @return
      */
-    @Select("select sum(bidamount) from bid_info where bidstate='已还款'")
+    @Select("select nvl(sum(bidamount),0) from bid_info where bidstate='已还款'")
     double getSuccse();
 }
