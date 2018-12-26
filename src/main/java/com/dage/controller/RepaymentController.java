@@ -84,61 +84,57 @@ public class RepaymentController {
     @ResponseBody
     @RequestMapping("/huankuan")
     @Transactional//事务
-    public int repayment(@RequestBody Map map,HttpSession session){
-        BigDecimal balance1=null;
-        BigDecimal balance2=null;
-        BigDecimal balance3=null;
-        String bidid=null;
-
+    public int repayment(@RequestBody Map map,HttpSession session) {
+        BigDecimal balance1 = null;
+        BigDecimal balance2 = null;
+        BigDecimal balance3 = null;
+        String bidid = null;
         //还款人id
-        String userid=(String) session.getAttribute("userid");
+        String userid = (String) session.getAttribute("userid");
         //标id
-        String repayid=(String) map.get("repayid");
+        String repayid = (String) map.get("repayid");
         //根据还款人的id查询用户余额
-        System.out.println(userid+"---------------------------------");
-        map.put("userId",userid);
-        System.out.println(map);
-        Map map1=repaymentService.getBalance(map);
-        System.out.println(repaymentService.getBalance(map));
-        System.out.println(map1);
-        if (map1.size()>0){
+        map.put("userId", userid);
+        Map map1 = repaymentService.getBalance(map);
+        if (map1.size() > 0) {
             //System.out.println(map1);
-            balance1 =(BigDecimal)map1.get("AVAILABLEBALANCE");
-            balance3 =(BigDecimal)map1.get("RETURNAMOUNT");
+            balance1 = (BigDecimal) map1.get("AVAILABLEBALANCE");
+            balance3 = (BigDecimal) map1.get("RETURNAMOUNT");
             //System.out.println("账户余额"+balance1);
             //System.out.println("账户待还金额"+balance3);
         }
         //根据还款计划Id查询需要还的钱
-        Map map2=repaymentService.getAmount(map);
-        if (map2.size()>0){
+        Map map2 = repaymentService.getAmount(map);
+        if (map2.size() > 0) {
             //System.out.println(map2);
-            bidid=(String)map2.get("BIDID");
+            bidid = (String) map2.get("BIDID");
             //System.out.println(bidid);
-            balance2 =(BigDecimal)map2.get("BIDREPAYAMOUNT");
+            balance2 = (BigDecimal) map2.get("BIDREPAYAMOUNT");
             //System.out.println("应还金额"+balance2);
         }
         // 账户余额减去应还金额 返回值  i
         //i==-1 时 账户余额小于应还金额 i==0时 账户余额与应还金额相等 i==1 时 账户余额大于应还金额
         int i = balance1.compareTo(balance2);
-        if(i==-1){
+        if (i == -1) {
             //System.out.println("账户余额小于应还金额");
             //当账户余额小于应还金额 提醒用户充值
             return 1;
-        }else{
+        } else {
             // i==0 System.out.println("账户余额与应还金额相等");
             // 只要账户的余额不小于 应还金额就可以还款
             // i==1 System.out.println("账户余额大于应还金额");
-            Map map3=new HashMap();
-            map3.put("userId",userid);
+            Map map3 = new HashMap();
+            map3.put("userId", userid);
             BigDecimal bignum3 = balance1.subtract(balance2);
             //System.out.println("两者之差是"+bignum3);
             //还款人还款之后的余额
-            map3.put("money",bignum3);
+            map3.put("money", bignum3);
             //还款人还款之后的待还金额
             BigDecimal bignum4 = balance3.subtract(balance2);
-            map3.put("money1",bignum4);
+            System.out.println(bignum4);
+            map3.put("money1", bignum4);
             //还款人的应还金额
-            map3.put("money2",balance2);
+            map3.put("money2", balance2);
             //System.out.println(map3.get("money1"));
             //更新用户账户表
             repaymentService.updateAmount(map3);
@@ -148,13 +144,13 @@ public class RepaymentController {
             repaymentService.updateRepay(map);
             //查找借款人的账户表
             List<Map> investor = repaymentService.getInvestor(bidid);
-            for (Map map4 : investor){
+            for (Map map4 : investor) {
                 //投资者的userid
-                String userid1=(String)map4.get("USERID");
+                String userid1 = (String) map4.get("USERID");
                 //System.out.println(userid1);
-                map4.put("userId",userid1);
+                map4.put("userId", userid1);
 
-                map4.put("bidid",bidid);
+                map4.put("bidid", bidid);
                 //根据投资人id和标id 查询投资记录列表 查询投资人投了这个标多少钱
                 double sum = repaymentService.getSum(map4);
                 //System.out.println("投资人"+userid1+"投资了 "+bidid+"-----"+sum+"元");
@@ -165,29 +161,30 @@ public class RepaymentController {
                 double proportion = sum / bidamount;
                 //System.out.println(sum/bidamount+"--------------");
                 //投资者的账户余额
-                BigDecimal money3=(BigDecimal)map4.get("AVAILABLEBALANCE");
+                BigDecimal money3 = (BigDecimal) map4.get("AVAILABLEBALANCE");
                 //投资者的待收本金
-                BigDecimal money4=(BigDecimal)map4.get("RECEIVEPRINCIPAL");
+                BigDecimal money4 = (BigDecimal) map4.get("RECEIVEPRINCIPAL");
                 //将比例转化为 BigDecimal 用于计算
-                BigDecimal decimalC=new BigDecimal(Double.toString(proportion));
+                BigDecimal decimalC = new BigDecimal(Double.toString(proportion));
                 //System.out.println("原来是"+balance2);
                 //System.out.println("比例"+decimalC);
                 //计算投资者按比例计算后的应得金额
                 BigDecimal multiply = balance2.multiply(decimalC);
                 //System.out.println("按比例应该获得"+multiply);
                 //还款后投资者的账户余额     两个BigDecimal相加  balance2.add(money3).doubleValue();
-                map4.put("money3",multiply.add(money3).doubleValue());
+                map4.put("money3", multiply.add(money3).doubleValue());
                 //还款后投资者的待收本金   两个BigDecimal相减   b1.subtract(b2).doubleValue();
-                map4.put("money4",money4.subtract(multiply).doubleValue());
+                map4.put("money4", money4.subtract(multiply).doubleValue());
                 //更新投资者的账户
                 repaymentService.updateInvestor(map4);
                 // 添加投资者的账户流水 账户变动金额 为 multiply
-                map4.put("money5",multiply);
+                map4.put("money5", multiply);
                 // 添加投资者的账户流水
                 repaymentService.insertInvestorFlow(map4);
-                return 1;
+
             }
+            return 2;
         }
-        return 2;
     }
+
 }
