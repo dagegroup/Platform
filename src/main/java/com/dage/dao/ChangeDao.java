@@ -1,7 +1,10 @@
 package com.dage.dao;
 
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.mybatis.caches.redis.RedisCache;
+import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 
@@ -11,6 +14,8 @@ import java.util.Map;
  * author:lc
  * createTime:2018-12-22 10:55
  */
+@Repository
+@CacheNamespace(implementation = RedisCache.class)
 public interface ChangeDao {
 
     /**
