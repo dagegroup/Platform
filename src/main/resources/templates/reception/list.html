@@ -137,11 +137,8 @@
   <div class="invest-list mrt30 clearfix">
     <div class="hd">
       <h3>投资列表</h3>
-      <div class="count">
-        <ul>
-          <li class="line">累计成交金额堆起来可超过：<span class="f20 bold">哈利法塔</span></li>
-          <li>使用用户手牵手可绕地球：<span class="f20 bold">2圈</span></li>
-        </ul>
+      <div class="count" id="getGrossAssets">
+        <!--总投资，总借款统计-->
       </div>
     </div>
     <div class="bd">
@@ -257,6 +254,7 @@
 
             //在 then的内部不能使用Vue的实例化的this, 因为在内部 this 没有被绑定。
             var self = this;
+            //展示待投标的所有标信息
             $.ajax({
                 url: "/bid/term",
                 async:false,//同步
@@ -296,7 +294,30 @@
 
                 },
                 error : function(data) {
-                    alert(data);
+                    alert("获取标列表错误");
+                }
+            })
+            //投资列表右上角交易额统计
+            $.ajax({
+                url: "/bid/getGrossAssets",
+                async:false,//同步
+                data:{},
+                type:"post",
+                dataType:"json",
+                success: function(data){
+                    $('#getGrossAssets').empty();
+                    var str="";
+                    if(data!=null){
+                        str+="<ul>\n" +
+                            "          <li class=\"line\">累计成功交易金额达：<span class=\"f20 bold\">"+data.succse+"元</span></li>\n" +
+                            "          <li>累计投资金额：<span class=\"f20 bold\">"+data.invest+"元</span></li>\n" +
+                            "        </ul>"
+                    }
+                    $('#getGrossAssets').append(str);
+
+                },
+                error : function(data) {
+                    alert("统计金额错误");
                 }
             })
         },

@@ -191,7 +191,7 @@
                                  text-color="#fff"
                                  active-text-color="#ffd04b">
                           <el-menu-item index="1">本期还款</el-menu-item>
-                          <el-menu-item index="2">提前还款</el-menu-item>
+                         <!-- <el-menu-item index="2">提前还款</el-menu-item>-->
                           <el-menu-item index="3">待还款</el-menu-item>
                           <el-menu-item index="4">还款记录</el-menu-item>
                         </el-menu>
@@ -361,6 +361,12 @@
                 //alert(self_.repayid);
                 //alert(111);
                 axios.post('/Repayment/huankuan',{'userId':this.userId,'repayid' : self_.repayid}).then(function (response) {
+                    alert(JSON.stringify(response.data));
+                    if(response.data==1){
+                        alert("您的余额不足请充值！！！");
+                    }else{
+                        alert("恭喜您还款成功！！！");
+                    }
                     self_.returnData = response.data.pageData;
                 })
             },
@@ -388,7 +394,6 @@
             // 点击我要还款  还款页面重新加载
             loadingDataA: function () {
                 var _self = this
-                _self.loading = true;
                 axios.post(this.goUrl, {
                     'userId': this.userId,
                     'type': this.type,
@@ -405,7 +410,6 @@
             // 点击提前还款 还款页面重新加载
             loadingDataB: function () {
                 var _self = this;
-                _self.loading = true;
                 axios.post(this.goUrl, {
                     'userId': this.userId,
                     'type': this.type,
@@ -421,7 +425,6 @@
             // 点击还款记录  还款页面重新加载
             loadingDataC: function () {
                 var _self = this;
-                _self.loading = true;
                 axios.post(this.goUrl, {
                     'userId': this.userId,
                     'type': this.type,
@@ -488,12 +491,12 @@
             handleSelect: function (key) {
                 var self = this;
                 if (key == 1) {  //重新加载显示当前还款期数
-                    this.show = true;
+                    this.show = false;
                     this.goUrl = '/Repayment/page';
                     self.loadingDataA();
                 }
                 if (key == 2) {  //提前还款
-                    this.show = true;
+                    this.show = false;
                     this.goUrl = '/Repayment/page';
                     self.loadingDataB();
                 }
@@ -504,7 +507,7 @@
                     self.loadingDataC();
                 }
                 if (key == 4) {  //查询还款记录
-                    this.show = false;
+                    this.show = true;
                     this.goUrl = '/Repayment/page';
                     this.type = '已还款';
                     self.loadingDataC();
