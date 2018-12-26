@@ -1,6 +1,8 @@
 package com.dage.dao;
 
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Select;
+import org.mybatis.caches.redis.RedisCache;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.Map;
  * createTime:2018-12-10 17:29
  */
 @Repository
+@CacheNamespace(implementation = RedisCache.class)
 public interface BidDao {
     /**
      * 获取标列表

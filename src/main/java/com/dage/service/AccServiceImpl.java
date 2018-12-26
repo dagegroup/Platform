@@ -23,10 +23,6 @@ public class AccServiceImpl implements AccService {
         return accDao.getBalance(map);
     }
 
-    @Override
-    public List<Map> getIncome(Map map) {
-        return accDao.getIncome(map);
-    }
 
     @Override
     public List<Map> getAccountFlow(Map map) {

@@ -60,8 +60,8 @@ public class ChangeController {
         session.setAttribute("verifyCode",execute);
         // 输出验证码
         //System.out.println(execute+"-----手机------");
-        //随便返回什么，前台不用接收。
-        return execute;
+        //前台判定验证码是否发送成功
+        return 1;
     }
 
     /**
@@ -131,6 +131,11 @@ public class ChangeController {
         //将userid放入map传入后台（根据userid修改密码）
         map.put("USERID",userid);
         if (userid!=null&&userid!=""){
+            //获取map中的密码
+            String payPassword = (String)map.get("TRANSACTIONPASSWORD");
+            //给密码加密
+            String encrypt = AESUtil.getInstance().encrypt(payPassword);
+            map.put("TRANSACTIONPASSWORD",encrypt);
             //将map传到后台调用修改支付密码方法
             changeService.updatePayment(map);
             return 1;
