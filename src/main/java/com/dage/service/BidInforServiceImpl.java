@@ -1,6 +1,7 @@
 package com.dage.service;
 
 import com.dage.dao.BidInforDao;
+import com.dage.util.AESUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -118,10 +119,11 @@ public class BidInforServiceImpl implements BidInforService {
         /*判断是否满标结束*/
 
         /*查询账户密码开始*/
-        int password = Integer.valueOf(bidInforDao.payPassword(map).toString());//获取账户表支付密码
-        int inputPassword = Integer.valueOf(map.get("TRANSACTIONPASSWORD").toString());//获取前台输入的支付密码
+        String password = bidInforDao.payPassword(map).toString();//获取账户表支付密码
+        String inputPass = map.get("TRANSACTIONPASSWORD").toString();//获取前台输入的支付密码
+        String inputPassword = AESUtil.getInstance().encrypt(inputPass);//加密
         /*查询账目密码结束*/
-        if (password==inputPassword) {
+        if (password.equals(inputPassword)) {
             if (oldavailablebalance >= bidamount) {
                 bidInforDao.userAccount(map);//更新账户表
                 bidInforDao.accountRun(map);//向账户流水表里插入数据

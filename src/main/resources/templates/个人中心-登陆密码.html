@@ -223,8 +223,28 @@
             },
             //发送手机验证码
             getCode:function () {
+                var _self=this;
                 axios.post("/changePassword/verifyCode",{'phone':$("#phone").val()}).then(function (response) {
                     //alert("发送至手机的验证码为："+response.data);
+                    var pho=$("#phone").val();
+                    if(pho!=0&&pho!=""&&pho!=null){
+                        if(response.data==1){
+                            _self.$message({
+                                message:  '验证码发送成功',
+                                type: 'success'
+                            });
+                        }else{
+                            _self.$message({
+                                message:  '验证码发送失败',
+                                type: 'error'
+                            });
+                        }
+                    }else{
+                        _self.$message({
+                            message:  '验证码发送失败',
+                            type: 'error'
+                        });
+                    }
                 })
             },
             //验证手机验证码是否输入正确
