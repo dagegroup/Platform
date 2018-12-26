@@ -64,6 +64,7 @@ public class AccController {
     @ResponseBody
     @RequestMapping("/edata")
     public Object getEchartsData(@RequestParam Map map){
+        System.out.println(map);
         System.out.println(accService.getAccountFlow(map));
         return accService.getAccountFlow(map);
     }
@@ -76,13 +77,10 @@ public class AccController {
     @ResponseBody
     @RequestMapping("/edata1")
     public Object getEchartsData1(@RequestParam Map map){
-        List<Map> balance = accService.getBalance(map);
-        List<Map> income = accService.getIncome(map);
-        Map map1=new HashMap();
-        map1.put("balance",balance);
-        map1.put("income",income);
-        System.out.println(map1);
-        return map1;
+
+        System.out.println(map);
+
+        return  accService.getBalance(map);
     }
     /**
      * 跳转账户流水界面

@@ -37,10 +37,5 @@ public interface AccService {
      */
     List<Map> getBalance(Map map);
 
-    /**
-     * 获得收入
-     * @param map
-     * @return
-     */
-    List<Map> getIncome(Map map);
+
 }
