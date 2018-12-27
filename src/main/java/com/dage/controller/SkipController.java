@@ -121,12 +121,12 @@ public class SkipController {
     }
 
     /**
-     * 跳转到个人中心开通第三方
+     * 跳转到个人中心融资记录
      * @return
      */
     @RequestMapping("/Thirdparty")
     public String toThirdparty(){
-        return "个人中心-开通第三方";
+        return "个人中心-融资记录";
     }
 
     /**
