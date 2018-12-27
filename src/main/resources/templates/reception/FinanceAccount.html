@@ -58,6 +58,7 @@
             }
         },
         created:function () {
+            this.searchForm.time="2018-12";
             this.getData1();
         },
         methods:{
@@ -87,7 +88,6 @@
                     dataType:"json",
                     async:false,//同步
                     success:function(data){
-                        alert(JSON.stringify(data))
                         if(data!=''){
                             for(var i=0;i<data.length;i++){
                                 title.push(data[i].TTIME);
@@ -185,10 +185,11 @@
         el:"#serach1",
         data:{
             searchForm:{
-                time:"2018-12"
+                time:""
             }
         },
         created:function () {
+            this.searchForm.time="2018-12";
             this.getData2();
         },
         methods:{
@@ -217,7 +218,6 @@
                     dataType:"json",
                     async:false,//同步
                     success:function(data){
-                        alert(JSON.stringify(data))
                         if(data!=''){
                             for(var i=0;i<data.length;i++){
                                 title.push(data[i].TIME);

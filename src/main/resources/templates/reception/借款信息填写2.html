@@ -16,9 +16,9 @@
   <script type="text/javascript" src="../js/vue.js"></script>
   <script type="text/javascript" src="../js/axios.min.js"></script>
   <!-- 引入样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="/elementui/elementui.css">
   <!-- 引入组件库 -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="/elementui/elementui.js"></script>
   <script type="text/javascript" src="../foreground/script/jquery.min.js"></script>
   <script type="text/javascript" src="../foreground/script/common.js"></script>
   <style type="text/css">
@@ -107,7 +107,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="现住地址:"  prop="ADDRESS">
+            <el-form-item label="现住地址:"  prop="sheng1">
               <el-row style="width:360px">
                 <el-col :span="6">
                   <el-select v-model="dataForm.sheng1" @change="choseProvince($event,1)" placeholder="省级地区" style="width:90px" >
@@ -243,7 +243,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="6"  class="ss">
-            <el-form-item label="现住地址:"  prop="ADDRESS">
+            <el-form-item label="现住地址:"  prop="sheng2">
               <el-row style="width:400px">
                 <el-col :span="6">
                   <el-select v-model="dataForm.sheng2" @change="choseProvince($event,2)" placeholder="省级地区" style="width:100px" >
@@ -281,12 +281,12 @@
         </el-row>
         <el-row>
           <el-col :span="6" class="ss">
-            <el-form-item label="工作联系人:" >
+            <el-form-item label="工作联系人:">
               <el-input v-model="dataForm.JOBCONTACTNAME"    style="width:150px"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6" class="ss">
-            <el-form-item label="关系:" >
+            <el-form-item label="关系:">
               <el-input v-model="dataForm.JOBRELATIONSHIP"    style="width:150px"></el-input>
             </el-form-item>
           </el-col>
@@ -404,7 +404,7 @@
   <a href="/goto/rentInfo1" class="selected">
     <span class="lend-menuIcon menuIcon-detialInfo png"></span>详细信息
   </a>
-  <a href="/goto/rentInfo2">
+  <a href="#">
     <span class="lend-menuIcon menuIcon-uploadInfo png"></span>上传资料
   </a>
   <div class="loanApplicationMenuTxt">
@@ -453,7 +453,7 @@
             var checkFamilytel= (rule, value, callback) => {
                 var reg=/^1(3|4|5|7|8)\d{9}$/;
                 if (!value) {
-                    callback(new Error('联系方式不能为空'));
+                    callback(new Error('请填写电话'));
                 } else {
                     if (!reg.test(value)) {
                         callback(new Error('格式错误'));
@@ -521,7 +521,7 @@
                     GENDER: [
                         { required: true, message: '请选择性别', trigger: 'blur' }
                     ],
-                    ADDRESS: [
+                    sheng1: [
                         { required: true, message: '请选择住址', trigger: 'blur' }
                     ],
                     EMAIL: [
@@ -552,14 +552,17 @@
                         { required: true, message: '请选择入职时间', trigger: 'blur' }
                     ],
                     FAMILYNAME: [
-                        { required: true, message: '请填写家庭联系人', trigger: 'blur' }
+                        { required: true, message: '请填联系人', trigger: 'blur' }
                     ],
                     FAMILYRELATIONSHIP: [
                         { required: true, message: '请填写关系', trigger: 'blur' }
                     ],
                     FAMILYTEL: [
                         { validator: checkFamilytel, trigger: 'blur' }
-                    ]
+                    ],
+                    sheng2: [
+                        { required: true, message: '请选择住址', trigger: 'blur' }
+                    ],
 
                 }
             };

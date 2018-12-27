@@ -15,25 +15,14 @@ import java.util.Map;
  * createTime:2018-12-10 17:29
  */
 @Repository
-@CacheNamespace(implementation = RedisCache.class)
 public interface BidDao {
-    /**
-     * 获取标列表
-     *
-     * @return
-     */
-    @Select(value = "select bidid,userid,auditid,bidproject,bidamount,bidcurrentamount,bidrepaymentmethod,bidrate," +
-            "100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline,bidissuedate,biddeadday,bidapplydate," +
-            "biddeaddate,biddesc,bidtype,bidstate from bid_info where bidstate='待投标' ")
-    List<Map> getList(Map map);
-
     /**
      * 条件查询标列表
      * @return
      */
     @Select("<script> " +
             "select bidid,userid,auditid,bidproject,bidamount,bidcurrentamount,bidrepaymentmethod,bidrate," +
-            "100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline,bidissuedate,biddeadday,bidapplydate," +
+            "nvl(100*round(bidcurrentamount/bidamount,4),0)||'%' as bidschedule,biddeadline,bidissuedate,biddeadday,bidapplydate," +
             "biddeaddate,biddesc,bidtype,bidstate from bid_info " +
             "where bidstate='待投标' " +
             "<if test=\" bidrate!=null and bidrate!=''\"> and ${bidrate}</if>" +
@@ -43,24 +32,16 @@ public interface BidDao {
     List<Map> getTerm(Map map);
 
     /**
-     * 雇员分页查询(思想历程，最终失败了)
-     * @param map
+     * 投资总金额
      * @return
      */
-    @Select("<script>" +
-            "select bidid,userid,auditid,bidproject,bidamount,bidcurrentamount,bidrepaymentmethod,bidrate," +
-            "100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline,bidissuedate,biddeadday,bidapplydate," +
-            "biddeaddate,biddesc,bidtype,bidstate from " +
-            "(" +
-            "select rownum rn,bidid,userid,auditid,bidproject,bidamount,bidcurrentamount,bidrepaymentmethod,bidrate," +
-            "100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline,bidissuedate,biddeadday,bidapplydate," +
-            "biddeaddate,biddesc,bidtype,bidstate from bid_info " +
-            "where rownum&lt;${end} " +
-            "<if test=\" bidrate!=null and bidrate!=''\"> and ${bidrate}</if>" +
-            "<if test=\" biddeadline!=null and biddeadline!=''\"> and ${biddeadline}</if>" +
-            "<if test=\" bidrepaymentmethod!=null and bidrepaymentmethod!=''\"> and ${bidrepaymentmethod}</if>" +
-            ") a " +
-            " where  a.rn &gt; ${start} </script>")
-    List<Map> getPage(Map map);
+    @Select("select nvl(sum(amount),0) from user_account_flow where flowtype='投资' ")
+    double getGrossAssets();
 
+    /**
+     *成功招标总金额
+     * @return
+     */
+    @Select("select nvl(sum(bidamount),0) from bid_info where bidstate='已还款'")
+    double getSuccse();
 }

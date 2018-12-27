@@ -2,6 +2,7 @@ package com.dage.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.Map;
 
@@ -17,8 +18,16 @@ public interface RentInfoDao {
      * @param userid
      * @return
      */
-    @Select("select * from tb_user_info where state='借款' and userid=#{userid}")
+    @Select("select * from tb_user_info where state='正常' and userid=#{userid}")
     Map getrent(String userid);
+
+    /**
+     * 借款人信息填写完成提交更新当前处于什么状态
+     * @param userid
+     * @return
+     */
+    @Update("update tb_user_info  set state='正在借款' where userid=#{userid}")
+    int updateState(String userid);
     /**
      *添加借款信息
      * @param map
