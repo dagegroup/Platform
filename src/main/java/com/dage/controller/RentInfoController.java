@@ -51,7 +51,7 @@ public class RentInfoController {
         //System.out.println(map);
         Object userid = session.getAttribute("userid");
         Map getrent = rentInfoService.getrent(userid + "");
-        map.put("userid",userid.toString());
+           map.put("userid",userid.toString());
         if(getrent!=null&&getrent.size()>0){
             return  rentInfoService.add(map);
         }else{

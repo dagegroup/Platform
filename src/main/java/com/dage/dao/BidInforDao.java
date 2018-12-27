@@ -30,7 +30,7 @@ public interface BidInforDao {
             "100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline," +
             "to_char(bidissuedate,'yyyy-MM-dd') as bidissuedate,biddeadday," +
             "to_char(bidapplydate,'yyyy-MM-dd') as bidapplydate," +
-            "to_char(biddeaddate,'yyyy-MM-dd') as biddeaddate," +
+            "to_char(trunc(biddeaddate)+1+1/24,'yyyy-MM-dd') as biddeaddate," +
             "biddesc,bidtype,bidstate," +
             "round(to_number(biddeaddate - sysdate)) as bidendday," +
             "to_char((bidamount - bidcurrentamount), '9999990.00') as bidendmoney" +

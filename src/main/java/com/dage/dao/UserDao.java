@@ -122,7 +122,7 @@ public interface UserDao {
      * @param map
      * @return
      */
-    @Select("<script>select bidproject,bidamount,bidrate,bidstate,biddeadline,to_char(bidapplydate,'yyyy-mm-dd') as bidapplydate from bid_info where  userid=#{userId} "+
+    @Select("<script>select infos, bidproject,bidamount,bidrate,bidstate,biddeadline,to_char(bidapplydate,'yyyy-mm-dd') as bidapplydate from bid_info where  userid=#{userId} "+
             " <if test=\" type!=null and type!=''\"> and bidstate=#{type}</if>" +
             " <if test=\" time1!=null and time1!='' \"> and to_char(bidapplydate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
             " <if test=\" time2!=null and time2!='' \"> and bidapplydate &gt;= trunc(next_day(sysdate-8,1)+1) and bidapplydate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
@@ -227,7 +227,7 @@ public interface UserDao {
      */
     @Insert("insert into tb_system_account_flow" +
             " values((select 'SFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
-            " #{userId},'A111111111',#{actualMoney1},(select (select availablebalance from" +
+            " #{userId},'A111111111',#{procedure},(select (select availablebalance from" +
             " (select flowdate,availablebalance from tb_system_account_flow where userid=#{userId} order by flowdate  desc)" +
             " where rownum =1)+#{money1} from dual),sysdate,'提现手续费',null,123)")
     int system2(Map map);

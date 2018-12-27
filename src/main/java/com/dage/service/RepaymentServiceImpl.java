@@ -39,7 +39,7 @@ public class RepaymentServiceImpl implements RepaymentService {
      * @return
      */
     @Override
-    public double updateBid(String bidid) {
+    public int updateBid(String bidid) {
         return repaymentDao.updateBid(bidid);
     }
 
@@ -154,5 +154,10 @@ public class RepaymentServiceImpl implements RepaymentService {
     @Override
     public List<Map> getList(Map map) {
         return repaymentDao.getList(map);
+    }
+
+    @Override
+    public int updateUser(String userid) {
+        return repaymentDao.updateUser(userid);
     }
 }
