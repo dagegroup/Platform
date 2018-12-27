@@ -45,7 +45,7 @@ public class AuditServiceImpl implements AuditService {
         Emp admin = (Emp)session.getAttribute("admin");
         map.put("EMPID",admin.getId());
         auditDao.AddAudit(map);
-        auditDao.updateUserState(map.get("USERID")+"");
+        auditDao.updateUserState(map);
         return auditDao.updateBidState(map);
     }
 

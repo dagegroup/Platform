@@ -262,7 +262,7 @@ public interface UserDao {
      * @param userid
      * @return
      */
-    @Insert("insert into tb_realname_certification(userid) values(#{userid}) ")
+    @Insert("insert into tb_realname_certification(realnameid,userid) values('Rz'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid}) ")
     int adduserid1(String userid);
 
     /**
