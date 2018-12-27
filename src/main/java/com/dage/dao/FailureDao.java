@@ -65,7 +65,7 @@ public interface FailureDao {
      * @param map
      * @return
      */
-    @Update("update user_account set availablebalance=#{AVAILABLEBALANCE} where userid=#{USERID}")
+    @Update("update user_account set availablebalance=#{AVAILABLEBALANCE},receivePrincipal=#{RECEIVEPRINCIPAL} where userid=#{USERID}")
     int updateUserAccount(Map map);
 
     /**
