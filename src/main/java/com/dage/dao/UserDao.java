@@ -111,12 +111,27 @@ public interface UserDao {
             " </script>")
     List<Map> getRepay(Map map);
 
-    /**
+/*    *//**
      * 更具
      * @param map
      * @return
+     *//*
+    int  getSum1(Map map);*/
+
+    /**
+     *根据用户id查询 用户融资信息
+     * @param map
+     * @return
      */
-    int  getSum1(Map map);
+    @Select("<script>select bidproject,bidamount,bidrate,bidstate,biddeadline,to_char(bidapplydate,'yyyy-mm-dd') as bidapplydate from bid_info where  userid=#{userId} "+
+            " <if test=\" type!=null and type!=''\"> and bidstate=#{type}</if>" +
+            " <if test=\" time1!=null and time1!='' \"> and to_char(bidapplydate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
+            " <if test=\" time2!=null and time2!='' \"> and bidapplydate &gt;= trunc(next_day(sysdate-8,1)+1) and bidapplydate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
+            " <if test=\" time3!=null and time3!='' \"> and to_char(bidapplydate,'yyyy-mm')=to_char(sysdate,'yyyy-mm')</if>"+
+            " <if test=\" time4!=null and time4!='' \"> and to_char(bidapplydate,'yyyy')=to_char(sysdate,'yyyy')</if>"+
+            " </script>")
+    List<Map> getBid(Map map);
+
 
     /**
      *根据用户id查询可以回款标信息标
@@ -247,7 +262,7 @@ public interface UserDao {
      * @param userid
      * @return
      */
-    @Insert("insert into tb_realname_certification(userid) values(#{userid}) ")
+    @Insert("insert into tb_realname_certification(realnameid,userid) values('Rz'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid}) ")
     int adduserid1(String userid);
 
     /**

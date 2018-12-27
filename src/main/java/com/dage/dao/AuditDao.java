@@ -46,7 +46,7 @@ public interface AuditDao {
      * @param map
      * @return
      */
-    @Update("update bid_info set bidstate=#{BIDSTATE},infos=#{INFOS} where bidid=#{BIDID} ")
+    @Update("update bid_info set bidissuedate=sysdate,biddeaddate=sysdate+biddeadday,bidstate=#{BIDSTATE},infos=#{INFOS} where bidid=#{BIDID} ")
     int updateBidState(Map map);
 
     /**
@@ -95,6 +95,6 @@ public interface AuditDao {
      * 根据用户id更改用户状态信息
      * @return
      */
-    @Update("update tb_user_info set state='借款中' where userid =#{userid}")
-    int updateUserState(String userid);
+    @Update("update tb_user_info set state=#{MSG} where userid =#{USERID}")
+    int updateUserState(Map map);
 }
