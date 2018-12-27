@@ -107,7 +107,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="现住地址:"  prop="ADDRESS">
+            <el-form-item label="现住地址:"  prop="sheng1">
               <el-row style="width:360px">
                 <el-col :span="6">
                   <el-select v-model="dataForm.sheng1" @change="choseProvince($event,1)" placeholder="省级地区" style="width:90px" >
@@ -243,7 +243,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="6"  class="ss">
-            <el-form-item label="现住地址:"  prop="ADDRESS">
+            <el-form-item label="现住地址:"  prop="sheng2">
               <el-row style="width:400px">
                 <el-col :span="6">
                   <el-select v-model="dataForm.sheng2" @change="choseProvince($event,2)" placeholder="省级地区" style="width:100px" >
@@ -521,7 +521,9 @@
                     GENDER: [
                         { required: true, message: '请选择性别', trigger: 'blur' }
                     ],
-
+                    sheng1: [
+                        { required: true, message: '请选择住址', trigger: 'blur' }
+                    ],
                     EMAIL: [
                         { validator: checkEmail, trigger: 'blur' }
                     ],
@@ -557,8 +559,10 @@
                     ],
                     FAMILYTEL: [
                         { validator: checkFamilytel, trigger: 'blur' }
+                    ],
+                    sheng2: [
+                        { required: true, message: '请选择住址', trigger: 'blur' }
                     ]
-
                 }
             };
         },
