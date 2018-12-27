@@ -319,7 +319,7 @@
             var self = this;
             axios.post('/person/bidinfo',{'pageNo':this.currentPage,'type':this.value,'time':this.value1,'pageSize':this.pageSize,'userId':this.userId}).then(function (response) {
                 self.tableData = response.data.pageData;
-                alert(JSON.stringify(response.data.pageData));
+                //alert(JSON.stringify(response.data.pageData));
                 self.total=response.data.total;
             })
         },
