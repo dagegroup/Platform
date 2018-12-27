@@ -47,6 +47,15 @@ public interface UserDao {
     List<Map> getUser(Map map);
 
     /**
+     * 根据用户id查询用户的代还金额
+     * @param userId
+     * @return
+     */
+    @Select("select nvl(sum(bidrepayamount),0) as bidrepayamount" +
+            " from bid_repay_info where bidrepaystate like '%待还款%'and userid='log201812270350'\n")
+    double getRepay1(String userId);
+
+    /**
      * 根据用户编号查询用户回款计划
      *
      * 还款计划表

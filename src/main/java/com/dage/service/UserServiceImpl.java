@@ -187,6 +187,16 @@ public class UserServiceImpl implements UserService {
         return userDao.getFlow(map);
     }
 
+    /**
+     * 根据用户id查询用户的代还金额
+     * @param userId
+     * @return
+     */
+    @Override
+    public double getRepay1(String userId) {
+        return userDao.getRepay1(userId);
+    }
+
     @Override
     public List<Map> getUser(Map map) {
         return userDao.getUser(map);

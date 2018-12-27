@@ -133,6 +133,13 @@ public interface UserService {
     List<Map> getUser(Map map);
 
     /**
+     * 根据用户id查询用户的代还金额
+     * @param userId
+     * @return
+     */
+    double getRepay1(String userId);
+
+    /**
      *  添加 用户提现之后减少 系统账户流水记录
      * @param map
      * @return
