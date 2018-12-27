@@ -254,7 +254,7 @@ public interface UserDao {
      * @param userid
      * @return
      */
-    @Insert("insert into user_account(accountid,userid) values('A'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid})")
+    @Insert("insert into user_account(accountid,userid,) values('A'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid})")
     int adduserid(String userid);
 
     /**

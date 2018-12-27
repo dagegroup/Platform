@@ -69,11 +69,16 @@ public class FailureServiceImpl implements FailureService {
                 Map m = (Map) o;
                 Map userMap = failureDao.getUserAccountByUserid(m.get("USERID") + "");
                 if (userMap != null && userMap.size() > 0) {
-                    Integer a = Integer.valueOf(userMap.get("AVAILABLEBALANCE") + "");
-                    Integer a1 = Integer.valueOf(m.get("BIDAMOUNT") + "");
-                    Integer amount = Integer.valueOf(m.get("BIDAMOUNT") + "");
+                    double a = Integer.valueOf(userMap.get("AVAILABLEBALANCE") + "");
+                    double a1 = Integer.valueOf(userMap.get("RECEIVEPRINCIPAL") + "");
+                    double a2 = Integer.valueOf(m.get("BIDAMOUNT") + "");
+                    double amount = Integer.valueOf(m.get("BIDAMOUNT") + "");
                     String accountid = userMap.get("ACCOUNTID") + "";
-                    m.put("AVAILABLEBALANCE", a + a1);
+                    double bidrate = Integer.valueOf(submitMap.get("BIDRATE") + "");
+                    double a3 = a2 * (1 + bidrate);
+                    double a4=a1-a3;
+                    m.put("RECEIVEPRINCIPAL",a4);
+                    m.put("AVAILABLEBALANCE", a + a2);
                     m.put("ACCOUNTID", accountid);
                     m.put("FLOWTYPE", "投资");
                     m.put("AMOUNT",amount);
