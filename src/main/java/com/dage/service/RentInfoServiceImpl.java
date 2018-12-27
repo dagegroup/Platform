@@ -55,6 +55,12 @@ public class RentInfoServiceImpl implements RentInfoService {
     public int addRentDetialInfo(Map map) {
         return rentInfoDao.addRentDetialInfo(map);
     }
+
+    @Override
+    public int updateState(String userid) {
+        return rentInfoDao.updateState(userid);
+    }
+
     /**
      *添加借款信息
      * @param map

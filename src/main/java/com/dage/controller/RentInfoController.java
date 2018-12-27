@@ -51,12 +51,13 @@ public class RentInfoController {
         //System.out.println(map);
         Object userid = session.getAttribute("userid");
         Map getrent = rentInfoService.getrent(userid + "");
+        map.put("userid",userid.toString());
         if(getrent!=null&&getrent.size()>0){
+            return  rentInfoService.add(map);
+        }else{
             return 0;
         }
-        // System.out.println(userid);
-        map.put("userid",userid.toString());
-        return rentInfoService.add(map);
+
     }
 
     /**
@@ -90,6 +91,7 @@ public class RentInfoController {
         }
         //System.out.println(map);
         Object userid = session.getAttribute("userid");
+        rentInfoService.updateState(userid+"");
        // System.out.println(userid);
         map.put("userid",userid.toString());
         return rentInfoService.addRentInfo2(map);

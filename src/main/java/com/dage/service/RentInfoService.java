@@ -42,4 +42,11 @@ public interface RentInfoService {
      * @return
      */
     Map getrent(String userid);
+
+    /**
+     * 提交信息更新用户状态
+     * @param userid
+     * @return
+     */
+    int updateState(String userid);
 }
