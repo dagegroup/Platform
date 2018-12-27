@@ -82,8 +82,8 @@ public interface BidInforDao {
      * @return
      */
     @Select("<script>" +
-            "select bidid,bidproject,biddeadline,bidrate,to_char(bidissuedate+5,'yyyy-MM-dd') as biddeaddate," +
-            "to_char((bidamount - bidcurrentamount), '9999990.00') as bidendmoney " +
+            "select bidid,bidproject,biddeadline,bidrate,biddeaddate," +
+            "to_char((nvl(bidamount,0) - nvl(bidcurrentamount,0)), '9999990.00') as bidendmoney " +
             "from bid_info where bidid= #{bidid} and bidstate='待投标'" +
             "</script>")
     Map tender(Map map);
@@ -125,7 +125,7 @@ public interface BidInforDao {
      * @param map
      * @return
      */
-    @Select("select bidamount-bidcurrentamount as canmoney from bid_info where bidid=#{BIDID} ")
+    @Select("select nvl(bidamount,0)-nvl(bidcurrentamount,0) as canmoney from bid_info where bidid=#{BIDID} ")
     double canMoney(Map map);
 
     /**
@@ -133,7 +133,7 @@ public interface BidInforDao {
      * @param map
      * @return
      */
-    @Select("select availablebalance from user_account where userid=#{USERID} ")
+    @Select("select nvl(availablebalance,0) from user_account where userid=#{USERID} ")
     double balance(Map map);
 
     /**
@@ -141,7 +141,7 @@ public interface BidInforDao {
      * @param map
      * @return
      */
-    @Select("select receiveprincipal from user_account where userid=#{USERID} ")
+    @Select("select nvl(receiveprincipal,0) from user_account where userid=#{USERID} ")
     double principal(Map map);
 
     /**
@@ -149,7 +149,7 @@ public interface BidInforDao {
      * @param map
      * @return
      */
-    @Select("select receivenumbererest from user_account where userid=#{USERID} ")
+    @Select("select nvl(receivenumbererest,0) from user_account where userid=#{USERID} ")
     double interest(Map map);
 
     /**
@@ -173,7 +173,7 @@ public interface BidInforDao {
      * @param map
      * @return
      */
-    @Update("update bid_info set bidcurrentamount=bidcurrentamount+#{BIDCURRENTAMOUNT} where bidid=#{BIDID} ")
+    @Update("update bid_info set bidcurrentamount=nvl(bidcurrentamount,0)+#{BIDCURRENTAMOUNT} where bidid=#{BIDID} ")
     int changeBidInfo(Map map);
 
     /**
@@ -181,7 +181,7 @@ public interface BidInforDao {
      * @param map
      * @return
      */
-    @Update("update bid_info set bidstate='满标待审核',bidcurrentamount=bidcurrentamount+#{BIDCURRENTAMOUNT} where bidid=#{BIDID} ")
+    @Update("update bid_info set bidstate='满标待审核',bidcurrentamount=nvl(bidcurrentamount,0)+#{BIDCURRENTAMOUNT} where bidid=#{BIDID} ")
     int changeBidState(Map map);
 
 }
