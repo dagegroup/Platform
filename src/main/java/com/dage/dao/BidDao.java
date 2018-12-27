@@ -22,7 +22,7 @@ public interface BidDao {
      */
     @Select("<script> " +
             "select bidid,userid,auditid,bidproject,bidamount,bidcurrentamount,bidrepaymentmethod,bidrate," +
-            "100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline,bidissuedate,biddeadday,bidapplydate," +
+            "nvl(100*round(bidcurrentamount/bidamount,4),0)||'%' as bidschedule,biddeadline,bidissuedate,biddeadday,bidapplydate," +
             "biddeaddate,biddesc,bidtype,bidstate from bid_info " +
             "where bidstate='待投标' " +
             "<if test=\" bidrate!=null and bidrate!=''\"> and ${bidrate}</if>" +
