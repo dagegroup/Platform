@@ -137,11 +137,11 @@ public class RepaymentController {
             map3.put("money2", balance2);
             //System.out.println(map3.get("money1"));
             //更新用户账户表
-            //repaymentService.updateAmount(map3);
+            repaymentService.updateAmount(map3);
             //添加用户流水
-            //repaymentService.updateAccountFlow(map3);
+            repaymentService.updateAccountFlow(map3);
             //改变 还款计划状态
-            //repaymentService.updateRepay(map);
+            repaymentService.updateRepay(map);
             //查找借款人的账户表
             List<Map> investor = repaymentService.getInvestor(bidid);
             for (Map map4 : investor) {
@@ -175,11 +175,11 @@ public class RepaymentController {
                 //还款后投资者的待收本金   两个BigDecimal相减   b1.subtract(b2).doubleValue();
                 map4.put("money4", money4.subtract(multiply).doubleValue());
                 //更新投资者的账户
-                //repaymentService.updateInvestor(map4);
+                repaymentService.updateInvestor(map4);
                 // 添加投资者的账户流水 账户变动金额 为 multiply
                 map4.put("money5", multiply);
                 // 添加投资者的账户流水
-                //repaymentService.insertInvestorFlow(map4);
+                repaymentService.insertInvestorFlow(map4);
                 //查询代还款的期数
                 int bidrepaynumber = repaymentService.getBidrepaynumber(map);
                 if(bidrepaynumber==0){

@@ -366,7 +366,7 @@
             repayment: function () {
                 var self_ = this;
                 //alert(self_.repayid);
-                alert(self_.bidrepaytotpmts);
+                //alert(self_.bidrepaytotpmts);
                 //alert(111);
                 axios.post('/Repayment/huankuan',{'userId':this.userId,'repayid': self_.repayid,'bidrepaytotpmts':self_.bidrepaytotpmts}).then(function (response) {
                     //alert(JSON.stringify(response.data));
