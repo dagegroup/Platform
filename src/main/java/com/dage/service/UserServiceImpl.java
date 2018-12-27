@@ -157,6 +157,16 @@ public class UserServiceImpl implements UserService {
         return userDao.recharge(map);
     }
 
+    /**
+     *根据用户id查询 用户融资信息
+     * @param map
+     * @return
+     */
+    @Override
+    public List<Map> getBid(Map map) {
+        return userDao.getBid(map);
+    }
+
     @Override
     public List<Map> getRepay(Map map) {
         return userDao.getRepay(map);

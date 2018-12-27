@@ -85,8 +85,8 @@
         <li ><span><a href="/skip/toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Record">资金记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Investment">投资记录</a></span></li>
-        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Thirdparty">融资记录</a></span></li>
-        <li class="pleft-cur"><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Plan">回款计划</a></span></li>
+        <li class="pleft-cur"><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Thirdparty">融资记录</a></span></li>
+        <li ><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Plan">回款计划</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Conversion">还款记录</a></span></li>
         <li > <span> <a href="Packet"> <i class="dot dot02"></i> 还款 </a> </span> </li>
         <li><span><a href="Recharge1"><i class="dot dot03"></i>充值</a></span></li>
@@ -142,31 +142,37 @@
                             border
                             style="width: 100%;height: 300px;">
 
+
+                      <el-table-column
+                              prop="BIDPROJECT"
+                              label="招标项目"
+                              width="100">
+                      </el-table-column>
+                      <el-table-column
+                              prop="BIDAMOUNT"
+                              label="招标金额"
+                              width="100">
+                      </el-table-column>
+                        <el-table-column
+                                prop="BIDRATE"
+                                label="还款利率/百分率"
+                                width="150">
+                      </el-table-column>
+                      <el-table-column
+                              prop="BIDAPPLYDATE"
+                              label="申请时间"
+                              width="100">
+                      </el-table-column>
+                      <el-table-column
+                              prop="BIDSTATE"
+                              label="状态"
+                              width="100">
+                      </el-table-column>
                       <el-table-column
                               prop="BIDDEADLINE"
                               label="还款期限/月"
-                              width="200">
-                      </el-table-column>
-                      <el-table-column
-                              prop="BIDPROJECT"
-                              label="回款项目"
-                              width="200">
-                      </el-table-column>
-                      <el-table-column
-                              prop="BIDRATE"
-                              label="回款利率"
-                              width="200">
-                      </el-table-column>
-                      <el-table-column
-                              prop="BIDREPAYMENTMETHOD"
-                              label="还款方式"
-                              width="200">
-                      </el-table-column>
-                      <!--<el-table-column
-                              prop="BIDREPAYTOTPMTS"
-                              label="还款总期数"
                               width="100">
-                      </el-table-column>-->
+                      </el-table-column>
                       <!--<el-table-column label="操作">
                         <template scope="scope">
                           <el-button :plain="true" type="success" size="small" icon="edit" @click="returnClick(scope.row)">我要还款</el-button>
@@ -232,17 +238,29 @@
                 value: '全部',
                 label: '全部'
             }, {
-                value: '已放款',
-                label: '已放款'
+                value: '待审核',
+                label: '待审核'
             }, {
-                value: '已投标',
-                label: '已投标'
+                value: '待投标',
+                label: '待投标'
             }, {
-                value: '已终止',
-                label: '已终止'
+                value: '满标',
+                label: '满标'
             }, {
-                value: '已回款',
-                label: '已回款'
+                value: '流标',
+                label: '流标'
+            }, {
+                value: '放款',
+                label: '放款'
+            }, {
+                value: '还款中',
+                label: '还款中'
+            }, {
+                value: '一审驳回',
+                label: '一审驳回'
+            }, {
+                value: '二审驳回',
+                label: '二审驳回'
             }],
             value: '',
             //下拉框2
@@ -299,9 +317,9 @@
         //页面加载时首次取值
         created:function () {
             var self = this;
-            axios.post('/person/MSBs',{'pageNo':this.currentPage,'type':this.value,'time':this.value1,'pageSize':this.pageSize,'userId':this.userId}).then(function (response) {
+            axios.post('/person/bidinfo',{'pageNo':this.currentPage,'type':this.value,'time':this.value1,'pageSize':this.pageSize,'userId':this.userId}).then(function (response) {
                 self.tableData = response.data.pageData;
-                //alert(JSON.stringify(response.data.pageData));
+                alert(JSON.stringify(response.data.pageData));
                 self.total=response.data.total;
             })
         },
@@ -333,7 +351,7 @@
                     'time':this.value1,
                     'userId': this.userId
                 };
-                axios.post('/person/MSBs', searchForm).then(function (response) {
+                axios.post('/person/bidinfo', searchForm).then(function (response) {
                     _self.total = response.data.total;
                     _self.tableData = response.data.pageData;
                 })
