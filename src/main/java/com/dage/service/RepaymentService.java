@@ -93,4 +93,19 @@ public interface RepaymentService {
      * @return
      */
     double getSum(Map map);
+
+    /**
+     * 当还款结束时更改标的状态为已还款
+     * @param bidid
+     * @return
+     */
+    double updateBid(String bidid);
+
+    /**
+     * 根据userid bidid 查询待还款剩余的期数
+     *
+     * @param map
+     * @return
+     */
+    int getBidrepaynumber(Map map);
 }

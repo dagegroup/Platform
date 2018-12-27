@@ -55,6 +55,23 @@ public interface RepaymentDao {
     double getBidamount(String bidid);
 
     /**
+     * 当还款结束时更改标的状态为已还款
+     * @param bidid
+     * @return
+     */
+    @Update("update bid_info set bidstate='已还款' where bidid=#{bidid}")
+    double updateBid(String bidid);
+
+    /**
+     * 根据userid bidid 查询待还款剩余的期数
+     *
+     * @param map
+     * @return
+     */
+    @Select("select count(*) from bid_repay_info where userid=#{userId}" +
+            " and bidid='#{bidid}' and bidrepaystate like '%待还款%'")
+    int getBidrepaynumber(Map map);
+    /**
      * 根据还款计划Id查询需要还的钱
      *
      * @param map

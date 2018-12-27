@@ -213,12 +213,17 @@
                           <el-table-column
                                   prop="BIDREPAYNUMBER"
                                   label="当前期数"
-                                  width="150">
+                                  width="100">
+                          </el-table-column>
+                          <el-table-column
+                                  prop="BIDREPAYTOTPMTS"
+                                  label="还款总期数"
+                                  width="100">
                           </el-table-column>
                           <el-table-column
                                   prop="BIDREPAYAMOUNT"
                                   label="还款金额"
-                                  width="150">
+                                  width="100">
                           </el-table-column>
                           <el-table-column
                                   prop="BIDERPAYDEADDATE"
@@ -290,6 +295,7 @@
             //userName:'[[${session.userName}]]',
             userId:'',
             type:'',
+            bidrepaytotpmts:'',
             //还款数据长度
             datalen:'',
             //数据最高长度
@@ -360,8 +366,9 @@
             repayment: function () {
                 var self_ = this;
                 //alert(self_.repayid);
+                //alert(self_.bidrepaytotpmts);
                 //alert(111);
-                axios.post('/Repayment/huankuan',{'userId':this.userId,'repayid' : self_.repayid}).then(function (response) {
+                axios.post('/Repayment/huankuan',{'userId':this.userId,'repayid': self_.repayid,'bidrepaytotpmts':self_.bidrepaytotpmts}).then(function (response) {
                     //alert(JSON.stringify(response.data));
                     if(response.data==1){
                         alert("您的余额不足请充值！！！");
@@ -399,6 +406,7 @@
                     'userId': this.userId,
                     'type': this.type,
                     'repayid': this.repayid,
+                    'bidrepaytotpmts':this.bidrepaytotpmts,
                     'pageNo': this.currentPageA,
                     'pageSize': this.pageSizeA
                 }).then(function (response) {
@@ -443,6 +451,7 @@
                 this.returnFormVisible = true;
                 this.returnForm = Object.assign({}, row);
                 this.repayid = row.REPAYID;
+                this.bidrepaytotpmts=row.BIDREPAYTOTPMTS;
                 this.goUrl = '/Repayment/page';
                 this.loadingDataA();
             },

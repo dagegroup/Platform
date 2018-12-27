@@ -21,6 +21,28 @@ public class RepaymentServiceImpl implements RepaymentService {
     @Autowired
     private RepaymentDao repaymentDao;
 
+
+    /**
+     * 根据userid bidid 查询待还款剩余的期数
+     *
+     * @param map
+     * @return
+     */
+    @Override
+    public int getBidrepaynumber(Map map) {
+        return repaymentDao.getBidrepaynumber(map);
+    }
+
+    /**
+     * 当还款结束时更改标的状态为已还款
+     * @param bidid
+     * @return
+     */
+    @Override
+    public double updateBid(String bidid) {
+        return repaymentDao.updateBid(bidid);
+    }
+
     /**
      * 根据bidid查询标的总额
      * @param bidid

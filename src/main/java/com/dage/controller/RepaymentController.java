@@ -149,7 +149,6 @@ public class RepaymentController {
                 String userid1 = (String) map4.get("USERID");
                 //System.out.println(userid1);
                 map4.put("userId", userid1);
-
                 map4.put("bidid", bidid);
                 //根据投资人id和标id 查询投资记录列表 查询投资人投了这个标多少钱
                 double sum = repaymentService.getSum(map4);
@@ -181,7 +180,12 @@ public class RepaymentController {
                 map4.put("money5", multiply);
                 // 添加投资者的账户流水
                 repaymentService.insertInvestorFlow(map4);
-
+                //查询代还款的期数
+                int bidrepaynumber = repaymentService.getBidrepaynumber(map);
+                if(bidrepaynumber==0){
+                    //改变标的状态
+                    repaymentService.updateBid(bidid);
+                }
             }
             return 2;
         }
