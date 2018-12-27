@@ -205,6 +205,14 @@ public class GotoController {
     public String tobackLoign(){
         return "/reception/BackLogin";
     }
+    /**
+     * 跳转index
+     * @return
+     */
+    @RequestMapping("detial")
+    public String torentIn(){
+        return "/reception/借款介绍";
+    }
 
 
 }
