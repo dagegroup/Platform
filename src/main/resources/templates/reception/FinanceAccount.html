@@ -19,30 +19,11 @@
 </head>
 
 <body>
-
-<select id="year" >
-    <option>2018</option>
-    <option>2019</option>
-    <option>2017</option>
-</select>月
-<select id="month" >
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10" selected="selected">10</option>
-    <option value="11">11</option>
-    <option value="12">12</option>
-</select>日
+    <div>
         <div id="serach">
-            <el-form :inline="true" :model="searchForm" class="demo-form-inline" style="float:right">
-                <el-form-item label="月份">
-                    <el-date-picker type="date" value-format="yyyy-MM" placeholder="月份" v-model="searchForm.time"></el-date-picker>
+            <el-form :inline="true" :model="searchForm" class="demo-form-inline" style="text-align:right">
+                <el-form-item label="">
+                    <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="月份" v-model="searchForm.time"></el-date-picker>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" icon="search" @click="searchClick">查询</el-button>
@@ -50,283 +31,286 @@
                 </el-form-item>
             </el-form>
         </div>
-<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-<center> <div id="main" style="height:400px;"></div>
-    <div id="main1" style="height:400px;"></div></center>
-<input type='button' value="导出数据" onclick="Export()">
+        <div id="main" style="height:300px;">
+
+        </div>
+        <div id="serach1">
+            <el-form :inline="true" :model="searchForm" class="demo-form-inline" style="text-align:right">
+                <el-form-item label="">
+                    <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="月份" v-model="searchForm.time"></el-date-picker>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" icon="search" @click="searchClick">查询</el-button>
+                    <el-button type="success" icon="plus" @click="toFlush">刷新</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
+             <div id="main1" style="height:300px;">
+
+             </div>
+         </div>
 <script type="text/javascript">
     var vm=new Vue({
         el:"#serach",
         data:{
-            serachForm:{
+            searchForm:{
                 time:""
             }
         },
         created:function () {
+            this.searchForm.time="2018-12";
+            this.getData1();
+        },
+        methods:{
+            toFlush:function () {
+                this.searchForm={
+                   time:"2018-12"
+                }
+                this.getData1();//重新加载数据
+            },
+            searchClick:function() {
+                var self = this;
+                $("#main").empty();
+                $('#main').removeAttr('_echarts_instance_');
+                self.getData1();//重新加载数据
+            },
+            getData1:function(){
+                var self=this;
+                var title = [];
+                var ydata1 = [];
+                var ydata2 = [];
 
+                //使用ajax得到数据
+                $.ajax({
+                    url:"/acc/edata1",
+                    type:"post",
+                    data:{time:this.searchForm.time},
+                    dataType:"json",
+                    async:false,//同步
+                    success:function(data){
+                        if(data!=''){
+                            for(var i=0;i<data.length;i++){
+                                title.push(data[i].TTIME);
+                                ydata1.push(data[i].LEAVE);
+                                ydata2.push(data[i].INCOME);
+                            }
+
+                            self.showData1(title,ydata1,ydata2);
+                        }else{
+                            $("#main").html("无数据！！！").css({"font-size":"40px","color":"#ff0000"});
+
+                        }
+                    }
+                });
+            },
+            showData1:function(title,ydata1,ydata2){
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main'));
+                option = {
+                    title : {
+                        text: 'P2P网贷系统流水',
+                        subtext: '数据来源于达阁系统'
+                    },
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['总账户余额','收入']
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            dataView : {show: true, readOnly: false},
+                            magicType : {show: true, type: ['line', 'bar']},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    calculable : true,
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : title
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'总账户余额',
+                            type:'bar',
+                            data:ydata1,
+                            markPoint : {
+                                data : [
+                                    {type : 'max', name: '最大值'},
+                                    {type : 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine : {
+                                data : [
+                                    {type : 'average', name: '平均值'}
+                                ]
+                            }
+                        },
+                        {
+                            name:'总收入',
+                            type:'bar',
+                            data:ydata2,
+                            markPoint : {
+                                data : [
+                                    {type : 'max', name: '最大值'},
+                                    {type : 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine : {
+                                data : [
+                                    {type : 'average', name : '平均值'}
+                                ]
+                            }
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            }
         }
 
     })
-    $(function(){
-        //默认显示
-       getData1(12,22);
-
-       /* //月份变化时变化
-        $("#month").change(function(){
-            $("#main").empty();
-            $("#tt").remove();
-            $('#main').removeAttr('_echarts_instance_');
-            getData($("#year").val(),$("#month").val());
-        });*/
-    });
-    function getData1(year,month){
-
-        var title = [];
-        var ydata1 = [];
-        var ydata2 = [];
-
-        //使用ajax得到数据
-        $.ajax({
-            url:"/acc/edata1",
-            type:"post",
-            data:{year:year,month:month},
-            dataType:"json",
-            async:false,//同步
-            success:function(data){
-                alert(JSON.stringify(data.income))
-
-                if(data!=''){
-                    for(var i=0;i<data.income.length;i++){
-                        title.push(data.income[i].TIME);
-                        ydata1.push(data.income[i].RENT);
-                    }
-                    for(var i=0;i<data.balance.length;i++){
-                        ydata2.push(data.balance[i].BLANCE);
-                    }
-                    showData1(title,ydata1,ydata2);
-                }else{
-                    $("#main").html("本月大哥还没来,不然怎么会没有数据！！！").css({"font-size":"40px","color":"#ff0000"});
-
-                    $("#main").append("<input type='hidden' value='1' id='tt'>");
-
-                }
-            }
-        });
-    }
-    function showData1(title,ydata1,ydata2){
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
-
-
-        option = {
-            title : {
-                text: 'P2P网贷系统流水',
-                subtext: '数据来源于达阁系统'
-            },
-            tooltip : {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['总账户余额','收入']
-            },
-            toolbox: {
-                show : true,
-                feature : {
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            calculable : true,
-            xAxis : [
-                {
-                    type : 'category',
-                    data : title
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value'
-                }
-            ],
-            series : [
-                {
-                    name:'总账户余额',
-                    type:'bar',
-                    data:ydata1,
-                    markPoint : {
-                        data : [
-                            {type : 'max', name: '最大值'},
-                            {type : 'min', name: '最小值'}
-                        ]
-                    },
-                    markLine : {
-                        data : [
-                            {type : 'average', name: '平均值'}
-                        ]
-                    }
-                },
-                {
-                    name:'总收入',
-                    type:'bar',
-                    data:ydata2,
-                    markPoint : {
-                        data : [
-                            {type : 'max', name: '最大值'},
-                            {type : 'min', name: '最小值'}
-                        ]
-                    },
-                    markLine : {
-                        data : [
-                            {type : 'average', name : '平均值'}
-                        ]
-                    }
-                }
-            ]
-        };
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    }
 </script>
-
 <script type="text/javascript">
-    //js定义数组
-
-    $(function(){
-        //默认显示
-
-        getData2(12,22);
-        //月份变化时变化
-        $("#month").change(function(){
-            $("#main1").empty();
-            $("#tt").remove();
-            $('#main1').removeAttr('_echarts_instance_');
-            getData($("#year").val(),$("#month").val());
-        });
-    });
-
-
-    function getData2(year,month){
-
-        var title = [];
-        var ydata1 = [];
-        var ydata2 = [];
-
-        //使用ajax得到数据
-        $.ajax({
-            url:"/acc/edata",
-            type:"post",
-            data:{year:year,month:month},
-            dataType:"json",
-            async:false,//同步
-            success:function(data){
-                alert(JSON.stringify(data))
-
-                if(data!=''){
-                    for(var i=0;i<data.length;i++){
-                        title.push(data[i].TIME);
-                        ydata1.push(data[i].INCOME);
-                        ydata2.push(data[i].OUTCOME);
-                    }
-                    showData2(title,ydata1,ydata2);
-                }else{
-                    $("#main1").html("本月大哥还没来,不然怎么会没有数据！！！").css({"font-size":"40px","color":"#ff0000"});
-
-                    $("#main1").append("<input type='hidden' value='1' id='tt'>");
-
-                }
+    var vm=new Vue({
+        el:"#serach1",
+        data:{
+            searchForm:{
+                time:""
             }
-        });
-    }
-
-
-    function showData2(title,ydata1,ydata2){
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main1'));
-
-
-        option = {
-            title : {
-                text: 'P2P网贷账户流水',
-                subtext: '数据来源于达阁系统'
-            },
-            tooltip : {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['总账户余额','收入']
-            },
-            toolbox: {
-                show : true,
-                feature : {
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
+        },
+        created:function () {
+            this.searchForm.time="2018-12";
+            this.getData2();
+        },
+        methods:{
+            toFlush:function () {
+                this.searchForm={
+                    time:""
                 }
+                this.getData2();//重新加载数据
             },
-            calculable : true,
-            xAxis : [
-                {
-                    type : 'category',
-                    data : title
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value'
-                }
-            ],
-            series : [
-                {
-                    name:'充值',
-                    type:'bar',
-                    data:ydata1,
-                    markPoint : {
-                        data : [
-                            {type : 'max', name: '最大值'},
-                            {type : 'min', name: '最小值'}
-                        ]
-                    },
-                    markLine : {
-                        data : [
-                            {type : 'average', name: '平均值'}
-                        ]
+            searchClick:function() {
+                var self = this;
+                $("#main1").empty();
+                $('#main1').removeAttr('_echarts_instance_');
+                self.getData2();//重新加载数据
+            },
+            getData2:function(){
+                var self=this;
+                var title = [];
+                var ydata1 = [];
+                var ydata2 = [];
+                //使用ajax得到数据
+                $.ajax({
+                    url:"/acc/edata",
+                    type:"post",
+                    data:{time:this.searchForm.time},
+                    dataType:"json",
+                    async:false,//同步
+                    success:function(data){
+                        if(data!=''){
+                            for(var i=0;i<data.length;i++){
+                                title.push(data[i].TIME);
+                                ydata1.push(data[i].INCOME);
+                                ydata2.push(data[i].OUTCOME);
+                            }
+                            self.showData2(title,ydata1,ydata2);
+
+                        }else{
+                            $("#main1").html("本月无数据！！！").css({"font-size":"40px","color":"#ff0000"});
+
+
+                        }
                     }
-                },
-                {
-                    name:'提现',
-                    type:'bar',
-                    data:ydata2,
-                    markPoint : {
-                        data : [
-                            {type : 'max', name: '最大值'},
-                            {type : 'min', name: '最小值'}
-                        ]
+                });
+            },
+            showData2:function(title,ydata1,ydata2){
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main1'));
+                option = {
+                    title : {
+                        text: 'P2P网贷账户流水',
+                        subtext: '数据来源于达阁系统'
                     },
-                    markLine : {
-                        data : [
-                            {type : 'average', name : '平均值'}
-                        ]
-                    }
-                }
-            ]
-        };
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    }
-    function Export(){
-        if($("#tt").val()==1){
-            $.messager.show({//easyui封装的浏览器右下角弹框
-                title: '信息提示',//弹框标题
-                msg: '本月无数据，无法导出数据！'//提示信息
-            });}
-        else{
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['总账户余额','收入']
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            dataView : {show: true, readOnly: false},
+                            magicType : {show: true, type: ['line', 'bar']},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    calculable : true,
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : title
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'充值',
+                            type:'bar',
+                            data:ydata1,
+                            markPoint : {
+                                data : [
+                                    {type : 'max', name: '最大值'},
+                                    {type : 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine : {
+                                data : [
+                                    {type : 'average', name: '平均值'}
+                                ]
+                            }
+                        },
+                        {
+                            name:'提现',
+                            type:'bar',
+                            data:ydata2,
+                            markPoint : {
+                                data : [
+                                    {type : 'max', name: '最大值'},
+                                    {type : 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine : {
+                                data : [
+                                    {type : 'average', name : '平均值'}
+                                ]
+                            }
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            }
+        }
 
-            location.href="financeAll/echartDataExp.do?year="+$("#year").val()+"&month="+$("#month").val();}
-
-    }
+    })
 </script>
+
 </body>
 </html>

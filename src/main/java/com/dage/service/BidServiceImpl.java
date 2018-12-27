@@ -23,15 +23,6 @@ public class BidServiceImpl implements BidService{
     @Autowired
     private BidDao bidDao;
 
-   /**
-     * 查询
-     * @return
-     */
-    @Override
-    public List<Map> getList(Map map) {
-        return bidDao.getList(null);
-    }
-
     /**
      * 条件查询
      * @param map
@@ -45,9 +36,23 @@ public class BidServiceImpl implements BidService{
         Map mp = new HashMap();
         mp.put("page",info);
         return mp;*/
-
-
         return bidDao.getTerm(map);
+    }
+
+    /**
+     * 返回投资总金额
+     * @return
+     */
+    public double getGrossAssets(){
+        return bidDao.getGrossAssets();
+    }
+
+    /**
+     * 成功招标总金额
+     * @return
+     */
+    public double getSuccse(){
+        return bidDao.getSuccse();
     }
 
 }
