@@ -65,13 +65,14 @@ public class RegisterController {
             map.put("msg",1);
         }else{
             int execute = IndustrySMS.execute(phone);
+            System.out.println(execute);
             if(execute<=0){
                 map.put("msg",3);
             }else {
                 map.put("msg",2);
             }
             session.setAttribute("checkcode",execute);
-            session.setMaxInactiveInterval(3*60);
+            session.setMaxInactiveInterval(1*60);
         }
         return map;
     }
