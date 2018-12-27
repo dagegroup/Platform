@@ -46,7 +46,7 @@ public interface AuditDao {
      * @param map
      * @return
      */
-    @Update("update bid_info set bidstate=#{BIDSTATE},infos=#{INFOS} where bidid=#{BIDID} ")
+    @Update("update bid_info set bidissuedate=sysdate,biddeaddate=sysdate+biddeadday,bidstate=#{BIDSTATE},infos=#{INFOS} where bidid=#{BIDID} ")
     int updateBidState(Map map);
 
     /**
