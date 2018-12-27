@@ -76,6 +76,13 @@ public interface UserService {
     List<Map> getSubmit(Map map);
 
     /**
+     *根据用户id查询 用户融资信息
+     * @param map
+     * @return
+     */
+    List<Map> getBid(Map map);
+
+    /**
      * 根据用户编号查询用户还款计划
      * @param map
      * @return

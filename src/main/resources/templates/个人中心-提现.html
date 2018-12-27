@@ -78,6 +78,7 @@
         <li ><span><a href="/skip/toPersonIndex"><i class="dot dot1"></i>账户总览</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Record">资金记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Investment">投资记录</a></span></li>
+        <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Thirdparty">融资记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Plan">回款计划</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="Conversion">还款记录</a></span></li>
         <li > <span> <a href="Packet"> <i class="dot dot02"></i> 还款 </a> </span> </li>
@@ -209,8 +210,13 @@
               <li><span class="deposit-formleft">实际到账金额</span> <em id="dzje" class="markicon fl"></em> <span class="deposit-formright deposit-formright1"> <i>
                 <label id="form:cashFine"><span id="practical">0.00 </span></label>
                 </i> 元</span> <span class="dzarrow-show">提现金额 - 提现费用</span><span class="dzicon-show"></span> </li>
+
+             <!-- <li> <span class="deposit-formleft">交易密码</span> <span class="deposit-formright">
+                <input type="password" id="password" name="password" class="deposite-txt" maxlength="10" onblur="Commission()" >
+                </span></span> </li>-->
+
               <li>
-                <input type="submit" name="form:j_idt78" value="提现" class="btn-depositok" onclick="return checkActualMoney()">
+                <input type="submit" name="form:j_idt78" value="提现" class="btn-depositok" onsubmit"" onclick="return checkActualMoney()">
               </li>
             </ul>
           </div>

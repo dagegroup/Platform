@@ -186,6 +186,37 @@ public class PersonController {
     }
 
     /**
+     * 根据用户id查询用户融资记录
+     * @param userId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/bidinfo")
+    public Object getBidinfo(@RequestBody Map map,HttpSession session){
+        if (map.get("type")!=null&&map.get("type")!=""){
+            if (map.get("type").equals("全部")){
+                map.put("type",null);
+            }
+        }
+        Map map1= putTime(map);
+        //根据session的userid 查询 为map 加入session里的 userid
+        String userid=(String)session.getAttribute("userid");
+        map1.put("userId",userid);
+        //设置当前第几页和每页显示数量
+        PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
+        System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
+        //用PageInfo对结果进行包装
+        PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getBid(map1));
+        Map resultMap=new HashMap();
+        //获取当前页数据
+        resultMap.put("pageData",pageInfo.getList());
+        //获取分页总数量
+        resultMap.put("total",pageInfo.getTotal());
+        System.out.println(userService.getBid(map1));
+        return resultMap;
+    }
+
+    /**
      * 更具用户id查询 用户正在回款的投资记录
      * @param map
      * @return
