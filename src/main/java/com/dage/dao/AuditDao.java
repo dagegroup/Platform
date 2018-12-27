@@ -95,6 +95,6 @@ public interface AuditDao {
      * 根据用户id更改用户状态信息
      * @return
      */
-    @Update("update tb_user_info set state='借款中' where userid =#{userid}")
-    int updateUserState(String userid);
+    @Update("update tb_user_info set state=#{MSG} where userid =#{USERID}")
+    int updateUserState(Map map);
 }
