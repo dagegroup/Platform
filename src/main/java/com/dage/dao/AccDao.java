@@ -13,8 +13,7 @@ import java.util.Map;
  * author:ChenMing
  * creatTime:2018-12-22 10:19
  */
-@CacheNamespace(implementation = RedisCache.class)
-public interface AccDao {
+  public interface AccDao {
     @Select("<script>select a.*,to_date(to_char(a.flowdate,'yyyy-mm-dd'),'yyyy-mm-dd'),b.name from tb_system_account_flow a ,tb_emp b where a.orderid=b.phone  " +
             " <if test=\"USERID!=null and USERID!=''\"> and userid=#{USERID}</if>" +
             " <if test=\"FLOWTYPE!=null and FLOWTYPE!=''\"> and flowtype like '%'||#{FLOWTYPE}||'%'</if>" +

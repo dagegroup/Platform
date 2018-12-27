@@ -17,7 +17,6 @@ import java.util.List;
  * @creatTime:2018-12-12 18:35
  */
 @Repository
-@CacheNamespace(implementation = RedisCache.class)
 public interface EmpDao {
 
     /**

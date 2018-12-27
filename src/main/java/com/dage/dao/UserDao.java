@@ -17,7 +17,6 @@ import java.util.Map;
  * creatTime:2018-12-19 14:39
  */
 @Repository
-@CacheNamespace(implementation = RedisCache.class)
 public interface UserDao {
 
     /**
@@ -251,11 +250,11 @@ public interface UserDao {
 
     /**
      * 向账户表中插入userid
-     * @param userid
+     * @param map
      * @return
      */
-    @Insert("insert into user_account(accountid,userid) values('A'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid})")
-    int adduserid(String userid);
+    @Insert("insert into user_account(accountid,userid,TRANSACTIONPASSWORD) values('A'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid},#{password})")
+    int adduserid(Map map);
 
     /**
      * 向用户详情中插入userid

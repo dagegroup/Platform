@@ -100,12 +100,18 @@ public class BidInforServiceImpl implements BidInforService {
 
         /*更新账户表数据开始*/
         double principal = bidInforDao.principal(map);//从数据库获取历史代收本金
-        double receiveprincipal = principal + bidamount;//代收本金 = 历史代收本金 + 投资金额
+        double benjin  = principal + bidamount;//代收本金 = 历史代收本金 + 投资金额
+
+
+        int getdate=bidInforDao.getdate(map);//获取还款期数
+        double interest = bidInforDao.interest(map);//从数据库获取历史代收利息
+        double receivenumbererest =interest + bidamount*(bidrate/12)*0.01*getdate;//代收利息=历史利息+投标金额*招标利率
+        double receiveprincipal=benjin+receivenumbererest;
         map.put("RECEIVEPRINCIPAL",receiveprincipal); //投标后的代收本金传到map里
 
-        double interest = bidInforDao.interest(map);//从数据库获取历史代收利息
+        /*double interest = bidInforDao.interest(map);//从数据库获取历史代收利息
         double receivenumbererest =interest + bidamount*(bidrate/12)*0.01;//代收利息=历史利息+投标金额*招标利率
-        map.put("RECEIVENUMBEREREST",receivenumbererest);//投标后代收利息传到map里
+        map.put("RECEIVENUMBEREREST",receivenumbererest);//投标后代收利息传到map里*/
 
         //变动后可用余额调用上面的AVAILABLEBALANCE即可
         /*更新账户表数据结束*/

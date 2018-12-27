@@ -18,7 +18,6 @@ import java.util.Map;
  * createTime:2018-12-19 10:28
  */
 @Repository
-@CacheNamespace(implementation = RedisCache.class)
 public interface RepaymentDao {
 
     /**
