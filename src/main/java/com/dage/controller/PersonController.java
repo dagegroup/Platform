@@ -49,6 +49,9 @@ public class PersonController {
         Map map2 = account.get(0);
         //获取用户信息
         List<Map> user = userService.getUser(map1);
+        //获取用户待还金额
+        double repay1 = userService.getRepay1(userid);
+        map2.put("RECEIVEPRINCIPAL1",repay1);
         //二者合并
         user.add(map2);
         return user;
@@ -230,7 +233,7 @@ public class PersonController {
         PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
         System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
         //用PageInfo对结果进行包装
-        PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getSubmit(map));
+        PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getMSBs(map));
         Map resultMap=new HashMap();
         //获取当前页数据
         resultMap.put("pageData",pageInfo.getList());

@@ -18,7 +18,6 @@ import java.util.Map;
  * createTime:2018-12-19 10:28
  */
 @Repository
-@CacheNamespace(implementation = RedisCache.class)
 public interface RepaymentDao {
 
     /**
@@ -60,7 +59,15 @@ public interface RepaymentDao {
      * @return
      */
     @Update("update bid_info set bidstate='已还款' where bidid=#{bidid}")
-    double updateBid(String bidid);
+    int updateBid(String bidid);
+
+    /**
+     * 当还款结束时更改标的状态为已还款
+     * @param userid
+     * @return
+     */
+    @Update("update tb_user_info set state='正常' where userid=#{userid}")
+    int updateUser(String userid);
 
     /**
      * 根据userid bidid 查询待还款剩余的期数
@@ -69,7 +76,7 @@ public interface RepaymentDao {
      * @return
      */
     @Select("select count(*) from bid_repay_info where userid=#{userId}" +
-            " and bidid='#{bidid}' and bidrepaystate like '%待还款%'")
+            " and bidid=#{bidid} and bidrepaystate like '%待还款%'")
     int getBidrepaynumber(Map map);
     /**
      * 根据还款计划Id查询需要还的钱

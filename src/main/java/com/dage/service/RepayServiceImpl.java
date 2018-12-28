@@ -75,7 +75,7 @@ public class RepayServiceImpl implements RepayService {
         Emp admin = (Emp)session.getAttribute("admin");
         mp.put("EMPID",admin.getId());
         int e = auditDao.AddAudit(mp);
-        if(j<0||a<0||b<0||c<0||d<0||e<0){
+        if(j<1||a<1||b<1||c<1||d<1||e<1){
             flag=false;
         }
         if (flag){

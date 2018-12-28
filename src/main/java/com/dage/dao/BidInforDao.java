@@ -30,7 +30,7 @@ public interface BidInforDao {
             "100*round(bidcurrentamount/bidamount,4)||'%' as bidschedule,biddeadline," +
             "to_char(bidissuedate,'yyyy-MM-dd') as bidissuedate,biddeadday," +
             "to_char(bidapplydate,'yyyy-MM-dd') as bidapplydate," +
-            "to_char(biddeaddate,'yyyy-MM-dd') as biddeaddate," +
+            "to_char(trunc(biddeaddate)+1+1/24,'yyyy-MM-dd hh24:mi:ss') as biddeaddate," +
             "biddesc,bidtype,bidstate," +
             "round(to_number(biddeaddate - sysdate)) as bidendday," +
             "to_char((bidamount - bidcurrentamount), '9999990.00') as bidendmoney" +
@@ -42,12 +42,8 @@ public interface BidInforDao {
      * @param map
      * @return
      */
-    @Select("<script> " +
-            "select r.realname,r.academic,r.marriage,r.address,r.income " +
-            " from tb_user_info u  " +
-            " left join tb_realname_certification r on u.realnameid=r.realnameid  " +
-            " where u.bidid=#{bidid} " +
-            "</script>")
+    @Select("select r.realname,r.academic,r.marriage,r.address,r.income from tb_realname_certification r "+
+            " where r.userid = (select userid from bid_info where bidid=#{bidid})")
     List<Map> getUserList(Map map);
 
     /**
@@ -151,6 +147,12 @@ public interface BidInforDao {
      */
     @Select("select nvl(receivenumbererest,0) from user_account where userid=#{USERID} ")
     double interest(Map map);
+
+    /**
+     * 过去分期期数
+     */
+    @Select("select biddeadline from bid_info where bidid=#{BIDID} ")
+    int getdate(Map map);
 
     /**
      * 根据userid从用户账户表user_account中查询账户id(accountid)

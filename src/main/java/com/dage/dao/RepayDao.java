@@ -80,7 +80,7 @@ public interface RepayDao {
      */
 
     @Insert("insert into user_account_flow (flowid,userid,amount,flowdate,flowtype)" +
-            "values((select 'UFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
+            " values((select 'UFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
             "#{USERID},#{MONEY},sysdate,'借款放款')")
     int updateUserAccFlow(Map map);
 

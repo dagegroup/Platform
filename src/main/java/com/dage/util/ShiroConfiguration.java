@@ -58,6 +58,8 @@ public class ShiroConfiguration {
         map.put("/Repayment/*","anon");
         map.put("/changePassword/*","anon");
         map.put("/person/*","anon");
+        map.put("/bklogout","anon");
+        map.put("/noAuth","anon");
         map.put("/**","authc");
         //anon 不拦截
         //authc 登陆访问

@@ -17,7 +17,6 @@ import java.util.Map;
  * creatTime:2018-12-19 14:39
  */
 @Repository
-@CacheNamespace(implementation = RedisCache.class)
 public interface UserDao {
 
     /**
@@ -45,6 +44,15 @@ public interface UserDao {
      */
     @Select("select * from tb_user_info where userid=#{userId}")
     List<Map> getUser(Map map);
+
+    /**
+     * 根据用户id查询用户的代还金额
+     * @param userId
+     * @return
+     */
+    @Select("select nvl(sum(bidrepayamount),0) as bidrepayamount" +
+            " from bid_repay_info where bidrepaystate like '%待还款%'and userid=#{userid}")
+    double getRepay1(String userId);
 
     /**
      * 根据用户编号查询用户回款计划
@@ -123,7 +131,7 @@ public interface UserDao {
      * @param map
      * @return
      */
-    @Select("<script>select bidproject,bidamount,bidrate,bidstate,biddeadline,to_char(bidapplydate,'yyyy-mm-dd') as bidapplydate from bid_info where  userid=#{userId} "+
+    @Select("<script>select infos, bidproject,bidamount,bidrate,bidstate,biddeadline,to_char(bidapplydate,'yyyy-mm-dd') as bidapplydate from bid_info where  userid=#{userId} "+
             " <if test=\" type!=null and type!=''\"> and bidstate=#{type}</if>" +
             " <if test=\" time1!=null and time1!='' \"> and to_char(bidapplydate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
             " <if test=\" time2!=null and time2!='' \"> and bidapplydate &gt;= trunc(next_day(sysdate-8,1)+1) and bidapplydate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
@@ -228,7 +236,7 @@ public interface UserDao {
      */
     @Insert("insert into tb_system_account_flow" +
             " values((select 'SFLOW'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0) from dual)," +
-            " #{userId},'A111111111',#{actualMoney1},(select (select availablebalance from" +
+            " #{userId},'A111111111',#{procedure},(select (select availablebalance from" +
             " (select flowdate,availablebalance from tb_system_account_flow where userid=#{userId} order by flowdate  desc)" +
             " where rownum =1)+#{money1} from dual),sysdate,'提现手续费',null,123)")
     int system2(Map map);
@@ -251,11 +259,11 @@ public interface UserDao {
 
     /**
      * 向账户表中插入userid
-     * @param userid
+     * @param map
      * @return
      */
-    @Insert("insert into user_account(accountid,userid,) values('A'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid})")
-    int adduserid(String userid);
+    @Insert("insert into user_account(accountid,userid,TRANSACTIONPASSWORD) values('A'||to_char(sysdate,'yyyyMMdd')||lpad(trunc(dbms_random.value*10000),4,0),#{userid},#{password})")
+    int adduserid(Map map);
 
     /**
      * 向用户详情中插入userid

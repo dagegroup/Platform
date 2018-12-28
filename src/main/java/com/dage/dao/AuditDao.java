@@ -17,7 +17,6 @@ import java.util.Map;
  * @creatTime:2018-12-15 08:56
  */
 @Repository
-@CacheNamespace(implementation = RedisCache.class)
 public interface AuditDao {
 
     /**
