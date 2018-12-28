@@ -14,7 +14,7 @@ import java.util.Map;
  * creatTime:2018-12-22 10:19
  */
   public interface AccDao {
-    @Select("<script>select a.*,to_date(to_char(a.flowdate,'yyyy-mm-dd'),'yyyy-mm-dd'),b.name from tb_system_account_flow a ,tb_emp b where a.orderid=b.phone  " +
+    @Select("<script>select a.*,to_char(a.flowdate,'yyyy-mm-dd hh24:mi:ss') as time,b.name from tb_system_account_flow a ,tb_emp b where a.orderid=b.phone  " +
             " <if test=\"USERID!=null and USERID!=''\"> and userid=#{USERID}</if>" +
             " <if test=\"FLOWTYPE!=null and FLOWTYPE!=''\"> and flowtype like '%'||#{FLOWTYPE}||'%'</if>" +
             " <if test=\"FLOWDATE!=null and FLOWDATE!=''\">  and flowdate like '%'||to_date(#{FLOWDATE},'yyyy-mm-dd')||'%'</if>" +

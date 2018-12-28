@@ -488,7 +488,7 @@ input,select,textarea {
 
 /*左右结构*/
 .container {
-	margin: 20px auto;
+	margin: 0px auto;
 	width: 1000px;
 	background: url(/yiren/images/container_bg.jpg) repeat-y;
 }
