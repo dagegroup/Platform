@@ -233,7 +233,7 @@ public class PersonController {
         PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
         System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
         //用PageInfo对结果进行包装
-        PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getSubmit(map));
+        PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getMSBs(map));
         Map resultMap=new HashMap();
         //获取当前页数据
         resultMap.put("pageData",pageInfo.getList());
