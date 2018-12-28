@@ -51,7 +51,7 @@ public class PersonController {
         List<Map> user = userService.getUser(map1);
         //获取用户待还金额
         double repay1 = userService.getRepay1(userid);
-        map.put("RECEIVEPRINCIPAL1",repay1);
+        map2.put("RECEIVEPRINCIPAL1",repay1);
         //二者合并
         user.add(map2);
         return user;

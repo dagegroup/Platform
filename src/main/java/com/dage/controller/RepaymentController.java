@@ -185,6 +185,7 @@ public class RepaymentController {
                 if(bidrepaynumber==0){
                     //改变标的状态
                     repaymentService.updateBid(bidid);
+                    repaymentService.updateUser(userid);
                 }
             }
             return 2;

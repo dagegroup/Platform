@@ -94,12 +94,20 @@ public interface RepaymentService {
      */
     double getSum(Map map);
 
+
+    /**
+     * 当还款结束时更改用户的状态为正常
+     * @param userid
+     * @return
+     */
+    int updateUser(String userid);
+
     /**
      * 当还款结束时更改标的状态为已还款
      * @param bidid
      * @return
      */
-    double updateBid(String bidid);
+    int updateBid(String bidid);
 
     /**
      * 根据userid bidid 查询待还款剩余的期数

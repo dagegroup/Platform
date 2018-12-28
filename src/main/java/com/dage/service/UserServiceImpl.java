@@ -1,9 +1,11 @@
 package com.dage.service;
 
 import com.dage.dao.UserDao;
+import com.dage.util.AESUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +48,11 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int addUserid(String userid) {
-        return userDao.adduserid(userid);
+        Map map = new HashMap();
+        String encrypt = AESUtil.getInstance().encrypt("123456");
+        map.put("userid",userid);
+        map.put("password",encrypt);
+        return userDao.adduserid(map);
     }
 
     /**

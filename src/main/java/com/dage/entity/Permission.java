@@ -10,7 +10,7 @@ import java.util.List;
  * @author:ProMonkey-K
  * @creatTime:2018-12-07 14:44
  */
-public class Permission implements Serializable {
+public class Permission implements Serializable{
 
     private static final long serialVersionUID = 1111111111;
     private Integer id;
