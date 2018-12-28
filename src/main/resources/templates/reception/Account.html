@@ -58,45 +58,47 @@
                     prop="USERID"
                     label="用户ID"
                     align="center"
-                    width="150">
+                    width="200">
             </el-table-column>
             <el-table-column
                     prop="ACCOUNTID"
                     label="用户账户ID"
                     align="center"
-                    width="140">
+                    width="140"
+            v-if="false">
             </el-table-column>
 
             <el-table-column
                     prop="AMOUNT"
                     label="金额(元)"
                     align="center"
-                    width="120">
+                    width="200">
             </el-table-column>
             <el-table-column
                     prop="AVAILABLEBALANCE"
                     align="center"
                     label="变动后可用余额(元)"
-                    width="150">
+                    width="150"
+            v-if="false">
             </el-table-column>
             <el-table-column
                     prop="TIME"
                     label="流水时间"
                     align="center"
-                    width="180">
+                    width="250">
             </el-table-column>
             <el-table-column
                     prop="FLOWTYPE"
                     label="流水类型"
                     align="center"
-                    width="120">
+                    width="200">
             </el-table-column>
             <!--bidcurrentamount-->
             <el-table-column
                     prop="NAME"
                     align="center"
                     label="操作员"
-                    width="140">
+                    width="200">
             </el-table-column>
         </el-table>
     </el-row>
