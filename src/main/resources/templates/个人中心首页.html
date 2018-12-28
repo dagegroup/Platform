@@ -116,7 +116,7 @@
                       $('.ename').html(data[0].USERNAME);
                       $('#amount').html(data[1].AVAILABLEBALANCE);
                       $('#sum').html(data[1].RECEIVEPRINCIPAL.toFixed(2));
-                      $('#debt').html(data[1].RETURNAMOUNT);
+                      $('#debt').html(data[1].RECEIVEPRINCIPAL1);
                   },
                   error : function(data) {
                       alert(data);
