@@ -17,6 +17,7 @@ import java.util.List;
  * @creatTime:2018-12-11 15:01
  */
 @Repository
+@CacheNamespace(implementation = RedisCache.class)
 public interface RoleDao {
 
     /**

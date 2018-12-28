@@ -8,10 +8,10 @@ import java.io.Serializable;
  * @author:ProMonkey-K
  * @creatTime:2018-12-13 14:55
  */
-public class Emp{
+public class Emp implements Serializable{
 //    id,name,sex,idcard,phone,roleid,state
 
-    //private static final long serialVersionUID=123456789;
+    private static final long serialVersionUID=123456789;
     private Integer id;
     private String name;
     private String sex;

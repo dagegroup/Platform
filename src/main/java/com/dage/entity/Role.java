@@ -9,9 +9,9 @@ import java.io.Serializable;
  * @author:ProMonkey-K
  * @creatTime:2018-12-11 14:58
  */
-public class Role  {
+public class Role implements Serializable {
     //roleid,rolename,roledesc,rolestate
-   // private static final long serialVersionUID=123456781;
+    private static final long serialVersionUID=123456781;
     private Integer roleid;
     private String rolename;
     private String roledesc;

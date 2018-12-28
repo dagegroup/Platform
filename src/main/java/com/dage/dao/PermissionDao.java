@@ -15,6 +15,7 @@ import java.util.Map;
  * @creatTime:2018-12-07 15:24
  */
 @Repository
+@CacheNamespace(implementation = RedisCache.class)
 public interface PermissionDao {
     /**
      * 根据登陆角色信息，查询对应权限，出对应的权限树
