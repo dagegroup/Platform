@@ -53,7 +53,9 @@ public class RentInfoController {
         Map getrent = rentInfoService.getrent(userid + "");
            map.put("userid",userid.toString());
         if(getrent!=null&&getrent.size()>0){
-            return  rentInfoService.add(map);
+            session.setAttribute("rentInfo1",map);
+//            rentInfoService.add(map);
+            return 1;
         }else{
             return 0;
         }
@@ -71,9 +73,11 @@ public class RentInfoController {
     public Object rentInfo1(@RequestBody Map map, HttpSession session){
         String addr = map.get("addrA").toString().concat(map.get("address") + "");
         Object userid = session.getAttribute("userid");
-       map.put("addrA",addr);
+        map.put("addrA",addr);
         map.put("userid",userid.toString());
-        return rentInfoService.addRentDetialInfo(map);
+        session.setAttribute("rentInfo2",map);
+//        rentInfoService.addRentDetialInfo(map);
+        return 1;
     }
 
     /**
@@ -94,7 +98,14 @@ public class RentInfoController {
         rentInfoService.updateState(userid+"");
        // System.out.println(userid);
         map.put("userid",userid.toString());
-        return rentInfoService.addRentInfo2(map);
+        Map rentInfo2 = (Map)session.getAttribute("rentInfo2");
+        Map rentInfo1 = (Map)session.getAttribute("rentInfo1");
+        int add = rentInfoService.add(rentInfo1);
+        int i = rentInfoService.addRentDetialInfo(rentInfo2);
+        int i1 = rentInfoService.addRentInfo2(map);
+        if (add>0&&i>0&&i1>0)
+        return 1;
+        else return 0;
     }
     /**
      * 上传方法

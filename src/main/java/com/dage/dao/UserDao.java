@@ -51,7 +51,7 @@ public interface UserDao {
      * @return
      */
     @Select("select nvl(sum(bidrepayamount),0) as bidrepayamount" +
-            " from bid_repay_info where bidrepaystate like '%待还款%'and userid='log201812270350'\n")
+            " from bid_repay_info where bidrepaystate like '%待还款%'and userid=#{userid}")
     double getRepay1(String userId);
 
     /**

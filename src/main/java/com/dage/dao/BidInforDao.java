@@ -43,7 +43,7 @@ public interface BidInforDao {
      * @return
      */
     @Select("select r.realname,r.academic,r.marriage,r.address,r.income from tb_realname_certification r "+
-            " where r.userid = (select userid from bid_info where bidid=#{BIDID})")
+            " where r.userid = (select userid from bid_info where bidid=#{bidid})")
     List<Map> getUserList(Map map);
 
     /**
