@@ -58,7 +58,7 @@ public interface SubmitDao {
      * @param bidid
      * @return
      */
-    @Select("select s.userid,s.bidid,s.bidamount,to_char(s.biddate,'yyyy-mm-dd hh24:mi:ss') as biddate,r.realname from bid_submit s left join tb_realname_certification r on s.userid=r.userid where s.bidid=#{bidid}")
+    @Select("select s.userid,s.bidid,s.bidamount,to_char(s.biddate,'yyyy-mm-dd hh24:mi:ss') as biddate,nvl(r.realname,'***') as realname from bid_submit s left join tb_realname_certification r on s.userid=r.userid where s.bidid=#{bidid}")
     List<Map> getSubmitByBidid(String bidid);
 
 
