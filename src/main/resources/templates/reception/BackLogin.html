@@ -107,14 +107,16 @@
             <div class="form-actions">
                 <div style="width:86%;padding-left:8%;">
                     <!--  验证码位置-->
-                    <!-- 	<div style="float: left;padding-top:2px;">
-                            <i><img src="/login/yan.png" /></i>
+                     	<div style="float: left;padding-top:2px;">
+                            <i><img src="/user/getImage" id="zcode" /></i>
                         </div>
                         <div style="float: left;" class="codediv">
                             <input type="text" name="code" id="code" class="login_code"
                                 style="height:16px; padding-top:4px;" />
                         </div>
-                         -->
+                    <div style="float: left;">
+                        <a  class="flip-link btn btn-info" id="changecode">点击更换</a>
+                    </div>
 
                     <!-- <span class="pull-right" style="padding-right:3%;"><a href="javascript:changepage(1);" class="btn btn-success">注册</a></span> -->
 
@@ -230,11 +232,11 @@
         if(check()){
             var phone = $("#phone").val();
             var password = $("#password").val();
-            var code = phone+","+password+","+$("#code").val();
+            var code = $("#code").val();
             $.ajax({
                 type: "POST",
                 url: '/user/backLogin',
-                data: {phone:phone,password:password},
+                data: {phone:phone,password:password,code:code},
                 dataType:'json',
                 cache: false,
                 success: function(data){
@@ -250,7 +252,7 @@
                         });
                         showfh();
                         $("#phone").focus();
-                    }/* else if("codeerror" == data.result){
+                    } else if("codeerror" == data.result){
 							$("#code").tips({
 								side : 1,
 								msg : "验证码输入有误",
@@ -259,7 +261,7 @@
 							});
 							showfh();
 							$("#code").focus();
-						} */else{
+						} else{
                         $("#phone").tips({
                             side : 1,
                             msg : "缺少参数",
@@ -276,8 +278,8 @@
 
     $(document).ready(function() {
         changeCode1();
-        $("#codeImg").bind("click", changeCode1);
-        $("#zcodeImg").bind("click", changeCode2);
+        $("#changecode").bind("click", changeCode1);
+
     });
 
     $(document).keyup(function(event) {
@@ -292,10 +294,8 @@
     }
 
     function changeCode1() {
-        $("#codeImg").attr("src", "code.do?t=" + genTimestamp());
-    }
-    function changeCode2() {
-        $("#zcodeImg").attr("src", "code.do?t=" + genTimestamp());
+        $("#zcode").attr("src", "/user/getImage?t="+Math.random());
+
     }
 
     //客户端校验
