@@ -80,7 +80,7 @@
             </el-table-column>
             <el-table-column
                     prop="SUBMITSTATE"
-                    label="年利率"
+                    label="投标状态"
                     v-if="false"
                     align="center"
                     width="70">
@@ -110,6 +110,7 @@
                 <template scope="scope">
                     <el-button :plain="true" type="danger" v-if="scope.row.SUBMITSTATE=='已投标'" size="small" icon="edit" @click="editClick(scope.row)">未回款详情</el-button>
                     <el-button :plain="true" type="success" v-if="scope.row.SUBMITSTATE=='已回款'" size="small" icon="edit" @click="editClick(scope.row)">已回款详情</el-button>
+                    <el-button :plain="true" type="danger" v-if="scope.row.SUBMITSTATE=='1'" size="small" icon="edit">当前标未投标信息</el-button>
                 </template>
             </el-table-column>
         </el-table>
