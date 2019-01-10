@@ -140,7 +140,7 @@
             //当前页
             currentPage:1,
             //分页大小
-            pageSize:5,
+            pageSize:10,
             //总记录数
             total:200,
             goUrl:'',
@@ -154,7 +154,7 @@
             var pageSize =this.pageSize;
             axios.post('/acc/list',{'pageNo':pageNo,'pageSize':pageSize,'USERID':this.searchForm.USERID,'FLOWTYPE':this.searchForm.FLOWTYPE,'FLOWDATE':this.searchForm.FLOWDATE}).then(function(response){
                 // console.log(response.data);
-                //alert(response.data.total);
+               // alert(response.data.flowtype);
                 self.total=response.data.total;
                 self.tableData = response.data.list;
                 self.options=response.data.flowtype;
