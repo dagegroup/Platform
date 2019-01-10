@@ -243,6 +243,26 @@
                 picpath:""
             }]
         },
+        created:function () {
+            var _self=this;
+            var formData = this.tableData;
+            axios.post('/rent/getInfo').then(function(response){
+                if(response.data.IDCARD!=null&&response.data.IDCARD!=''&&response.data.IDCARD!='null'){
+                    //alert(JSON.stringify(response.data))
+                    formData[0].picpath=response.data.IDIMAGEFOUNTVAR;
+                    formData[1].picpath=response.data.IDIMAGEBACKVAR;
+                    formData[2].picpath=response.data.CREDITIMG;
+                    formData[3].picpath=response.data.VALUEIMG;
+
+                }else{
+                    pic1="";
+                    pic2="";
+                    pic3="";
+                    pic4="";
+                }
+
+            })
+        },
         methods:{
             submitUpload:function(row) {
                 var self = this;
@@ -303,7 +323,7 @@
                 })
             },
             toback:function(){
-                location.href="/goto/rentInfo2"
+                location.href="/goto/rentInfo1"
             }
         }
     })

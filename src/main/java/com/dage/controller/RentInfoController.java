@@ -71,6 +71,20 @@ public class RentInfoController {
     @ResponseBody
     @RequestMapping("rentInfo2")
     public Object rentInfo1(@RequestBody Map map, HttpSession session){
+        System.out.println(map);
+        session.setAttribute("sheng1",map.get("sheng1"));
+        session.setAttribute("shi1",map.get("shi1"));
+        session.setAttribute("qu1",map.get("qu1"));
+        session.setAttribute("sheng2",map.get("sheng2"));
+        session.setAttribute("shi2",map.get("shi2"));
+        session.setAttribute("qu2",map.get("qu2"));
+        session.setAttribute("sheng3",map.get("sheng3"));
+        session.setAttribute("shi3",map.get("shi3"));
+        session.setAttribute("qu3",map.get("qu3"));
+        session.setAttribute("sheng4",map.get("sheng4"));
+        session.setAttribute("shi4",map.get("shi4"));
+        session.setAttribute("qu4",map.get("qu4"));
+        session.setAttribute("address",map.get("address"));
         String addr = map.get("addrA").toString().concat(map.get("address") + "");
         Object userid = session.getAttribute("userid");
         map.put("addrA",addr);
@@ -147,6 +161,25 @@ public class RentInfoController {
     @RequestMapping("getInfo")
     public Object getInfo(HttpSession session){
         Object userid = session.getAttribute("userid");
-        return rentInfoService.getInfo(userid+"");
+        Map map=rentInfoService.getInfo(userid+"");
+        map.put("sheng1",session.getAttribute("sheng1"));
+        map.put("shi1",session.getAttribute("shi1"));
+        map.put("qu1", session.getAttribute("qu1"));
+        map.put("sheng2",session.getAttribute("sheng2"));
+        map.put("shi2",session.getAttribute("shi2"));
+        map.put("qu2",session.getAttribute("qu2"));
+        map.put("sheng3",session.getAttribute("sheng3"));
+        map.put("shi3",session.getAttribute("shi3"));
+        map.put("qu3",session.getAttribute("qu3"));
+        map.put("sheng4",session.getAttribute("sheng4"));
+        map.put("shi4",session.getAttribute("shi4"));
+        map.put("qu4",session.getAttribute("qu4"))  ;
+        map.put("address",session.getAttribute("address"))  ;
+        return map;
     }
+    @ResponseBody
+    @RequestMapping("getInfo1")
+    public Object getBackInfo(HttpSession session){
+      return    session.getAttribute("rentInfo1");
+    };
 }
