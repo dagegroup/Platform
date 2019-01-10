@@ -222,7 +222,7 @@
           </el-col>
           <el-col :span="6" >
             <el-form-item label="本单位入职时间:" prop="JOINTIME">
-              <el-date-picker type="datetime" value-format="yyyy-MM-dd HH:mm:ss"  style="width:150px" placeholder="选择日期" v-model="dataForm.JOINTIME"></el-date-picker>
+              <el-date-picker type="date" value-format="yyyy-MM-dd "  style="width:150px" placeholder="选择日期" v-model="dataForm.JOINTIME"></el-date-picker>
             </el-form-item>
           </el-col>
         </el-row>
@@ -387,6 +387,7 @@
         </el-row>
         <center>
           <template >
+            <el-button :plain="true" type="primary" size="small"  @click="back">上一步</el-button>
             <el-button :plain="true" type="primary" size="small"  @click="nextin('dataForm')">下一步，填写详细信息</el-button>
           </template>
         </center>
@@ -568,11 +569,16 @@
             };
         },
         created:function(){
+
             this.getCityData();
             var _self=this;
             axios.post('/rent/getInfo').then(function(response){
                 if(response.data.IDCARD!=null&&response.data.IDCARD!=''&&response.data.IDCARD!='null'){
                     _self.dataForm=response.data;
+                    _self.dataForm.addrA=_self.dataForm.sheng1+_self.dataForm.shi1+_self.dataForm.qu1;
+                    _self.dataForm.addrB=_self.dataForm.sheng2+_self.dataForm.shi2+_self.dataForm.qu2;
+                    _self.dataForm.addrC=_self.dataForm.sheng3+_self.dataForm.shi3+_self.dataForm.qu3;
+                    _self.dataForm.addrD=_self.dataForm.sheng4+_self.dataForm.shi4+_self.dataForm.qu4;
                 }else{
                     dataForm={
                         REALNAME:"",
@@ -595,7 +601,24 @@
                         JOBTEL:"",
                         OTHERNAME:"",
                         OTHERRELATIONSHIP:"",
-                        OTHERTEL:""
+                        OTHERTEL:"",
+                        sheng1: '',
+                        shi1: '',
+                        qu1: '',
+                        sheng2: '',
+                        shi2: '',
+                        qu2: '',
+                        sheng3: '',
+                        shi3: '',
+                        qu3: '',
+                        sheng4: '',
+                        shi4: '',
+                        qu4: '',
+                        address:"",
+                        addrA:"",
+                        addrB:"",
+                        addrC:"",
+                        addrD:""
                     }
                 }
 
@@ -603,6 +626,9 @@
 
         },
         methods: {
+            back:function () {
+                location.href="/goto/rentInfo" ;
+            },
             nextin(formName) {
                 this.$refs[formName].validate((valid) => {
                     if(valid) {

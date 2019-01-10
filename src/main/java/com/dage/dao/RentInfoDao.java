@@ -41,7 +41,7 @@ public interface RentInfoDao {
      * @param map
      * @return
      */
-    @Update("update   tb_realname_certification set auditresult='未审核', realname=#{REALNAME},sex=#{GENDER},address=#{addrA},email=#{EMAIL},idnumber=#{IDCARD},academic=#{MAXEDUCATION},housed=#{HOUSE},income=#{INCOME},marriage=#{MARRIAGE},jobtype=#{JOBTYPE},comname=#{COMNAME},jointime=to_date(#{JOINTIME},'yyyy-mm-dd hh24:mi:ss'),linkman1name=#{FAMILYNAME},linkman1rela=#{FAMILYRELATIONSHIP},linkman1phone=#{FAMILYTEL},linkman1sex='男',linkman1address=#{addrB},linkman2name=#{JOBCONTACTNAME},linkman2rela=#{JOBRELATIONSHIP},linkman2phone=#{JOBTEL},linkman2sex='男',linkman2address=#{addrC},linkman3name=#{OTHERNAME},linkman3rela=#{OTHERRELATIONSHIP},linkman3phone=#{OTHERTEL},linkman3sex='男',linkman3address=#{addrD},applytime=sysdate  where userid=#{userid}")
+    @Update("update   tb_realname_certification set auditresult='未审核', realname=#{REALNAME},sex=#{GENDER},address=#{addrA},email=#{EMAIL},idnumber=#{IDCARD},academic=#{MAXEDUCATION},housed=#{HOUSE},income=#{INCOME},marriage=#{MARRIAGE},jobtype=#{JOBTYPE},comname=#{COMNAME},jointime=to_date(#{JOINTIME},'yyyy-mm-dd '),linkman1name=#{FAMILYNAME},linkman1rela=#{FAMILYRELATIONSHIP},linkman1phone=#{FAMILYTEL},linkman1sex='男',linkman1address=#{addrB},linkman2name=#{JOBCONTACTNAME},linkman2rela=#{JOBRELATIONSHIP},linkman2phone=#{JOBTEL},linkman2sex='男',linkman2address=#{addrC},linkman3name=#{OTHERNAME},linkman3rela=#{OTHERRELATIONSHIP},linkman3phone=#{OTHERTEL},linkman3sex='男',linkman3address=#{addrD},applytime=sysdate  where userid=#{userid}")
     int addRentDetialInfo(Map map);
 
     /**
@@ -57,6 +57,6 @@ public interface RentInfoDao {
      * @param userid
      * @return
      */
-    @Select("select realname,sex GENDER,address,email,idnumber IDCARD,academic MAXEDUCATION,housed HOUSE,income ,marriage,jobtype,comname,to_char(jointime,'yyyy-mm-dd hh24:mi:ss'),linkman1name FAMILYNAME,linkman1rela FAMILYRELATIONSHIP,linkman1phone FAMILYTEL,linkman1sex ,linkman1address,linkman2name JOBCONTACTNAME ,linkman2rela JOBRELATIONSHIP,linkman2phone JOBTEL,linkman2sex,linkman2address ADDRESSS,linkman3name OTHERNAME,linkman3rela OTHERRELATIONSHIP,linkman3phone OTHERTEL,linkman3sex,linkman3address from tb_realname_certification where userid=#{userid}")
+    @Select("select realname,sex GENDER,address,email,idnumber IDCARD,academic MAXEDUCATION,housed HOUSE,income ,marriage,jobtype,comname,to_char(jointime,'yyyy-mm-dd ') JOINTIME,linkman1name FAMILYNAME,linkman1rela FAMILYRELATIONSHIP,linkman1phone FAMILYTEL,linkman1sex ,linkman1address,linkman2name JOBCONTACTNAME ,linkman2rela JOBRELATIONSHIP,linkman2phone JOBTEL,linkman2sex,linkman2address ADDRESSS,linkman3name OTHERNAME,linkman3rela OTHERRELATIONSHIP,linkman3phone OTHERTEL,linkman3sex,linkman3address,idimagefountvar,idimagebackvar,creditimg,valueimg from tb_realname_certification where userid=#{userid}")
     Map getInfo(String userid);
 }
