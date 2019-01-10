@@ -1,6 +1,7 @@
 package com.dage.controller;
 
 import com.dage.service.UserService;
+import com.dage.util.AESUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -241,8 +242,6 @@ public class PersonController {
         resultMap.put("total",pageInfo.getTotal());
         return resultMap;
     }
-
-
     /**
      * 投资记录内的统计
      * @param map
@@ -263,6 +262,35 @@ public class PersonController {
         //二者合并
         account.add(statistics);
         return account;
+    }
+
+    /**
+     * 验证用户的交易密码
+     * @param map
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("password")
+    public int getPwd(@RequestParam Map map,HttpSession session){
+        // 根据session的userid 查询 为map 加入session里的 userid
+        String userid=(String)session.getAttribute("userid");
+        map.put("userId",userid);
+        //map.put("userId","U201812076613");
+        //获取账户信息
+        List<Map> account = userService.getAccount(userid);
+        String transactionpassword = (String)account.get(0).get("TRANSACTIONPASSWORD");
+        String DeString =AESUtil.getInstance().decrypt(transactionpassword);
+        //System.out.println("数据库中密码解密后  "+DeString);
+        String password =(String) map.get("password");
+        //System.out.println("传过来的交易密码  "+password);
+        if(DeString.equals(password)){
+            //System.out.println("交易密码正确！");
+            return 1;
+        }else{
+            //System.out.println("交易密码错误！");
+            return 2;
+        }
+
     }
 
     /**
