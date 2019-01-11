@@ -572,56 +572,69 @@
 
             this.getCityData();
             var _self=this;
-            axios.post('/rent/getInfo').then(function(response){
+            axios.post('/rent/getInfo2').then(function(response){
                 if(response.data.IDCARD!=null&&response.data.IDCARD!=''&&response.data.IDCARD!='null'){
+
                     _self.dataForm=response.data;
                     _self.dataForm.addrA=_self.dataForm.sheng1+_self.dataForm.shi1+_self.dataForm.qu1;
                     _self.dataForm.addrB=_self.dataForm.sheng2+_self.dataForm.shi2+_self.dataForm.qu2;
                     _self.dataForm.addrC=_self.dataForm.sheng3+_self.dataForm.shi3+_self.dataForm.qu3;
                     _self.dataForm.addrD=_self.dataForm.sheng4+_self.dataForm.shi4+_self.dataForm.qu4;
-                }else{
-                    dataForm={
-                        REALNAME:"",
-                        GENDER:"",
-                        ADDRESS:[],
-                        EMAIL:"",
-                        IDCARD:"",
-                        MAXEDUCATION:"",
-                        HOUSE:"",
-                        MARRIAGE:"",
-                        INCOME:"",
-                        JOBTYPE:"",
-                        COMNAME:"",
-                        JOINTIME:"",
-                        FAMILYNAME:"",
-                        FAMILYRELATIONSHIP:"",
-                        FAMILYTEL:"",
-                        JOBCONTACTNAME:"",
-                        JOBRELATIONSHIP:"",
-                        JOBTEL:"",
-                        OTHERNAME:"",
-                        OTHERRELATIONSHIP:"",
-                        OTHERTEL:"",
-                        sheng1: '',
-                        shi1: '',
-                        qu1: '',
-                        sheng2: '',
-                        shi2: '',
-                        qu2: '',
-                        sheng3: '',
-                        shi3: '',
-                        qu3: '',
-                        sheng4: '',
-                        shi4: '',
-                        qu4: '',
-                        address:"",
-                        addrA:"",
-                        addrB:"",
-                        addrC:"",
-                        addrD:""
-                    }
                 }
+                else{
+                    axios.post('/rent/getInfo').then(function(response){
+                        if(response.data.IDCARD!=null&&response.data.IDCARD!=''&&response.data.IDCARD!='null'){
+                            _self.dataForm=response.data;
+                            _self.dataForm.addrA=_self.dataForm.sheng1+_self.dataForm.shi1+_self.dataForm.qu1;
+                            _self.dataForm.addrB=_self.dataForm.sheng2+_self.dataForm.shi2+_self.dataForm.qu2;
+                            _self.dataForm.addrC=_self.dataForm.sheng3+_self.dataForm.shi3+_self.dataForm.qu3;
+                            _self.dataForm.addrD=_self.dataForm.sheng4+_self.dataForm.shi4+_self.dataForm.qu4;
+                        }else{
+                            dataForm={
+                                REALNAME:"",
+                                GENDER:"",
+                                ADDRESS:[],
+                                EMAIL:"",
+                                IDCARD:"",
+                                MAXEDUCATION:"",
+                                HOUSE:"",
+                                MARRIAGE:"",
+                                INCOME:"",
+                                JOBTYPE:"",
+                                COMNAME:"",
+                                JOINTIME:"",
+                                FAMILYNAME:"",
+                                FAMILYRELATIONSHIP:"",
+                                FAMILYTEL:"",
+                                JOBCONTACTNAME:"",
+                                JOBRELATIONSHIP:"",
+                                JOBTEL:"",
+                                OTHERNAME:"",
+                                OTHERRELATIONSHIP:"",
+                                OTHERTEL:"",
+                                sheng1: '',
+                                shi1: '',
+                                qu1: '',
+                                sheng2: '',
+                                shi2: '',
+                                qu2: '',
+                                sheng3: '',
+                                shi3: '',
+                                qu3: '',
+                                sheng4: '',
+                                shi4: '',
+                                qu4: '',
+                                address:"",
+                                addrA:"",
+                                addrB:"",
+                                addrC:"",
+                                addrD:""
+                            }
+                        }
 
+                    })
+
+                }
             })
 
         },
