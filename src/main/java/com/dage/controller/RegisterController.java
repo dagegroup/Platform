@@ -65,7 +65,7 @@ public class RegisterController {
             map.put("msg",1);
         }else{
             int execute = IndustrySMS.execute(phone);
-            System.out.println(execute);
+            //System.out.println(execute);
             if(execute<=0){
                 map.put("msg",3);
             }else {
