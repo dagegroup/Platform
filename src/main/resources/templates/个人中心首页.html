@@ -122,18 +122,31 @@
                       alert(data);
                     }
               })
+              $.ajax({
+                  type:"post",
+                  dataType:"text",
+                  url:"/person/isBindHP",
+                  success:function (data) {
+                      if(data!=null&&data!=0){
+                          $("#photoImage").attr("src","/person/show?fileName="+data);
+                      }else {
+                          $("#photoImage").attr("src","../foreground/images/touxiang.png");
+                      }
+                  }
+              })
           });
       </script>
       <div class="pmain-profile">
         <div class="pmain-welcome"> <span class="fl"><span id="outLogin"></span> <span class="ename"></span>喝一杯下午茶，让心情放松一下~</span></div>
         <div class="pmain-user">
           <div class="user-head"> <span id="clickHeadImage" class="head-img" title="点击更换头像">
-            <form  method="post" action="">
+            <form  method="post" id="addForm" action="/person/uploadPhoto" enctype="multipart/form-data">
               <input type="hidden" name="userPhotoUploadForm" value="userPhotoUploadForm">
-              <span id="userPhotoUploadForm:photo"><img id="userPhotoUploadForm:photoImage" src="../foreground/images/touxiang.png" alt="" style="width:88px;height:88px;z-index:0;"> <i class="headframe" style="z-index:0;"></i>-
+              <span id="userPhotoUploadForm:photo"><img id="photoImage" src="" alt="" style="width:88px;height:88px;z-index:0;">
+                <i class="headframe" style="z-index:0;"></i>-
               <div id="userPhotoUploadForm:shangchuan-btn" class="ui-fileupload ui-widget" style="z-index:0;">
                 <div class="ui-fileupload-buttonbar ui-corner-top"><span class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left ui-fileupload-choose" role="button"><span class="ui-button-icon-left ui-icon ui-c ui-icon-plusthick"></span><span class="ui-button-text ui-c"></span>
-                  <input type="file" id="userPhotoUploadForm:shangchuan-btn_input" name="userPhotoUploadForm:shangchuan-btn_input" style="z-index:0;">
+                  <input type="file" id="shangchuan-btn_input" name="headPhoto" style="z-index:0;">
                   </span></div>
                 <div class="ui-fileupload-content ui-widget-content ui-corner-bottom">
                   <table class="ui-fileupload-files">
@@ -166,8 +179,11 @@
 			       $(function(){
 			    	   $("#clickHeadImage").click(function(){
 			    		   $(this).find('span').removeClass('ui-state-hover');
-			    		   document.getElementById("userPhotoUploadForm:shangchuan-btn_input").click();
+			    		   document.getElementById("shangchuan-btn_input").click();
 			    	   });
+                       $("#shangchuan-btn_input").change(function () {
+                           $("#addForm").submit();
+                       });
 			    	   var safeLevel = "低";
 			    	   if(safeLevel=="高"){
 			    		   $(".pmain-user .user-info li .safe-level .onlevel").css("background-color","#f1483c");

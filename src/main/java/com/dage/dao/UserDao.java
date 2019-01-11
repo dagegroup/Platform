@@ -186,6 +186,17 @@ public interface UserDao {
     List<Map> getAccount(String userid);
 
     /**
+     * 用户添加头像
+     */
+    @Insert("update user_account set portrait=#{headphoto} where userid=#{userId}")
+    int updateHeadPhoto(Map map);
+
+    /**
+     * 判断用户是否上传了头像
+     */
+    @Select("select portrait from user_account where userid=#{userid}")
+    String getHeadphoto(String userid);
+    /**
      * 用户充值  之后更新用户账户表
      * @param map
      * @return

@@ -2,14 +2,19 @@ package com.dage.controller;
 
 import com.dage.service.UserService;
 import com.dage.util.AESUtil;
+import com.dage.util.FtpConfiguration;
+import com.dage.util.FtpUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -27,6 +32,14 @@ import java.util.Map;
 public class PersonController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private FtpConfiguration ftpConfig;
+    @Autowired
+    private FtpUtil ftpUtil;
+    @Autowired
+    private ResourceLoader resourceLoader;
+
 
     /**
      * 根据用户编号查询用户信息
@@ -301,6 +314,57 @@ public class PersonController {
 
     }
 
+    /**
+     * 用户上传头像
+     * @param map
+     * @param headPhoto
+     * @return
+     */
+    //用户修改头像
+    @RequestMapping("uploadPhoto")
+    public Object uploadPhoto(@RequestParam Map map,@RequestParam MultipartFile headPhoto,HttpSession session){
+        // 根据session的userid 查询 为map 加入session里的 userid
+        String userid=(String)session.getAttribute("userid");
+        map.put("userId",userid);
+        System.out.println("---------------------------------");
+        String headPhotoName = ftpUtil.upLoad(headPhoto);
+        System.out.println(headPhotoName);
+        map.put("headphoto",headPhotoName);
+        //修改个人信息头像
+        int updateHeadPhoto = userService.updateHeadPhoto(map);
+        if(updateHeadPhoto>0){
+            return "forward:/skip/toPersonIndex";
+        }
+        return "forward:/skip/toPersonIndex";
+    }
+    /**
+     * 判断用户是否上传了头像
+     * @param session
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("isBindHP")
+    public Object isBindHP(HttpSession session){
+        // 根据session的userid 查询 为map 加入session里的 userid
+        String userid=(String)session.getAttribute("userid");
+        String hFileName = userService.getHeadphoto(userid);
+        if(hFileName!=null&&hFileName!=""){
+            return hFileName;
+        }
+        return 0;
+    }
+    /**
+     * 显示图片
+     */
+    @RequestMapping("/show")
+    public ResponseEntity show(String fileName){
+        try {
+            //  ftp://192.168.1.14/98f20a5d-7304-41c7-ac5a-db07d2aaffd3.png
+            return ResponseEntity.ok(resourceLoader.getResource("ftp://"+ftpConfig.getFtpUsername()+":"+ftpConfig.getFtpPassWord()+"@"+ ftpConfig.getRemoteIp()+ftpConfig.getRemotePath() + fileName));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
     /**
      * 条件查询时为map 添加查询条件
      * @param map

@@ -92,6 +92,22 @@ public class UserServiceImpl implements UserService {
         return userDao.withdraw(map);
     }
 
+    /**
+     * 判断用户是否上传了头像
+     */
+    @Override
+    public String getHeadphoto(String userid) {
+        return userDao.getHeadphoto(userid);
+    }
+
+    /**
+     * 用户添加头像
+     */
+    @Override
+    public int updateHeadPhoto(Map map) {
+        return userDao.updateHeadPhoto(map);
+    }
+
     @Override
     public List<Map> getAccount(String userid) {
         return userDao.getAccount(userid);

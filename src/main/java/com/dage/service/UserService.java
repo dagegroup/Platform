@@ -189,4 +189,14 @@ public interface UserService {
      * @return
      */
     int adduserid1(String userid);
+
+    /**
+     * 用户添加头像
+     */
+    int updateHeadPhoto(Map map);
+
+    /**
+     * 判断用户是否上传了头像
+     */
+    String getHeadphoto(String userid);
 }
