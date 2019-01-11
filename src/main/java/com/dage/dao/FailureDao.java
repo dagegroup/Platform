@@ -32,7 +32,7 @@ public interface FailureDao {
      * @param bidid
      * @return
      */
-    @Select("select s.userid,s.bidid,s.bidamount,to_char(s.biddate,'yyyy-mm-dd hh24:mi:ss') as biddate,s.bidstate,r.realname from bid_submit s left join tb_realname_certification r on s.userid=r.userid where s.bidid=#{bidid}")
+    @Select("select s.userid,s.bidid,s.bidamount,s.bidrate,to_char(s.biddate,'yyyy-mm-dd hh24:mi:ss') as biddate,s.bidstate,r.realname from bid_submit s left join tb_realname_certification r on s.userid=r.userid where s.bidid=#{bidid}")
     List<Map> getMapByBidid(String bidid);
 
 
