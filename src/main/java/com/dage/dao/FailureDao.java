@@ -20,7 +20,7 @@ public interface FailureDao {
      * @param map
      * @return
      */
-    @Select("<script>select distinct a.*,s.bidstate as SUBMITSTATE from(select b.bidid,b.userid,b.bidamount,b.bidrepaymentmethod,b.bidrate||'%' as bidrate,b.biddeadline,b.bidproject,r.realname,b.bidcurrentamount from bid_info b left join  TB_REALNAME_CERTIFICATION r on b.userid=r.userid where b.bidstate = '流标' " +
+    @Select("<script>select distinct a.*,nvl(s.bidstate, 1)as SUBMITSTATE from(select b.bidid,b.userid,b.bidamount,b.bidrepaymentmethod,b.bidrate||'%' as bidrate,b.biddeadline,b.bidproject,r.realname,b.bidcurrentamount from bid_info b left join  TB_REALNAME_CERTIFICATION r on b.userid=r.userid where b.bidstate = '流标' " +
             "<if test=\" BIDID!=null and BIDID!=''\"> and b.bidid = #{BIDID}</if>" +
             "<if test=\" USERID!=null and USERID!=''\"> and b.userid = #{USERID}</if>" +
             "<if test=\" REALNAME!=null and REALNAME!=''\"> and r.realname like  '%'||#{REALNAME}||'%'</if>" +
@@ -32,7 +32,7 @@ public interface FailureDao {
      * @param bidid
      * @return
      */
-    @Select("select s.userid,s.bidid,s.bidamount,to_char(s.biddate,'yyyy-mm-dd hh24:mi:ss') as biddate,s.bidstate,r.realname from bid_submit s left join tb_realname_certification r on s.userid=r.userid where s.bidid=#{bidid}")
+    @Select("select s.userid,s.bidid,s.bidamount,s.bidrate,to_char(s.biddate,'yyyy-mm-dd hh24:mi:ss') as biddate,s.bidstate,r.realname from bid_submit s left join tb_realname_certification r on s.userid=r.userid where s.bidid=#{bidid}")
     List<Map> getMapByBidid(String bidid);
 
 

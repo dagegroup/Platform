@@ -5,6 +5,7 @@ import com.dage.service.EmpService;
 import com.dage.service.UserService;
 
 import com.dage.util.AESUtil;
+import com.dage.util.ImageUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
@@ -168,6 +170,13 @@ public class UserController {
     @ResponseBody
     @RequestMapping("backLogin")
     public Map userLogin(@RequestParam Map<String, String> map, HttpSession session) {
+        String srand = session.getAttribute("srand")+"";
+
+      String code=map.get("code")+"";
+        System.out.println(code);
+      if (!code.equals(srand)){ map.put("result", "codeerror");
+
+      return map;}
         Subject subject = SecurityUtils.getSubject();
         String password = AESUtil.getInstance().encrypt(map.get("password"));
         UsernamePasswordToken token = new UsernamePasswordToken(map.get("phone") + "", password);
@@ -181,5 +190,12 @@ public class UserController {
             map.put("result", "usererror");
         }
         return map;
+    }
+    @RequestMapping("getImage")
+    public  void getImage(HttpServletResponse response  ,HttpSession session){
+
+        ImageUtil imageUtil = new ImageUtil();
+        imageUtil.getImage(response ,session);
+        System.out.println(session.getAttribute("srand"));
     }
 }

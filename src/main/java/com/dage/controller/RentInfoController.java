@@ -107,10 +107,8 @@ public class RentInfoController {
         if(map.get("pic1")==""||map.get("pic2")==""||map.get("pic3")==""|| map.get("pic4")==""){
             return 0;
         }
-        //System.out.println(map);
         Object userid = session.getAttribute("userid");
         rentInfoService.updateState(userid+"");
-       // System.out.println(userid);
         map.put("userid",userid.toString());
         Map rentInfo2 = (Map)session.getAttribute("rentInfo2");
         Map rentInfo1 = (Map)session.getAttribute("rentInfo1");
@@ -179,7 +177,14 @@ public class RentInfoController {
     }
     @ResponseBody
     @RequestMapping("getInfo1")
-    public Object getBackInfo(HttpSession session){
+    public Object getBackInfo1(HttpSession session){
       return    session.getAttribute("rentInfo1");
-    };
+    }
+    @ResponseBody
+    @RequestMapping("getInfo2")
+    public Object getBackInfo2(HttpSession session){
+    Map map= (Map) session.getAttribute("rentInfo2");
+
+        return    map;
+    }
 }
