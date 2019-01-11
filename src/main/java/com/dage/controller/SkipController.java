@@ -6,9 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,7 +62,9 @@ public class SkipController {
      */
     @RequestMapping("/Recharge")
     @Transactional//事务
-    public String toRecharge(@RequestParam Map map,HttpSession session){
+    @ResponseBody
+    public Map toRecharge(@RequestParam Map map,HttpSession session){
+        Map map1 =new HashMap();
         if (map.size()>0){
             //System.out.println(map.get("actualMoney1"));
             //System.out.println(map.get("bankCardNo"));
@@ -90,8 +94,10 @@ public class SkipController {
             userService.recharge(map);
             // 加入系统的账户
             userService.addSys(map);
+
+            map1.put("msg","恭喜你充值成功！");
         }
-        return "个人中心-充值";
+        return map1;
     }
     /**
      * 跳转到个人中心充值1

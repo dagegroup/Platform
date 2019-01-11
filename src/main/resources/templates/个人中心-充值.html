@@ -426,13 +426,13 @@
         function Commission() {
             var str=document.getElementById("form:actualMoney1").value;
             if(str==""){
-                $('#chognzhi').html("请输入你的充值金额");
+                $('#chongzhi').html("请输入你的充值金额");
             }else if(parseInt(str)<1000){
-                $('#chognzhi').html("单次充值金额不能低于1000元");
+                $('#chongzhi').html("单次充值金额不能低于1000元");
             }else if(parseInt(str)>50000){
-                $('#chognzhi').html("充值金额超过五万请使用网银充值");
+                $('#chongzhi').html("充值金额超过五万请使用网银充值");
             }else{
-                $('#chognzhi').html("设置成功");
+                $('#chongzhi').html("设置成功");
             }
             function CheckBankNo(t_bankno) {
                 var bankno=document.getElementById("car").value;
@@ -466,7 +466,7 @@
                     $("#banknoInfo").html("请填写银行卡号");
                     return false;
                 }else if(str1.indexOf("银行卡号")>-1){
-                    $("#banknoInfo").html("请正确输入银行卡号");
+                    $('#chognzhi').html("请正确输入银行卡号");
                     return false;
                 }else{
                     return true;
@@ -615,12 +615,12 @@
 				<div class="alert-title"><h3>消息</h3></div>
 				<div class="alert-main">
 			    	<p class="msg4">
-			    	        
+
 			    	</p>
 			        <p class="msg-a"><a class="btn-ok btn-145" onclick="displaySpan('alert-unbindMsgDialog')" href="#">关 闭</a></p>
 			    </div>
 			</div>
-            
+
             <script language="JavaScript" type="text/javascript">
             $(
             	function()
@@ -632,16 +632,16 @@
             		}
             	}
              )
-	
+
 	        </script>
-	        	
+
 	        <script type="text/javascript">
 	        $("#recharge\\:actualMoney").val("单笔大于0元");
 	        var value = "单笔大于0元";
 	        $("#recharge\\:actualMoney").focus(
 					   function(){
 						   	$(this).css({"font-size":"24px","font-weight":"bold","font-family":"Arial","border":"1px solid #0caffe"});
-						   if($("#recharge\\:actualMoney").val() == value) { 
+						   if($("#recharge\\:actualMoney").val() == value) {
 							   	$("#recharge\\:actualMoney").val("")
 								$(this).css({"font-size":"24px","font-weight":"bold","font-family":"Arial"});
 						   }
@@ -653,12 +653,12 @@
 							   	$(this).css({"color":"#D0D0D0","font-size":"14px","font-weight":"normal"});
 					}
 				})
-			
+
 			$("#form\\:actualMoney1").val("单笔大于0元");
 	        $("#form\\:actualMoney1").focus(
 					   function(){
 						   	$(this).css({"font-size":"24px","font-weight":"bold","font-family":"Arial","border":"1px solid #0caffe", "height":"38px"});
-						   if($("#form\\:actualMoney1").val() == value) { 
+						   if($("#form\\:actualMoney1").val() == value) {
 							   	$("#form\\:actualMoney1").val("");
 								$(this).css({"font-size":"24px","font-weight":"bold","font-family":"Arial", "height":"38px"});
 						   }
@@ -670,12 +670,12 @@
 							  $(this).css({"color":"#D0D0D0","font-size":"14px","font-weight":"normal", "height":"38px"});
 					}
 				})
-				
+
 			$("#form2\\:actualMoney2").val("单笔大于0元");
 	        $("#form2\\:actualMoney2").focus(
 					   function(){
 						   	$(this).css({"font-size":"24px","font-weight":"bold","font-family":"Arial","border":"1px solid #0caffe", "height":"38px"});
-						   if($("#form2\\:actualMoney2").val() == value) { 
+						   if($("#form2\\:actualMoney2").val() == value) {
 							   	$("#form2\\:actualMoney2").val("")
 								$(this).css({"font-size":"24px","font-weight":"bold","font-family":"Arial", "height":"38px"});
 						   }
@@ -687,7 +687,7 @@
 							   	$(this).css({"color":"#D0D0D0","font-size":"14px","font-weight":"normal", "height":"38px"});
 					}
 				})
-				
+
 				function keyUpcheck()
 				{
 					$(this).css({"font-size":"24px","font-weight":"bold","font-family":"Arial"});
@@ -698,7 +698,7 @@
 	        $("#form\\:bankCardNo").focus(
 					   function(){
 						   	$(this).css({"font-size":"14px","font-weight":"bold","font-family":"Arial","border":"1px solid #0caffe", "color": "rgb(75, 73, 72)"});
-						   if($("#form\\:bankCardNo").val() == cardValue) { 
+						   if($("#form\\:bankCardNo").val() == cardValue) {
 							   	$("#form\\:bankCardNo").val("")
 								$(this).css({"font-size":"14px","font-weight":"bold","font-family":"Arial"});
 						   }
@@ -712,7 +712,7 @@
 				})
 			</script>
 			<script type="text/javascript">
-				
+
 				var typeValue=$("#typeValue").html().trim();
 				var url=""
 				if(typeValue==1)

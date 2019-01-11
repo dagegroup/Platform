@@ -91,367 +91,169 @@
     </div>
     <label id="typeValue" style="display:none;"> </label>
     <script>
-		$(function(){
-		    $('.quick-tit').click(function(){
-		      
-		      $(this).addClass('pay-cur');
-		      $(this).siblings().removeClass('pay-cur');
-		      $('.quick-main').show();
-		      $('.online-main').hide();
-		      
-		      $(".pay-tipcon").hide();
-		      $(".pay-tipcon2").show();
+        $(function(){
+            $('.quick-tit').click(function(){
 
-		    })
+                $(this).addClass('pay-cur');
+                $(this).siblings().removeClass('pay-cur');
+                $('.quick-main').show();
+                $('.online-main').hide();
 
-		    $('.online-tit').click(function(){
-		      
-		      $(this).addClass('pay-cur');
-		      $(this).siblings().removeClass('pay-cur');
-		      $('.quick-main').hide();
-		      $('.online-main').show();
+                $(".pay-tipcon").hide();
+                $(".pay-tipcon2").show();
 
-		      $(".pay-tipcon2").hide();
-		      $(".pay-tipcon").show();
-		    })
-	  });
-		//<![CDATA[
-			function showSpan(op){
-				$("body").append("<div id='mask'></div>");
-				$("#mask").addClass("mask").css("display","block");
-	
-				$("#"+op).css("display","block");
-			}
-	
-			function displaySpan(op){
-				$("#mask").css("display","none");
-				$("#"+op).css("display","none");
-			}
-		//]]>
-		</script>
-    <script>
-			//<![CDATA[
-			function checkRecharge() {
-				var moneyRegex="^(([1-9]+[0-9]*)|((([1-9]+[0-9]*)|0)\\.[0-9]{1,2}))$";
-				var money = $("#recharge\\:actualMoney").val();
-				var nullFlag=(money=="")||money<=0;
-				var numberFlag=isNaN(money);
-				//如果输入为空
-				if(nullFlag)
-				{
-					var $span = "<em></em>请输入金额";
-					$("#actualMoneyErrorDiv").html($span);
-					return false;
-				}
-				else
-				{
-					$("#actualMoneyErrorDiv").html("");
-				}
-				//如果输入的不是数字
-				if(numberFlag)
-				{
-					var $span = "<em></em>请输入数字</span>";
-					$("#actualMoneyErrorDiv").html($span);
-					return false;
-				}
-				else
-				{
-					$("#actualMoneyErrorDiv").html("");
-				}
-				//输入金额是否合法
-				var moneyPattern = new RegExp(moneyRegex);
-		    	var legalFlag=moneyPattern.test(money);
-				if(!legalFlag)
-				{
-					var $span = "<em></em>金额必须大于0且为整数或小数，小数点后不超过2位</span>";
-					$("#actualMoneyErrorDiv").html($span);
-					return false;		
-				}
-				else
-				{
-					$("#actualMoneyErrorDiv").html("");
-				}
-				return true;
-			}
-			function validateAgree()
-			{
-				var $checkname=$("#bank-check").children("b").hasClass("selected");
-				if(!($checkname))
-				{
-					return false;
-				}
-				else
-				{
-					return true;		
-				}
-			}
-			function getShowPayVal(){
-				var rechargeFlag=checkRecharge();
-				var agreeFlag=validateAgree();
-				flag=rechargeFlag&&agreeFlag;
-				$("#recharge\\:rechargeWay").val($("#showpay").html());
-				var bankProtocol = $("#bankProtocol").attr('class');
-				if(!bankProtocol)
-				{
-					$("#bankProtocol_message").show();
-					 return false;
-				}
-				return flag;
-			}
-			
-			
-			function amount(th){
-			    var regStrs = [
-			        ['^0(\\d+)$', '$1'], //禁止录入整数部分两位以上，但首位为0
-			        ['[^\\d\\.]+$', ''], //禁止录入任何非数字和点
-			        ['\\.(\\d?)\\.+', '.$1'], //禁止录入两个以上的点
-			        ['^(\\d+\\.\\d{2}).+', '$1'] //禁止录入小数点后两位以上
-			    ];
-			    for(i=0; i<regStrs.length; i++){
-			        var reg = new RegExp(regStrs[i][0]);
-			        th.value = th.value.replace(reg, regStrs[i][1]);
-			    }
-			    if(th.value>9999999.99){
-			    	th.value = th.value.substr(0,th.value.length-1);
-			    }
-			}
+            })
 
-			//验证输入银行卡号的合法性
-			function checkBankCardNo() {
-				//$("#form\\:defaultBankName").text("");
-				var cardNo = $("#form\\:bankCardNo").val(); 
-				var reg = /^\d{16,19}$/g; // 以19位数字开头，以19位数字结尾 
-				if( !reg.test(cardNo) ) 
-				{ 
-					//$(".info2-bank").css({"display":"none"});
-				    var $span = "<em></em>银行卡号输入错误";
-				    $("#bankCardError").html($span);
-					return false;		
-				} else{
-					//$(".info2-bank").css({"display":"block"});
-					$("#bankCardError").html("");
-				}
-				return true;
-			}
-			function checkBank() {
-				$("#form\\:defaultBankName").text("");
-				var cardNo = $("#form\\:bankCardNo").val(); 
-				var reg = /^\d{16,19}$/g; // 以19位数字开头，以19位数字结尾 
-				if( !reg.test(cardNo) ) 
-				{ 
-					$(".info2-bank").css({"display":"none"});
-					return false;		
-				} else{
-					$(".info2-bank").css({"display":"block"});
-				}
-				return true;
-			}
+            $('.online-tit').click(function(){
 
-			function validateAgree2()
-			{
-				var $checkname=$("#bank-check2").children("b").hasClass("selected");
-				if(!($checkname))
-				{
-					showSpan('alert-tyht');
-					return false;
-				}
-				else
-				{
-					return true;		
-				}
-			}
-			
-			function checkRecharge1() {
-				var moneyRegex="^(([1-9]+[0-9]*)|((([1-9]+[0-9]*)|0)\\.[0-9]{1,2}))$";
-				var money = $("#form\\:actualMoney1").val();
-				var nullFlag=(money=="")||money<=0;
-				var numberFlag=isNaN(money);
-				//如果输入为空
-				if(nullFlag)
-				{
-					var $span = "<em></em>请输入充值金额";
-					$(".quick-error").html($span);
-					return false;
-				}
-				else
-				{
-					$(".quick-error").html("");
-				}
-				//如果输入的不是数字
-				if(numberFlag)
-				{
-					var $span = "<em></em>请输入数字";
-					$(".quick-error").html($span);
-					return false;
-				}
-				else
-				{
-					$(".quick-error").html("");
-				}
-				//输入金额是否合法
-				var moneyPattern = new RegExp(moneyRegex);
-		    	var legalFlag=moneyPattern.test(money);
-				if(!legalFlag)
-				{
-					var $span = "<em></em>金额必须大于0且为整数或小数，小数点后不超过2位";
-					$(".quick-error").html($span);
-					return false;		
-				}
-				else
-				{
-					$(".quick-error").html("");
-				}
+                $(this).addClass('pay-cur');
+                $(this).siblings().removeClass('pay-cur');
+                $('.quick-main').hide();
+                $('.online-main').show();
 
-				if(parseInt(money) > 50000){
-					var $span = "<em></em>充值金额超过50000元";
-					$(".quick-error").html($span);
-					return false;
-				}else
-				{
-					$(".quick-error").html("");
-				}
-				return true;
-			}
-
-			function getShowPayVal1(){
-				var rechargeFlag=checkRecharge1();
-				var bankCardFlag = checkBankCardNo();
-				var agreeFlag=validateAgree2();
-				var payflag=rechargeFlag && bankCardFlag && agreeFlag;
-				var defaultBankName = $("#form\\:defaultBankName").text();
-				if(defaultBankName.replace(/(^\s*)|(\s*$)/g, "")=="此银行暂不支持"){
-					var $span = "<em></em>此银行暂不支持";
-					$(".quick-error3").html($span);
-					return false;
-				}
-				/*$("#recharge\\:rechargeWay").val($("#showpay").html());
-				var bankProtocol = $("#bankProtocol").attr('class');
-				if(!bankProtocol)
-				{
-					$("#bankProtocol_message").show();
-					 return false;
-				}*/
-				return payflag;
-			}
-
-			function checkRecharge2() {
-				var moneyRegex="^(([1-9]+[0-9]*)|((([1-9]+[0-9]*)|0)\\.[0-9]{1,2}))$";
-				var money = $("#form2\\:actualMoney2").val();
-				var nullFlag=(money=="")||money<=0;
-				var numberFlag=isNaN(money);
-				//如果输入为空
-				if(nullFlag)
-				{
-					var $span = "<em></em>请输入充值金额";
-					$("#quick-error2").html($span);
-					return false;
-				}
-				else
-				{
-					$("#quick-error2").html("");
-				}
-				//如果输入的不是数字
-				if(numberFlag)
-				{
-					var $span = "<em></em>请输入数字";
-					$("#quick-error2").html($span);
-					return false;
-				}
-				else
-				{
-					$("#quick-error2").html("");
-				}
-				//输入金额是否合法
-				var moneyPattern = new RegExp(moneyRegex);
-		    	var legalFlag=moneyPattern.test(money);
-				if(!legalFlag)
-				{
-					var $span = "<em></em>金额必须大于0且为整数或小数，小数点后不超过2位";
-					$("#quick-error2").html($span);
-					return false;		
-				}
-				else
-				{
-					$("#quick-error2").html("");
-				}
-
-				if(parseInt(money) > 50000){
-					var $span = "<em></em>充值金额超过50000元";
-					$("#quick-error2").html($span);
-					return false;
-				}else
-				{
-					$("#quick-error2").html("");
-				}
-				return true;
-			}
-
-			function getShowPayVal2(){
-				var rechargeFlag=checkRecharge2();
-				var agreeFlag=validateAgree2();
-				var payflag=rechargeFlag && agreeFlag;
-				/*$("#recharge\\:rechargeWay").val($("#showpay").html());
-				var bankProtocol = $("#bankProtocol").attr('class');
-				if(!bankProtocol)
-				{
-					$("#bankProtocol_message").show();
-					 return false;
-				}*/
-				return payflag;
-			}
-
-			/* function showSpan(op){
-				$("body").append("<div id='maskCommon'></div>");
-				$("#maskCommon").addClass("mask1").css("display","block");
-				$("#"+op).css("display","block");
-			} */
-
-			/* function displaySpan(op){
-				$("#alert-ClickDialog").hide();
-				$("#maskCommon").hide();
-			} */
-			
-			$(document).ready(function(){
-				  if("false"=='true'){
-					 showSpan("alert-ClickDialog");
-				  } 
-				  if("false"=='true'){
-						 showSpan("alert-unbindMsgDialog");
-					  } 
-			 });
-			//]]>
-		</script>
+                $(".pay-tipcon2").hide();
+                $(".pay-tipcon").show();
+            })
+        });
+        function Commission() {
+            var str = document.getElementById("form:actualMoney1").value;
+            if (str == "") {
+                $('#chongzhi').html("请输入你的充值金额");
+            } else if (parseInt(str) < 1000) {
+                $('#chongzhi').html("单次充值金额不能低于1000元");
+            } else if (parseInt(str) > 50000) {
+                $('#chongzhi').html("充值金额不能超过五万");
+            } else {
+                $('#chongzhi').html("设置成功");
+            }
+        }
+            function CheckBankNo() {
+                var bankno=document.getElementById("car").value;
+                var num = /^\d*$/; //全数字
+                //开头6位
+                var strBin = "10,18,30,35,37,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,58,60,62,65,68,69,84,87,88,94,95,98,99";
+                if(bankno == "") {
+                    $("#banknoInfo").html("请填写银行卡号");
+                }else if(bankno.length < 16 || bankno.length > 19) {
+                    $("#banknoInfo").html("银行卡号长度必须在16到19之间");
+                }else if(!num.exec(bankno)) {
+                    $("#banknoInfo").html("银行卡号必须全为数字");
+                }else if(strBin.indexOf(bankno.substring(0, 2)) == -1) {
+                    $("#banknoInfo").html("银行卡号开头6位不符合规范");
+                }else{
+                    $("#banknoInfo").html("验证通过");
+                }
+            }
+            function checkActualMoney() {
+                var str = document.getElementById("form:actualMoney1").value;
+                var str1 = document.getElementById("banknoInfo").innerText;
+                var str2 = document.getElementById("chongzhi").innerText;
+                var str3 = document.getElementById("car").value;
+                if (str == "") {
+                    $("#chongzhi").html("请输入你的充值金额");
+                    return false;
+                } else if (str3.indexOf("充值金额") > -1) {
+                    $('#chongzhi').html("请正确输入充值金额");
+                    return false;
+                } else if (str3 == "") {
+                    $("#banknoInfo").html("请填写银行卡号");
+                    return false;
+                } else if (str1.indexOf("银行卡号") > -1) {
+                    $('#chongzhi').html("请正确输入银行卡号");
+                    return false;
+                } else {
+                    ChongZhi(str);
+                    return false;
+                }
+            }
+        function ChongZhi(str) {
+            $.ajax({
+                url: "/skip/Recharge",
+                data:{actualMoney1:str},
+                async:false,//同步
+                type:"post",
+                dataType:"json",
+                success: function(data){
+                    alert(JSON.stringify(data.msg));
+                },
+                error : function(data) {
+                    alert(data);
+                }
+            })
+        }
+    </script>
     <div class="personal-main">
       <div class="personal-pay">
         <h3><i>充值</i></h3>
         <div class="quick-pay-wrap">
           <h4> <span class="quick-tit pay-cur"><em>快捷支付</em></span> <span class="online-tit"><em>网银充值</em></span> </h4>
-          <form id="form" name="form" method="post" action="Recharge" >
+          <form  method="post" action="" onsubmit="return checkActualMoney()" >
             <div class="quick-main">
               <div class="fl quick-info">
                 <div class="info-1"> <span class="info-tit">充值金额</span> <span class="info1-input">
-                  <input id="form:actualMoney1" type="text" name="actualMoney1" class="pay-money-txt" maxlength="10" >
-                  <em>元</em> </span> <span class="quick-error"> </span> </div>
+                  <input id="form:actualMoney1"onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" name="actualMoney1" class="pay-money-txt" maxlength="10" onblur="Commission()" >
+                  <em>元</em> </span>  <span id="chongzhi" class="quick-error2"> </span></div>
                 <div class="info-tips">亿人宝提醒您：充值金额超过50000元时，请切换到网银充值</div>
                 <div class="info-2"> <span class="info-tit">银行卡号</span> <span class="info2-input">
-                  <input id="form:bankCardNo" type="text" name="bankCardNo" class="tx-txt">
-                  <em class="info2-bank" style="display: none;">
-                  <label id="form:defaultBankName" style="font-size:16px;"> </label>
-                  </em> </span> <span class="quick-error3" id="bankCardError"></span> </div>
+                  <input id="car" type="text"  name="bankCardNo"  onblur="CheckBankNo()">
+                  </span>  </div>
+              <div class="bank-check" ><span id="banknoInfo" style="color: red"></span></div>
                 <div class="bank-check" id="bank-check2"> <b class="selected" id="bankProtocol1"></b><span class="bank-agree">我同意并接受<a href="#" target="_blank">《亿人宝投资咨询与管理服务电子协议》</a></span> <span class="error" id="bankProtocol_message" style="display:none;margin-top:-3px;">请同意协议内容！</span> </div>
-                <input type="submit" name="" value="充值" class="btn-paycz" onclick="return getShowPayVal1()">
+                <input type="submit"  value="充值" class="btn-paycz" onclick="return getShowPayVal1()">
               </div>
             </div>
           </form>
           <div class="online-main" style="display:none;">
-            <form id="recharge" name="recharge" method="post" action="/skip/Recharge" target="_blank">
+            <form id="recharge" name="recharge" method="post" action="" target="_blank">
               <div class="online-mar">
                 <div class="quick-info quick-info-width">
                   <div class="info-1"> <span class="info-tit">充值金额</span> <span class="info1-input">
-                    <input id="recharge:actualMoney1" type="text" name="recharge:actualMoney" class="pay-money-txt" maxlength="10" onblur="checkRecharge()" onkeydown="amount(this);keyUpcheck()" onkeyup="amount(this);keyUpcheck()">
-                    <em>元</em> </span> <span id="actualMoneyErrorDiv" class="quick-error2"> </span> </div>
+                    <input id="recharge:actualMoney1"onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" name="actualMoney1" class="pay-money-txt" maxlength="10" onblur="Commission1()"  >
+                    <em>元</em> </span> <span id="chongzhi1" class="quick-error2"> </span> </div>
                 </div>
               </div>
+              <script type="text/javascript">
+                function Commission1() {
+                    var str = document.getElementById("recharge:actualMoney1").value;
+                    if(str==""){
+                        $("#chongzhi1").html("请填写充值金额");
+                    }else if(parseInt(str) < 1000){
+                        $("#chongzhi1").html("单次充值金额不能低于1000元");
+                    }else{
+                        $("#chongzhi1").html("设置成功");
+                    }
+                    
+                }
+                function getShowPayVal() {
+                    var str = document.getElementById("recharge:actualMoney1").value;
+                    var str1 = document.getElementById("chongzhi").innerText;
+                    if (str1==""){
+                        $("#chongzhi1").html("请填写充值金额");
+                        return false;
+                    }else if(str.indexOf("充值")>-1){
+                        $("#chongzhi1").html("请正确输入充值金额");
+                        return false;
+                    }else{
+                        ChongZhi(str);
+                        return false;
+                    }
+                }
+                function ChongZhi(str) {
+                    $.ajax({
+                        url: "/skip/Recharge",
+                        data:{actualMoney1:str},
+                        async:false,//同步
+                        type:"post",
+                        dataType:"json",
+                        success: function(data){
+                            alert(JSON.stringify(data.msg));
+                        },
+                        error : function(data) {
+                            alert(data);
+                        }
+                    })
+                }
+              </script>
               <div> <span><font style=" color:#848484;font-weight:bold; margin-left:80px; height:32px; line-height:32px; font-size:12px;">亿人宝提醒您：充值前，请核实您的可用支付额度！</font></span> </div>
               <div class="pay-bank" id="pay-bank">
                 <h6>请选择充值银行</h6>
