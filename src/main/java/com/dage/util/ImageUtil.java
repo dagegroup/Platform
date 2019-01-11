@@ -61,7 +61,7 @@ public class ImageUtil {
         try {
             ImageIO.write(image, "JPEG", response.getOutputStream());
         } catch (IOException e) {
-            System.out.println("触发异常");
+           // System.out.println("触发异常");
             e.printStackTrace();
         }
     }

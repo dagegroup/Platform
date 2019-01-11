@@ -71,7 +71,7 @@ public class RentInfoController {
     @ResponseBody
     @RequestMapping("rentInfo2")
     public Object rentInfo1(@RequestBody Map map, HttpSession session){
-        System.out.println(map);
+        //System.out.println(map);
         session.setAttribute("sheng1",map.get("sheng1"));
         session.setAttribute("shi1",map.get("shi1"));
         session.setAttribute("qu1",map.get("qu1"));
@@ -103,7 +103,7 @@ public class RentInfoController {
     @ResponseBody
     @RequestMapping("rentInfo3")
     public Object rentInfo2(@RequestBody Map map, HttpSession session){
-        System.out.println(map);
+        //System.out.println(map);
         if(map.get("pic1")==""||map.get("pic2")==""||map.get("pic3")==""|| map.get("pic4")==""){
             return 0;
         }

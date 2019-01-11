@@ -125,7 +125,7 @@ public class PermissionServiceImpl implements PermissionService{
                 int i = permissionDaos.saveRolePower(roleid,Integer.valueOf(powerid));
                 if (i==0) { flag = false;}
             }
-            System.out.println(flag);
+          //  System.out.println(flag);
             if(flag) {
                 sqlSession.commit();
                 return 1;

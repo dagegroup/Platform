@@ -36,7 +36,6 @@ public class EmpRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        System.out.println("执行授权逻辑");
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //info.addStringPermission("news");
         Subject subject = SecurityUtils.getSubject();
@@ -62,7 +61,7 @@ public class EmpRealm extends AuthorizingRealm {
        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //System.out.println(token.getUsername());
         Emp emp = empService.getEmpByPhone(token.getUsername());
-        System.out.println(emp==null);
+        //System.out.println(emp==null);
         if (emp==null){
             return null;
         }

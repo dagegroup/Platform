@@ -54,7 +54,7 @@ public class RepaymentController {
         //System.out.println(map);
         //设置当前第几页和每页显示数量
         PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
-        System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
+        //System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
         //用PageInfo对结果进行包装
         PageInfo<Map> pageInfo=new PageInfo<Map>(repaymentService.getList(map));
         Map resultMap=new HashMap();
@@ -131,7 +131,7 @@ public class RepaymentController {
             map3.put("money", bignum3);
             //还款人还款之后的待还金额
             BigDecimal bignum4 = balance3.subtract(balance2);
-            System.out.println(bignum4);
+           // System.out.println(bignum4);
             map3.put("money1", bignum4);
             //还款人的应还金额
             map3.put("money2", balance2);

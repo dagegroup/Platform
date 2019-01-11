@@ -80,7 +80,7 @@ public class PersonController {
         map1.put("userId",userid);
         //设置当前第几页和每页显示数量
         PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
-        System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
+       // System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
         //用PageInfo对结果进行包装
         PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getFlow(map1));
         Map resultMap=new HashMap();
@@ -101,7 +101,7 @@ public class PersonController {
     public Object page(@RequestBody Map map){
         //设置当前第几页和每页显示数量
         PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
-        System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
+        //System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
         //用PageInfo对结果进行包装
         PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getList(map));
         Map resultMap=new HashMap();
@@ -135,7 +135,7 @@ public class PersonController {
         map1.put("userId",userid);*/
         //设置当前第几页和每页显示数量
         PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
-        System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
+        //System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
         //用PageInfo对结果进行包装
         PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getSubmit(map1));
         Map resultMap=new HashMap();
@@ -166,7 +166,7 @@ public class PersonController {
         map1.put("type","已还款");
         //设置当前第几页和每页显示数量
         PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
-        System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
+        //System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
         //用PageInfo对结果进行包装
         PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getRepay(map1));
         Map resultMap=new HashMap();
@@ -208,7 +208,7 @@ public class PersonController {
         map1.put("userId",userid);
         //设置当前第几页和每页显示数量
         PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
-        System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
+        //System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
         //用PageInfo对结果进行包装
         PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getBid(map1));
         Map resultMap=new HashMap();
@@ -216,7 +216,7 @@ public class PersonController {
         resultMap.put("pageData",pageInfo.getList());
         //获取分页总数量
         resultMap.put("total",pageInfo.getTotal());
-        System.out.println(userService.getBid(map1));
+       // System.out.println(userService.getBid(map1));
         return resultMap;
     }
 
@@ -240,7 +240,7 @@ public class PersonController {
         map.put("userId",userid);
         //设置当前第几页和每页显示数量
         PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
-        System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
+        //System.out.println(Integer.valueOf(map.get("pageNo")+"")+Integer.valueOf(map.get("pageSize")+""));
         //用PageInfo对结果进行包装
         PageInfo<Map> pageInfo=new PageInfo<Map>(userService.getMSBs(map));
         Map resultMap=new HashMap();

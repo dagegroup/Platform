@@ -45,10 +45,10 @@ public class AccController {
     @ResponseBody
     @RequestMapping("list")
     public Object  getList(@RequestBody Map map){
-        System.out.println(map);
+        //System.out.println(map);
         PageHelper.startPage(Integer.valueOf(map.get("pageNo")+""),Integer.valueOf(map.get("pageSize")+""));
         PageInfo<Map> pageInfo=new PageInfo<Map>(accService.getList(map));
-        System.out.println(accService.getList(map));
+       // System.out.println(accService.getList(map));
         List<Map> flowtype = accService.getFlowtype();
         Map resultMap=new HashMap();
         resultMap.put("list",pageInfo.getList());
@@ -64,8 +64,8 @@ public class AccController {
     @ResponseBody
     @RequestMapping("/edata")
     public Object getEchartsData(@RequestParam Map map){
-        System.out.println(map);
-        System.out.println(accService.getAccountFlow(map));
+       // System.out.println(map);
+       // System.out.println(accService.getAccountFlow(map));
         return accService.getAccountFlow(map);
     }
 
@@ -78,7 +78,7 @@ public class AccController {
     @RequestMapping("/edata1")
     public Object getEchartsData1(@RequestParam Map map){
 
-        System.out.println(map);
+       // System.out.println(map);
 
         return  accService.getBalance(map);
     }
