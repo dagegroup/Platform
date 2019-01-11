@@ -175,8 +175,8 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
             <el-button @click.native="editFormVisible = false">取消</el-button>
-            <el-button type="primary" v-if="bidForm.AUDITRESULT=='审核通过'" @click.native="editSubmit('待投标','借款中')" :loading="editLoading">审核通过</el-button>
-            <el-button type="warning" @click.native="editSubmit('初审驳回','正常')" :loading="editLoading">审核驳回</el-button>
+            <el-button type="primary" v-if="bidForm.AUDITRESULT=='审核通过'" @click.native="editSubmit('待投标','借款中','bidForm')" :loading="editLoading">审核通过</el-button>
+            <el-button type="warning" @click.native="editSubmit('初审驳回','正常','bidForm')" :loading="editLoading">审核驳回</el-button>
         </div>
     </el-dialog>
 
@@ -184,7 +184,7 @@
 
     <!--认证信息界面-->
     <el-dialog title="认证信息" :visible.sync="auditVisible" :close-on-click-modal="false">
-        <el-form :model="auditForm" label-width="90px" :rules="editFormRules" ref="bidForm">
+        <el-form :model="auditForm" label-width="90px" :rules="editFormRules" ref="auditForm">
             <!--REALNAMEID:'',USERID:'',-->
             <!--REALNAME:'',SEX:'',-->
             <!--ADDRESS:'',EMAIL:'',-->
@@ -270,8 +270,8 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
             <el-button @click.native="auditVisible = false">取消</el-button>
-            <el-button type="primary" v-if="auditForm.AUDITRESULT=='未审核'" @click.native="auditSubmit('审核通过')" :loading="editLoading">审核通过</el-button>
-            <el-button type="warning" v-if="auditForm.AUDITRESULT=='未审核'" @click.native="auditSubmit('审核驳回')" :loading="editLoading">审核驳回</el-button>
+            <el-button type="primary" v-if="auditForm.AUDITRESULT=='未审核'" @click.native="auditSubmit('审核通过','auditForm')" :loading="editLoading">审核通过</el-button>
+            <el-button type="warning" v-if="auditForm.AUDITRESULT=='未审核'" @click.native="auditSubmit('审核驳回','auditForm')" :loading="editLoading">审核驳回</el-button>
         </div>
     </el-dialog>
 
@@ -446,7 +446,9 @@
                 _self.loadingData();//重新加载数据
             },
             //保存点击事件
-            editSubmit:function(msg,user){
+            editSubmit:function(msg,user,formName){
+                this.$refs[formName].validate((valid) => {
+                    if(valid) {
                 var _self = this;
                 //_self.loading = true;
                 _self.bidForm.BIDSTATE=msg;
@@ -467,8 +469,10 @@
                     _self.loadingData();//重新加载数据
                 })
                 console.info(this.editForm);
-            },
-            auditSubmit:function(msg){
+            }})},
+            auditSubmit:function(msg,formName){
+                this.$refs[formName].validate((valid) => {
+                    if(valid) {
                 var _self = this;
                 //_self.loading = true;
                 _self.auditForm.AUDITRESULT=msg;
@@ -488,7 +492,7 @@
                     _self.loadingData();//重新加载数据
                 })
                 console.info(this.auditVisible);
-            }
+            }})}
         }
 
     })

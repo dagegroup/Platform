@@ -310,11 +310,9 @@
                 _self.loading = true;
                 var goUrl = '/failure/update';
                 var bidid=_self.submitData[0].BIDID
-                alert(bidid);
                 axios.post(goUrl,{bidid:bidid}).then(function (response) {
                     // self.total=response.data.total;
                     if (response.data > 0) {
-                        alert(response.data);
                         _self.editFormVisible = false;
                         _self.loadingData();//重新加载数据
                     } else {
