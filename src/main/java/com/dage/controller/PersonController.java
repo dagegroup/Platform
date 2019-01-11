@@ -228,6 +228,14 @@ public class PersonController {
     @ResponseBody
     @RequestMapping("/MSBs")
     public Object getMSBs(@RequestBody Map map,HttpSession session){
+        //添加查询条件
+        if (map.get("type")!=null&&map.get("type")!=""){
+            if (map.get("type").equals("全部")){
+                map.put("type",null);
+            }
+        }
+        Map map1= putTime(map);
+        //加入userid
         String userid=(String)session.getAttribute("userid");
         map.put("userId",userid);
         //设置当前第几页和每页显示数量

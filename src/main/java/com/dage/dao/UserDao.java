@@ -147,11 +147,11 @@ public interface UserDao {
      * @return
      */
     @Select("<script>select * from bid_info where bidid in (select bidid from bid_submit where userid=#{userId}) "+
-            " <if test=\" type!=null and type!=''\"> and bidrepaymentmethod=#{type}</if>" +
-            " <if test=\" time1!=null and time1!='' \"> and to_char(biderpaydeaddate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
-            " <if test=\" time2!=null and time2!='' \"> and biderpaydeaddate &gt;= trunc(next_day(sysdate-8,1)+1) and biderpaydeaddate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
-            " <if test=\" time3!=null and time3!='' \"> and to_char(biderpaydeaddate,'yyyy-mm')=to_char(sysdate,'yyyy-mm')</if>"+
-            " <if test=\" time4!=null and time4!='' \"> and to_char(biderpaydeaddate,'yyyy')=to_char(sysdate,'yyyy')</if>"+
+            " <if test=\" type!=null and type!=''\"> and bidstate=#{type}</if>" +
+            " <if test=\" time1!=null and time1!='' \"> and to_char(bidissuedate,'yyyy-mm-dd')=to_char(sysdate,'yyyy-mm-dd')</if>"+
+            " <if test=\" time2!=null and time2!='' \"> and  bidissuedate &gt;= trunc(next_day(sysdate-8,1)+1) and bidissuedate &lt; trunc(next_day(sysdate-8,1)+7)+1</if>"+
+            " <if test=\" time3!=null and time3!='' \"> and to_char(bidissuedate,'yyyy-mm')=to_char(sysdate,'yyyy-mm')</if>"+
+            " <if test=\" time4!=null and time4!='' \"> and to_char(bidissuedate,'yyyy')=to_char(sysdate,'yyyy')</if>"+
             " </script>")
     List<Map> getMSBs(Map map);
 

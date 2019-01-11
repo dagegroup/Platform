@@ -153,12 +153,12 @@
                       <el-table-column
                               prop="BIDDEADLINE"
                               label="还款期限/月"
-                              width="200">
+                              width="150">
                       </el-table-column>
                       <el-table-column
                               prop="BIDPROJECT"
                               label="回款项目"
-                              width="200">
+                              width="150">
                       </el-table-column>
                       <el-table-column
                               prop="BIDRATE"
@@ -168,13 +168,13 @@
                       <el-table-column
                               prop="BIDREPAYMENTMETHOD"
                               label="还款方式"
-                              width="200">
+                              width="150">
                       </el-table-column>
-                      <!--<el-table-column
-                              prop="BIDREPAYTOTPMTS"
-                              label="还款总期数"
+                      <el-table-column
+                              prop="BIDSTATE"
+                              label="标状态"
                               width="100">
-                      </el-table-column>-->
+                      </el-table-column>
                       <!--<el-table-column label="操作">
                         <template scope="scope">
                           <el-button :plain="true" type="success" size="small" icon="edit" @click="returnClick(scope.row)">我要还款</el-button>
@@ -205,8 +205,6 @@
                 </div>
               </div>
             </div>
-
-
           </div>
       </div>
     </div>
@@ -243,11 +241,11 @@
                 value: '已放款',
                 label: '已放款'
             }, {
-                value: '已投标',
-                label: '已投标'
+                value: '已还款',
+                label: '已还款'
             }, {
-                value: '已终止',
-                label: '已终止'
+                value: '流标',
+                label: '流标'
             }, {
                 value: '已回款',
                 label: '已回款'

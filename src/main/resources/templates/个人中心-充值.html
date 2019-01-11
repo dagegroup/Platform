@@ -93,19 +93,19 @@
 		<script>
 		$(function(){
 		    $('.quick-tit').click(function(){
-		      
+
 		      $(this).addClass('pay-cur');
 		      $(this).siblings().removeClass('pay-cur');
 		      $('.quick-main').show();
 		      $('.online-main').hide();
-		      
+
 		      $(".pay-tipcon").hide();
 		      $(".pay-tipcon2").show();
 
 		    })
 
 		    $('.online-tit').click(function(){
-		      
+
 		      $(this).addClass('pay-cur');
 		      $(this).siblings().removeClass('pay-cur');
 		      $('.quick-main').hide();
@@ -119,10 +119,10 @@
 			function showSpan(op){
 				$("body").append("<div id='mask'></div>");
 				$("#mask").addClass("mask").css("display","none");
-	
+
 				$("#"+op).css("display","none");
 			}
-	
+
 			function displaySpan(op){
 				$("#mask").css("display","none");
 				$("#"+op).css("display","none");
@@ -165,7 +165,7 @@
 				{
 					var $span = "<em></em>金额必须大于0且为整数或小数，小数点后不超过2位</span>";
 					$("#actualMoneyErrorDiv").html($span);
-					return false;		
+					return false;
 				}
 				else
 				{
@@ -182,7 +182,7 @@
 				}
 				else
 				{
-					return true;		
+					return true;
 				}
 			}
 			function getShowPayVal(){
@@ -198,8 +198,8 @@
 				}
 				return flag;
 			}
-			
-			
+
+
 			function amount(th){
 			    var regStrs = [
 			        ['^0(\\d+)$', '$1'], //禁止录入整数部分两位以上，但首位为0
@@ -219,14 +219,14 @@
 			//验证输入银行卡号的合法性
 			function checkBankCardNo() {
 				//$("#form\\:defaultBankName").text("");
-				var cardNo = $("#form\\:bankCardNo").val(); 
-				var reg = /^\d{16,19}$/g; // 以19位数字开头，以19位数字结尾 
-				if( !reg.test(cardNo) ) 
-				{ 
+				var cardNo = $("#form\\:bankCardNo").val();
+				var reg = /^\d{16,19}$/g; // 以19位数字开头，以19位数字结尾
+				if( !reg.test(cardNo) )
+				{
 					//$(".info2-bank").css({"display":"none"});
 				    var $span = "<em></em>银行卡号输入错误";
 				    $("#bankCardError").html($span);
-					return false;		
+					return false;
 				} else{
 					//$(".info2-bank").css({"display":"block"});
 					$("#bankCardError").html("");
@@ -235,12 +235,12 @@
 			}
 			function checkBank() {
 				$("#form\\:defaultBankName").text("");
-				var cardNo = $("#form\\:bankCardNo").val(); 
-				var reg = /^\d{16,19}$/g; // 以19位数字开头，以19位数字结尾 
-				if( !reg.test(cardNo) ) 
-				{ 
+				var cardNo = $("#form\\:bankCardNo").val();
+				var reg = /^\d{16,19}$/g; // 以19位数字开头，以19位数字结尾
+				if( !reg.test(cardNo) )
+				{
 					$(".info2-bank").css({"display":"none"});
-					return false;		
+					return false;
 				} else{
 					$(".info2-bank").css({"display":"none"});
 				}
@@ -257,10 +257,10 @@
 				}
 				else
 				{
-					return true;		
+					return true;
 				}
 			}
-			
+
 			function checkRecharge1() {
 				var moneyRegex="^(([1-9]+[0-9]*)|((([1-9]+[0-9]*)|0)\\.[0-9]{1,2}))$";
 				var money = $("#form\\:actualMoney1").val();
@@ -295,7 +295,7 @@
 				{
 					var $span = "<em></em>金额必须大于0且为整数或小数，小数点后不超过2位";
 					$(".quick-error").html($span);
-					return false;		
+					return false;
 				}
 				else
 				{
@@ -368,7 +368,7 @@
 				{
 					var $span = "<em></em>金额必须大于0且为整数或小数，小数点后不超过2位";
 					$("#quick-error2").html($span);
-					return false;		
+					return false;
 				}
 				else
 				{
@@ -410,31 +410,88 @@
 				$("#alert-ClickDialog").hide();
 				$("#maskCommon").hide();
 			} */
-			
+
 			$(document).ready(function(){
 				  if("false"=='true'){
 					 showSpan("alert-ClickDialog");
-				  } 
+				  }
 				  if("false"=='true'){
 						 showSpan("alert-unbindMsgDialog");
-					  } 
+					  }
 			 });
 			//]]>
 		</script>
+
+       <script>
+        function Commission() {
+            var str=document.getElementById("form:actualMoney1").value;
+            if(str==""){
+                $('#chognzhi').html("请输入你的充值金额");
+            }else if(parseInt(str)<1000){
+                $('#chognzhi').html("单次充值金额不能低于1000元");
+            }else if(parseInt(str)>50000){
+                $('#chognzhi').html("充值金额超过五万请使用网银充值");
+            }else{
+                $('#chognzhi').html("设置成功");
+            }
+            function CheckBankNo(t_bankno) {
+                var bankno=document.getElementById("car").value;
+                var num = /^\d*$/; //全数字
+                //开头6位
+                var strBin = "10,18,30,35,37,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,58,60,62,65,68,69,84,87,88,94,95,98,99";
+                if(bankno == "") {
+                    $("#banknoInfo").html("请填写银行卡号");
+                }else if(bankno.length < 16 || bankno.length > 19) {
+                    $("#banknoInfo").html("银行卡号长度必须在16到19之间");
+                }else if(!num.exec(bankno)) {
+                    $("#banknoInfo").html("银行卡号必须全为数字");
+                }else if(strBin.indexOf(bankno.substring(0, 2)) == -1) {
+                    $("#banknoInfo").html("银行卡号开头6位不符合规范");
+                }else{
+                    $("#banknoInfo").html("验证通过");
+                }
+            }
+            function checkActualMoney() {
+                var str=document.getElementById("form:actualMoney1").value;
+                var str1=document.getElementById("banknoInfo").innerText;
+                var str2=document.getElementById("chongzhi").innerText;
+                var str3=document.getElementById("car").value;
+                if(str==""){
+                    $("#zhognzhi").html("请输入你的充值金额");
+                    return false;
+                }else if(str3.indexOf("充值金额")>-1){
+                    $('#chognzhi').html("请正确输入充值金额");
+                    return false;
+                }else if(str3==""){
+                    $("#banknoInfo").html("请填写银行卡号");
+                    return false;
+                }else if(str1.indexOf("银行卡号")>-1){
+                    $("#banknoInfo").html("请正确输入银行卡号");
+                    return false;
+                }else{
+                    return true;
+                }
+
+            }
+            
+        }
+
+
+       </script>
 		<div class="personal-main">
         	<div class="personal-pay">
         <h3><i>充值</i></h3>
         <div class="quick-pay-wrap">
           <h4> <span class="quick-tit pay-cur"><em>快捷支付</em></span> <!--<span class="online-tit"><em>网银充值</em></span> --></h4>
-          <form id="form" name="form" method="post" action="skip/Recharge" >
+          <form id="form" name="form" method="post" action="skip/Recharge" onsubmit="return checkActualMoney()" >
             <div class="quick-main">
               <div class="fl quick-info">
                   <div class="info-1"> <span class="info-tit">充值金额</span> <span class="info1-input">
-                  <input id="form:actualMoney1" type="text" name="actualMoney1" class="pay-money-txt" maxlength="10" >
-                  <em>元</em> </span> <span class="quick-error"> </span> </div>
+                  <input id="form:actualMoney1" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" name="actualMoney1" class="pay-money-txt" maxlength="10" onblur="Commission()" >
+                  <em>元</em> </span> <span id="chongzhi" style="color: red"> </span> </div>
                 <div class="info-tips">亿人宝提醒您：充值金额超过50000元时，请切换到网银充值</div>
                 <div class="info-2"> <span class="info-tit">银行卡号</span> <span class="info2-input">
-                  <input id="form:bankCardNo" type="text" name="bankCardNo" class="tx-txt">
+                  <input id="car" type="text" name="bankCardNo" class="tx-txt" onblur="CheckBankNo()"><span id="banknoInfo"></span>
                   <em class="info2-bank" style="display: none;">
                   <label id="form:defaultBankName" style="font-size:16px;"> </label>
                   </em> </span> <span class="quick-error3" id="bankCardError"></span> </div>
@@ -456,22 +513,6 @@
               <div class="pay-bank" id="pay-bank">
                 <h6>请选择充值银行</h6>
                 <span id="showpay" style="display:none;"></span>
-                <ul id="paysSpan" style="height:150px;">
-                  <li><img src="/foreground/images/bank_002.png" property1="icbc"><em></em></li>
-                  <li><img src="/foreground/images/bank_006.png" property1="abc"><em></em></li>
-                  <li><img src="/foreground/images/bank_001.png" property1="boc"><em></em></li>
-                  <li><img src="/foreground/images/bank_004.png" property1="ccb"><em></em></li>
-                  <li><img src="/foreground/images/bank_006.png" property1="hxb"><em></em></li>
-                  <li><img src="/foreground/images/bank_007.png" property1="comm"><em></em></li>
-                  <li><img src="/foreground/images/bank_003.png" property1="cmb"><em></em></li>
-                  <li><img src="/foreground/images/bank_011.png" property1="ceb"><em></em></li>
-                  <li><img src="/foreground/images/bank_015.png" property1="cncb"><em></em></li>
-                  <li><img src="/foreground/images/bank_010.png" property1="cmsb"><em></em></li>
-                  <li><img src="/foreground/images/bank_012.png" property1="cgb"><em></em></li>
-                  <li><img src="/foreground/images/bank_bos.png" property1="shb"><em></em></li>
-                  <li><img src="/foreground/images/bccb.png" property1="bjb"><em></em></li>
-                  <li><img src="/foreground/images/bank_nsyh.png" property1="rcb"><em></em></li>
-                </ul>
                 <span class="pay-other"><span class="paytxt">选择其他银行卡</span><i class="paydown"></i></span> </div>
               <div class="pay-bankstate"> <span class="bankstate-head"><i class="fl">请关注您的充值金额是否超限：</i><i class="fr" id="show-pay-hotLine">工商银行客服热线：95588</i></span>
                 <table>

@@ -160,7 +160,7 @@
 					$(actualMessage).hide();
 				}
 				var balance=Number("0.0");
-				//提现金额小于余额 
+				//提现金额小于余额
 				var legalFlag=(actualMoney-balance).toFixed(2)<=0;
 				if(!legalFlag)
 				{
@@ -174,7 +174,7 @@
 				}
 				return true;
 			}
-			
+
 			function amount(th){
 			    var regStrs = [
 			        ['^0(\\d+)$', '$1'], //禁止录入整数部分两位以上，但首位为0
@@ -198,12 +198,15 @@
           <div class="deposit-form" style="margin-top:0px;border-top:0px none;">
             <h6>填写提现金额</h6>
             <ul>
-              <li> <span class="deposit-formleft">可用金额</span> <span class="deposit-formright"> <i>
+              <li> <span class="deposit-formleft">可用余额</span> <span class="deposit-formright"> <i>
                 <label id="form:blance"><span id="blance"> </span> </label>
                 </i>元 </span> </li>
               <li> <span class="deposit-formleft">提现金额</span> <span class="deposit-formright">
-                <input type="text" id="money" name="money" class="deposite-txt" maxlength="10" onblur="Commission()" >
-                元 </span> <span id="actualMoneyErrorDiv"><span id="actualMoney_message" style="display:none" class="error"></span></span> </li>
+                <input onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text" id="money" name="money" class="deposite-txt" maxlength="10" onblur="Commission()" >
+                元 </span> <span id="tixian" style="color: red "></span> </li>
+              <li><span class="deposit-formleft">提现银行卡</span> <span class="deposit-formright">
+                <input  type="text" id="car"  class="deposite-txt" maxlength="19" onblur="CheckBankNo()" >
+                </span> <span id="banknoInfo" style="color: red "></span></li>
               <li> <span class="deposit-formleft">提现费用</span> <em id="txfy" class="markicon fl"></em> <span class="deposit-formright deposit-formright1"> <i>
                 <label id="form:fee"> <span id="commission">0.00 </span><input type="text" style="display:none" id="procedure" name="procedure"></label>
                 </i>元 </span> <span class="txarrow-show">提现金额的0.1%，最低不低于2元，最高100元封顶</span><span class="txicon-show"></span> </li>
@@ -243,21 +246,24 @@
             function Commission() {
                 var str=document.getElementById("money").value;
                 var str1=document.getElementById('blance').innerText;
-                /*alert(parseInt(str));
-                alert(str1);*/
                 if(parseInt(str)>parseInt(str1)){
-                    alert("你有那么多钱吗？穷逼！！！");
+                   $('#tixian').html("    你有那么多钱吗？穷逼！！！");
                 }else if(parseInt(str)<100){
-                    alert("提现不能低于100元");
+                    $('#tixian').html("   提现金额不能低于100元！");
+                    $('#commission').html("0");
+                    $('#practical').html("0");
+                }else if(str == ""){
+                    $('#tixian').html("提现金额不能为空！");
                 }else{
-                    if (str <= 200){
+                    $('#tixian').html("");
+                    if (str <= 2000){
                         $('#commission').html(2);
                         $('#practical').html((str-2).toFixed(2));
                         document.getElementById("procedure").value=(2);
-                    }else if(str < 10000){
-                        $('#commission').html(str*0.01);
-                        $('#practical').html((str-str*0.01).toFixed(2));
-                        document.getElementById("procedure").value=(str*0.01);
+                    }else if(str < 100000){
+                        $('#commission').html(str*0.001);
+                        $('#practical').html((str-str*0.001).toFixed(2));
+                        document.getElementById("procedure").value=(str*0.001);
                     }else{
                         $('#commission').html(100);
                         $('#practical').html((str-100).toFixed(2));
@@ -268,17 +274,32 @@
             function checkActualMoney() {
                 var str=document.getElementById("money").value;
                 var str1=document.getElementById("blance").innerText;
-                var str2=document.getElementById("pwd").innerText;
+                var str2=document.getElementById("password").value;
+                var str3=document.getElementById("pwd").innerText;
+                var str4=document.getElementById("banknoInfo").innerText;
+                var str5=document.getElementById("car").value;
                 if (parseInt(str)>parseInt(str1)){
-                    alert("你有这么多钱吗？穷逼！！！");
+                    $('#tixian').html("你有那么多钱吗？穷逼！！！");
                     return false;
                 }else if(parseInt(str)<100){
-                    alert("提现不得低于100！！！");
+                    $('#tixian').html("提现金额不能低于100元！");
                     return false;
-                }else if(str2.indexOf("正确")>-1){
+                }else if(str==""){
+                    $('#tixian').html("提现金额不能为空！");
+                    return false;
+                }else if(str2==""){
+                    $('#pwd').html("请输入交易密码！");
+                    return false;
+                }else if(str3.indexOf("错误")>-1){
+                    $('#pwd').html("交易密码错误！请重新输入！");
+                    return false;
+                }else if(str4.indexOf("银行卡号")>-1){
+                    return false;
+                }else if(str5==""){
+                    $('#banknoInfo').html("请填写银行卡号！");
+                    return false;
+                }else{
                     return true;
-                }else {
-                    return false;
                 }
 
             }
@@ -304,9 +325,26 @@
                     }
                 })
             }
+            function CheckBankNo(t_bankno) {
+                var bankno=document.getElementById("car").value;
+                var num = /^\d*$/; //全数字
+                //开头6位
+                var strBin = "10,18,30,35,37,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,58,60,62,65,68,69,84,87,88,94,95,98,99";
+                if(bankno == "") {
+                    $("#banknoInfo").html("请填写银行卡号");
+                }else if(bankno.length < 16 || bankno.length > 19) {
+                    $("#banknoInfo").html("银行卡号长度必须在16到19之间");
+                }else if(!num.exec(bankno)) {
+                    $("#banknoInfo").html("银行卡号必须全为数字");
+                }else if(strBin.indexOf(bankno.substring(0, 2)) == -1) {
+                    $("#banknoInfo").html("银行卡号开头6位不符合规范");
+                }else{
+                    $("#banknoInfo").html("验证通过");
+                }
+            }
         </script>
-        <div class="deposit-tip"> 温馨提示：<br>
-          1、用户需在完成身份认证、开通丰付托管账户并绑定银行卡后，方可申请提现；<br>
+        <div class="deposit-tip" style="margin-top:80px"> 温馨提示：<br>
+          1、用户需在完成身份认证、开通丰付托管账户并绑定银行卡后，方可提现；<br>
           2、请务必在提现时使用持卡人与身份认证一致的银行卡号，且确保填写信息准确无误；<br>
           3、工作日当天16:00前提交的提现申请将在当天处理，默认为T+1到账；<br>
           4、提现金额单笔上限为50万元，单日累计总额不可超过100万元；<br>
