@@ -64,7 +64,7 @@
         methods:{
             toFlush:function () {
                 this.searchForm={
-                   time:"2018-12"
+                   time:""
                 }
                 this.getData1();//重新加载数据
             },
@@ -115,7 +115,7 @@
                         trigger: 'axis'
                     },
                     legend: {
-                        data:['总账户余额','收入']
+                        data:['资金流水','收入']
                     },
                     toolbox: {
                         show : true,
@@ -140,7 +140,7 @@
                     ],
                     series : [
                         {
-                            name:'总账户余额',
+                            name:'资金流水',
                             type:'bar',
                             data:ydata1,
                             markPoint : {

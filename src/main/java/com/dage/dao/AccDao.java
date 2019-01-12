@@ -27,7 +27,7 @@ import java.util.Map;
      * 账户流水
      * @return
      */
-    @Select("<script>select to_char(flowdate,'yyyy-mm-dd') as ttime ,nvl(sum(case when t.flowtype='充值' then nvl(t.amount,0) end),0) as incoome,nvl(sum(case when t.flowtype='提现' then nvl(t.amount,0) end),0) as outcome   from tb_system_account_flow t   <if test=\" time!=null and time!=''\"> where to_char(flowdate,'yyyy-mm-dd') like '%'||substr(#{time},0,7)||'%'</if>   group by to_char(flowdate,'yyyy-mm-dd')  order by to_char(flowdate,'yyyy-mm-dd') </script>")
+    @Select("<script>select to_char(flowdate,'yyyy-mm-dd') as ttime ,nvl(sum(case when t.flowtype='充值' then nvl(t.amount,0) end),0) as income,nvl(sum(case when t.flowtype='提现' then nvl(t.amount,0) end),0) as outcome   from tb_system_account_flow t   <if test=\" time!=null and time!=''\"> where to_char(flowdate,'yyyy-mm-dd') like '%'||substr(#{time},0,7)||'%'</if>   group by to_char(flowdate,'yyyy-mm-dd')  order by to_char(flowdate,'yyyy-mm-dd') </script>")
     List<Map> getAccountFlow(Map map);
     @Select("<script>select to_char(flowdate,'yyyy-mm-dd') as ttime ,nvl(sum(case when t.flowtype='充值' then nvl(t.amount,0) end),0)-nvl(sum(case when t.flowtype='提现' then nvl(t.amount,0) end),0) as leave    ,nvl(sum(case when t.flowtype='手续费' then nvl(t.amount,0) end),0)+nvl(sum(case when t.flowtype='借款收入' then nvl(t.amount,0) end),0) as income   from tb_system_account_flow t   <if test=\" time!=null and time!=''\"> where to_char(flowdate,'yyyy-mm-dd') like '%'||substr(#{time},0,7)||'%'</if>   group by to_char(flowdate,'yyyy-mm-dd')  order by to_char(flowdate,'yyyy-mm-dd')</script>  ")
     List<Map> getBalance(Map map);

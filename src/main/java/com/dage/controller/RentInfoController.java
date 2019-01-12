@@ -175,16 +175,28 @@ public class RentInfoController {
         map.put("address",session.getAttribute("address"))  ;
         return map;
     }
+
+    /**
+     * 回显借款信息1
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("getInfo1")
     public Object getBackInfo1(HttpSession session){
       return    session.getAttribute("rentInfo1");
     }
+
+    /**
+     * 回显借款信息2
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("getInfo2")
     public Object getBackInfo2(HttpSession session){
     Map map= (Map) session.getAttribute("rentInfo2");
 
-        return    map;
+        return   map;
     }
 }
